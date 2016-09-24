@@ -8,9 +8,10 @@ using DAL.ORM;
 namespace DAL.Migrations
 {
     [DbContext(typeof(SiteCreatorDbContext))]
-    partial class SiteCreatorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160924200756_Change User FK to int")]
+    partial class ChangeUserFKtoint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")

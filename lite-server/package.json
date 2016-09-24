@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "name": "lite-server",
+  "private": true,
+  "scripts": {
+    "lite": "lite-server"
+  },
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "lite-server": "^2.2.2"
+  }
+}
