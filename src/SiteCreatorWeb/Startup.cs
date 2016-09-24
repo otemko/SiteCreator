@@ -9,30 +9,30 @@ using DAL.ORM;
 using DAL.ORM.Model;
 using DAL.Interfaces;
 using DAL.Concrete;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SiteCreatorWeb
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration;
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
 
             if (env.IsDevelopment())
             {
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
                 builder.AddApplicationInsightsSettings(developerMode: true);
+                builder.AddJsonFile("userSecrets.json", optional: true, reloadOnChange: true);
             }
+
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
@@ -58,10 +58,12 @@ namespace SiteCreatorWeb
                 .AddEntityFrameworkStores<SiteCreatorDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -72,6 +74,7 @@ namespace SiteCreatorWeb
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
             else
@@ -79,9 +82,30 @@ namespace SiteCreatorWeb
                 app.UseExceptionHandler("/Home/Error");
             }
 
+
             app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseStaticFiles();
+
+            app.UseIdentity();
+
+            app.UseFacebookAuthentication(new FacebookOptions()
+            {
+                AppId = Configuration["Authentication:Facebook:AppId"],
+                AppSecret = Configuration["Authentication:Facebook:AppSecret"]
+            });
+
+            app.UseVkontakteAuthentication(new AspNetCore.Security.OAuth.Vkontakte.VkontakteAuthenticationOptions()
+            {
+                ClientId = Configuration["Authentication:Vkontakte:ClientId"],
+                ClientSecret = Configuration["Authentication:Vkontakte:ClientSecret"]
+            });
+
+            app.UseTwitterAuthentication(new TwitterOptions()
+            {
+                ConsumerKey = Configuration["Authentication:Twitter:ConsumerKey"],
+                ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"]
+            });
 
             app.UseMvc(routes =>
             {
