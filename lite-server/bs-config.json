@@ -1,5 +1,5 @@
 {
   "port": 3000,
-  "files": ["../src/SiteCreatorWeb/wwwroot/**"],
-  "server": { "baseDir": "" }
+  "files": [""],
+  "server": { "baseDir": "../src/SiteCreatorWeb/wwwroot/" }
 }
