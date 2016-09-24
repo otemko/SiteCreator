@@ -1,1 +1,17 @@
-﻿<my-app>Loading...</my-app>
+﻿
+
+<my-app>Loading...</my-app>
+
+@section Scripts {
+    <script src="~/lib/core-js/client/shim.min.js"></script>
+    <script src="~/lib/zone.js/dist/zone.js"></script>
+    <script src="~/lib/reflect-metadata/Reflect.js"></script>
+    <script src="~/lib/systemjs/dist/system.src.js"></script>
+
+    <script src="~/systemjs.config.js"></script>
+    <script>
+        System.import('appScripts').catch(function (err) {
+            console.error(err);
+        });
+    </script>
+}
