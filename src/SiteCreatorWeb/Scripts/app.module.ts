@@ -9,6 +9,7 @@ import { SiteComponent } from './Components/Site/site.component'
 import { SitesComponent } from './Components/Sites/sites.component'
 import { UsersComponent } from './Components/Users/users.component'
 import { AboutComponent } from './Components/About/about.component'
+import { LoginComponent } from './Components/Account/Login/login.component'
 
 import { routing } from './routes';
 
@@ -24,7 +25,8 @@ import { routing } from './routes';
         SiteComponent,
         SitesComponent,
         UsersComponent,
-        AboutComponent
+        AboutComponent,
+        LoginComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

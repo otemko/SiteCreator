@@ -19,17 +19,8 @@ namespace SiteCreatorWeb.Controllers
             this.signInManager = signInManager;
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Login(string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
-
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
             var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { returnUrl = returnUrl });
@@ -44,13 +35,13 @@ namespace SiteCreatorWeb.Controllers
             if (remoteError != null)
             {
                 ModelState.AddModelError(string.Empty, $"Error from external provider: {remoteError}");
-                return View(nameof(Login));
+                return View("/");
             }
 
             var info = await signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                return RedirectToAction(nameof(Login));
+                return RedirectToAction("/");
             }
 
             var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: true);
@@ -72,7 +63,6 @@ namespace SiteCreatorWeb.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExternalLoginConfirmation(string returnUrl = null)
         {
             var info = await signInManager.GetExternalLoginInfoAsync();
@@ -94,15 +84,14 @@ namespace SiteCreatorWeb.Controllers
             }
             AddErrors(result);
             ViewData["ReturnUrl"] = returnUrl;
-            return View(nameof(Login));
+            return View("/");
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
         {
             await signInManager.SignOutAsync();
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return Redirect("/");
         }
 
 
@@ -122,7 +111,7 @@ namespace SiteCreatorWeb.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return Redirect("/");
             }
         }
     }
