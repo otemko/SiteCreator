@@ -71,7 +71,7 @@ namespace SiteCreatorWeb.Controllers
                 return View("ExternalLoginFailure");
             }
             string userName = Guid.NewGuid().ToString().Replace("-", "");
-            var user = new User { UserName = userName };
+            var user = new User { UserName = userName, LanguageId = 1, StyleId = 1 };
             var result = await userManager.CreateAsync(user);
             if (result.Succeeded)
             {
@@ -84,14 +84,13 @@ namespace SiteCreatorWeb.Controllers
             }
             AddErrors(result);
             ViewData["ReturnUrl"] = returnUrl;
-            return View("/");
+            return View(returnUrl);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> LogOff()
+        public async Task<IActionResult> LogOff(string returnUrl = "/")
         {
             await signInManager.SignOutAsync();
-            return Redirect("/");
+            return Redirect(returnUrl);
         }
 
 

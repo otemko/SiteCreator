@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -21,6 +21,7 @@
                 <li>
                     <a [routerLink]="['/about']"><i class="fa fa-info fa-fw"></i>&nbsp;About</a>
                 </li>
+                
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -41,10 +42,11 @@
                             <a [routerLink]="['/login']"><i class="fa fa-sign-in fa-fw"></i>&nbsp;Sign In</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/account']"><i class="fa fa-user-md"></i>&nbsp;Accout</a>
+                            <a [routerLink]="['/account']"><i class="fa fa-user-md fa-fw"></i>&nbsp;Accout</a>
                         </li>
+                        <li class="divider"></li>
                         <li>
-                            <a><i class="fa fa-power-off fa-fw"></i>&nbsp;Logout</a>
+                            <a href="/Account/LogOff"><i class="fa fa-power-off fa-fw"></i>&nbsp;Logout</a>
                         </li>
                     </ul>
                 </li>
