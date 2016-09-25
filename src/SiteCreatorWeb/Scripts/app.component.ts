@@ -1,6 +1,16 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+
 @Component({
     selector: 'my-app',
-    template: '<h1>My First Angular App</h1>'
+    templateUrl: './appScripts/app.component.html',
+    styleUrls: ['./appScripts/app.component.css']
 })
-export class AppComponent { }
+export class AppComponent implements OnInit {
+
+    constructor(public location: Location) { }
+
+    ngOnInit() {
+        this.location.go('/');
+    }
+ }

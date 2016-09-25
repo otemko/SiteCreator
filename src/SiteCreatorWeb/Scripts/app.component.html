@@ -1,0 +1,58 @@
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" [routerLink]="['/home']"><i class="fa fa-diamond fa-fw"></i>&nbsp;Designing</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav ">
+                <li>
+                    <a [routerLink]="['/sites']"><i class="fa fa-sitemap fa-fw"></i>&nbsp;Sites</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/users']"><i class="fa fa-users fa-fw"></i>&nbsp;Users</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/about']"><i class="fa fa-info fa-fw"></i>&nbsp;About</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe fa-fw"></i>&nbsp;Language<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">English</a>
+                        </li>
+                        <li>
+                            <a href="#">Russian</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i>&nbsp;Sign In<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/Account/Login"><i class="fa fa-sign-in fa-fw"></i>&nbsp;Sign In</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/account']"><i class="fa fa-user-md"></i>&nbsp;Accout</a>
+                        </li>
+                        <li>
+                            <a><i class="fa fa-power-off fa-fw"></i>&nbsp;Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container app-body">
+    <router-outlet></router-outlet>
+</div>
