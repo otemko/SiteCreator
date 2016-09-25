@@ -43,6 +43,7 @@ namespace DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
                     Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -198,8 +199,7 @@ namespace DAL.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AchievementId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -211,8 +211,8 @@ namespace DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AchievementUser_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_AchievementUser_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -227,8 +227,7 @@ namespace DAL.Migrations
                     DateCreated = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     StyleMenuId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -240,8 +239,8 @@ namespace DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Site_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Site_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -382,8 +381,7 @@ namespace DAL.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Content = table.Column<string>(nullable: true),
                     PageId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -395,8 +393,8 @@ namespace DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Comment_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Comment_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -408,9 +406,9 @@ namespace DAL.Migrations
                 column: "AchievementId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AchievementUser_UserId1",
+                name: "IX_AchievementUser_UserId",
                 table: "AchievementUser",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comment_PageId",
@@ -418,9 +416,9 @@ namespace DAL.Migrations
                 column: "PageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comment_UserId1",
+                name: "IX_Comment_UserId",
                 table: "Comment",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Page_ContentId",
@@ -444,9 +442,9 @@ namespace DAL.Migrations
                 column: "StyleMenuId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Site_UserId1",
+                name: "IX_Site_UserId",
                 table: "Site",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TagSite_SiteId",

@@ -4,8 +4,6 @@ namespace DAL.ORM.Model
 {
     public class Content: IEntity
     {
-        [Required]
-        [Key]
         public int Id { get; set; }
         public string Html { get; set; }
 

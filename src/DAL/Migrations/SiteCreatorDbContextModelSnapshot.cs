@@ -87,6 +87,8 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Name");
+
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
@@ -164,6 +166,8 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Name");
+
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
@@ -227,7 +231,7 @@ namespace DAL.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<int?>("LanguageId");
+                    b.Property<int>("LanguageId");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -247,7 +251,7 @@ namespace DAL.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<int?>("StyleId");
+                    b.Property<int>("StyleId");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -448,11 +452,13 @@ namespace DAL.Migrations
                 {
                     b.HasOne("DAL.ORM.Model.Language", "Language")
                         .WithMany("User")
-                        .HasForeignKey("LanguageId");
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("DAL.ORM.Model.Style", "Style")
                         .WithMany("User")
-                        .HasForeignKey("StyleId");
+                        .HasForeignKey("StyleId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

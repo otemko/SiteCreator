@@ -6,8 +6,6 @@ namespace DAL.ORM.Model
 {
     public class Site: IEntity
     {
-        [Required]
-        [Key]
         public int Id { get; set; }
         public DateTime DateCreated { get; set; }
         public string Name { get; set; }

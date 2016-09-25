@@ -4,8 +4,6 @@ namespace DAL.ORM.Model
 {
     public class AchievementUser: IEntity
     {
-        [Required]
-        [Key]
         public int Id { get; set; }
 
         public string UserId { get; set; }

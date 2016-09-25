@@ -4,8 +4,6 @@ namespace DAL.ORM.Model
 {
     public class Comment: IEntity
     {
-        [Required]
-        [Key]
         public int Id { get; set; }
         public string Content { get; set; }
 
