@@ -85,7 +85,6 @@ namespace SiteCreatorWeb
 
             app.UseApplicationInsightsExceptionTelemetry();
 
-            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseIdentity();

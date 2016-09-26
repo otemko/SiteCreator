@@ -24,7 +24,7 @@ const appRoutes: Routes = [
         component: AccountComponent
     },
     {
-        path: 'site',
+        path: 'site/:id',
         component: SiteComponent
     },
     {

@@ -1,3 +1,7 @@
-<div class="text-center">
-    <i class="fa fa-sitemap fa-5x"></i>
+<div  *ngIf="sites.length > 0">
+    <div class="list-group">
+        <a class="list-group-item" *ngFor="let site of sites" [routerLink]="['/site', site.id]" >
+            <site-item [site]="site"></site-item>
+        </a>
+    </div>
 </div>
