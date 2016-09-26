@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 using DAL.Interfaces;
 using DAL.DTO;
 using ORM;
+using DAL.Mapper;
+using ORM.Model;
 
 namespace DAL.Concrete
 {
-    public class EntityRepository<TEntity, TDal> : IEntityRepository<TDal> 
-        where TDal : class, IDalEntity, new()
+    public class EntityRepository<TEntity, TDal> : IEntityRepository<TDal>
+        where TDal : class, IDalEntity
         where TEntity : class, new()
     {
         private SiteCreatorDbContext context;
+        private readonly IMapper<TEntity, TDal> mapper;
 
         public EntityRepository(SiteCreatorDbContext context)
         {
@@ -28,83 +31,91 @@ namespace DAL.Concrete
 
         public virtual void Create(TDal entity)
         {
-            context.Set<TEntity>().Add(entity);
+            context.Set<TEntity>().Add(mapper.ToDataBase(entity));
         }
 
         public void Update(TDal entity)
         {
-            context.Set<T>().Update(entity);
+            context.Set<TEntity>().Update(mapper.ToDataBase(entity));
         }
 
         public virtual void Delete(TDal entity)
         {
-            context.Set<T>().Remove(entity);
+            context.Set<TEntity>().Remove(mapper.ToDataBase(entity));
         }
 
         public virtual IEnumerable<TDal> AllIncluding(params Expression<Func<TDal, object>>[] includeProperties)
         {
-            IQueryable<T> query = context.Set<T>();
+            IQueryable<TEntity> query = context.Set<TEntity>();
             foreach (var includeProperty in includeProperties)
             {
-                query = query.Include(includeProperty);
+                query = query.Include(mapper.ToDataBaseExpressionInclude(includeProperty));
             }
-            return query.AsEnumerable();
+            return query.AsEnumerable().Select(x => mapper.ToDal(x));
         }
 
         public virtual async Task<IEnumerable<TDal>> AllIncludingAsync(params Expression<Func<TDal, object>>[] includeProperties)
         {
-            IQueryable<T> query = context.Set<T>();
+            IQueryable<TEntity> query = context.Set<TEntity>();
             foreach (var includeProperty in includeProperties)
             {
-                query = query.Include(includeProperty);
+                query = query.Include(mapper.ToDataBaseExpressionInclude(includeProperty));
             }
-            return await query.ToListAsync();
+            return await query.Select(x => mapper.ToDal(x)).ToListAsync();
         }
 
         public virtual IEnumerable<TDal> FindBy(Expression<Func<TDal, bool>> predicate)
         {
-            return context.Set<T>().Where(predicate);
+            return context.Set<TEntity>()
+                .Where(mapper.ToDataBaseExpression(predicate))
+                .Select(x => mapper.ToDal(x));
         }
 
         public virtual async Task<IEnumerable<TDal>> FindByAsync(Expression<Func<TDal, bool>> predicate)
         {
-            return await context.Set<T>().Where(predicate).ToListAsync();
+            return await context.Set<TEntity>()
+                .Where(mapper.ToDataBaseExpression(predicate))
+                .Select(x => mapper.ToDal(x))
+                .ToListAsync();
         }
 
         public virtual IEnumerable<TDal> GetAll()
         {
-            return context.Set<T>().AsEnumerable();
+            return context.Set<TEntity>().AsEnumerable().Select(x => mapper.ToDal(x));
         }
 
         public virtual async Task<IEnumerable<TDal>> GetAllAsync()
         {
-            return await context.Set<T>().ToListAsync();
+            return await context.Set<TEntity>().Select(x => mapper.ToDal(x)).ToListAsync();
         }
 
         public virtual TDal GetSingle(Expression<Func<TDal, bool>> predicate)
         {
-            return context.Set<T>().FirstOrDefault(predicate);
+            return context.Set<TEntity>()
+                .Where(mapper.ToDataBaseExpression(predicate))
+                .Select(x => mapper.ToDal(x)).FirstOrDefault();
         }
 
         public virtual TDal GetSingle(int id)
         {
-            return context.Set<T>().FirstOrDefault(e => e.Id == id);
+            return context.Set<TEntity>().Select(x => mapper.ToDal(x)).FirstOrDefault(e => e.Id == id);
         }
 
         public virtual TDal GetSingle(Expression<Func<TDal, bool>> predicate, params Expression<Func<TDal, object>>[] includeProperties)
         {
-            IQueryable<T> query = context.Set<T>();
+            IQueryable<TEntity> query = context.Set<TEntity>();
             foreach (var includeProperty in includeProperties)
             {
-                query = query.Include(includeProperty);
+                query = query.Include(mapper.ToDataBaseExpressionInclude(includeProperty));
             }
 
-            return query.Where(predicate).FirstOrDefault();
+            return query.Where(mapper.ToDataBaseExpression(predicate)).Select(x => mapper.ToDal(x)).FirstOrDefault();
         }
 
         public virtual async Task<TDal> GetSingleAsync(int id)
         {
-            return await context.Set<T>().FirstOrDefaultAsync(e => e.Id == id);
+            return await context.Set<TEntity>().Select(x => mapper.ToDal(x)).
+                FirstOrDefaultAsync(e => e.Id == id);
         }                
     }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DAL.Interfaces
+namespace DAL.DTO
 {
-    public class DalComment
+    public class DalComment: IDalEntity
     {
         public int Id { get; set; }
         public string Content { get; set; }

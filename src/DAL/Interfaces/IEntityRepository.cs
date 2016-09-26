@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    public interface IEntityRepository<TDal> where TDal : class, IDalEntity, new()
+    public interface IEntityRepository<TDal> where TDal : IDalEntity
     {
         IEnumerable<TDal> AllIncluding(params Expression<Func<TDal, object>>[] includeProperties);
         Task<IEnumerable<TDal>> AllIncludingAsync(params Expression<Func<TDal, object>>[] includeProperties);
