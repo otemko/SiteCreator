@@ -3,275 +3,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using DAL.ORM;
+using ORM;
 
-namespace DAL.Migrations
+namespace ORM.Migrations
 {
     [DbContext(typeof(SiteCreatorDbContext))]
-    [Migration("20160925132638_Initial")]
-    partial class Initial
+    partial class SiteCreatorDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("DAL.ORM.Model.Achievement", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<byte[]>("Image");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Achievement");
-                });
-
-            modelBuilder.Entity("DAL.ORM.Model.AchievementUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AchievementId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AchievementId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AchievementUser");
-                });
-
-            modelBuilder.Entity("DAL.ORM.Model.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Content");
-
-                    b.Property<int>("PageId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PageId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Comment");
-                });
-
-            modelBuilder.Entity("DAL.ORM.Model.Content", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Html");
-
-                    b.Property<int>("PageId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Content");
-                });
-
-            modelBuilder.Entity("DAL.ORM.Model.Language", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Url");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Language");
-                });
-
-            modelBuilder.Entity("DAL.ORM.Model.Layout", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Html");
-
-                    b.Property<byte[]>("Image");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Layout");
-                });
-
-            modelBuilder.Entity("DAL.ORM.Model.Page", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ContentId");
-
-                    b.Property<DateTime>("LastModififcation");
-
-                    b.Property<int>("LayoutId");
-
-                    b.Property<int>("Order");
-
-                    b.Property<int>("Rating");
-
-                    b.Property<int>("SiteId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContentId")
-                        .IsUnique();
-
-                    b.HasIndex("LayoutId");
-
-                    b.HasIndex("SiteId");
-
-                    b.ToTable("Page");
-                });
-
-            modelBuilder.Entity("DAL.ORM.Model.Site", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DateCreated");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("StyleMenuId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StyleMenuId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Site");
-                });
-
-            modelBuilder.Entity("DAL.ORM.Model.Style", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Url");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Style");
-                });
-
-            modelBuilder.Entity("DAL.ORM.Model.StyleMenu", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("StyleMenu");
-                });
-
-            modelBuilder.Entity("DAL.ORM.Model.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tag");
-                });
-
-            modelBuilder.Entity("DAL.ORM.Model.TagSite", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("SiteId");
-
-                    b.Property<int>("TagId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SiteId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("TagSite");
-                });
-
-            modelBuilder.Entity("DAL.ORM.Model.User", b =>
-                {
-                    b.Property<string>("Id");
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Email")
-                        .HasAnnotation("MaxLength", 256);
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<int>("LanguageId");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasAnnotation("MaxLength", 256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasAnnotation("MaxLength", 256);
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<int>("StyleId");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName")
-                        .HasAnnotation("MaxLength", 256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LanguageId");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex");
-
-                    b.HasIndex("StyleId");
-
-                    b.ToTable("AspNetUsers");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
                 {
@@ -380,84 +123,266 @@ namespace DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("DAL.ORM.Model.AchievementUser", b =>
+            modelBuilder.Entity("ORM.Model.Achievement", b =>
                 {
-                    b.HasOne("DAL.ORM.Model.Achievement", "Achievement")
-                        .WithMany("AchievementUser")
-                        .HasForeignKey("AchievementId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.HasOne("DAL.ORM.Model.User", "User")
-                        .WithMany("AchievementUser")
-                        .HasForeignKey("UserId");
+                    b.Property<string>("Description");
+
+                    b.Property<byte[]>("Image");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Achievement");
                 });
 
-            modelBuilder.Entity("DAL.ORM.Model.Comment", b =>
+            modelBuilder.Entity("ORM.Model.AchievementUser", b =>
                 {
-                    b.HasOne("DAL.ORM.Model.Page", "Page")
-                        .WithMany("Comment")
-                        .HasForeignKey("PageId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.HasOne("DAL.ORM.Model.User", "User")
-                        .WithMany("Comment")
-                        .HasForeignKey("UserId");
+                    b.Property<int>("AchievementId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AchievementId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AchievementUser");
                 });
 
-            modelBuilder.Entity("DAL.ORM.Model.Page", b =>
+            modelBuilder.Entity("ORM.Model.Comment", b =>
                 {
-                    b.HasOne("DAL.ORM.Model.Content", "Content")
-                        .WithOne("Page")
-                        .HasForeignKey("DAL.ORM.Model.Page", "ContentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.HasOne("DAL.ORM.Model.Layout", "Layout")
-                        .WithMany("Page")
-                        .HasForeignKey("LayoutId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<string>("Content");
 
-                    b.HasOne("DAL.ORM.Model.Site", "Site")
-                        .WithMany("Page")
-                        .HasForeignKey("SiteId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<int>("PageId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PageId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comment");
                 });
 
-            modelBuilder.Entity("DAL.ORM.Model.Site", b =>
+            modelBuilder.Entity("ORM.Model.Content", b =>
                 {
-                    b.HasOne("DAL.ORM.Model.StyleMenu", "StyleMenu")
-                        .WithMany("Site")
-                        .HasForeignKey("StyleMenuId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.HasOne("DAL.ORM.Model.User", "User")
-                        .WithMany("Site")
-                        .HasForeignKey("UserId");
+                    b.Property<string>("Html");
+
+                    b.Property<int>("PageId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Content");
                 });
 
-            modelBuilder.Entity("DAL.ORM.Model.TagSite", b =>
+            modelBuilder.Entity("ORM.Model.Language", b =>
                 {
-                    b.HasOne("DAL.ORM.Model.Site", "Site")
-                        .WithMany("TagSite")
-                        .HasForeignKey("SiteId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.HasOne("DAL.ORM.Model.Tag", "Tag")
-                        .WithMany("TagSite")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Language");
                 });
 
-            modelBuilder.Entity("DAL.ORM.Model.User", b =>
+            modelBuilder.Entity("ORM.Model.Layout", b =>
                 {
-                    b.HasOne("DAL.ORM.Model.Language", "Language")
-                        .WithMany("User")
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.HasOne("DAL.ORM.Model.Style", "Style")
-                        .WithMany("User")
-                        .HasForeignKey("StyleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<string>("Html");
+
+                    b.Property<byte[]>("Image");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Layout");
+                });
+
+            modelBuilder.Entity("ORM.Model.Page", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ContentId");
+
+                    b.Property<DateTime>("LastModififcation");
+
+                    b.Property<int>("LayoutId");
+
+                    b.Property<int>("Order");
+
+                    b.Property<int>("Rating");
+
+                    b.Property<int>("SiteId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContentId")
+                        .IsUnique();
+
+                    b.HasIndex("LayoutId");
+
+                    b.HasIndex("SiteId");
+
+                    b.ToTable("Page");
+                });
+
+            modelBuilder.Entity("ORM.Model.Site", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("StyleMenuId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StyleMenuId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Site");
+                });
+
+            modelBuilder.Entity("ORM.Model.Style", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Style");
+                });
+
+            modelBuilder.Entity("ORM.Model.StyleMenu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StyleMenu");
+                });
+
+            modelBuilder.Entity("ORM.Model.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tag");
+                });
+
+            modelBuilder.Entity("ORM.Model.TagSite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("SiteId");
+
+                    b.Property<int>("TagId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SiteId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("TagSite");
+                });
+
+            modelBuilder.Entity("ORM.Model.User", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Email")
+                        .HasAnnotation("MaxLength", 256);
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasAnnotation("MaxLength", 256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasAnnotation("MaxLength", 256);
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<int>("StyleId");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .HasAnnotation("MaxLength", 256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex");
+
+                    b.HasIndex("StyleId");
+
+                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -470,7 +395,7 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("DAL.ORM.Model.User")
+                    b.HasOne("ORM.Model.User")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -478,7 +403,7 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("DAL.ORM.Model.User")
+                    b.HasOne("ORM.Model.User")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -491,9 +416,89 @@ namespace DAL.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("DAL.ORM.Model.User")
+                    b.HasOne("ORM.Model.User")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ORM.Model.AchievementUser", b =>
+                {
+                    b.HasOne("ORM.Model.Achievement", "Achievement")
+                        .WithMany("AchievementUser")
+                        .HasForeignKey("AchievementId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ORM.Model.User", "User")
+                        .WithMany("AchievementUser")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("ORM.Model.Comment", b =>
+                {
+                    b.HasOne("ORM.Model.Page", "Page")
+                        .WithMany("Comment")
+                        .HasForeignKey("PageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ORM.Model.User", "User")
+                        .WithMany("Comment")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("ORM.Model.Page", b =>
+                {
+                    b.HasOne("ORM.Model.Content", "Content")
+                        .WithOne("Page")
+                        .HasForeignKey("ORM.Model.Page", "ContentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ORM.Model.Layout", "Layout")
+                        .WithMany("Page")
+                        .HasForeignKey("LayoutId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ORM.Model.Site", "Site")
+                        .WithMany("Page")
+                        .HasForeignKey("SiteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ORM.Model.Site", b =>
+                {
+                    b.HasOne("ORM.Model.StyleMenu", "StyleMenu")
+                        .WithMany("Site")
+                        .HasForeignKey("StyleMenuId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ORM.Model.User", "User")
+                        .WithMany("Site")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("ORM.Model.TagSite", b =>
+                {
+                    b.HasOne("ORM.Model.Site", "Site")
+                        .WithMany("TagSite")
+                        .HasForeignKey("SiteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ORM.Model.Tag", "Tag")
+                        .WithMany("TagSite")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ORM.Model.User", b =>
+                {
+                    b.HasOne("ORM.Model.Language", "Language")
+                        .WithMany("User")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ORM.Model.Style", "Style")
+                        .WithMany("User")
+                        .HasForeignKey("StyleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

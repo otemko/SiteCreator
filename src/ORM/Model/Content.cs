@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DAL.ORM.Model
+namespace ORM.Model
 {
     public class Content: IEntity
     {

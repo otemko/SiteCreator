@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace DAL.ORM.Model
+namespace ORM.Model
 {
     public class User: IdentityUser
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
         public int StyleId { get; set; }
         public virtual Style Style { get; set; }
 

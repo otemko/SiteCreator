@@ -1,8 +1,8 @@
-﻿using DAL.ORM.Model;
+﻿using ORM.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL.ORM
+namespace ORM
 {
     public class SiteCreatorDbContext: IdentityDbContext<User>
     {

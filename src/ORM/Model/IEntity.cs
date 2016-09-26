@@ -1,4 +1,4 @@
-﻿namespace DAL.ORM.Model
+﻿namespace ORM.Model
 {
     public interface IEntity
     {

@@ -1,30 +1,30 @@
-﻿using System;
+﻿using DAL.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using DAL.ORM.Model;
 
 namespace DAL.Interfaces
 {
-    public interface IEntityRepository<T> where T : class, IEntity, new()
+    public interface IEntityRepository<TDal> where TDal : class, IDalEntity, new()
     {
-        IEnumerable<T> AllIncluding(params Expression<Func<T, object>>[] includeProperties);
-        Task<IEnumerable<T>> AllIncludingAsync(params Expression<Func<T, object>>[] includeProperties);
+        IEnumerable<TDal> AllIncluding(params Expression<Func<TDal, object>>[] includeProperties);
+        Task<IEnumerable<TDal>> AllIncludingAsync(params Expression<Func<TDal, object>>[] includeProperties);
 
-        IEnumerable<T> GetAll();
-        Task<IEnumerable<T>> GetAllAsync();
+        IEnumerable<TDal> GetAll();
+        Task<IEnumerable<TDal>> GetAllAsync();
 
-        T GetSingle(int id);
-        T GetSingle(Expression<Func<T, bool>> predicate);
-        T GetSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
-        Task<T> GetSingleAsync(int id);
+        TDal GetSingle(int id);
+        TDal GetSingle(Expression<Func<TDal, bool>> predicate);
+        TDal GetSingle(Expression<Func<TDal, bool>> predicate, params Expression<Func<TDal, object>>[] includeProperties);
+        Task<TDal> GetSingleAsync(int id);
 
-        IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate);
-        Task<IEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate);
+        IEnumerable<TDal> FindBy(Expression<Func<TDal, bool>> predicate);
+        Task<IEnumerable<TDal>> FindByAsync(Expression<Func<TDal, bool>> predicate);
 
-        void Create(T entity);
-        void Delete(T entity);
-        void Update(T entity);
+        void Create(TDal entity);
+        void Delete(TDal entity);
+        void Update(TDal entity);
 
         void Commit();
     }
