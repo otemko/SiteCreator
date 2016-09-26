@@ -116,6 +116,14 @@ namespace DAL.Concrete
         {
             return await context.Set<TEntity>().Select(x => mapper.ToDal(x)).
                 FirstOrDefaultAsync(e => e.Id == id);
-        }                
+        }
+
+        public async Task<IEnumerable<TDal>>  GetAllAsync(Expression<Func<TDal, bool>> predicate)
+        {
+            return await context.Set<TEntity>().
+                Where(mapper.ToDataBaseExpression(predicate)).
+                Select(x => mapper.ToDal(x)).
+                ToListAsync();
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace DAL.Interfaces
 
         IEnumerable<TDal> GetAll();
         Task<IEnumerable<TDal>> GetAllAsync();
+        Task<IEnumerable<TDal>> GetAllAsync(Expression<Func<TDal, bool>> predicate);
 
         TDal GetSingle(int id);
         TDal GetSingle(Expression<Func<TDal, bool>> predicate);

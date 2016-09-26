@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace DAL.Concrete
 {
     public class CommentRepository : EntityRepository<Comment, DalComment>,
-        ICommentUserRepository, IMapper<Comment, DalComment>
+        ICommentRepository, IMapper<Comment, DalComment>
     {
         private readonly IVisitor<Comment, DalComment> visitorMapper;
         public CommentRepository(SiteCreatorDbContext context) : base(context)
