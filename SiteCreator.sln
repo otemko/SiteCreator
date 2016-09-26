@@ -14,6 +14,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DAL", "src\DAL\DAL.xproj", 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SiteCreatorWeb", "src\SiteCreatorWeb\SiteCreatorWeb.xproj", "{6C8B3BC1-408E-46DD-B705-6BFDA968E09C}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BLL", "src\BLL\BLL.xproj", "{F14C14A8-B330-460F-AA4F-C725875B6CFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{6C8B3BC1-408E-46DD-B705-6BFDA968E09C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C8B3BC1-408E-46DD-B705-6BFDA968E09C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C8B3BC1-408E-46DD-B705-6BFDA968E09C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F14C14A8-B330-460F-AA4F-C725875B6CFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F14C14A8-B330-460F-AA4F-C725875B6CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F14C14A8-B330-460F-AA4F-C725875B6CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F14C14A8-B330-460F-AA4F-C725875B6CFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,5 +41,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6878547D-1A92-4391-BDDE-DB46EED6F79C} = {F7230BCA-C789-4561-AE35-06809F2F4EF9}
 		{6C8B3BC1-408E-46DD-B705-6BFDA968E09C} = {F7230BCA-C789-4561-AE35-06809F2F4EF9}
+		{F14C14A8-B330-460F-AA4F-C725875B6CFD} = {F7230BCA-C789-4561-AE35-06809F2F4EF9}
 	EndGlobalSection
 EndGlobal

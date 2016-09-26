@@ -79,6 +79,11 @@ namespace DAL.Concrete
             return await context.Set<T>().ToListAsync();
         }
 
+        public virtual async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await context.Set<T>().Where(predicate).ToListAsync();
+        }
+
         public virtual T GetSingle(Expression<Func<T, bool>> predicate)
         {
             return context.Set<T>().FirstOrDefault(predicate);
