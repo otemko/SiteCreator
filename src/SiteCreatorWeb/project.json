@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.1",
@@ -24,7 +24,8 @@
     "AspNetCore.Security.OAuth.Vkontakte": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Twitter": "1.0.0",
     "DAL": "1.0.0-*",
-    "Microsoft.ApplicationInsights.AspNetCore": "1.0.0"
+    "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
+    "ORM": "1.0.0-*"
   },
 
   "tools": {

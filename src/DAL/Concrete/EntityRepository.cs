@@ -5,12 +5,14 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DAL.Interfaces;
-using DAL.ORM.Model;
-using DAL.ORM;
+using DAL.DTO;
+using ORM;
 
 namespace DAL.Concrete
 {
-    public class EntityRepository<T> : IEntityRepository<T> where T : class, IEntity, new()
+    public class EntityRepository<TEntity, TDal> : IEntityRepository<TDal> 
+        where TDal : class, IDalEntity, new()
+        where TEntity : class, new()
     {
         private SiteCreatorDbContext context;
 
@@ -24,22 +26,22 @@ namespace DAL.Concrete
             context.SaveChanges();
         }
 
-        public virtual void Create(T entity)
+        public virtual void Create(TDal entity)
         {
-            context.Set<T>().Add(entity);
+            context.Set<TEntity>().Add(entity);
         }
 
-        public void Update(T entity)
+        public void Update(TDal entity)
         {
             context.Set<T>().Update(entity);
         }
 
-        public virtual void Delete(T entity)
+        public virtual void Delete(TDal entity)
         {
             context.Set<T>().Remove(entity);
         }
 
-        public virtual IEnumerable<T> AllIncluding(params Expression<Func<T, object>>[] includeProperties)
+        public virtual IEnumerable<TDal> AllIncluding(params Expression<Func<TDal, object>>[] includeProperties)
         {
             IQueryable<T> query = context.Set<T>();
             foreach (var includeProperty in includeProperties)
@@ -49,7 +51,7 @@ namespace DAL.Concrete
             return query.AsEnumerable();
         }
 
-        public virtual async Task<IEnumerable<T>> AllIncludingAsync(params Expression<Func<T, object>>[] includeProperties)
+        public virtual async Task<IEnumerable<TDal>> AllIncludingAsync(params Expression<Func<TDal, object>>[] includeProperties)
         {
             IQueryable<T> query = context.Set<T>();
             foreach (var includeProperty in includeProperties)
@@ -59,37 +61,37 @@ namespace DAL.Concrete
             return await query.ToListAsync();
         }
 
-        public virtual IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate)
+        public virtual IEnumerable<TDal> FindBy(Expression<Func<TDal, bool>> predicate)
         {
             return context.Set<T>().Where(predicate);
         }
 
-        public virtual async Task<IEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate)
+        public virtual async Task<IEnumerable<TDal>> FindByAsync(Expression<Func<TDal, bool>> predicate)
         {
             return await context.Set<T>().Where(predicate).ToListAsync();
         }
 
-        public virtual IEnumerable<T> GetAll()
+        public virtual IEnumerable<TDal> GetAll()
         {
             return context.Set<T>().AsEnumerable();
         }
 
-        public virtual async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<TDal>> GetAllAsync()
         {
             return await context.Set<T>().ToListAsync();
         }
 
-        public virtual T GetSingle(Expression<Func<T, bool>> predicate)
+        public virtual TDal GetSingle(Expression<Func<TDal, bool>> predicate)
         {
             return context.Set<T>().FirstOrDefault(predicate);
         }
 
-        public virtual T GetSingle(int id)
+        public virtual TDal GetSingle(int id)
         {
             return context.Set<T>().FirstOrDefault(e => e.Id == id);
         }
 
-        public virtual T GetSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        public virtual TDal GetSingle(Expression<Func<TDal, bool>> predicate, params Expression<Func<TDal, object>>[] includeProperties)
         {
             IQueryable<T> query = context.Set<T>();
             foreach (var includeProperty in includeProperties)
@@ -100,7 +102,7 @@ namespace DAL.Concrete
             return query.Where(predicate).FirstOrDefault();
         }
 
-        public virtual async Task<T> GetSingleAsync(int id)
+        public virtual async Task<TDal> GetSingleAsync(int id)
         {
             return await context.Set<T>().FirstOrDefaultAsync(e => e.Id == id);
         }                

@@ -1,12 +1,13 @@
-<html>
+﻿<html>
 
 <head>
-    <title>Angular QuickStart</title>
+    <title>Web Designer</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet"></link>
-    <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet"></link>
+    <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="css/site.css" rel="stylesheet"/>
 
     <script src="/lib/jquery/dist/jquery.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
@@ -27,8 +28,12 @@
 </head>
 <!-- 3. Display the application -->
 
-<body>
-    <my-app>Loading...</my-app>
+<body class="content">
+    <my-app>
+        <div class="middle-loading-box">
+            <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+        </div>
+    </my-app>
 </body>
 
 </html>

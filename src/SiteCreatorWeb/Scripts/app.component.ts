@@ -6,11 +6,8 @@ import { Location } from '@angular/common';
     templateUrl: './appScripts/app.component.html',
     styleUrls: ['./appScripts/app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
     constructor(public location: Location) { }
 
-    ngOnInit() {
-        this.location.go('/');
-    }
  }
