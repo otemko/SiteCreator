@@ -12,7 +12,6 @@ namespace DAL.DTO
         public string Name { get; set; }
 
         public string UserId { get; set; }
-
         public int StyleMenuId { get; set; }
     }
 }

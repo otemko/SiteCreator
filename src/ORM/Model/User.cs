@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ORM.Model
@@ -18,6 +19,6 @@ namespace ORM.Model
 
         public virtual ICollection<AchievementUser> AchievementUser { get; set; }
 
-        public virtual ICollection<Site> Site { get; set; }
+        public virtual ICollection<Site> Site { get; set; }               
     }
 }

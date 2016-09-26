@@ -16,6 +16,7 @@ namespace DAL.Concrete
         public AchievementRepository(SiteCreatorDbContext context) : base(context)
         {
             visitorMapper = visitorMapper;
+
         }
 
         public DalAchievement ToDal(Achievement dbEntity)
@@ -24,7 +25,7 @@ namespace DAL.Concrete
             {
                 Id = dbEntity.Id,
                 Description = dbEntity.Description,
-                Image = dbEntity.Image                
+                Image = dbEntity.Image        
             };
         }
 
