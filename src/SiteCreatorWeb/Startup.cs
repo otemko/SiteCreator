@@ -10,6 +10,7 @@ using ORM.Model;
 using DAL.Interfaces;
 using DAL.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using BLL.Services;
 
 namespace SiteCreatorWeb
 {
@@ -40,19 +41,7 @@ namespace SiteCreatorWeb
 
             services.AddDbContext<SiteCreatorDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddScoped<IAchievementRepository, AchievementRepository>();
-            services.AddScoped<IAchievementUserRepository, AchievementUserRepository>();
-            services.AddScoped<ICommentRepository, CommentRepository>();
-            services.AddScoped<IContentRepository, ContentRepository>();
-            services.AddScoped<ILanguageRepository, LanguageRepository>();
-            services.AddScoped<ILayoutRepository, LayoutRepository>();
-            services.AddScoped<IPageRepository, PageRepository>();
-            services.AddScoped<ISiteRepository, SiteRepository>();
-            services.AddScoped<IStyleRepository, StyleRepository>();
-            services.AddScoped<IStyleMenuRepository, StyleMenuRepository>();
-            services.AddScoped<ITagRepository, TagRepository>();
-            services.AddScoped<ITagSiteRepository, TagSiteRepository>();
+            AddDependencies(services);
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<SiteCreatorDbContext>()
@@ -63,6 +52,8 @@ namespace SiteCreatorWeb
                 options.Filters.Add(new RequireHttpsAttribute());
             });
         }
+
+
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
@@ -113,6 +104,23 @@ namespace SiteCreatorWeb
                     name: "default",
                     template: "{controller}/{action}/{id?}");
             });
+        }
+        private void AddDependencies(IServiceCollection services)
+        {
+            services.AddScoped<IAchievementRepository, AchievementRepository>();
+            services.AddScoped<IAchievementUserRepository, AchievementUserRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IContentRepository, ContentRepository>();
+            services.AddScoped<ILanguageRepository, LanguageRepository>();
+            services.AddScoped<ILayoutRepository, LayoutRepository>();
+            services.AddScoped<IPageRepository, PageRepository>();
+            services.AddScoped<ISiteRepository, SiteRepository>();
+            services.AddScoped<IStyleRepository, StyleRepository>();
+            services.AddScoped<IStyleMenuRepository, StyleMenuRepository>();
+            services.AddScoped<ITagRepository, TagRepository>();
+            services.AddScoped<ITagSiteRepository, TagSiteRepository>();
+
+            services.AddScoped<SiteService>();
         }
     }
 }
