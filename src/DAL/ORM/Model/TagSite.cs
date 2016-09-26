@@ -4,8 +4,6 @@ namespace DAL.ORM.Model
 {
     public class TagSite: IEntity
     {
-        [Required]
-        [Key]
         public int Id { get; set; }
 
         public int SiteId { get; set; }

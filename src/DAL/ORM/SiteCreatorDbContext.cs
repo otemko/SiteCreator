@@ -22,7 +22,6 @@ namespace DAL.ORM
         public SiteCreatorDbContext(DbContextOptions<SiteCreatorDbContext> options)
             : base(options)
         {
-            
         }
     }
 }

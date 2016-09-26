@@ -8,8 +8,8 @@ using DAL.ORM;
 namespace DAL.Migrations
 {
     [DbContext(typeof(SiteCreatorDbContext))]
-    [Migration("20160924122458_3")]
-    partial class _3
+    [Migration("20160925132929_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -88,6 +88,8 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Name");
+
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
@@ -164,6 +166,8 @@ namespace DAL.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("Url");
 

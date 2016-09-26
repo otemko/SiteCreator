@@ -6,8 +6,6 @@ namespace DAL.ORM.Model
 {
     public class Page: IEntity
     {
-        [Required]
-        [Key]
         public int Id { get; set; }
         public int Order { get; set; }
         public int Rating { get; set; }
