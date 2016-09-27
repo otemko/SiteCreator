@@ -51,9 +51,12 @@ namespace SiteCreator.Web
             {
                 options.Filters.Add(new RequireHttpsAttribute());
             });
+
+            services.AddTransient<SeedData>();
         }
         
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,
+            SeedData seeder)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -78,6 +81,8 @@ namespace SiteCreator.Web
             app.UseStaticFiles();
 
             app.UseIdentity();
+
+            seeder.Seed();
 
             app.UseFacebookAuthentication(new FacebookOptions()
             {

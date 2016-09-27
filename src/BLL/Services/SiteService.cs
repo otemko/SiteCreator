@@ -16,16 +16,22 @@ namespace SiteCreator.BLL.Services
             this.repository = repository;            
         }
         
-        public async Task<IEnumerable<Site>> GetSitesWithUser(string userId)
-        {
-            var sites = await repository.GetAllAsync<Site>(s => s.UserId == userId, s => s.User);
-            return sites;
-        }
-
         public async Task<IEnumerable<Site>> GetSitesWithUserAndTag(string userId)
         {
-            var sites = await repository.GetAllAsync<Site>(s => s.UserId == userId, s => s.User);
-            return sites;
+            var result = new List<Site>();
+
+            var tagsites = await repository.GetAllAsync<TagSite>(ts => ts.Site.UserId == userId, 
+                ts => ts.Site, ts => ts.Site.User, ts => ts.Tag);
+
+            foreach (var tagsite in tagsites)
+            {
+                if (!result.Contains(tagsite.Site))
+                {
+                    result.Add(tagsite.Site);
+                }
+            }
+
+            return result;
         }
     }
 }

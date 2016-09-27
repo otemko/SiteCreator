@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using SiteCreator.BLL.IService;
 using SiteCreator.Entities;
+using SiteCreator.Web.Model;
+using System.Linq;
 
 namespace SiteCreator.Web.Controllers
 {
@@ -24,10 +26,19 @@ namespace SiteCreator.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IEnumerable<object>> Get(string id)
+        public async Task<IEnumerable<SiteViewModel>> Get(string id)
         {
-            var k = await siteService.GetAllAsync();
-            return k;
+            var listResult = new List<SiteViewModel>();
+
+            var sites = await siteService.GetSitesWithUserAndTag(id);
+
+            foreach (var site in sites)
+            {
+                var tags = site.TagSite.Select(t => t.Tag);
+                listResult.Add(new SiteViewModel(site, tags));
+            }
+
+            return listResult;
         }
 
         // POST api/values

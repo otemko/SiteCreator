@@ -8,7 +8,7 @@ using SiteCreator.ORM;
 namespace ORM.Migrations
 {
     [DbContext(typeof(SiteCreatorDbContext))]
-    [Migration("20160927065828_Initial")]
+    [Migration("20160927224406_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -300,7 +300,7 @@ namespace ORM.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Name");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
