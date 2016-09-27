@@ -9,14 +9,16 @@ import { Service } from '../service'
 @Injectable()
 export class AccountService {
 
-    private url: 'api/Account/';
+    private url: 'api/Manage/';
 
-    constructor(private service: Service) {
+    constructor(private service: Service, private account: Account) {
 
     }
 
-    getAccountInfo(): Promise<Account> {
-        return this.service.get(this.url);
+    getAccountInfo(): Account {
+        this.service.get<Account>(this.url)
+            .then(account => this.account = account);
+        return this.account;
     }
 
 }
