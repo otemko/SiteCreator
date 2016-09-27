@@ -10,6 +10,7 @@ using SiteCreator.ORM;
 using SiteCreator.Entities;
 using SiteCreator.BLL.Services;
 using SiteCreator.DAL;
+using SiteCreator.BLL.IService;
 
 namespace SiteCreator.Web
 {
@@ -107,7 +108,7 @@ namespace SiteCreator.Web
         }
         private void AddDependencies(IServiceCollection services)
         {
-            services.AddScoped<SiteService>();
+            services.AddScoped<ISiteService, SiteService>();
             services.AddScoped<IEntityRepository, EntityRepository>();
         }
     }

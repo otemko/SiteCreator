@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using SiteCreator.BLL.Services;
 using System.Threading.Tasks;
-using System.Linq;
+using SiteCreator.BLL.IService;
 
 namespace SiteCreator.Web.Controllers
 {
     [Route("api/[controller]")]
     public class SitesController : Controller
     {
-        private SiteService siteService;
+        private ISiteService siteService;
 
-        public SitesController(SiteService siteService)
+        public SitesController(ISiteService siteService)
         {
             this.siteService = siteService;
         }

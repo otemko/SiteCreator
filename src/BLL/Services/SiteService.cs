@@ -3,10 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using SiteCreator.Entities;
 using SiteCreator.DAL;
+using SiteCreator.BLL.IService;
 
 namespace SiteCreator.BLL.Services
 {
-    public class SiteService
+    public class SiteService : ISiteService
     {
         IEntityRepository repository;
 
