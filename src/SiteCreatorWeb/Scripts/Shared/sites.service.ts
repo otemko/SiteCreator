@@ -6,6 +6,7 @@ import { sites } from './sites.data'
 
 @Injectable()
 export class SiteService {
+
     getSites(): ISite[] {
         return sites;
     }

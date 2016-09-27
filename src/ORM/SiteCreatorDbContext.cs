@@ -1,10 +1,10 @@
-﻿using ORM.Model;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SiteCreator.Entities;
 
-namespace ORM
+namespace SiteCreator.ORM
 {
-    public class SiteCreatorDbContext: IdentityDbContext<User>
+    public class SiteCreatorDbContext : IdentityDbContext<User>
     {
         public DbSet<Achievement> Achievement { get; set; }
         public DbSet<AchievementUser> AchievementUser { get; set; }
@@ -18,10 +18,12 @@ namespace ORM
         public DbSet<StyleMenu> StyleMenu { get; set; }
         public DbSet<Tag> Tag { get; set; }
         public DbSet<TagSite> TagSite { get; set; }
-        
+
         public SiteCreatorDbContext(DbContextOptions<SiteCreatorDbContext> options)
             : base(options)
         {
+            
         }
+        
     }
 }

@@ -5,13 +5,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ORM;
-using ORM.Model;
-using DAL.Interfaces;
-using DAL.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using SiteCreator.ORM;
+using SiteCreator.Entities;
+using SiteCreator.BLL.Services;
+using SiteCreator.DAL;
+using SiteCreator.BLL.IService;
 
-namespace SiteCreatorWeb
+namespace SiteCreator.Web
 {
     public class Startup
     {
@@ -40,19 +41,7 @@ namespace SiteCreatorWeb
 
             services.AddDbContext<SiteCreatorDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddScoped<IAchievementRepository, AchievementRepository>();
-            services.AddScoped<IAchievementUserRepository, AchievementUserRepository>();
-            services.AddScoped<ICommentRepository, CommentRepository>();
-            services.AddScoped<IContentRepository, ContentRepository>();
-            services.AddScoped<ILanguageRepository, LanguageRepository>();
-            services.AddScoped<ILayoutRepository, LayoutRepository>();
-            services.AddScoped<IPageRepository, PageRepository>();
-            services.AddScoped<ISiteRepository, SiteRepository>();
-            services.AddScoped<IStyleRepository, StyleRepository>();
-            services.AddScoped<IStyleMenuRepository, StyleMenuRepository>();
-            services.AddScoped<ITagRepository, TagRepository>();
-            services.AddScoped<ITagSiteRepository, TagSiteRepository>();
+            AddDependencies(services);
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<SiteCreatorDbContext>()
@@ -62,9 +51,12 @@ namespace SiteCreatorWeb
             {
                 options.Filters.Add(new RequireHttpsAttribute());
             });
-        }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+            services.AddTransient<SeedData>();
+        }
+        
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,
+            SeedData seeder)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -85,9 +77,12 @@ namespace SiteCreatorWeb
 
             app.UseApplicationInsightsExceptionTelemetry();
 
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseIdentity();
+
+            seeder.Seed();
 
             app.UseFacebookAuthentication(new FacebookOptions()
             {
@@ -113,6 +108,11 @@ namespace SiteCreatorWeb
                     name: "default",
                     template: "{controller}/{action}/{id?}");
             });
+        }
+        private void AddDependencies(IServiceCollection services)
+        {
+            services.AddScoped<ISiteService, SiteService>();
+            services.AddScoped<IEntityRepository, EntityRepository>();
         }
     }
 }
