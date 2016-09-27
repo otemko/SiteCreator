@@ -7,7 +7,7 @@ using SiteCreator.BLL.IService;
 
 namespace SiteCreator.BLL.Services
 {
-    public class SiteService<T,Q> : EntityService<T,Q>,  ISiteService<T, Q> where T : class, WithId<Q>
+    public class SiteService : EntityService<Site,int>,  ISiteService
     {
         IEntityRepository repository;
 
@@ -17,6 +17,12 @@ namespace SiteCreator.BLL.Services
         }
         
         public async Task<IEnumerable<Site>> GetSitesWithUser(string userId)
+        {
+            var sites = await repository.GetAllAsync<Site>(s => s.UserId == userId, s => s.User);
+            return sites;
+        }
+
+        public async Task<IEnumerable<Site>> GetSitesWithUserAndTag(string userId)
         {
             var sites = await repository.GetAllAsync<Site>(s => s.UserId == userId, s => s.User);
             return sites;

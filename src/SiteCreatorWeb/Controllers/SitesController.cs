@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using SiteCreator.BLL.IService;
+using SiteCreator.Entities;
 
 namespace SiteCreator.Web.Controllers
 {
@@ -25,7 +26,8 @@ namespace SiteCreator.Web.Controllers
         [HttpGet("{id}")]
         public async Task<IEnumerable<object>> Get(string id)
         {
-            return await siteService.GetAllByUserAsync(id);
+            var k = await siteService.GetAllAsync();
+            return k;
         }
 
         // POST api/values

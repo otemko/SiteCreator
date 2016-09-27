@@ -72,7 +72,9 @@ namespace SiteCreator.DAL
                 query = query.Include(includeProperty);
             }
 
-            return await query.Where(predicate).ToListAsync();
+             
+            var r = await query.Where(predicate).ToListAsync();
+            return r;
         }
         #endregion
 
