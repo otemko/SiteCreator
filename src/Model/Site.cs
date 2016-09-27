@@ -17,6 +17,6 @@ namespace SiteCreator.Entities
 
         public virtual ICollection<Page> Page { get; set; }
 
-        public virtual ICollection<TagSite> TagSite { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 }

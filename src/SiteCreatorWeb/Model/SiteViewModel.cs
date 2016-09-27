@@ -11,7 +11,7 @@ namespace SiteCreator.Web.Model
         public virtual int Id { get; set; }
         public virtual DateTime DateCreated { get; set; }
         public virtual string Name { get; set; }
-        public string UserId { get; set; }
+        public UserViewModelSite User { get; set; }
         public virtual string[] TagSite { get; set; }
 
         public SiteViewModel(Site site)
@@ -19,7 +19,12 @@ namespace SiteCreator.Web.Model
             Id = site.Id;
             DateCreated = site.DateCreated;
             Name = site.Name;
-            UserId = site.User.Id;
+
+            User.Id = site.User.Id;
+            User.FirstName = site.User.FirstName;
+            User.FirstName = site.User.LastName;                     
+
+            //TagSite = site.TagSite.
         }
     }
 }

@@ -16,7 +16,7 @@ namespace SiteCreator.Entities
 
         public virtual ICollection<Comment> Comment { get; set; }
 
-        public virtual ICollection<AchievementUser> AchievementUser { get; set; }
+        //public virtual ICollection<Achievement> Achievements { get; set; }
 
         public virtual ICollection<Site> Site { get; set; }               
     }

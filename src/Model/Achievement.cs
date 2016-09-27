@@ -9,6 +9,6 @@ namespace SiteCreator.Entities
         public virtual string Description { get; set; }
         public virtual byte[] Image { get; set; }
 
-        public virtual ICollection<AchievementUser> AchievementUser { get; set; }
+        //public virtual ICollection<User> Users { get; set; }
     }
 }
