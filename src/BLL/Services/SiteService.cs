@@ -18,19 +18,19 @@ namespace SiteCreator.BLL.Services
         public void CreateAsync(Site site)
         {
             repository.Create(site);
-            repository.Commit();
+            repository.CommitAsync();
         }
 
         public void Update(Site site)
         {
             repository.Update(site);
-            repository.Commit();
+            repository.CommitAsync();
         }
 
         public void Delete(Site site)
         {
             repository.Delete(site);
-            repository.Commit();
+            repository.CommitAsync();
         }
 
         public async Task<IEnumerable<Site>> GetAllByUserAsync(string userId)

@@ -51,9 +51,7 @@ namespace SiteCreator.Web
                 options.Filters.Add(new RequireHttpsAttribute());
             });
         }
-
-
-
+        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));

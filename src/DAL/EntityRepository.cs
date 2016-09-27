@@ -18,11 +18,12 @@ namespace SiteCreator.DAL
             this.context = context;
         }
 
-        public virtual void Commit()
+        public virtual void CommitAsync()
         {
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
 
+        #region CUD
         public virtual void Create<T>(T entity) where T : class
         {
             context.Add(entity);
@@ -37,18 +38,9 @@ namespace SiteCreator.DAL
         {
             context.Remove(entity);
         }
+        #endregion
 
-        public virtual IEnumerable<T> AllIncluding<T>(params Expression<Func<T,
-            object>>[] includeProperties) where T : class
-        {
-            IQueryable<T> query = context.Set<T>();
-            foreach (var includeProperty in includeProperties)
-            {
-                query = query.Include(includeProperty);
-            }
-            return query.AsEnumerable();
-        }
-
+        #region AllIncluding
         public virtual async Task<IEnumerable<T>> AllIncludingAsync<T>(params Expression<Func<T,
             object>>[] includeProperties) where T : class
         {
@@ -59,24 +51,18 @@ namespace SiteCreator.DAL
             }
             return await query.ToListAsync();
         }
+        #endregion
 
-        public virtual IEnumerable<T> FindBy<T>(Expression<Func<T, bool>> predicate) where T : class
-        {
-            return context.Set<T>()
-                .Where(predicate);
-        }
-
+        #region FindBy
         public virtual async Task<IEnumerable<T>> FindByAsync<T>(Expression<Func<T,
             bool>> predicate) where T : class
         {
             return await context.Set<T>()
                 .Where(predicate).ToListAsync();
         }
+        #endregion
 
-        public virtual IEnumerable<T> GetAll<T>() where T : class
-        {
-            return context.Set<T>().AsEnumerable();
-        }
+        #region GetAll
 
         public virtual async Task<IEnumerable<T>> GetAllAsync<T>() where T : class
         {
@@ -87,24 +73,15 @@ namespace SiteCreator.DAL
         {
             return await context.Set<T>().Where(predicate).ToListAsync();
         }
+        #endregion
 
-        public virtual T GetSingle<T>(Expression<Func<T, bool>> predicate) where T : class
-        {
-            return context.Set<T>()
-                .Where(predicate).FirstOrDefault();
-        }
-
-        public virtual T GetSingle<T, Q>(Q id) where T : class, WithId<Q>
-        {
-            return context.Set<T>().FirstOrDefault(e => e.Id.Equals(id));
-        }
-
-        public async Task<T> GetSingleAsync<T, Q>(Q id) where T : class, WithId<Q>
+        #region GetSingle
+        public virtual async Task<T> GetSingleAsync<T, Q>(Q id) where T : class, WithId<Q>
         {
             return await context.Set<T>().FirstOrDefaultAsync(e => e.Id.Equals(id));
         }
 
-        public virtual T GetSingle<T>(Expression<Func<T, bool>> predicate,
+        public virtual async Task<T> GetSingleAsync<T>(Expression<Func<T, bool>> predicate,
             params Expression<Func<T, object>>[] includeProperties) where T : class
         {
             IQueryable<T> query = context.Set<T>();
@@ -113,9 +90,14 @@ namespace SiteCreator.DAL
                 query = query.Include(includeProperty);
             }
 
-            return query.Where(predicate).FirstOrDefault();
+            return await query.Where(predicate).FirstOrDefaultAsync();
         }
 
-        
+        public virtual async Task<T> GetSingleAsync<T>(Expression<Func<T, bool>> predicate) where T : class
+        {
+            return await context.Set<T>()
+                .Where(predicate).FirstOrDefaultAsync();
+        }
+        #endregion
     }
 }

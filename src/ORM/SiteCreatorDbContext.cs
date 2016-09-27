@@ -23,5 +23,6 @@ namespace SiteCreator.ORM
             : base(options)
         {
         }
+        
     }
 }
