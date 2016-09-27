@@ -1,6 +1,7 @@
 ﻿import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
+import { HttpModule } from '@angular/http';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { HomeComponent } from './Components/Home/home.component'
@@ -17,7 +18,8 @@ import { routing } from './routes';
 @NgModule({
     imports: [
         BrowserModule,
-        routing
+        routing,
+        HttpModule
     ],
     declarations: [
         AppComponent,

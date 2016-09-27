@@ -13,9 +13,9 @@ namespace SiteCreator.Web.Controllers
     {
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public object Get()
         {
-            return new string[] { "value1", "value2" };
+            return new { id = "value1", name = "value2" };
         }
 
         // GET api/values/5
