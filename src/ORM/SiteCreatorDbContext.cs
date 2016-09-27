@@ -1,9 +1,8 @@
-﻿using ORM.Model;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
+using SiteCreator.Entities;
 
-namespace ORM
+namespace SiteCreator.ORM
 {
     public class SiteCreatorDbContext : IdentityDbContext<User>
     {

@@ -5,14 +5,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ORM;
-using ORM.Model;
-using DAL.Interfaces;
-using DAL.Concrete;
 using Microsoft.AspNetCore.Mvc;
-using BLL.Services;
+using SiteCreator.ORM;
+using SiteCreator.Entities;
+using SiteCreator.BLL.Services;
+using SiteCreator.DAL;
 
-namespace SiteCreatorWeb
+namespace SiteCreator.Web
 {
     public class Startup
     {
@@ -76,6 +75,7 @@ namespace SiteCreatorWeb
 
             app.UseApplicationInsightsExceptionTelemetry();
 
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseIdentity();
@@ -107,20 +107,8 @@ namespace SiteCreatorWeb
         }
         private void AddDependencies(IServiceCollection services)
         {
-            services.AddScoped<IAchievementRepository, AchievementRepository>();
-            services.AddScoped<IAchievementUserRepository, AchievementUserRepository>();
-            services.AddScoped<ICommentRepository, CommentRepository>();
-            services.AddScoped<IContentRepository, ContentRepository>();
-            services.AddScoped<ILanguageRepository, LanguageRepository>();
-            services.AddScoped<ILayoutRepository, LayoutRepository>();
-            services.AddScoped<IPageRepository, PageRepository>();
-            services.AddScoped<ISiteRepository, SiteRepository>();
-            services.AddScoped<IStyleRepository, StyleRepository>();
-            services.AddScoped<IStyleMenuRepository, StyleMenuRepository>();
-            services.AddScoped<ITagRepository, TagRepository>();
-            services.AddScoped<ITagSiteRepository, TagSiteRepository>();
-
             services.AddScoped<SiteService>();
+            services.AddScoped<IEntityRepository, EntityRepository>();
         }
     }
 }

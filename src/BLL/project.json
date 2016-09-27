@@ -2,8 +2,11 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "DAL": "1.0.0-*",
-    "NETStandard.Library": "1.6.0"
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
+    "System.ComponentModel.Annotations": "4.1.0",
+    "NETStandard.Library": "1.6.0",
+    "Model": "1.0.0-*",
+    "DAL": "1.0.0-*"
   },
 
   "frameworks": {

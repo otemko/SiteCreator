@@ -1,17 +1,16 @@
-﻿using BLL.Model;
-using DAL.Interfaces;
-using DAL.ORM.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SiteCreator.Entities;
+using SiteCreator.DAL;
 
-namespace BLL.Services
+namespace SiteCreator.BLL.Services
 {
     public class SiteService
     {
-        ISiteRepository repository;
+        IEntityRepository repository;
 
-        public SiteService(ISiteRepository repository)
+        public SiteService(IEntityRepository repository)
         {
             this.repository = repository;
         }
@@ -34,10 +33,10 @@ namespace BLL.Services
             repository.Commit();
         }
 
-        public async Task<IEnumerable<BllSite>> GetAllByUserAsync(string userId)
+        public async Task<IEnumerable<Site>> GetAllByUserAsync(string userId)
         {
-            var sites = await repository.GetAllAsync(p => p.UserId == userId);
-            return sites.Select(p => p.ToBll());
+            var sites = await repository.GetAllAsync<Site>(p => p.UserId == userId);
+            return sites;
         }
 
     }

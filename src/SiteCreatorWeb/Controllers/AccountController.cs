@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
-using ORM.Model;
+using SiteCreator.Entities;
 
-namespace SiteCreatorWeb.Controllers
+namespace SiteCreator.Web.Controllers
 {
     [Authorize]
     public class AccountController : Controller

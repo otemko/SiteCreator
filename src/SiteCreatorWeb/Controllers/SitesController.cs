@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using BLL.Services;
+using SiteCreator.BLL.Services;
 using System.Threading.Tasks;
 using System.Linq;
 
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace SiteCreatorWeb.Controllers
+namespace SiteCreator.Web.Controllers
 {
     [Route("api/[controller]")]
     public class SitesController : Controller
