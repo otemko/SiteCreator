@@ -53,17 +53,7 @@ namespace SiteCreator.DAL
         }
         #endregion
 
-        #region FindBy
-        public virtual async Task<IEnumerable<T>> FindByAsync<T>(Expression<Func<T,
-            bool>> predicate) where T : class
-        {
-            return await context.Set<T>()
-                .Where(predicate).ToListAsync();
-        }
-        #endregion
-
         #region GetAll
-
         public virtual async Task<IEnumerable<T>> GetAllAsync<T>() where T : class
         {
             return await context.Set<T>().ToListAsync();
@@ -72,6 +62,17 @@ namespace SiteCreator.DAL
         public virtual async Task<IEnumerable<T>> GetAllAsync<T>(Expression<Func<T, bool>> predicate) where T : class
         {
             return await context.Set<T>().Where(predicate).ToListAsync();
+        }
+
+        public virtual async Task<IEnumerable<T>> GetAllAsync<T>(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties) where T : class
+        {
+            IQueryable<T> query = context.Set<T>();
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return await query.Where(predicate).ToListAsync();
         }
         #endregion
 
@@ -97,7 +98,7 @@ namespace SiteCreator.DAL
         {
             return await context.Set<T>()
                 .Where(predicate).FirstOrDefaultAsync();
-        }
+        }        
         #endregion
     }
 }

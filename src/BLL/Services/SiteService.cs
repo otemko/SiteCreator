@@ -7,38 +7,19 @@ using SiteCreator.BLL.IService;
 
 namespace SiteCreator.BLL.Services
 {
-    public class SiteService : ISiteService
+    public class SiteService<T,Q> : EntityService<T,Q>,  ISiteService<T, Q> where T : class, WithId<Q>
     {
         IEntityRepository repository;
 
-        public SiteService(IEntityRepository repository)
+        public SiteService(IEntityRepository repository): base(repository)
         {
-            this.repository = repository;
+            this.repository = repository;            
         }
-
-        public void CreateAsync(Site site)
+        
+        public async Task<IEnumerable<Site>> GetSitesWithUser(string userId)
         {
-            repository.Create(site);
-            repository.CommitAsync();
-        }
-
-        public void Update(Site site)
-        {
-            repository.Update(site);
-            repository.CommitAsync();
-        }
-
-        public void Delete(Site site)
-        {
-            repository.Delete(site);
-            repository.CommitAsync();
-        }
-
-        public async Task<IEnumerable<Site>> GetAllByUserAsync(string userId)
-        {
-            var sites = await repository.GetAllAsync<Site>(p => p.UserId == userId);
+            var sites = await repository.GetAllAsync<Site>(s => s.UserId == userId, s => s.User);
             return sites;
         }
-
     }
 }

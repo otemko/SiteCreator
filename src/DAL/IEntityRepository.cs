@@ -12,13 +12,12 @@ namespace SiteCreator.DAL
 
         Task<IEnumerable<T>> GetAllAsync<T>() where T : class;
         Task<IEnumerable<T>> GetAllAsync<T>(Expression<Func<T, bool>> predicate) where T : class;
+        Task<IEnumerable<T>> GetAllAsync<T>(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties) where T : class;
 
         Task<T> GetSingleAsync<T>(Expression<Func<T, bool>> predicate) where T : class;
         Task<T> GetSingleAsync<T>(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties) where T : class;
         Task<T> GetSingleAsync<T, Q>(Q id) where T : class, WithId<Q>;
-
-        Task<IEnumerable<T>> FindByAsync<T>(Expression<Func<T, bool>> predicate) where T : class;
-
+        
         void Create<T>(T entity) where T : class;
         void Delete<T>(T entity) where T : class;
         void Update<T>(T entity) where T : class;

@@ -1,4 +1,5 @@
-﻿using SiteCreator.Entities;
+﻿using SiteCreator.BLL.Services;
+using SiteCreator.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,14 +7,8 @@ using System.Threading.Tasks;
 
 namespace SiteCreator.BLL.IService
 {
-    public interface ISiteService
+    public interface ISiteService<T,Q>: IEntityService<T,Q>
     {
-        void CreateAsync(Site site);
-
-        void Update(Site site);
-
-        void Delete(Site site);
-
-        Task<IEnumerable<Site>> GetAllByUserAsync(string userId);
+        Task<IEnumerable<Site>> GetSitesWithUser(string userId);
     }
 }
