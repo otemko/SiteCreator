@@ -1,10 +1,14 @@
 export class Account {
     id: string;
-    name: string;
+    nickName: string;
+    firstName: string;
+    lastName: string;
+    languageId: number;
+    styleId: number;
 
-    read(account : Account) {
+    read(account) {
         this.id = account.id;
-        this.name = account.name;
+        this.nickName = account.nickName;
     }
 }
 

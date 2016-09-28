@@ -112,6 +112,7 @@ namespace SiteCreator.Web
         private void AddDependencies(IServiceCollection services)
         {
             services.AddScoped<ISiteService, SiteService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEntityRepository, EntityRepository>();
         }
     }

@@ -3,19 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SiteCreator.BLL.IService;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using SiteCreator.Web.Model;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SiteCreator.Web.Controllers
 {
+
     [Route("api/[controller]")]
     public class ManageController : Controller
     {
+        private IUserService userservice;
+
+        public ManageController(IUserService userservice)
+        {
+            this.userservice = userservice;
+        }
+
         // GET: api/values
         [HttpGet]
-        public object Get()
+        public async Task<UserInfoViewModel> GetUserInfo()
         {
-            return new { id = "value1", name = "value2" };
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await userservice.GetSingleAsync(userId);
+            return new UserInfoViewModel(user);
         }
 
         // GET api/values/5
