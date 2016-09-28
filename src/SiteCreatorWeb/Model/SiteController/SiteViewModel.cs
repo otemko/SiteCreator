@@ -10,7 +10,7 @@ namespace SiteCreator.Web.Model.SiteController
         public virtual int Id { get; set; }
         public virtual DateTime DateCreated { get; set; }
         public virtual string Name { get; set; }
-        public string UserNick { get; set; }
+        public string UserName { get; set; }
         public virtual IEnumerable<string> Tags { get; set; }
 
         public SiteViewModel(Site site, IEnumerable<Tag> tags)
@@ -19,7 +19,7 @@ namespace SiteCreator.Web.Model.SiteController
             DateCreated = site.DateCreated;
             Name = site.Name;
 
-            UserNick = site.User.UserName;
+            UserName = site.User.UserName;
 
             var listTags = new List<string>();
 
