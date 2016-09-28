@@ -16,15 +16,8 @@ export class SiteService {
 
     }
 
-    getSites(): Site[] {
-
-        let result: Site[] = new Array();
-
-        this.service.get(this.url)
-            .then(sites => Object.assign(result, sites));
-        console.log(result);
-       
-        return result;
+    getSites(): Promise<Site[]> {
+        return this.service.get(this.url)
     }
 
     //getSite(id: number): Site {

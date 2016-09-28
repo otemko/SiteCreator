@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core'
+import { Component, Input, Output, OnInit } from '@angular/core'
 
 import { Site } from '../../Shared/Models/site.model';
 import { SiteItemComponent } from './site-item.component';
@@ -10,12 +10,16 @@ import { SiteService } from '../../Shared/Services/sites.service'
     providers: [SiteService]
 })
 
-export class SitesComponent {
-    sites: Site[];
+export class SitesComponent implements OnInit {
+    sites : Site[] = new Array();
 
     constructor(private siteService: SiteService) {
-        this.sites = this.siteService.getSites();
-
-        console.log(this.sites);
+        this.siteService.getSites().then( sites => this.sites = sites);
     }
+
+    ngOnInit() {
+        console.log(this.sites.length);
+    }
+
+
 }
