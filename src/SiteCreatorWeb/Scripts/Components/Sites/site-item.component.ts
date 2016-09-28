@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core'
 
-import { Site } from '../Site/site.model'
+import { Site } from '../../Shared/Models/site.model'
 
 @Component({
     selector: 'site-item',

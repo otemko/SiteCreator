@@ -1,8 +1,8 @@
 import { Component, Input, Output } from '@angular/core'
 
-import { Site } from '../Site/site.model';
+import { Site } from '../../Shared/Models/site.model';
 import { SiteItemComponent } from './site-item.component';
-import { SiteService } from '../../Shared/sites.service'
+import { SiteService } from '../../Shared/Services/sites.service'
 
 @Component({
     selector: 'sites',

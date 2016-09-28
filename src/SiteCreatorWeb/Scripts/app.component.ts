@@ -2,9 +2,9 @@
 import { Location } from '@angular/common';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
-import { Account } from './Shared/Account/account.model'
-import { Service } from './Shared/service'
-import { AccountService } from './Shared/Account/account.service'
+import { Account } from './Shared/Models/account.model'
+import { Service } from './Shared/Services/service'
+import { AccountService } from './Shared/Services/account.service'
 
 @Component({
     selector: 'my-app',

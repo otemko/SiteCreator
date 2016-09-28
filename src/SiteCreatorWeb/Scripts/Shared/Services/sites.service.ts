@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { ISite, Site } from '../Components/Site/site.model'
-import { sites } from './sites.data'
+import { ISite, Site } from '../Models/site.model'
+import { sites } from '../Models/sites.data'
 
 
 @Injectable()
