@@ -1,10 +1,9 @@
 ﻿using SiteCreator.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace SiteCreator.Web.Model
+
+namespace SiteCreator.Web.Model.SiteController
 {
     public class SiteViewModel
     {

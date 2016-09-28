@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SiteCreator.Web.Model
+namespace SiteCreator.Web.Model.SiteController
 {
     public class TagViewModelSite
     {
