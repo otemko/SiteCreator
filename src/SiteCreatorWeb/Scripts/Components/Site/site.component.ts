@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 
-import { Site } from './site.model'
-import { SiteService } from '../../Shared/sites.service'
+import { Site } from '../../Shared/Models/site.model'
+import { SiteService } from '../../Shared/Services/sites.service'
 
 @Component({
     selector: 'site',

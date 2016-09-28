@@ -3,8 +3,8 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http'
 
 import 'rxjs/add/operator/toPromise';
 
-import { Account } from './account.model'
-import { Service } from '../service'
+import { Account } from '../Models/account.model'
+import { Service } from './service'
 
 @Injectable()
 export class AccountService {

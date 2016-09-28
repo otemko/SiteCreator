@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 
-import { Account } from '../../Shared/Account/account.model'
-import { AccountService } from '../../Shared/Account/account.service'
+import { Account } from '../../Shared/Models/account.model'
+import { AccountService } from '../../Shared/Services/account.service'
 
 
 @Component({
