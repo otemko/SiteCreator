@@ -12,7 +12,7 @@ export class Service {
 
     get(url: string): Promise<any> {
         return this.getPromise<any>(
-            this.http.get('api/Manage/'));
+            this.http.get(url));
     }
 
     post<T>(url: string, item: T): Promise<T> {
@@ -32,7 +32,7 @@ export class Service {
 
 
     private handleError(error: any): Promise<void> {
-        console.log('Error', error);
+        console.log('Error12456', error);
         return Promise.reject(error.message || error);
     }
 }

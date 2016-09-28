@@ -1,4 +1,4 @@
-<div  *ngIf="sites.length > 0">
+<div  *ngIf="sites">
     <div class="list-group">
         <a class="list-group-item" *ngFor="let site of sites" [routerLink]="['/site', site.id]" >
             <site-item [site]="site"></site-item>

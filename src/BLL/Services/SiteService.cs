@@ -33,5 +33,22 @@ namespace SiteCreator.BLL.Services
 
             return result;
         }
+
+        public async Task<IEnumerable<Site>> GetAllSitesWithUserAndTag()
+        {
+            var result = new List<Site>();
+
+            var tagsites = await repository.AllIncludingAsync<TagSite>(ts => ts.Site, ts => ts.Site.User, ts => ts.Tag);
+
+            foreach (var tagsite in tagsites)
+            {
+                if (!result.Contains(tagsite.Site))
+                {
+                    result.Add(tagsite.Site);
+                }
+            }
+
+            return result;
+        }
     }
 }

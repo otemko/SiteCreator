@@ -1,5 +1,4 @@
 import { Component, Injectable } from '@angular/core'
-import { Http, Headers, RequestOptions, Response } from '@angular/http'
 
 import 'rxjs/add/operator/toPromise';
 
@@ -9,7 +8,7 @@ import { Service } from './service'
 @Injectable()
 export class AccountService {
 
-    private url: 'api/Manage/';
+    private url = 'api/Manage/';
 
     constructor(private account: Account, private service: Service) {
     }

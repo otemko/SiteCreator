@@ -15,5 +15,7 @@ export class SitesComponent {
 
     constructor(private siteService: SiteService) {
         this.sites = this.siteService.getSites();
+
+        console.log(this.sites);
     }
 }

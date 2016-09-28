@@ -15,11 +15,11 @@ export class SiteComponent {
 
     constructor(private siteService: SiteService, private route: ActivatedRoute) {
         let id = +this.route.snapshot.params['id'];
-        this.site = this.siteService.getSite(id);
+        //this.site = this.siteService.getSite(id);
     }
 
     submit() {
-        this.siteService.updateSite(this.site);
+        //this.siteService.updateSite(this.site);
     }
 
 }
