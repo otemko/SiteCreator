@@ -12,12 +12,11 @@ export class AccountService {
     private url: 'api/Manage/';
 
     constructor(private account: Account, private service: Service) {
-
     }
 
     getAccountInfo(): void {
         this.service.get(this.url)
-            .then(account => this.account.read(account));
+            .then(account => Object.assign(this.account, account ));
     }
 
 }

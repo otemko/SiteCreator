@@ -11,6 +11,7 @@ using SiteCreator.Entities;
 using SiteCreator.BLL.Services;
 using SiteCreator.DAL;
 using SiteCreator.BLL.IService;
+using System.Collections.Generic;
 
 namespace SiteCreator.Web
 {
@@ -84,23 +85,14 @@ namespace SiteCreator.Web
 
             seeder.Seed();
 
-            app.UseFacebookAuthentication(new FacebookOptions()
-            {
-                AppId = Configuration["Authentication:Facebook:AppId"],
-                AppSecret = Configuration["Authentication:Facebook:AppSecret"]
-            });
+            UseFacebookAuthentication(app);
 
             app.UseVkontakteAuthentication(new AspNetCore.Security.OAuth.Vkontakte.VkontakteAuthenticationOptions()
             {
                 ClientId = Configuration["Authentication:Vkontakte:ClientId"],
                 ClientSecret = Configuration["Authentication:Vkontakte:ClientSecret"]
             });
-
-            app.UseTwitterAuthentication(new TwitterOptions()
-            {
-                ConsumerKey = Configuration["Authentication:Twitter:ConsumerKey"],
-                ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"]
-            });
+            UseTwitterAuthentication(app);
 
             app.UseMvc(routes =>
             {
@@ -109,6 +101,33 @@ namespace SiteCreator.Web
                     template: "{controller}/{action}/{id?}");
             });
         }
+
+        private void UseTwitterAuthentication(IApplicationBuilder app)
+        {
+            var options = new TwitterOptions()
+            {
+                ConsumerKey = Configuration["Authentication:Twitter:ConsumerKey"],
+                ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"],
+                RetrieveUserDetails = true,
+            };
+
+
+            app.UseTwitterAuthentication(options);
+        }
+
+        private void UseFacebookAuthentication(IApplicationBuilder app)
+        {
+            var options = new FacebookOptions()
+            {
+                AppId = Configuration["Authentication:Facebook:AppId"],
+                AppSecret = Configuration["Authentication:Facebook:AppSecret"],
+            };
+
+            options.Scope.Add("id");
+
+            app.UseFacebookAuthentication(options);
+        }
+
         private void AddDependencies(IServiceCollection services)
         {
             services.AddScoped<ISiteService, SiteService>();
