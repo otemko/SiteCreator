@@ -11,7 +11,8 @@ export class Service {
     constructor(private http: Http) {}
 
     get<T>(url: string): Promise<T> {
-        return this.getPromise(this.http.get(url))
+        return this.getPromise(
+            this.http.get('api/Manage/'));
     }
 
     post<T>(url: string, item: T): Promise<T> {
@@ -25,7 +26,7 @@ export class Service {
     
     private getPromise<T>(response: Observable<Response>) : Promise<T> {
         return response.toPromise()
-            .then(res => res.json().data)
+            .then(res => res.json())
             .catch(this.handleError);
     }
 

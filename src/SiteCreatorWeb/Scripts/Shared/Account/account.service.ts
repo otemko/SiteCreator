@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Component, Injectable } from '@angular/core'
 import { Http, Headers, RequestOptions, Response } from '@angular/http'
 
 import 'rxjs/add/operator/toPromise';
@@ -11,14 +11,13 @@ export class AccountService {
 
     private url: 'api/Manage/';
 
-    constructor(private service: Service, private account: Account) {
+    constructor(private account: Account, private service: Service) {
 
     }
 
-    getAccountInfo(): Account {
+    getAccountInfo(): void {
         this.service.get<Account>(this.url)
-            .then(account => this.account = account);
-        return this.account;
+            .then(account => this.account.read(account));
     }
 
 }

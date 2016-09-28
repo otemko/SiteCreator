@@ -2,9 +2,9 @@ export class Account {
     id: string;
     name: string;
 
-    constructor(id: string, name: string) {
-        this.id = id;
-        this.name = name;
+    read(account : Account) {
+        this.id = account.id;
+        this.name = account.name;
     }
 }
 
