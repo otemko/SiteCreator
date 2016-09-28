@@ -10,8 +10,8 @@ export class Service {
     
     constructor(private http: Http) {}
 
-    get<T>(url: string): Promise<T> {
-        return this.getPromise(
+    get(url: string): Promise<any> {
+        return this.getPromise<any>(
             this.http.get('api/Manage/'));
     }
 
