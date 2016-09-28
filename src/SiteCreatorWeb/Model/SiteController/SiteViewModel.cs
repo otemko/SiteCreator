@@ -10,8 +10,8 @@ namespace SiteCreator.Web.Model.SiteController
         public virtual int Id { get; set; }
         public virtual DateTime DateCreated { get; set; }
         public virtual string Name { get; set; }
-        public UserViewModelSite User { get; set; }
-        public virtual IEnumerable<TagViewModelSite> Tags { get; set; }
+        public string UserNick { get; set; }
+        public virtual IEnumerable<string> Tags { get; set; }
 
         public SiteViewModel(Site site, IEnumerable<Tag> tags)
         {
@@ -19,22 +19,13 @@ namespace SiteCreator.Web.Model.SiteController
             DateCreated = site.DateCreated;
             Name = site.Name;
 
-            User = new UserViewModelSite
-            {
-                Id = site.UserId,
-                FirstName = site.User.FirstName,
-                LastName = site.User.LastName
-            };
-            
-            var listTags = new List<TagViewModelSite>();
+            UserNick = site.User.UserName;
+
+            var listTags = new List<string>();
 
             foreach (var tag in tags)
             {
-                listTags.Add(new TagViewModelSite
-                {
-                    Id = tag.Id,
-                    Name = tag.Name
-                });
+                listTags.Add(tag.Name);
             }
 
             Tags = listTags;

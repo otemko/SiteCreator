@@ -9,5 +9,4 @@ import { Site } from '../../Shared/Models/site.model'
 
 export class SiteItemComponent {
     @Input() site: Site;
-
 }
