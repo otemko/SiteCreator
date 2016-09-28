@@ -17,7 +17,7 @@ export class AccountService {
 
     getAccountInfo(): void {
         this.service.get(this.url)
-            .then(account => this.account = account);
+            .then(account => this.account.read(account));
     }
 
 }
