@@ -26,7 +26,10 @@ export class Service {
     
     private getPromise<T>(response: Observable<Response>) : Promise<T> {
         return response.toPromise()
-            .then(res => res.json())
+            .then(res => {
+                 if (res.status == 204)  return null;
+                 else return res.json()
+                })
             .catch(this.handleError);
     }
 
