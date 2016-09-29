@@ -16,7 +16,6 @@ import { SiteUserItemComponent } from './Components/Sites/site-user-item.compone
 
 import { UsersComponent } from './Components/Users/users.component'
 import { AboutComponent } from './Components/About/about.component'
-import { SiteItemComponent } from './Components/Sites/site-item.component'
 import { AccountHeaderComponent } from './Components/Account/AccountPanel/accountPanel.component'
 import { LanguagePanelComponent } from './Components/LanguagePanel/languagePanel.component'
 
