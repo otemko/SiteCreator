@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ApplicationModule } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable'
 
@@ -17,10 +17,10 @@ export class Service {
 
     post<T>(url: string, item: T): Promise<T> {
         let body = JSON.stringify(item);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers });
 
-        return this.getPromise<T>((this.http.post(url, body, options)));
+        return this.getPromise<T>((this.http.post(url, 'provider=Twitter', options)));
     }
 
     

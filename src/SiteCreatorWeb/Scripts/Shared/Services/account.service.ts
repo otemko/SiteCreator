@@ -14,8 +14,12 @@ export class AccountService {
     }
 
     getAccountInfo(): void {
+        this.account.loading = true;
         this.service.get(this.url)
-            .then(account => Object.assign(this.account, account ));
+            .then(account => { 
+                Object.assign(this.account, account );
+                this.account.loading = false;
+            });
     }
 
 }

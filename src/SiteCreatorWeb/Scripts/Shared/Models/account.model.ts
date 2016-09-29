@@ -4,5 +4,7 @@ export class Account {
     lastName: string;
     languageId: number;
     styleId: number;
+
+    loading: boolean = false;
 }
 
