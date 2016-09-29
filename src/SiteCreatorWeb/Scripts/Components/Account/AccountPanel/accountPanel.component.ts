@@ -14,10 +14,8 @@ export class AccountHeaderComponent {
 
     }
 
-    externalLogin(event: any) {
-
-
-        let body = { provider: 'Twitter' };
+    externalLogin(provider: string) {
+        let body = { provider: provider };
         this.post('/Account/ExternalLogin', body, '');
     }
 
