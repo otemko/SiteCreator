@@ -9,7 +9,7 @@
             </div>
         </a>
         <p class="text-center">
-            <a href="#" *ngFor="let tag of site.tags"><i class="fa fa-hashtag fa-fw"></i>{{ tag.name }} </a>
+            <a [routerLink]="['/sites', tag.id]" *ngFor="let tag of site.tags"><i class="fa fa-hashtag fa-fw"></i>{{ tag.name }} </a>
         </p>
         <p class="text-center">
             <button (click)="edit()" class="btn btn-primary">Edit</button>

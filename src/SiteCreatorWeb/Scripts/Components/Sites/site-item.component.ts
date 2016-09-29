@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
 
 import { Site } from '../../Shared/Models/site.model'
 
@@ -9,4 +10,12 @@ import { Site } from '../../Shared/Models/site.model'
 
 export class SiteItemComponent {
     @Input() site: Site;
+
+    constructor(private route: Router) {
+    }
+
+    tagClick(id: number): void {
+        console.log(id);
+        this.route.navigate(['/sites/', id]);
+    }
 }

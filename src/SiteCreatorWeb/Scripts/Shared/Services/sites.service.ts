@@ -21,7 +21,12 @@ export class SiteService {
     }
 
     getSitesByUserId(userId: string): Promise<Site[]> {
+        console.log(this.url + userId);
         return this.service.get(this.url + userId);
+    }
+
+    getSitesByTag(tagId: number): Promise<Site[]> {
+        return this.service.get(this.url + tagId);
     }
 
     //updateSite(site: Site): void {

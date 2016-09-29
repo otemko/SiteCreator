@@ -9,7 +9,6 @@ using SiteCreator.Web.Model.SiteController;
 
 namespace SiteCreator.Web.Controllers
 {
-    [Route("api/[controller]")]
     public class SitesController : Controller
     {
         private ISiteService siteService;
@@ -20,7 +19,7 @@ namespace SiteCreator.Web.Controllers
         }
 
         // GET: api/values
-        [HttpGet]
+        [Route("api/[controller]")]
         public async Task<IEnumerable<SiteViewModel>> Get()
         {
             var listResult = new List<SiteViewModel>();
@@ -36,12 +35,28 @@ namespace SiteCreator.Web.Controllers
             return listResult;
         }
 
-        [HttpGet("{userId}")]
-        public async Task<IEnumerable<SiteViewModel>> Get(string userId)
+        [Route("api/[controller]/{userId}")]
+        public async Task<IEnumerable<SiteViewModel>> Getstring(string userId)
         {
             var listResult = new List<SiteViewModel>();
 
             var sites = await siteService.GetSitesByUserId(userId);
+
+            foreach (var site in sites)
+            {
+                var tags = site.TagSite.Select(t => t.Tag);
+                listResult.Add(new SiteViewModel(site, tags));
+            }
+
+            return listResult;
+        }
+
+        [Route("api/[controller]/{tagId:int}")]
+        public async Task<IEnumerable<SiteViewModel>> Getint(int tagId)
+        {
+            var listResult = new List<SiteViewModel>();
+
+            var sites = await siteService.GetSitesByTagId(tagId);
 
             foreach (var site in sites)
             {

@@ -20,7 +20,7 @@ export class Service {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers });
 
-        return this.getPromise<T>((this.http.post(url, 'provider=Twitter', options)));
+        return this.getPromise<T>((this.http.post(url, body, options)));
     }
 
     
@@ -32,6 +32,7 @@ export class Service {
                 })
             .catch(this.handleError);
     }
+
 
 
     private handleError(error: any): Promise<void> {

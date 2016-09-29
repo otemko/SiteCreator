@@ -17,7 +17,8 @@ export class SitesUserComponent {
 
     constructor(private siteService: SiteService, private route: ActivatedRoute) {
         let id = ""+this.route.snapshot.params['id'];
-        this.siteService.getSitesByUserId(id).then(sites => this.sites = sites);
+        this.siteService.getSitesByUserId(id).then(sites => { this.sites = sites;});
+        
     }
 
     create(): void

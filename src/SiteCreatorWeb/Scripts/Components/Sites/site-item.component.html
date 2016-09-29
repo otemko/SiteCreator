@@ -1,14 +1,19 @@
 <div class="row">
-
-    <div class="col-md-2 text-center">
-        <i class="fa fa-folder fa-5x fa-fw"></i>
-    </div>
-
+    <a [routerLink]="['/site', site.id]">
+        <div class="col-md-2 text-center">
+            <i class="fa fa-folder fa-5x fa-fw"></i>
+        </div>
+    </a>
     <div class="col-md-10">
-        <span class="lead">{{ site.name }}</span><br/>
-        <span class="text-info">            
-            <a href="#" *ngFor="let tag of site.tags"><i class="fa fa-hashtag fa-fw"></i>{{ tag.name }} </a>            
-        </span><br/>
-        <span><a href="#" >{{ site.userName }}</a> </span>
+        <a [routerLink]="['/site', site.id]">
+            <span class="lead">{{ site.name }}</span><br />
+        </a>
+        <span class="text-info">
+            <a [routerLink]="['/sites', tag.id]" *ngFor="let tag of site.tags">
+                <i class="fa fa-hashtag fa-fw"></i>
+                {{ tag.name }}
+            </a>
+        </span><br />
+        <span><a href="#">{{ site.userName }}</a> </span>
     </div>
 </div>
