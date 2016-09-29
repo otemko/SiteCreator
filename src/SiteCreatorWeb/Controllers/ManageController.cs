@@ -7,6 +7,7 @@ using SiteCreator.BLL.IService;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using SiteCreator.Web.Model;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,6 +15,7 @@ namespace SiteCreator.Web.Controllers
 {
 
     [Route("api/[controller]")]
+    [Authorize]
     public class ManageController : Controller
     {
         private IUserService userservice;
@@ -23,7 +25,6 @@ namespace SiteCreator.Web.Controllers
             this.userservice = userservice;
         }
 
-        // GET: api/values
         [HttpGet]
         public async Task<UserInfoViewModel> GetUserInfo()
         {
@@ -37,6 +38,12 @@ namespace SiteCreator.Web.Controllers
         public string Get(int id)
         {
             return "value";
+        }
+
+        [HttpGet("{tegName}")]
+        public string Get(string tagName)
+        {
+            return "valu22312e";
         }
 
         // POST api/values

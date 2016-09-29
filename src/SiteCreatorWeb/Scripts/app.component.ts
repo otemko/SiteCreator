@@ -10,7 +10,7 @@ import { AccountService } from './Shared/Services/account.service'
     selector: 'my-app',
     templateUrl: './appScripts/app.component.html',
     styleUrls: ['./appScripts/app.component.css'],
-    providers: [Account, Service, AccountService]
+    providers: [Account, Service, AccountService],
 })
 export class AppComponent {
 
