@@ -1,0 +1,20 @@
+﻿<div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+        <a [routerLink]="['/site', site.id]">
+            <div class="text-center">
+                <i class="fa fa-folder fa-5x fa-fw"></i>                   
+                <h3>
+                    {{ site.name }}
+                </h3>
+            </div>
+        </a>
+        <p class="text-center">
+            <a [routerLink]="['/sites', tag.id]" *ngFor="let tag of site.tags"><i class="fa fa-hashtag fa-fw"></i>{{ tag.name }} </a>
+        </p>
+        <p class="text-center">
+            <button (click)="edit()" class="btn btn-primary">Edit</button>
+            <button (click)="delete()"  class="btn btn-danger">Delete</button>          
+        </p>
+    </div>
+</div>
+  

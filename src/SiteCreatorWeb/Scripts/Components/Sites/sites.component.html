@@ -1,9 +1,7 @@
 <div  *ngIf="sites">
     <div class="list-group">
-        <a class="list-group-item" *ngFor="let site of sites" [routerLink]="['/site', site.id]" >
+        <div class="list-group-item" *ngFor="let site of sites" >
             <site-item [site]="site"></site-item>
-        </a>
+        </div>
     </div>
 </div>
-
-<span>{{ sites.length }}</span>

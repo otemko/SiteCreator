@@ -1,0 +1,9 @@
+﻿<div *ngIf="sites">
+    <div *ngFor="let site of sites">
+        <site-user-item [site]="site"></site-user-item>
+    </div>
+</div>
+<div>
+    <button (click)="create()" class="btn btn-primary">Create</button>
+</div>
+

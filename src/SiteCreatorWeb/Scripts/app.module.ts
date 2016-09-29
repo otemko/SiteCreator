@@ -6,8 +6,14 @@ import { Location, LocationStrategy, HashLocationStrategy } from '@angular/commo
 
 import { HomeComponent } from './Components/Home/home.component'
 import { AccountComponent } from './Components/Account/account.component'
+
 import { SiteComponent } from './Components/Site/site.component'
 import { SitesComponent } from './Components/Sites/sites.component'
+import { SiteItemComponent } from './Components/Sites/site-item.component'
+
+import { SitesUserComponent } from './Components/Sites/sites-user.component'
+import { SiteUserItemComponent } from './Components/Sites/site-user-item.component'
+
 import { UsersComponent } from './Components/Users/users.component'
 import { AboutComponent } from './Components/About/about.component'
 import { SiteItemComponent } from './Components/Sites/site-item.component'
@@ -32,7 +38,9 @@ import { routing } from './routes';
         AboutComponent,
         SiteItemComponent,
         AccountHeaderComponent,
-        LanguagePanelComponent
+        LanguagePanelComponent,
+        SitesUserComponent,
+        SiteUserItemComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

@@ -17,12 +17,17 @@ export class SiteService {
     }
 
     getSites(): Promise<Site[]> {
-        return this.service.get(this.url)
+        return this.service.get(this.url);
     }
 
-    //getSite(id: number): Site {
-    //    return sites.find(s => s.id == id);
-    //}
+    getSitesByUserId(userId: string): Promise<Site[]> {
+        console.log(this.url + userId);
+        return this.service.get(this.url + userId);
+    }
+
+    getSitesByTag(tagId: number): Promise<Site[]> {
+        return this.service.get(this.url + tagId);
+    }
 
     //updateSite(site: Site): void {
     //    let index = sites.findIndex(p => p.id == site.id);

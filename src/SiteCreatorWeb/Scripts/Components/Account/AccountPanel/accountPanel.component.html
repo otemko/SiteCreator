@@ -10,6 +10,9 @@
             <li>
                 <a [routerLink]=""><i class="fa fa-user-md fa-fw"></i>&nbsp;Accout</a>
             </li>
+            <li>
+                <a [routerLink]="['/sites-user', account.id]"><i class="fa fa-book"></i>&nbsp;My sites</a>
+            </li>
             <li class="divider"></li>
             <li>
                 <a [routerLink]="" (click)="logoff()"><i class="fa fa-power-off fa-fw"></i>&nbsp;Logout</a>
