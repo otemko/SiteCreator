@@ -6,6 +6,8 @@ using SiteCreator.Entities;
 using SiteCreator.Web.Model;
 using System.Linq;
 using SiteCreator.Web.Model.SiteController;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace SiteCreator.Web.Controllers
 {
@@ -13,12 +15,17 @@ namespace SiteCreator.Web.Controllers
     {
         private ISiteService siteService;
 
-        public SitesController(ISiteService siteService)
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
+
+        public SitesController(ISiteService siteService, UserManager<User> userManager, SignInManager<User> signInManager)
         {
+            this.userManager = userManager;
+            this.signInManager = signInManager;
             this.siteService = siteService;
         }
 
-        // GET: api/values
+        [HttpGet]
         [Route("api/[controller]")]
         public async Task<IEnumerable<SiteViewModel>> Get()
         {
@@ -35,6 +42,7 @@ namespace SiteCreator.Web.Controllers
             return listResult;
         }
 
+        [HttpGet]
         [Route("api/[controller]/{userId}")]
         public async Task<IEnumerable<SiteViewModel>> Getstring(string userId)
         {
@@ -51,6 +59,7 @@ namespace SiteCreator.Web.Controllers
             return listResult;
         }
 
+        [HttpGet]
         [Route("api/[controller]/{tagId:int}")]
         public async Task<IEnumerable<SiteViewModel>> Getint(int tagId)
         {
@@ -80,9 +89,23 @@ namespace SiteCreator.Web.Controllers
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        [Route("api/[controller]/{id:int}")]
+        public int Delete(int id)
         {
+            if (!signInManager.IsSignedIn(User))
+                return -1;
+
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var site = siteService.GetSingleAsync(id).Result;
+
+            if (site.UserId == userId)
+            {
+                siteService.DeleteAsync(site);
+                return id;
+            }
+            return -1;
         }
     }
 }

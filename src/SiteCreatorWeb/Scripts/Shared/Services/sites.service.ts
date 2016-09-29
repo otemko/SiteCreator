@@ -29,6 +29,10 @@ export class SiteService {
         return this.service.get(this.url + tagId);
     }
 
+    deleteSite(id: number): Promise<number> {
+        return this.service.delete(this.url + id);
+    }
+
     //updateSite(site: Site): void {
     //    let index = sites.findIndex(p => p.id == site.id);
     //    if (~index) {

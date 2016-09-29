@@ -23,6 +23,11 @@ export class Service {
         return this.getPromise<T>((this.http.post(url, body, options)));
     }
 
+    delete(url: string): Promise<any> {        
+        return this.getPromise<any>(
+            this.http.delete(url));
+    }
+
     
     private getPromise<T>(response: Observable<Response>) : Promise<T> {
         return response.toPromise()
