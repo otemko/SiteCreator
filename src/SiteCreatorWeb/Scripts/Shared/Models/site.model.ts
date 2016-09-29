@@ -1,7 +1,10 @@
+import { Tag } from './tag.model';
+
 export class Site{
-    dateCreated: string;
     id: number;
+    dateCreated: string;    
     name: string;
     userName: string;
-    tags: string[];
+    userId: string;
+    tags: Tag[];
 }

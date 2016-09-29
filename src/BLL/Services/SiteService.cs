@@ -15,13 +15,12 @@ namespace SiteCreator.BLL.Services
         {
             this.repository = repository;            
         }
-        
-        public async Task<IEnumerable<Site>> GetSitesWithUserAndTag(string userId)
+
+        public async Task<IEnumerable<Site>> GetAllSitesWithUserAndTag()
         {
             var result = new List<Site>();
 
-            var tagsites = await repository.GetAllAsync<TagSite>(ts => ts.Site.UserId == userId, 
-                ts => ts.Site, ts => ts.Site.User, ts => ts.Tag);
+            var tagsites = await repository.AllIncludingAsync<TagSite>(ts => ts.Site, ts => ts.Site.User, ts => ts.Tag);
 
             foreach (var tagsite in tagsites)
             {
@@ -34,11 +33,12 @@ namespace SiteCreator.BLL.Services
             return result;
         }
 
-        public async Task<IEnumerable<Site>> GetAllSitesWithUserAndTag()
+        public async Task<IEnumerable<Site>> GetSitesByUserId(string userId)
         {
             var result = new List<Site>();
 
-            var tagsites = await repository.AllIncludingAsync<TagSite>(ts => ts.Site, ts => ts.Site.User, ts => ts.Tag);
+            var tagsites = await repository.GetAllAsync<TagSite>(ts => ts.Site.UserId == userId,
+                ts=> ts.Site, ts => ts.Site.User, ts => ts.Tag);
 
             foreach (var tagsite in tagsites)
             {

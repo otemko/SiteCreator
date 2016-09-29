@@ -36,12 +36,12 @@ namespace SiteCreator.Web.Controllers
             return listResult;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IEnumerable<SiteViewModel>> Get(string id)
+        [HttpGet("{userId}")]
+        public async Task<IEnumerable<SiteViewModel>> Get(string userId)
         {
             var listResult = new List<SiteViewModel>();
 
-            var sites = await siteService.GetSitesWithUserAndTag(id);
+            var sites = await siteService.GetSitesByUserId(userId);
 
             foreach (var site in sites)
             {

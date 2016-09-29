@@ -10,16 +10,17 @@ import { SiteService } from '../../Shared/Services/sites.service'
     providers: [SiteService]
 })
 
-export class SitesComponent implements OnInit {
+export class SitesComponent{
     sites : Site[] = new Array();
 
     constructor(private siteService: SiteService) {
-        this.siteService.getSites().then( sites => this.sites = sites);
+        this.siteService.getSites().then(sites => {
+            
+            this.sites = sites;
+            console.log(this.sites);
+        });
     }
 
-    ngOnInit() {
-        console.log(this.sites.length);
-    }
 
 
 }

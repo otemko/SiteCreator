@@ -6,9 +6,9 @@
 
     <div class="col-md-10">
         <span class="lead">{{ site.name }}</span><br/>
-        <span class="text-info">
-            <i class="fa fa-hashtag fa-fw"></i>{{ site.tags }}
+        <span class="text-info">            
+            <a href="#" *ngFor="let tag of site.tags"><i class="fa fa-hashtag fa-fw"></i>{{ tag.name }} </a>            
         </span><br/>
-        <span>{{ site.userNick }}</span>
+        <span><a href="#" >{{ site.userName }}</a> </span>
     </div>
 </div>
