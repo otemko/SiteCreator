@@ -1,5 +1,5 @@
 <ul class="nav navbar-nav navbar-right">
-    <li class="dropdown">
+    <li *ngIf="!account.loading" class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-user fa-fw"></i>
             <span *ngIf="account.userName">&nbsp;{{ account.userName }}</span>
@@ -8,14 +8,14 @@
         </a>
         <ul *ngIf="account.userName" class="dropdown-menu">
             <li>
-                <a [routerLink]="['/account']"><i class="fa fa-user-md fa-fw"></i>&nbsp;Accout</a>
+                <a [routerLink]=""><i class="fa fa-user-md fa-fw"></i>&nbsp;Accout</a>
             </li>
             <li>
                 <a [routerLink]="['/sites-user', account.id]"><i class="fa fa-book"></i>&nbsp;My sites</a>
             </li>
             <li class="divider"></li>
             <li>
-                <a href="/Account/LogOff"><i class="fa fa-power-off fa-fw"></i>&nbsp;Logout</a>
+                <a [routerLink]="" (click)="logoff()"><i class="fa fa-power-off fa-fw"></i>&nbsp;Logout</a>
             </li>
         </ul>
         <ul *ngIf="!account.userName" class="dropdown-menu">
@@ -29,15 +29,17 @@
                     <i class="fa fa-facebook-f fa-fw"></i>&nbsp;Facebook
                 </a>
             </li>
-             <li>
-            <a [routerLink]="" (click)="externalLogin('Vkontakte')">
+            <li>
+                <a [routerLink]="" (click)="externalLogin('Vkontakte')">
                     <i class="fa fa-vk fa-fw"></i>&nbsp;Vkontakte
                 </a>
             </li>
-
         </ul>
-
-    </li>
-
+        <li *ngIf="account.loading" class="dropdown">
+            <a [routerLink]="" class="dropdown-toggle"  data-toggle="dropdown">
+                <i class="fa fa-user fa-fw"></i>
+                <span>&nbsp;<i class="fa fa-spinner fa-pulse"></i></span>
+            </a>
+        </li>
 
 </ul>

@@ -123,8 +123,6 @@ namespace SiteCreator.Web
                 AppSecret = Configuration["Authentication:Facebook:AppSecret"],
             };
 
-            options.Scope.Add("id");
-
             app.UseFacebookAuthentication(options);
         }
 

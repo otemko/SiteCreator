@@ -11,7 +11,6 @@ import { SitesUserComponent } from './Components/Sites/sites-user.component'
 
 import { UsersComponent } from './Components/Users/users.component'
 import { AboutComponent } from './Components/About/about.component'
-import { LoginComponent } from './Components/Account/Login/login.component'
 
 const appRoutes: Routes = [
     {

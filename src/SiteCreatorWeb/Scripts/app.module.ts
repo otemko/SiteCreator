@@ -16,8 +16,6 @@ import { SiteUserItemComponent } from './Components/Sites/site-user-item.compone
 
 import { UsersComponent } from './Components/Users/users.component'
 import { AboutComponent } from './Components/About/about.component'
-import { LoginComponent } from './Components/Account/Login/login.component'
-
 import { AccountHeaderComponent } from './Components/Account/AccountPanel/accountPanel.component'
 import { LanguagePanelComponent } from './Components/LanguagePanel/languagePanel.component'
 
@@ -37,7 +35,6 @@ import { routing } from './routes';
         SitesComponent,
         UsersComponent,
         AboutComponent,
-        LoginComponent,
         SiteItemComponent,
         AccountHeaderComponent,
         LanguagePanelComponent,

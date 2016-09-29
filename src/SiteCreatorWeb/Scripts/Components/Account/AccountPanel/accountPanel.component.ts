@@ -1,7 +1,8 @@
 import { Component } from '@angular/core'
 
 import { Account } from '../../../Shared/Models/account.model'
-import { Service } from '../../../Shared/Services/service'
+import { AccountService } from '../../../Shared/Services/account.service'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
     selector: 'account-panel',
@@ -10,35 +11,15 @@ import { Service } from '../../../Shared/Services/service'
 
 export class AccountHeaderComponent {
 
-    constructor(private account: Account, private service: Service) {
+    constructor(private account: Account, public route: ActivatedRoute, private service: AccountService) {
 
     }
 
     externalLogin(provider: string) {
-        let body = { provider: provider };
-        this.post('/Account/ExternalLogin', body, '');
+        this.service.externalLogin(provider, document.URL);
     }
 
-    post(path, params, method) {
-        method = method || "post";
-
-        var form = document.createElement("form");
-        form.setAttribute("method", method);
-        form.setAttribute("action", path);
-
-        for (var key in params) {
-            if (params.hasOwnProperty(key)) {
-                var hiddenField = document.createElement("input");
-                hiddenField.setAttribute("type", "hidden");
-                hiddenField.setAttribute("name", key);
-                hiddenField.setAttribute("value", params[key]);
-
-                form.appendChild(hiddenField);
-            }
-        }
-
-        document.body.appendChild(form);
-        form.submit();
+    logoff() {
+        this.service.logoff(document.URL);
     }
-
 }
