@@ -17,7 +17,6 @@ export class SitesComponent{
         this.siteService.getSites().then(sites => {
             
             this.sites = sites;
-            console.log(this.sites);
         });
     }
 

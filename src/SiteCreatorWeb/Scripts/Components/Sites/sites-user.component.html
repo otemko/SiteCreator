@@ -1,5 +1,9 @@
 ﻿<div *ngIf="sites">
-    <a *ngFor="let site of sites" [routerLink]="['/site', site.id]">
+    <div *ngFor="let site of sites">
         <site-user-item [site]="site"></site-user-item>
-    </a>
+    </div>
 </div>
+<div>
+    <button (click)="create()" class="btn btn-primary">Create</button>
+</div>
+

@@ -15,12 +15,12 @@ import { Account } from '../../Shared/Models/account.model'
 export class SitesUserComponent {
     sites: Site[] = new Array();
 
-    constructor(private siteService: SiteService/*, private route: ActivatedRoute*/) {
-        //let id = ""+this.route.snapshot.params['id'];
-
-        this.siteService.getSitesByUserId('8a8475e1-9945-41be-96e7-cd038ad2a876').then(sites => this.sites = sites);
+    constructor(private siteService: SiteService, private route: ActivatedRoute) {
+        let id = ""+this.route.snapshot.params['id'];
+        this.siteService.getSitesByUserId(id).then(sites => this.sites = sites);
     }
 
-
-
+    create(): void
+    {
+    }
 }

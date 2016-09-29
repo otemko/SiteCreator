@@ -42,10 +42,9 @@ const appRoutes: Routes = [
     {
         path: 'about',
         component: AboutComponent
-    }
-    ,
+    },
     {
-        path: 'sites-user',
+        path: 'sites-user/:id',
         component: SitesUserComponent
     }
 ];

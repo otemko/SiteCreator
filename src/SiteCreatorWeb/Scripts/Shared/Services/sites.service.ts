@@ -21,7 +21,6 @@ export class SiteService {
     }
 
     getSitesByUserId(userId: string): Promise<Site[]> {
-        console.log(this.url + userId);
         return this.service.get(this.url + userId);
     }
 
