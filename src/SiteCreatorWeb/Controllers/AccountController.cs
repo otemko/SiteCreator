@@ -35,13 +35,13 @@ namespace SiteCreator.Web.Controllers
             if (remoteError != null)
             {
                 ModelState.AddModelError(string.Empty, $"Error from external provider: {remoteError}");
-                return View("/");
+                return RedirectToLocal(returnUrl);
             }
 
             var info = await signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                return RedirectToAction("/");
+                return RedirectToLocal(returnUrl);
             }
 
             var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: true);
@@ -87,10 +87,11 @@ namespace SiteCreator.Web.Controllers
             return View(returnUrl);
         }
 
-        public async Task<IActionResult> LogOff(string returnUrl = "/")
+        [HttpPost]
+        public async Task<IActionResult> LogOff(string returnUrl = null)
         {
             await signInManager.SignOutAsync();
-            return Redirect(returnUrl);
+            return RedirectToLocal(returnUrl);
         }
 
 
@@ -104,14 +105,8 @@ namespace SiteCreator.Web.Controllers
 
         private IActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
-            {
+            if (returnUrl == null) returnUrl = "/";
                 return Redirect(returnUrl);
-            }
-            else
-            {
-                return Redirect("/");
-            }
         }
     }
 }

@@ -16,10 +16,20 @@ export class AccountService {
     getAccountInfo(): void {
         this.account.loading = true;
         this.service.get(this.url)
-            .then(account => { 
-                Object.assign(this.account, account );
+            .then(account => {
+                Object.assign(this.account, account);
                 this.account.loading = false;
             });
+    }
+
+    externalLogin(provider: string, returnUrl: string) {
+        let body = { provider: provider, returnUrl: returnUrl };
+        this.service.postForm('/Account/ExternalLogin', body, '');
+    }
+
+    logoff(returnUrl: string) {
+        let body = { returnUrl: returnUrl };
+        this.service.postForm(`/Account/logoff?returnUrl=${returnUrl}`, null, '');
     }
 
 }
