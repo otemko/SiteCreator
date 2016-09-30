@@ -1,6 +1,7 @@
 ﻿var ts = require('gulp-typescript');
 var gulp = require('gulp');
 var clean = require('gulp-clean');
+var concat = require('gulp-concat');
 
 var destPath = './wwwroot/libs/';
 
@@ -22,12 +23,25 @@ gulp.task("scriptsNStyles", () => {
             'jquery-validation-unobtrusive/**',
             'bootstrap/dist/**',
             'font-awesome/**',
-            'ng2-dnd/**'
-
+            'ng2-dnd/**',
         ], {
             cwd: "node_modules/**"
-        })
-        .pipe(gulp.dest("./wwwroot/lib"));
+        }).pipe(gulp.dest("./wwwroot/lib"));
+
+    gulp.src([
+            'froala_editor.min.js',
+            'plugins/**'
+        ], {
+            cwd: "node_modules/froala-editor/js/**"
+        }).pipe(concat('scripts.js')).pipe(gulp.dest("./wwwroot/lib/froala-editor"));
+
+    gulp.src([
+            'froala_editor.min.css',
+            'froala_style.min.css',
+            'plugins/*.min.css'
+        ], {
+            cwd: "node_modules/froala-editor/css/**"
+        }).pipe(concat('styles.css')).pipe(gulp.dest("./wwwroot/lib/froala-editor"));
 });
 
 var tsProject = ts.createProject('Scripts/tsconfig.json');

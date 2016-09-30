@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
 import { HttpModule } from '@angular/http';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { DndModule } from 'ng2-dnd'
+import { DndModule } from 'ng2-dnd';
+import { FroalaEditorDirective, FroalaViewDirective } from './Froala-editor/froala.directives';
+
 
 import { FormsModule }   from '@angular/forms';
 
@@ -47,7 +49,9 @@ import { routing } from './routes';
         LanguagePanelComponent,
         SitesUserComponent,
         SiteUserItemComponent,
-        SiteCreateComponent
+        SiteCreateComponent,
+        FroalaEditorDirective,
+        FroalaViewDirective
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

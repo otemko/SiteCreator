@@ -1,3 +1,63 @@
 <div class="text-center">
     <i class="fa fa-home fa-5x"></i>
 </div>
+<h1>Angular adapter for the Froala WYSIWYG editor</h1>
+<div class="sample">
+    <h2>Sample 1: Inline Edit</h2>
+    <div [froalaEditor]="titleOptions" [(froalaModel)]="myTitle"></div>
+    <input [(ngModel)]="myTitle" />
+</div>
+
+<div class="sample">
+    <h2>Sample 2: Full Editor</h2>
+    <div [froalaEditor] [(froalaModel)]="content"></div>
+    <h4>Rendered Content:</h4>
+    <div [froalaView]="content"></div>
+</div>
+
+<div class="sample">
+    <h2>Sample 3: Two way binding</h2>
+    <div [froalaEditor] [(froalaModel)]="twoWayContent"></div>
+    <div [froalaEditor] [(froalaModel)]="twoWayContent"></div>
+</div>
+
+<div class="sample">
+    <h2>Sample 4: Manual Initialization</h2>
+    <button class="manual" (click)="initControls.initialize()">Initialize Editor</button>
+    <button (click)="initControls.destroy()" [hidden]="!initControls || initControls.getEditor() == null">Close Editor</button>
+    <button (click)="deleteAll()" [hidden]="!initControls || initControls.getEditor() == null">Delete All</button>
+    <div [froalaEditor] [(froalaModel)]="sample3Text">Check out the <a href="https://www.froala.com/wysiwyg-editor">Froala Editor</a></div>
+</div>
+
+<div class="sample">
+    <h2>Sample 5: Editor on 'img' tag. Two way binding.</h2>
+    <img [froalaEditor] [(froalaModel)]="imgModel" />
+    <img [froalaEditor] [(froalaModel)]="imgModel" />
+    <h4>Model Obj:</h4>
+    <div>{{imgModel | json}}</div>
+</div>
+
+<div class="sample">
+    <h2>Sample 6: Editor on 'button' tag</h2>
+    <button [froalaEditor] [(froalaModel)]="buttonModel"></button>
+    <h4>Model Obj:</h4>
+    <div>{{buttonModel | json}}</div>
+</div>
+
+<div class="sample">
+    <h2>Sample 7: Editor on 'input' tag</h2>
+    <input [froalaEditor]="inputOptions" [(froalaModel)]="inputModel" />
+    <h4>Model Obj:</h4>
+    <div>{{inputModel | json}}</div>
+</div>
+
+<div class="sample">
+    <h2>Sample 8: Editor on 'a' tag. Manual Initialization</h2>
+    <button class="manual" (click)="linkInitControls.initialize()">Initialize Editor</button>
+    <button (click)="linkInitControls.destroy()" [hidden]="!linkInitControls || linkInitControls.getEditor() == null">Close Editor</button>
+    <div>
+        <a [froalaEditor] [(froalaModel)]="linkModel">Froala Editor</a>
+    </div>
+    <h4>Model Obj:</h4>
+    <div>{{linkModel | json}}</div>
+</div>
