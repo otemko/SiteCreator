@@ -2,8 +2,7 @@
 
 namespace SiteCreator.BLL.IService
 {
-    public interface ITagService : IEntityService<Tag, int>
+    public interface IStyleMenuService : IEntityService<StyleMenu, int>
     {
-        
     }
 }

@@ -11,26 +11,25 @@ export class Service {
     constructor(private http: Http) {}
 
     get(url: string): Promise<any> {
+        console.log(url);
         return this.getPromise<any>(
             this.http.get(url));
     }
 
     post<T>(url: string, item: T): Promise<T> {
         let body = JSON.stringify(item);
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        console.log(body);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers });
 
-        return this.getPromise<T>((this.http.post(url, body, options)));
+        return this.getPromise<any>((this.http.post(url, body, options)));
     }
 
     delete(url: string): Promise<any> {        
         return this.getPromise<any>(
             this.http.delete(url));
     }
-
-    
-
-    
+        
     private getPromise<T>(response: Observable<Response>) : Promise<T> {
         return response.toPromise()
             .then(res => {

@@ -4,14 +4,13 @@ using SiteCreator.Entities;
 
 namespace SiteCreator.BLL.Services
 {
-    public class TagService : EntityService<Tag, int>, ITagService
+    public class StyleMenuService : EntityService<StyleMenu, int>, IStyleMenuService
     {
         IEntityRepository repository;
 
-        public TagService(IEntityRepository repository): base(repository)
+        public StyleMenuService(IEntityRepository repository): base(repository)
         {
             this.repository = repository;
         }
-
     }
 }

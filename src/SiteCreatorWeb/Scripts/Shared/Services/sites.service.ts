@@ -33,6 +33,10 @@ export class SiteService {
         return this.service.delete(this.url + id);
     }
 
+    createSite(site: Site): Promise<Site> {
+        return this.service.post(this.url, site);
+    }
+
     //updateSite(site: Site): void {
     //    let index = sites.findIndex(p => p.id == site.id);
     //    if (~index) {

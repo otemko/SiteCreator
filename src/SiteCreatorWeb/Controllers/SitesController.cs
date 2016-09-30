@@ -78,8 +78,10 @@ namespace SiteCreator.Web.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        [Route("api/[controller]")]
+        public int Post([FromBody]CreateSiteViewModel value)
         {
+            return 0;
         }
 
         // PUT api/values/5
@@ -91,14 +93,14 @@ namespace SiteCreator.Web.Controllers
         // DELETE api/values/5
         [HttpDelete]
         [Route("api/[controller]/{id:int}")]
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
             if (!signInManager.IsSignedIn(User))
                 return -1;
 
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var site = siteService.GetSingleAsync(id).Result;
+            var site = await siteService.GetSingleAsync(id);
 
             if (site.UserId == userId)
             {

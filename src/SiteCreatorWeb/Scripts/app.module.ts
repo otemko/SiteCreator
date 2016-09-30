@@ -4,6 +4,8 @@ import { AppComponent }   from './app.component';
 import { HttpModule } from '@angular/http';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
 
+import { FormsModule }   from '@angular/forms';
+
 import { HomeComponent } from './Components/Home/home.component'
 import { AccountComponent } from './Components/Account/account.component'
 
@@ -19,13 +21,16 @@ import { AboutComponent } from './Components/About/about.component'
 import { AccountHeaderComponent } from './Components/Account/AccountPanel/accountPanel.component'
 import { LanguagePanelComponent } from './Components/LanguagePanel/languagePanel.component'
 
+import { SiteCreateComponent } from './Components/Sites/site-create.component'
+
 import { routing } from './routes';
 
 @NgModule({
     imports: [
         BrowserModule,
         routing,
-        HttpModule
+        HttpModule,
+        FormsModule
     ],
     declarations: [
         AppComponent,
@@ -39,7 +44,8 @@ import { routing } from './routes';
         AccountHeaderComponent,
         LanguagePanelComponent,
         SitesUserComponent,
-        SiteUserItemComponent
+        SiteUserItemComponent,
+        SiteCreateComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
