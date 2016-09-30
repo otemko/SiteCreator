@@ -21,7 +21,8 @@ gulp.task("scriptsNStyles", () => {
             'jquery-validation/dist/**',
             'jquery-validation-unobtrusive/**',
             'bootstrap/dist/**',
-            'font-awesome/**'
+            'font-awesome/**',
+            'ng2-dnd/**'
 
         ], {
             cwd: "node_modules/**"

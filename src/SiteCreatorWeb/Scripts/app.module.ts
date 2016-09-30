@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
 import { HttpModule } from '@angular/http';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { DndModule } from 'ng2-dnd'
 
 import { HomeComponent } from './Components/Home/home.component'
 import { AccountComponent } from './Components/Account/account.component'
@@ -25,7 +26,8 @@ import { routing } from './routes';
     imports: [
         BrowserModule,
         routing,
-        HttpModule
+        HttpModule,
+        DndModule.forRoot()
     ],
     declarations: [
         AppComponent,
