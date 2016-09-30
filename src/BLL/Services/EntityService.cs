@@ -19,20 +19,17 @@ namespace SiteCreator.BLL.Services
 
         public virtual void CreateAsync(T entity)
         {
-            repository.Create(entity);
-            repository.CommitAsync();
+            repository.Create<T>(entity);
         }
 
         public virtual void UpdateAsync(T entity)
         {
-            repository.Update(entity);
-            repository.CommitAsync();
+            repository.Update<T>(entity);
         }
 
         public virtual void DeleteAsync(T entity)
         {
-            repository.Delete(entity);
-            repository.CommitAsync();
+            repository.Delete<T>(entity);
         }
 
         public virtual Task<IEnumerable<T>> GetAllAsync()

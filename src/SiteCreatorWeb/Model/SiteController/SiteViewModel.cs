@@ -1,4 +1,5 @@
 ﻿using SiteCreator.Entities;
+using SiteCreator.Web.Model.Shared;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +13,8 @@ namespace SiteCreator.Web.Model.SiteController
         public virtual string Name { get; set; }
         public string UserName { get; set; }
         public string UserId { get; set; }
-        public virtual IEnumerable<TagViewModelSite> Tags { get; set; }
+        public virtual int StyleMenuId { get; set; }
+        public virtual IEnumerable<TagViewModel> Tags { get; set; }
 
         public SiteViewModel(Site site, IEnumerable<Tag> tags)
         {
@@ -23,11 +25,13 @@ namespace SiteCreator.Web.Model.SiteController
             UserName = site.User.UserName;
             UserId = site.UserId;
 
-            var listTags = new List<TagViewModelSite>();
+            StyleMenuId = site.StyleMenuId;
+
+            var listTags = new List<TagViewModel>();
 
             foreach (var tag in tags)
             {
-                listTags.Add(new TagViewModelSite
+                listTags.Add(new TagViewModel
                 {
                     Id = tag.Id,
                     Name = tag.Name

@@ -18,25 +18,23 @@ namespace SiteCreator.DAL
             this.context = context;
         }
 
-        public virtual void CommitAsync()
-        {
-            context.SaveChangesAsync();
-        }
-
         #region CUD
         public virtual void Create<T>(T entity) where T : class
         {
             context.Add(entity);
+            context.SaveChanges();
         }
 
         public virtual void Update<T>(T entity) where T : class
         {
             context.Update(entity);
+            context.SaveChanges();
         }
 
         public virtual void Delete<T>(T entity) where T : class
         {
             context.Remove(entity);
+            context.SaveChanges();
         }
         #endregion
 

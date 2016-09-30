@@ -6,5 +6,6 @@ export class Site{
     name: string;
     userName: string;
     userId: string;
+    styleMenuId: number;
     tags: Tag[];
 }

@@ -16,14 +16,13 @@ export class SitesComponent{
 
     constructor(private siteService: SiteService, private route: ActivatedRoute) {
         let id = +this.route.snapshot.params['id'];
-        console.log(id);
         if (id) {
             this.siteService.getSitesByTag(id).then(sites => {
                 this.sites = sites;
             });
         }
         else {
-            this.siteService.getSites().then(sites => {
+            this.siteService.getSites().then(sites => {                
                 this.sites = sites;
             });
         }
