@@ -31,7 +31,8 @@ import { routing } from './routes';
         BrowserModule,
         routing,
         HttpModule,
-        DndModule.forRoot()
+        DndModule.forRoot(),
+        FormsModule
     ],
     declarations: [
         AppComponent,
