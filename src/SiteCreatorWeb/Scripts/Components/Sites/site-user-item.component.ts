@@ -22,7 +22,7 @@ export class SiteUserItemComponent {
         this.siteService.deleteSite(id).then(resId => {
             if (id == resId)
             {
-                this.route.navigate(['/sites-user', this.account.id]);
+                setTimeout(() => { this.route.navigateByUrl("/sites-user/" + this.account.id); }, 100); 
                 console.log('Succeed');
             }
             else

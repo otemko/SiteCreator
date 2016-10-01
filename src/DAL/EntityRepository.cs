@@ -42,6 +42,14 @@ namespace SiteCreator.DAL
             context.Remove(entity);
             context.SaveChanges();
         }
+
+
+        public void DeleteRange<T>(T[] entities) where T : class
+        {
+            context.RemoveRange(entities);
+            context.SaveChanges();
+        }
+
         #endregion
 
         #region AllIncluding
@@ -102,7 +110,7 @@ namespace SiteCreator.DAL
         {
             return await context.Set<T>()
                 .Where(predicate).FirstOrDefaultAsync();
-        }        
+        }
         #endregion
     }
 }

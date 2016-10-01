@@ -9,5 +9,6 @@ namespace SiteCreator.BLL.IService
         Task<IEnumerable<Site>> GetSitesByUserId(string userId);
         Task<IEnumerable<Site>> GetAllSitesWithUserAndTag();
         Task<IEnumerable<Site>> GetSitesByTagId(int tagId);
+        Task<Site> GetSitesById(int siteId);
     }
 }

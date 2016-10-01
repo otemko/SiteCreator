@@ -4,7 +4,7 @@
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name"
                    required
-                   [(ngModel)]="newSite.name" name="name"
+                   [(ngModel)]="site.name" name="name"
                    #name="ngModel">
             <div [hidden]="name.valid || name.pristine">
                 Name is required
@@ -15,7 +15,7 @@
             <label for="styleMenu">Style Menu</label>
             <select class="form-control" id="styleMenu"
                     required
-                    [(ngModel)]="newSite.styleMenuId" name="styleMenuId"
+                    [(ngModel)]="site.styleMenuId" name="styleMenuId"
                     #styleMenu="ngModel">
                 <option *ngFor="let styleMenu of styleMenus" [value]="styleMenu.id">{{styleMenu.name}}</option>
             </select>

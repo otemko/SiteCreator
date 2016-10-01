@@ -18,7 +18,7 @@ import { TagService } from '../../Shared/Services/tag.service'
 })
 
 export class SiteCreateComponent {
-    newSite: SiteCreate;
+    site: SiteCreate;
     styleMenus: StyleMenu[];
     tags: Tag[];
 
@@ -31,11 +31,37 @@ export class SiteCreateComponent {
     oldTags: Tag[] = new Array();
     newTags: string[] = new Array();
 
+    tagsRequest: Tag[];
+    isUpdate = false;
+
     constructor(private siteService: SiteService, private styleMenuService: StyleMenuService,
         private route: Router, private tagService: TagService, private account: Account,
         private r: ActivatedRoute) {
-            
-        this.newSite = new SiteCreate();     
+
+        let id = +this.r.snapshot.params['id'];
+
+        if (id) {
+            this.site = new SiteCreate();
+            this.siteService.getSiteById(id).then(site => {
+
+                console.log(site);
+
+                this.site.name = site.name;
+                this.site.styleMenuId = site.styleMenuId;
+                this.site.id = site.id;
+                this.site.userId = site.userId;
+                this.site.dateCreated = site.dateCreated;
+                this.tagsRequest = site.tags;
+
+                for (let i = 0; i < site.tags.length; i++) {
+                    this.tagsView.push(site.tags[i].name);
+                }
+            });
+            this.isUpdate = true;
+        }
+        else {
+            this.site = new SiteCreate();
+        }           
         
         this.styleMenuService.getStyleMenus().then(styleMenus => {
             this.styleMenus = styleMenus;
@@ -51,22 +77,26 @@ export class SiteCreateComponent {
 
     onSubmit() {
 
+        this.getTags();
+        this.site.oldTags = this.oldTags;
+        this.site.newTags = this.newTags;
+
         if (this.tagsView.length == 0) {
             let element = document.getElementById("invalid-tags");
             element.hidden = false;
         }
-        else {
-            this.newSite.dateCreated = this.getDate();
+        else {      
 
-            this.newSite.userId = this.account.id;
-
-            this.getTags();
-            this.newSite.oldTags = this.oldTags;
-            this.newSite.newTags = this.newTags;
+            if (this.isUpdate) {
+                this.siteService.updateSite(this.site).then(resId => { console.log(resId); });
+            }
+            else {
+                this.site.userId = this.account.id;
+                this.site.dateCreated = this.getDate();
+                this.siteService.createSite(this.site).then(resId => { console.log(resId); });
+            }
+            setTimeout(() => { this.route.navigateByUrl("/sites-user/" + this.account.id); }, 100);          
             
-            this.siteService.createSite(this.newSite).then(resId => { console.log(resId); });
-            this.route.navigate(['/sites-user', this.account.id]);
-
         }
     }
 
@@ -94,6 +124,9 @@ export class SiteCreateComponent {
                 this.newTags.push(this.tagsView[i]);
             }
         }
+    }
+
+    getTagsUpdate(): void {
     }
 
     filterTags(event) {

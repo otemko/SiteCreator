@@ -16,5 +16,12 @@ namespace SiteCreator.BLL.Services
         {
             this.repository = repository;
         }
+
+        public async Task<IEnumerable<TagSite>> GetTagSitesBySiteId(int siteId)
+        {
+            var result = new List<TagSite>();
+
+            return await repository.GetAllAsync<TagSite>(ts => ts.SiteId == siteId);            
+        }
     }
 }

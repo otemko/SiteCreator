@@ -19,7 +19,6 @@ export class Service {
         let body = JSON.stringify(item);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers });
-        console.log(body);
         return this.getPromise<any>((this.http.post(url, body, options)));
     }
 
@@ -27,7 +26,14 @@ export class Service {
         return this.getPromise<any>(
             this.http.delete(url));
     }
-        
+
+    put<T>(url: string, item: T): Promise<T> {
+        let body = JSON.stringify(item);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers });
+        return this.getPromise<any>((this.http.put(url, body, options)));
+    }
+
     private getPromise<T>(response: Observable<Response>) : Promise<T> {
         return response.toPromise()
             .then(res => {

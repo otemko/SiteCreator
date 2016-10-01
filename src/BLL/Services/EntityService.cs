@@ -37,6 +37,10 @@ namespace SiteCreator.BLL.Services
             repository.Delete<T>(entity);
         }
 
+        public virtual void DeleteRangeAsync(T[] entities)
+        {
+            repository.DeleteRange<T>(entities);
+        }
         public virtual Task<IEnumerable<T>> GetAllAsync()
         {
             return repository.GetAllAsync<T>();

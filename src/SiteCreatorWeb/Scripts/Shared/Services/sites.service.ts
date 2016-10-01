@@ -21,8 +21,11 @@ export class SiteService {
         return this.service.get(this.url);
     }
 
+    getSiteById(siteId: number): Promise<Site> {
+        return this.service.get(this.url+'siteId/'+siteId);
+    }
+
     getSitesByUserId(userId: string): Promise<Site[]> {
-        console.log(this.url + userId);
         return this.service.get(this.url + userId);
     }
 
@@ -38,10 +41,7 @@ export class SiteService {
         return this.service.post(this.url, newSite);
     }
 
-    //updateSite(site: Site): void {
-    //    let index = sites.findIndex(p => p.id == site.id);
-    //    if (~index) {
-    //        sites[index] = site;
-    //    }
-    //}
+    updateSite(site: SiteCreate): Promise<SiteCreate> {
+        return this.service.put(this.url, site);
+    }
 }
