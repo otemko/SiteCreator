@@ -1,6 +1,6 @@
 ﻿.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .middle-loading-box {
@@ -11,9 +11,6 @@
    margin-left:-35px;
 }
 
-.navbar .navbar-default .navbar-fixed-top {
-    opacity: 50;
-}
 
 input,
 select,
@@ -26,6 +23,7 @@ textarea {
   position: fixed;
   left: 0;
   right: 0;
+  bottom: 0px;
   z-index: -1;
   
   display: block;
@@ -41,7 +39,6 @@ textarea {
 }
 
 .content {
-  position: fixed;
   left: 0;
   right: 0;
   z-index: 0;

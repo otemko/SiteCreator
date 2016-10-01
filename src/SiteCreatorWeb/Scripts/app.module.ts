@@ -4,6 +4,9 @@ import { AppComponent }   from './app.component';
 import { HttpModule } from '@angular/http';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AutoCompleteModule } from 'primeng/primeng';
+import { DndModule } from 'ng2-dnd';
+import { FroalaEditorDirective, FroalaViewDirective } from './Froala-editor/froala.directives';
+
 
 import { FormsModule }   from '@angular/forms';
 
@@ -33,6 +36,7 @@ import { routing } from './routes';
         HttpModule,
         FormsModule,
         AutoCompleteModule
+        DndModule.forRoot()
     ],
     declarations: [
         AppComponent,
@@ -47,7 +51,9 @@ import { routing } from './routes';
         LanguagePanelComponent,
         SitesUserComponent,
         SiteUserItemComponent,
-        SiteCreateComponent
+        SiteCreateComponent,
+        FroalaEditorDirective,
+        FroalaViewDirective
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

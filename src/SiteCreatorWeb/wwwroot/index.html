@@ -7,23 +7,26 @@
 
     <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
     <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="lib/ng2-dnd/style.css" rel="stylesheet"/>
+    <link href="lib/froala-editor/styles.css" rel="stylesheet"/>
+    <link href="css/site.css" rel="stylesheet"/>
+
 
     <link rel="stylesheet" type="text/css" href="/lib/primeng/resources/themes/omega/theme.css" />
     <link rel="stylesheet" type="text/css" href="/lib/primeng/resources/primeng.min.css" />
-
-    <link href="css/site.css" rel="stylesheet"/>    
+  
     <link type="text/css" href="css/bootstrap-tag-cloud.css" rel="stylesheet">
     
     <script src="/lib/jquery/dist/jquery.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
 
-    <!-- 1. Load libraries -->
-    <!-- Polyfill(s) for older browsers -->
+    <script src="lib/froala-editor/scripts.js"></script>
+
     <script src="lib/core-js/client/shim.min.js"></script>
     <script src="lib/zone.js/dist/zone.js"></script>
     <script src="lib/reflect-metadata/Reflect.js"></script>
     <script src="lib/systemjs/dist/system.src.js"></script>
-    <!-- 2. Configure SystemJS -->
+
     <script src="systemjs.config.js"></script>
     <script>
         System.import('appScripts/').catch(function(err) {
@@ -39,6 +42,7 @@
             <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
         </div>
     </my-app>
+    
 </body>
 
 </html>
