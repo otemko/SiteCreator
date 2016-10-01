@@ -25,6 +25,12 @@ namespace SiteCreator.DAL
             context.SaveChanges();
         }
 
+        public virtual void CreateRange<T>(T[] entities) where T : class
+        {
+            context.AddRange(entities);
+            context.SaveChanges();
+        }
+
         public virtual void Update<T>(T entity) where T : class
         {
             context.Update(entity);

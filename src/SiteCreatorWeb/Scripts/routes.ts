@@ -55,7 +55,11 @@ const appRoutes: Routes = [
     {
         path: 'site-create',
         component: SiteCreateComponent
-    }    
+    },
+    {
+        path: 'site-create/:id',
+        component: SiteCreateComponent
+    }     
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

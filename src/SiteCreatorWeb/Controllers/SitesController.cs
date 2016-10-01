@@ -8,21 +8,27 @@ using System.Linq;
 using SiteCreator.Web.Model.SiteController;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using System;
 
 namespace SiteCreator.Web.Controllers
 {
     public class SitesController : Controller
     {
         private ISiteService siteService;
+        private ITagService tagService;
+        private ITagSiteService tagSiteService;
 
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
 
-        public SitesController(ISiteService siteService, UserManager<User> userManager, SignInManager<User> signInManager)
+        public SitesController(ISiteService siteService, ITagService tagService, ITagSiteService tagSiteService,
+            UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.siteService = siteService;
+            this.tagService = tagService;
+            this.tagSiteService = tagSiteService;
         }
 
         [HttpGet]
@@ -79,8 +85,58 @@ namespace SiteCreator.Web.Controllers
         // POST api/values
         [HttpPost]
         [Route("api/[controller]")]
-        public int Post([FromBody]CreateSiteViewModel value)
+        public int Post([FromBody]CreateSiteViewModel createSite)
         {
+            var time = GetDate(createSite.dateCreated);
+            var site = new Site
+            {
+                Name = createSite.name,
+                DateCreated = time,
+                StyleMenuId = createSite.styleMenuId,
+                UserId = createSite.userId
+            };
+
+            siteService.CreateAsync(site);
+
+            var newTags = new List<Tag>();
+            var tagSites = new List<TagSite>();
+
+            if (createSite.newTags != null)
+            {
+                foreach (var newTag in createSite.newTags)
+                {
+                    newTags.Add(new Tag
+                    {
+                        Name = newTag,
+                        TagSite = new List<TagSite>()
+                    });
+                }
+                tagService.CreateRangeAsync(newTags.ToArray());
+
+                foreach (var newTag in newTags)
+                {
+                    tagSites.Add(new TagSite
+                    {
+                        SiteId = site.Id,
+                        TagId = newTag.Id
+                    });
+                }
+            }
+
+            if (createSite.oldTags != null)
+            {
+                foreach (var oldTag in createSite.oldTags)
+                {
+                    tagSites.Add(new TagSite
+                    {
+                        SiteId = site.Id,                        
+                        TagId = oldTag.id
+                    });
+                }
+            }
+
+            tagSiteService.CreateRangeAsync(tagSites.ToArray());
+                   
             return 0;
         }
 
@@ -108,6 +164,14 @@ namespace SiteCreator.Web.Controllers
                 return id;
             }
             return -1;
+        }
+
+        private DateTime GetDate(string strDate)
+        {
+            var dateArray = strDate.Split(' ')[0].Split('.');
+            var timeArray = strDate.Split(' ')[1].Split('.');
+            return new DateTime(int.Parse(dateArray[2]), int.Parse(dateArray[1]), int.Parse(dateArray[0]),
+                int.Parse(timeArray[0]), int.Parse(timeArray[1]), int.Parse(timeArray[2]));
         }
     }
 }

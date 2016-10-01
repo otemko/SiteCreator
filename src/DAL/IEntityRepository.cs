@@ -19,6 +19,7 @@ namespace SiteCreator.DAL
         Task<T> GetSingleAsync<T, Q>(Q id) where T : class, WithId<Q>;
         
         void Create<T>(T entity) where T : class;
+        void CreateRange<T>(T[] entities) where T : class;
         void Delete<T>(T entity) where T : class;
         void Update<T>(T entity) where T : class;
         

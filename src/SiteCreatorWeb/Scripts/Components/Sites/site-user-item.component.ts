@@ -31,5 +31,7 @@ export class SiteUserItemComponent {
         
     }
 
-    edit(): void { console.log('ed'); }
+    edit(id: number): void {
+        this.route.navigate(['/site-create', id]);
+    }
 }

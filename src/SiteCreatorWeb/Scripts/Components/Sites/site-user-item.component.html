@@ -12,7 +12,7 @@
             <a [routerLink]="['/sites', tag.id]" *ngFor="let tag of site.tags"><i class="fa fa-hashtag fa-fw"></i>{{ tag.name }} </a>
         </p>
         <p class="text-center">
-            <button (click)="edit()" class="btn btn-primary">Edit</button>
+            <button (click)="edit(site.id)" class="btn btn-primary">Edit</button>
             <button (click)="delete(site.id)"  class="btn btn-danger">Delete</button>          
         </p>
     </div>

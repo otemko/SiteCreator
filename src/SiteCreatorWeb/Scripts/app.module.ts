@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
 import { HttpModule } from '@angular/http';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { AutoCompleteModule } from 'primeng/primeng';
 
 import { FormsModule }   from '@angular/forms';
 
@@ -30,7 +31,8 @@ import { routing } from './routes';
         BrowserModule,
         routing,
         HttpModule,
-        FormsModule
+        FormsModule,
+        AutoCompleteModule
     ],
     declarations: [
         AppComponent,

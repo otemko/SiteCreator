@@ -11,5 +11,7 @@ namespace SiteCreator.Web.Model.SiteController
         public string name { get; set; }
         public string userId { get; set; }
         public int styleMenuId { get; set; }
+        public string[] newTags { get; set; }
+        public TagsCreateSiteViewModel[] oldTags { get; set; }
     }
 }

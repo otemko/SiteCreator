@@ -8,6 +8,7 @@ namespace SiteCreator.BLL.IService
     public interface IEntityService<T,Q>
     {
         void CreateAsync(T entity);
+        void CreateRangeAsync(T[] entities);
         void UpdateAsync(T entity);
         void DeleteAsync(T entity);
         Task<IEnumerable<T>> GetAllAsync();

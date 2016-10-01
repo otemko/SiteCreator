@@ -4,6 +4,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http'
 import 'rxjs/add/operator/toPromise';
 
 import { Site } from '../Models/site.model'
+import { SiteCreate } from '../Models/site-create.model'
 import { Service } from './service'
 
 
@@ -33,8 +34,8 @@ export class SiteService {
         return this.service.delete(this.url + id);
     }
 
-    createSite(site: Site): Promise<Site> {
-        return this.service.post(this.url, site);
+    createSite(newSite: SiteCreate): Promise<SiteCreate> {
+        return this.service.post(this.url, newSite);
     }
 
     //updateSite(site: Site): void {

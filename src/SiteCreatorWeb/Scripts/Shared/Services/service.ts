@@ -11,17 +11,15 @@ export class Service {
     constructor(private http: Http) {}
 
     get(url: string): Promise<any> {
-        console.log(url);
         return this.getPromise<any>(
             this.http.get(url));
     }
 
     post<T>(url: string, item: T): Promise<T> {
         let body = JSON.stringify(item);
-        console.log(body);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers });
-
+        console.log(body);
         return this.getPromise<any>((this.http.post(url, body, options)));
     }
 
