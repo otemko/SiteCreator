@@ -12,19 +12,81 @@ import { SiteService } from '../../Shared/Services/sites.service'
 })
 
 export class SitesComponent{
-    sites : Site[] = new Array();
+    sites: Site[] = new Array();
+    
+    //typesSort = [{ key: 0, value: "By user name"},
+    //            { key: 1, value: "By site name"},
+    //            { key: 2, value: "By date created"}];
+    typeSort = -1;
 
     constructor(private siteService: SiteService, private route: ActivatedRoute) {
         let id = +this.route.snapshot.params['id'];
+        this.update(id);
+        
+    }
+
+    update(id : number) {
         if (id) {
             this.siteService.getSitesByTag(id).then(sites => {
                 this.sites = sites;
             });
         }
         else {
-            this.siteService.getSites().then(sites => {                
+            this.siteService.getSites().then(sites => {
                 this.sites = sites;
-            });
+                console.log(this.sites);
+            });            
         }
     }
+
+    sortBy() {
+        //for (let i = 0; i < this.typesSort.length; i++) {
+        //    if (this.typeSort == this.typesSort[i].key)
+        //    {
+        //        var k = this.typesSort[i].func.call();
+        //        break;
+        //    }
+        //}
+        if (this.typeSort == 0) {
+            this.sortByUserName();
+        }
+        if (this.typeSort == 1) {
+            this.sortBySiteName();
+        }
+        if (this.typeSort == 2) {
+            this.sortByDate();
+        }
+
+    }
+
+    sortByUserName() {
+        this.sites.sort(
+            function compare(a: Site, b: Site) {
+                if (a.userName < b.userName)
+                    return -1;
+                if (a.userName > b.userName)
+                    return 1;
+                return 0;
+            });
+        
+    }
+
+    sortBySiteName() {
+        this.sites.sort(
+            function compare(a: Site, b: Site) {
+                if (a.name < b.name)
+                    return -1;
+                if (a.name > b.name)
+                    return 1;
+                return 0;
+            });
+    }
+
+    sortByDate() {
+        this.sites.sort(function (a: Site, b: Site) {
+            return new Date(a.dateCreated).getTime() - new Date(b.dateCreated).getTime()
+        });
+        this.sites.reverse();
+    }
+
 }

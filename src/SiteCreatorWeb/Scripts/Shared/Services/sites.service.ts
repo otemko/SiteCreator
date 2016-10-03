@@ -11,6 +11,8 @@ import { Service } from './service'
 @Injectable()
 export class SiteService {
 
+    allSites: Site[] = new Array();
+
     private url =  'api/Sites/';
 
     constructor(private service: Service) {

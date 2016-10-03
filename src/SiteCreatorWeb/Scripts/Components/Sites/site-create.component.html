@@ -27,7 +27,7 @@
 
         <div class="form-group" *ngIf="tagsView">
             <div class="div-in-row" *ngFor="let tagView of tagsView">
-                <div  (click)="deleteTag(tagView)" class="tag-cloud tag-cloud-info" >{{tagView}}</div>
+                <div class="tag-cloud tag-cloud-info" >{{tagView}} <i (click)="deleteTag(tagView)" class="fa fa-times" aria-hidden="true"></i></div>
             </div>
         </div>       
 

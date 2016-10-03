@@ -35,7 +35,7 @@ import { routing } from './routes';
         routing,
         HttpModule,
         FormsModule,
-        AutoCompleteModule
+        AutoCompleteModule,
         DndModule.forRoot()
     ],
     declarations: [

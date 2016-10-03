@@ -31,7 +31,6 @@ export class SiteCreateComponent {
     oldTags: Tag[] = new Array();
     newTags: string[] = new Array();
 
-    tagsRequest: Tag[];
     isUpdate = false;
 
     constructor(private siteService: SiteService, private styleMenuService: StyleMenuService,
@@ -43,15 +42,11 @@ export class SiteCreateComponent {
         if (id) {
             this.site = new SiteCreate();
             this.siteService.getSiteById(id).then(site => {
-
-                console.log(site);
-
                 this.site.name = site.name;
                 this.site.styleMenuId = site.styleMenuId;
                 this.site.id = site.id;
                 this.site.userId = site.userId;
                 this.site.dateCreated = site.dateCreated;
-                this.tagsRequest = site.tags;
 
                 for (let i = 0; i < site.tags.length; i++) {
                     this.tagsView.push(site.tags[i].name);
@@ -124,9 +119,6 @@ export class SiteCreateComponent {
                 this.newTags.push(this.tagsView[i]);
             }
         }
-    }
-
-    getTagsUpdate(): void {
     }
 
     filterTags(event) {

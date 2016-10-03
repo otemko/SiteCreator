@@ -39,7 +39,7 @@ const appRoutes: Routes = [
     {
         path: 'sites/:id',
         component: SitesComponent
-    },
+    }, 
     {
         path: 'users',
         component: UsersComponent
