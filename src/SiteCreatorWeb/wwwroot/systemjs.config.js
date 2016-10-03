@@ -10,6 +10,9 @@
         'angular2-in-memory-web-api': 'lib/angular2-in-memory-web-api',
         'rxjs': 'lib/rxjs',
         'ng2-dnd': 'lib/ng2-dnd',
+        'angular2-dynamic-component': 'lib/angular2-dynamic-component',
+        'ts-metadata-helper': 'lib/ts-metadata-helper',
+        'core-js': 'lib/core-js'
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
@@ -17,6 +20,9 @@
         'rxjs': { defaultExtension: 'js' },
         'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
         'ng2-dnd':  { main: 'index.js',  defaultExtension: 'js' },
+        'angular2-dynamic-component': { main: 'index.js',  defaultExtension: 'js' },
+        'ts-metadata-helper': { main: 'index.js',  defaultExtension: 'js' },
+        'core-js': { main: 'index.js',  defaultExtension: 'js' }
     };
     var ngPackageNames = [
       'common',

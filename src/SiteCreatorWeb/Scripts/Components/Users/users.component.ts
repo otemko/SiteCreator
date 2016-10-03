@@ -1,51 +1,73 @@
-import { Component, Pipe, PipeTransform, Sanitizer, SecurityContext } from '@angular/core'
-import { DomSanitizer, SafeHtml, SafeUrl, SafeResourceUrl, SafeStyle } from '@angular/platform-browser';
+import { Component, ViewContainerRef, Compiler, OnInit, NgModule, ApplicationModule } from '@angular/core'
+import { Directive, ElementRef, Renderer, Input, Output, Optional, EventEmitter } from '@angular/core';
+
+import { DomSanitizer, SafeHtml, SafeUrl, SafeResourceUrl, SafeStyle, BrowserModule } from '@angular/platform-browser';
+import { SiteContent } from '../../Shared/Models/site.content.model';
+import { AppModule } from '../../app.module'
+import { SiteContentComponent } from './site.content.component'
+import { InnerContent } from './innerContent';
+import { DynamicHTMLOutlet } from './dynamic'
+import { FroalaEditorDirective, FroalaViewDirective } from '../../Froala-editor/froala.directives';
+import {DynamicComponent, DynamicComponentMetadata} from 'angular2-dynamic-component';
+import { DndModule } from 'ng2-dnd';
 
 @Component({
     selector: 'about',
     templateUrl: './appScripts/Components/Users/users.component.html'
 })
-@Pipe({
-    name: 'sanitizeHtml'
-})
-export class UsersComponent implements PipeTransform {
-    availableProducts = [];
-    shoppingBasket = [];
 
-    constructor(private _sanitizer: DomSanitizer) {
-        this.availableProducts.push('<b>Hello</b>');
-        this.availableProducts.push('<div>Hello</div>');
-        this.availableProducts.push(`<div class="panel panel-default">
-                                        <div class="panel-heading">Hello</div>
-                                        <div class="panel-body">Hello</div>
-                                    </div>`);
-        this.availableProducts.push(`<div class="form-group">
-                                        <label>Tittle:</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                    <button class="btn btn-default">Submit</button>
-                                </div>`);
-        this.availableProducts.push(`<span>12312312</span>
-                                    <span>
-                                        <img  style="z-index: 0" src='http://vignette4.wikia.nocookie.net/mrmen/images/5/52/Small.gif/revision/latest?cb=20100731114437'>
-                                    </span>`);
+export class UsersComponent implements OnInit {
 
+    siteElements: Array<SiteContent> = [];
+
+
+    constructor(private _sanitizer: DomSanitizer, private view: ViewContainerRef,
+        private compiler: Compiler) {
+        this.siteElements.push({
+            element: `<div class="sample">
+                        <h2>Sample 1: Inline Edit</h2>
+                        <div [froalaEditor]="titleOptions" [(froalaModel)]="myTitle"></div>
+                    </div>`,
+            content: { src: 'http://weknowyourdreams.com/images/stars/stars-05.jpg' }
+        }, {
+                element: `<div dnd-draggable [dragEnabled]="true" [dragData]="element" [dropZones]="['demo1']">
+                        <span>Hello</span></div>
+                        <div dnd-draggable [dragEnabled]="true" [dragData]="element" [dropZones]="['demo1']">
+                        helo</div>`
+                , content: "12"
+            },
+            {
+                element: `<account></account>`
+                , content: "12"
+            });
     }
 
-    transform(v: string) {
-        return this._sanitizer.bypassSecurityTrustHtml(v);
+    public titleOptions: Object = {
+        placeholderText: 'Edit Your Content Here!',
+        charCounterCount: false,
+        toolbarInline: true,
+        events: {
+            'froalaEditor.initialized': function () {
+                console.log('initialized');
+            }
+        }
+    }
+    public myTitle: string;
+    public extraModules = [ Dyn ];
+
+    ngOnInit() {
     }
 
-    tr(v: string) {
-        return this._sanitizer.bypassSecurityTrustUrl(v);
+    log(event) {
+        console.log(event);
     }
 
-    orderedProduct(orderedProduct: any) {
-        console.log(orderedProduct);
-    }
-    addToBasket($event) {
-        let newProduct = $event.dragData;
-        this.shoppingBasket.push(newProduct);
-    }
 }
 
+
+@NgModule({
+    imports: [DndModule],
+    declarations: [FroalaEditorDirective, FroalaViewDirective],
+    exports: [FroalaEditorDirective, FroalaViewDirective]
+})
+export class Dyn { }

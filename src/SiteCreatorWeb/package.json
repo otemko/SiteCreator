@@ -16,6 +16,7 @@
     "@angular/platform-browser-dynamic": "2.0.0",
     "@angular/router": "3.0.0",
     "@angular/upgrade": "2.0.0",
+    "angular2-dynamic-component": "0.0.50",
     "angular2-in-memory-web-api": "0.0.20",
     "bootstrap": "3.3.7",
     "core-js": "^2.4.1",
@@ -29,6 +30,7 @@
     "rxjs": "5.0.0-beta.12",
     "systemjs": "0.19.38",
     "systemjs-builder": "^0.15.32",
+    "ts-metadata-helper": "0.0.3",
     "zone.js": "0.6.25"
   },
   "devDependencies": {

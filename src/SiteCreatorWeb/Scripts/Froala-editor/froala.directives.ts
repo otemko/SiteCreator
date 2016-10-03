@@ -1,4 +1,6 @@
-import { Directive, ElementRef, Renderer, Input, Output, Optional, EventEmitter } from '@angular/core';
+import { Directive, Component, ElementRef, Renderer, Input, Output, Optional, EventEmitter, NgModule } from '@angular/core';
+import { ModuleWithProviders } from "@angular/core";
+
 
 // non-typescript definitions
 declare var $;

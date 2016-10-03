@@ -12,7 +12,7 @@ gulp.task('clean', function() {
 
 gulp.task("scriptsNStyles", () => {
     gulp.src([
-            'core-js/client/**',
+            'core-js/**',
             'systemjs/dist/system.src.js',
             'reflect-metadata/**',
             'rxjs/**',
@@ -24,6 +24,8 @@ gulp.task("scriptsNStyles", () => {
             'bootstrap/dist/**',
             'font-awesome/**',
             'ng2-dnd/**',
+            'angular2-dynamic-component/**',
+            'ts-metadata-helper/**'
         ], {
             cwd: "node_modules/**"
         }).pipe(gulp.dest("./wwwroot/lib"));

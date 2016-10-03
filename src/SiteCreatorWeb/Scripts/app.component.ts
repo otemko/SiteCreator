@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import { Location, } from '@angular/common';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import { Account } from './Shared/Models/account.model'
@@ -17,5 +17,4 @@ export class AppComponent {
     constructor(public location: Location, private accountService: AccountService) { 
             this.accountService.getAccountInfo();
     }
-
  }

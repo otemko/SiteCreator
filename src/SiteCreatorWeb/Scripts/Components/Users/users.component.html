@@ -1,25 +1,27 @@
 <h4>Your site</h4>
 <div class="row">
     <div class="col-sm-8">
-        <div dnd-droppable (onDropSuccess)="addToBasket($event)" [dropZones]="['demo1']"
-            class="panel panel-default">
+        <div dnd-droppable (onDropSuccess)="log('to main')" [dropZones]="['demo1']" class="panel panel-default">
             <div class="panel-heading">Your site</div>
             <div class="panel-body">
-                <span *ngFor="let product of shoppingBasket" [innerHTML]='transform(product)'>
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">Available items</div>
-            <div class="panel-body">
-                <div *ngFor="let product of availableProducts"
-                    dnd-draggable [dragEnabled]="true" [dragData]="product"
-                    (onDragSuccess)="orderedProduct($event)" [dropZones]="['demo1']">
-                    <div [innerHTML]='transform(product)'>
-                    </div>
+                <div *ngFor="let el of siteElements" dnd-droppable (onDropSuccess)="log('to second')" dnd-draggable [dragEnabled]="true" [dragData]="el.element" [dropZones]="['demo1']">
+                    <DynamicComponent [componentTemplate]="siteElements[0].element" [componentModules]="extraModules">
+                    </DynamicComponent>
                 </div>
             </div>
         </div>
     </div>
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Available items</div>
+            <div class="panel-body">
+                <div *ngFor="let el of siteElements" dnd-draggable [dragEnabled]="true" [dragData]="el.element" [dropZones]="['demo1']">
+                    <DynamicComponent [componentTemplate]="siteElements[0].element" [componentModules]="extraModules">
+                    </DynamicComponent>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
