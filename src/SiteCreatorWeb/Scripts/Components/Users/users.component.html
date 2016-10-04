@@ -4,10 +4,14 @@
         <div dnd-droppable (onDropSuccess)="addElement($event.dragData, elements)" [dropZones]="['add']" class="panel panel-default">
             <div class="panel-heading">Your site</div>
             <div class="panel-body">
-                <div *ngFor="let el of elements; let i = index" dnd-draggable [dragEnabled]="true" [dragData]="el" [dropZones]="['add','trash']">
+                <!--<div *ngFor="let el of elements; let i = index" dnd-draggable [dragEnabled]="true" [dragData]="el" [dropZones]="['add','trash']">
                     <DynamicComponent [componentTemplate]="el.element" [componentInputData]="el.inputData" [componentModules]="extraModules">
                     </DynamicComponent>
-                </div>
+                    
+                </div>-->
+
+                <div [froalaEditor]="options" [(froalaModel)]="content1"></div>
+                <div [froalaEditor]="options" [(froalaModel)]="content"></div>
             </div>
         </div>
     </div>
@@ -17,6 +21,8 @@
             <div class="panel-body">
                 <div *ngFor="let el of availableElements; let i = index" dnd-draggable [dragEnabled]="true" [dragData]="el" [dropZones]="['add']">
                     <DynamicComponent [componentTemplate]="el.previous" [componentModules]="extraModules">
+                    </DynamicComponent>
+                    <DynamicComponent [componentTemplate]="el.element" [componentInputData]="el.inputData" [componentModules]="extraModules">
                     </DynamicComponent>
                 </div>
             </div>
@@ -35,17 +41,12 @@
         <div class="panel panel-default">
             <div class="panel-heading">Your site</div>
         </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="panel panel-default">
-                    <div class="panel-heading" dnd-droppable (onDropSuccess)="addElement($event.dragData); log(index)" [dropZones]="['add']"></div>
-                    <div class="panel-body">
-                        <div style="min-height: 20px" class="col-sm-6" dnd-droppable (onDropSuccess)="addElement($event.dragData); log(index)" [dropZones]="['add']">
-                        </div>
-                        <div style="min-height: 20px" class="col-sm-6" dnd-droppable (onDropSuccess)="addElement($event.dragData); log(index)" [dropZones]="['add']">
-                        </div>
-                    </div>
-                </div>
+        <div id="111" class="panel-body">
+            <div *ngFor="let el of availableElements; let i = index" dnd-draggable [dragEnabled]="true" [dragData]="el" [dropZones]="['add']">
+                <DynamicComponent [componentTemplate]="el.previous" [componentModules]="extraModules">
+                </DynamicComponent>
+                <DynamicComponent [componentTemplate]="el.element" [componentInputData]="el.inputData" [componentModules]="extraModules">
+                </DynamicComponent>
             </div>
         </div>
     </div>

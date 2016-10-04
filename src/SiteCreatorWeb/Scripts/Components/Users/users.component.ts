@@ -5,6 +5,8 @@ import { DynamicComponentModule } from "angular2-dynamic-component";
 
 import { SiteContent } from '../../Shared/Models/site.content.model';
 import { FroalaEditorDirective, FroalaViewDirective } from '../../Froala-editor/froala.directives';
+declare var $;
+
 
 @Component({
     selector: 'about',
@@ -12,16 +14,17 @@ import { FroalaEditorDirective, FroalaViewDirective } from '../../Froala-editor/
 })
 
 export class UsersComponent implements OnInit {
-
     availableElements = [];
     elements = [];
-    public extraModules = [ FroalaModule, DndModule.forRoot() ];
+    currentElement = {};
+
+    public extraModules = [FroalaModule, DndModule.forRoot()];
 
     constructor() {
         this.availableElements.push({
             previous: `<div class="text-center"><button class="btn btn-default">
                 <i class="fa fa-tint" aria-hidden="true"></i> text</button></div>`,
-            element: `<div [froalaEditor]="options" [(froalaModel)]="content"></div>`,
+            element: `<div id='{{id}}' [froalaEditor]="options" [(froalaModel)]="content"></div>`,
             inputData: {
                 options: {
                     placeholderText: 'Edit Your Content Here!',
@@ -29,7 +32,7 @@ export class UsersComponent implements OnInit {
                     toolbarInline: true,
                 },
                 content: '',
-                elements: []
+                id: '123'
             },
 
         },
@@ -40,7 +43,6 @@ export class UsersComponent implements OnInit {
                             <div class="panel panel-default">
                                 <div class="panel-heading" dnd-droppable (onDropSuccess)="addElement($event.dragData)" [dropZones]="['add']">
                                     <div *ngFor="let el of elements; let i = index" dnd-draggable [dragEnabled]="true" [dragData]="el" [dropZones]="['add','trash']">
-                                         Hallo
                                     </div>
                                 </div>
                                 <div class="panel-body">
@@ -66,7 +68,7 @@ export class UsersComponent implements OnInit {
         let obj = JSON.parse(JSON.stringify(data));
         obj.inputData.addElement = this.addElement;
         this.elements.push(obj);
-        console.log(obj);
+        console.log(this.currentElement);
     }
 
     removeElement(data) {
