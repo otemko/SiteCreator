@@ -1,19 +1,19 @@
 {
-    "compilerOptions": {
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "module": "commonjs",
-        "noEmitOnError": true,
-        "noImplicitAny": false,
-        "outDir": "../wwwroot/appScripts/",
-        "removeComments": false,
-        "sourceMap": true,
-        "target": "es2015",
-        "moduleResolution": "node"
-    },
-    "exclude": [
-        "node_modules",
-        "wwwroot",
-        "typings/"
-    ]
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "outDir": "../wwwroot/appScripts/",
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es2015",
+    "moduleResolution": "node"
+  },
+  "exclude": [
+    "node_modules/",
+    "wwwroot/",
+    "typings/"
+  ]
 }

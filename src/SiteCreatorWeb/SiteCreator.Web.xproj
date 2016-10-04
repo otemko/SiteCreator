@@ -15,6 +15,9 @@
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
+  <PropertyGroup>
+  <TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
+</PropertyGroup>
   <ItemGroup>
     <DnxInvisibleContent Include=".bowerrc" />
   </ItemGroup>
