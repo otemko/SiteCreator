@@ -8,9 +8,10 @@ using SiteCreator.ORM;
 namespace ORM.Migrations
 {
     [DbContext(typeof(SiteCreatorDbContext))]
-    partial class SiteCreatorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161005140053_Table_for_page_content")]
+    partial class Table_for_page_content
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -208,8 +209,6 @@ namespace ORM.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PageContentId");
-
                     b.HasIndex("SiteId");
 
                     b.ToTable("Page");
@@ -354,20 +353,6 @@ namespace ORM.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("SiteCreator.Model.PageContent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Content");
-
-                    b.Property<int>("PageId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PageContent");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
@@ -431,11 +416,6 @@ namespace ORM.Migrations
 
             modelBuilder.Entity("SiteCreator.Entities.Page", b =>
                 {
-                    b.HasOne("SiteCreator.Model.PageContent", "PageContent")
-                        .WithMany()
-                        .HasForeignKey("PageContentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("SiteCreator.Entities.Site", "Site")
                         .WithMany("Page")
                         .HasForeignKey("SiteId")

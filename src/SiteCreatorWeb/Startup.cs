@@ -133,6 +133,7 @@ namespace SiteCreator.Web
             services.AddScoped<ITagService, TagService>();
             services.AddScoped<ITagSiteService, TagSiteService>();
             services.AddScoped<IStyleMenuService, StyleMenuService>();
+            services.AddScoped<IPageService, PageService>();
 
             services.AddScoped<IEntityRepository, EntityRepository>();
         }

@@ -7,12 +7,12 @@ namespace SiteCreator.BLL.IService
 {
     public interface IEntityService<T,Q>
     {
-        void CreateAsync(T entity);
-        void CreateRangeAsync(T[] entities);
-        void UpdateAsync(T entity);
-        void DeleteAsync(T entity);
-        void DeleteRangeAsync(T[] entities);
+        Task CreateAsync(T entity);
+        Task CreateRangeAsync(T[] entities);
+        Task UpdateAsync(T entity);
+        Task DeleteAsync(T entity);
+        Task DeleteRangeAsync(T[] entities);
         Task<IEnumerable<T>> GetAllAsync();
-        Task<T> GetSingleAsync(Q userId);
+        Task<T> GetSingleAsync(Q id);
     }
 }

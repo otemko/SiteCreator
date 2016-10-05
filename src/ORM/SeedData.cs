@@ -18,21 +18,21 @@ namespace SiteCreator.ORM
 
         public async void Seed()
         {
-            AddStyles();
+            //AddStyles();
             
-            AddLanguages();
+            //AddLanguages();
             
-            AddStylesMenu();
+            //AddStylesMenu();
             
-            AddTags();            
+            //AddTags();            
 
-            var userId = await AddUsers();
+            //var userId = await AddUsers();
             
-            AddSites(userId);
+            //AddSites(userId);
             
-            AddTagSites();
+            //AddTagSites();
 
-            await context.SaveChangesAsync();
+            //await context.SaveChangesAsync();
         }
 
         private void AddStylesMenu()

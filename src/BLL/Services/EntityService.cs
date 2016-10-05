@@ -17,39 +17,39 @@ namespace SiteCreator.BLL.Services
             this.repository = repository;
         }
 
-        public virtual void CreateAsync(T entity)
+        public virtual async Task CreateAsync(T entity)
         {
-            repository.Create<T>(entity);
+            await repository.CreateAsync<T>(entity);
         }
 
-        public virtual void CreateRangeAsync(T[] entities)
+        public virtual async Task CreateRangeAsync(T[] entities)
         {
-            repository.CreateRange<T>(entities);
+            await repository.CreateRangeAsync<T>(entities);
         }
 
-        public virtual void UpdateAsync(T entity)
+        public virtual async Task UpdateAsync(T entity)
         {
-            repository.Update<T>(entity);
+            await repository.Update<T>(entity);
         }
 
-        public virtual void DeleteAsync(T entity)
+        public virtual async Task DeleteAsync(T entity)
         {
-            repository.Delete<T>(entity);
+            await repository.Delete<T>(entity);
         }
 
-        public virtual void DeleteRangeAsync(T[] entities)
+        public virtual async Task DeleteRangeAsync(T[] entities)
         {
-            repository.DeleteRange<T>(entities);
+            await repository.DeleteRange<T>(entities);
         }
         public virtual Task<IEnumerable<T>> GetAllAsync()
         {
             return repository.GetAllAsync<T>();
         }
 
-        public async Task<T> GetSingleAsync(Q userId)
+        public async Task<T> GetSingleAsync(Q Id)
         {
-            var sites = await repository.GetSingleAsync<T, Q>(userId);
-            return sites;
+            var result = await repository.GetSingleAsync<T, Q>(Id);
+            return result;
         }
     }
 }

@@ -8,9 +8,10 @@ using SiteCreator.ORM;
 namespace ORM.Migrations
 {
     [DbContext(typeof(SiteCreatorDbContext))]
-    partial class SiteCreatorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161005105848_PageContent_change1")]
+    partial class PageContent_change1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -194,21 +195,19 @@ namespace ORM.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Content");
+
                     b.Property<int>("CountRated");
 
                     b.Property<DateTime>("LastModififcation");
 
                     b.Property<int>("Order");
 
-                    b.Property<int>("PageContentId");
-
                     b.Property<decimal>("Rating");
 
                     b.Property<int>("SiteId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PageContentId");
 
                     b.HasIndex("SiteId");
 
@@ -354,20 +353,6 @@ namespace ORM.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("SiteCreator.Model.PageContent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Content");
-
-                    b.Property<int>("PageId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PageContent");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
@@ -431,11 +416,6 @@ namespace ORM.Migrations
 
             modelBuilder.Entity("SiteCreator.Entities.Page", b =>
                 {
-                    b.HasOne("SiteCreator.Model.PageContent", "PageContent")
-                        .WithMany()
-                        .HasForeignKey("PageContentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("SiteCreator.Entities.Site", "Site")
                         .WithMany("Page")
                         .HasForeignKey("SiteId")

@@ -40,36 +40,5 @@ namespace SiteCreator.Web.Controllers
             var user = await userservice.GetSingleAsync(userId);
             return new UserInfoViewModel(user);
         }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        [HttpGet("{tegName}")]
-        public string Get(string tagName)
-        {
-            return "valu22312e";
-        }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

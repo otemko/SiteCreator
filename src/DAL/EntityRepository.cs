@@ -19,35 +19,35 @@ namespace SiteCreator.DAL
         }
 
         #region CUD
-        public virtual void Create<T>(T entity) where T : class
+        public virtual async Task CreateAsync<T>(T entity) where T : class
         {
             context.Add(entity);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public virtual void CreateRange<T>(T[] entities) where T : class
+        public virtual async Task CreateRangeAsync<T>(T[] entities) where T : class
         {
             context.AddRange(entities);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public virtual void Update<T>(T entity) where T : class
+        public virtual async Task UpdateAsync<T>(T entity) where T : class
         {
             context.Update(entity);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public virtual void Delete<T>(T entity) where T : class
+        public virtual async Task DeleteAsync<T>(T entity) where T : class
         {
             context.Remove(entity);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
 
-        public void DeleteRange<T>(T[] entities) where T : class
+        public virtual async Task DeleteRangeAsync<T>(T[] entities) where T : class
         {
             context.RemoveRange(entities);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         #endregion
@@ -86,6 +86,9 @@ namespace SiteCreator.DAL
             var rr = query.Where(predicate);
             return await rr.ToListAsync();
         }
+        
+        
+        
         #endregion
 
         #region GetSingle

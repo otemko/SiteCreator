@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SiteCreator.Model;
+using System;
 using System.Collections.Generic;
 
 namespace SiteCreator.Entities
@@ -7,18 +8,15 @@ namespace SiteCreator.Entities
     {
         public virtual int Id { get; set; }
         public virtual int Order { get; set; }
-        public virtual int Rating { get; set; }
+        public decimal Rating { get; set; }
+        public int CountRated { get; set; }
         public virtual DateTime LastModififcation { get; set; }
 
         public virtual int SiteId { get; set; }
         public virtual Site Site { get; set; }
 
-        public virtual int LayoutId { get; set; }
-        public virtual Layout Layout { get; set; }
-
-        public virtual int ContentId { get; set; }
-        public virtual Content Content { get; set; }
-
+        public int PageContentId { get; set; }
+        public PageContent PageContent { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }
 
     }

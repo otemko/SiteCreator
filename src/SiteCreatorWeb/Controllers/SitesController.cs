@@ -87,16 +87,15 @@ namespace SiteCreator.Web.Controllers
         public async Task<SiteViewModel> GetSite(int siteId)
         {
             var site = await siteService.GetSitesById(siteId);
-                      
-            var tags = site.TagSite.Select(t => t.Tag); 
+            if (site == null) return null;
            
-            return new SiteViewModel(site, tags);
+            return new SiteViewModel(site);
         }
 
         // POST api/values
         [HttpPost]
         [Route("api/[controller]")]
-        public int Post([FromBody]CreateSiteViewModel createSite)
+        public async Task<int> Post([FromBody]CreateSiteViewModel createSite)
         {
             var site = new Site
             {
@@ -106,7 +105,7 @@ namespace SiteCreator.Web.Controllers
                 UserId = createSite.userId
             };
 
-            siteService.CreateAsync(site);
+            await siteService.CreateAsync(site);
 
             var newTags = new List<Tag>();
             var tagSites = new List<TagSite>();
@@ -121,7 +120,7 @@ namespace SiteCreator.Web.Controllers
                         TagSite = new List<TagSite>()
                     });
                 }
-                tagService.CreateRangeAsync(newTags.ToArray());
+                await tagService.CreateRangeAsync(newTags.ToArray());
 
                 foreach (var newTag in newTags)
                 {
@@ -139,14 +138,14 @@ namespace SiteCreator.Web.Controllers
                 {
                     tagSites.Add(new TagSite
                     {
-                        SiteId = site.Id,                        
+                        SiteId = site.Id,
                         TagId = oldTag.id
                     });
                 }
             }
 
-            tagSiteService.CreateRangeAsync(tagSites.ToArray());
-                   
+            await tagSiteService.CreateRangeAsync(tagSites.ToArray());
+
             return 0;
         }
 
@@ -156,7 +155,7 @@ namespace SiteCreator.Web.Controllers
         public async Task<int> Put([FromBody]CreateSiteViewModel createSite)
         {
             var oldTagSites = await tagSiteService.GetTagSitesBySiteId(createSite.id);
-            tagSiteService.DeleteRangeAsync(oldTagSites.ToArray());
+            await tagSiteService.DeleteRangeAsync(oldTagSites.ToArray());
 
             var newTags = new List<Tag>();
             var tagSites = new List<TagSite>();
@@ -171,7 +170,7 @@ namespace SiteCreator.Web.Controllers
                         TagSite = new List<TagSite>()
                     });
                 }
-                tagService.CreateRangeAsync(newTags.ToArray());
+                await tagService.CreateRangeAsync(newTags.ToArray());
 
                 foreach (var newTag in newTags)
                 {
@@ -205,7 +204,7 @@ namespace SiteCreator.Web.Controllers
                 UserId = createSite.userId
             };
 
-            siteService.UpdateAsync(site);
+            await siteService.UpdateAsync(site);
 
             return 0;
         }
@@ -224,7 +223,7 @@ namespace SiteCreator.Web.Controllers
 
             if (site.UserId == userId)
             {
-                siteService.DeleteAsync(site);
+                await siteService.DeleteAsync(site);
                 return id;
             }
             return -1;

@@ -5,15 +5,19 @@ using SiteCreator.Entities;
 using SiteCreator.DAL;
 using SiteCreator.BLL.IService;
 using System;
+using SiteCreator.DAL.Repository;
+using SiteCreator.DAL.IRepository;
 
 namespace SiteCreator.BLL.Services
 {
     public class SiteService : EntityService<Site,int>,  ISiteService
     {
         IEntityRepository repository;
+        ISiteRepository siteRepository;
 
-        public SiteService(IEntityRepository repository): base(repository)
+        public SiteService(IEntityRepository repository, ISiteRepository siteRepository): base(repository)
         {
+            this.siteRepository = siteRepository;
             this.repository = repository;            
         }
 
@@ -37,9 +41,11 @@ namespace SiteCreator.BLL.Services
         public async Task<Site> GetSitesById(int siteId)
         {
             var tagsites = await repository.GetAllAsync<TagSite>(ts => ts.SiteId == siteId,
-                ts => ts.Site, ts => ts.Site.User, ts => ts.Tag);
+                ts => ts.Site, ts => ts.Site.User, ts => ts.Tag, ts => ts.Site.Page);
 
-            return tagsites.ElementAt(0).Site;
+            var site = tagsites.FirstOrDefault()?.Site;
+
+            return site;
         }
 
         public async Task<IEnumerable<Site>> GetSitesByTagId(int tagId)

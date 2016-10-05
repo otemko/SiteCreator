@@ -12,6 +12,7 @@ import { SitesUserComponent } from './Components/Sites/sites-user.component'
 import { SiteCreateComponent } from './Components/Sites/site-create.component'
 
 import { PageEditorComponent } from './Components/Page/page.editor.component';
+import { PageComponent } from './Components/Page/page.component';
 
 import { UsersComponent } from './Components/Users/users.component'
 import { AboutComponent } from './Components/About/about.component'
@@ -65,6 +66,11 @@ const appRoutes: Routes = [
     {
         path: 'site-create/:id',
         component: SiteCreateComponent
+    }
+    ,
+    {
+        path: 'page/:id',
+        component: PageComponent
     }
 ];
 

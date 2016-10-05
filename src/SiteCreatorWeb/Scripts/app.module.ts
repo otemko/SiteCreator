@@ -28,6 +28,7 @@ import { LanguagePanelComponent } from "./Components/LanguagePanel/languagePanel
 import { SiteCreateComponent } from "./Components/Sites/site-create.component";
 
 import { PageEditorComponent } from './Components/Page/page.editor.component';
+import { PageComponent } from './Components/Page/page.component';
 
 import { routing } from "./routes";
 
@@ -56,7 +57,8 @@ import { routing } from "./routes";
         SitesUserComponent,
         SiteUserItemComponent,
         SiteCreateComponent,
-        PageEditorComponent
+        PageEditorComponent,
+        PageComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy},
