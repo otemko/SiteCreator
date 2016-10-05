@@ -1,13 +1,12 @@
 ﻿<div class="container">
-    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+    <form (ngSubmit)="onSubmit()" >
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name"
                    required
                    [(ngModel)]="site.name" name="name"
                    #name="ngModel">
-            <div [hidden]="name.valid || name.pristine"
-                 class="alert alert-danger">
+            <div [hidden]="name.valid || name.pristine">
                 Name is required
             </div>
         </div>
@@ -20,11 +19,37 @@
                     #styleMenu="ngModel">
                 <option *ngFor="let styleMenu of styleMenus" [value]="styleMenu.id">{{styleMenu.name}}</option>
             </select>
-            <div [hidden]="styleMenu.valid || styleMenu.pristine" class="alert alert-danger">
+            <div [hidden]="styleMenu.valid || styleMenu.pristine">
                 Style Menu is required
             </div>
         </div>
+        
 
-        <button type="submit" class="btn btn-default" [disabled]="!heroForm.form.valid">Submit</button>
-    </form>
+        <div class="form-group" *ngIf="tagsView">
+            <div class="div-in-row" *ngFor="let tagView of tagsView">
+                <div class="tag-cloud tag-cloud-info" >{{tagView}} <i (click)="deleteTag(tagView)" class="fa fa-times" aria-hidden="true"></i></div>
+            </div>
+        </div>       
+
+        <div class="form-group">
+            <p-autoComplete #inputBox
+                            [(ngModel)]="resultTag" [ngModelOptions]="{standalone: true}"
+                            [suggestions]="filteredTags"
+                            (completeMethod)="filterTags($event)"
+                            [minLength]="1"
+                            placeholder="Chosse tag"
+                            [dropdown]="true"
+                            (onDropdownClick)="handleDropdownClick($event)">
+            </p-autoComplete>
+        </div>
+
+        <div id="invalid-tags" hidden>
+            One tag is required
+        </div>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-default" (click)="addTag(); inputBox.value=''">Add tag</button>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>    
 </div>

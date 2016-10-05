@@ -1,6 +1,18 @@
-<div  *ngIf="sites">
+<div *ngIf="sites">
+
+
+    <label for="sort">Sort</label>
+    <select class="form-control" 
+            id="sort"
+            [(ngModel)]="typeSort" [ngModelOptions]="{standalone: true}"
+            (ngModelChange)="sortBy()"
+            name="sort">
+        <option *ngFor="let ts of typesSort" [value]=ts.key>{{ts.value}}</option>
+    </select>
+
+
     <div class="list-group">
-        <div class="list-group-item" *ngFor="let site of sites" >
+        <div class="list-group-item" *ngFor="let site of sites">
             <site-item [site]="site"></site-item>
         </div>
     </div>

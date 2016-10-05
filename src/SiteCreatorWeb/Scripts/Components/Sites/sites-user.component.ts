@@ -12,16 +12,18 @@ import { Account } from '../../Shared/Models/account.model'
     providers: [SiteService]
 })
 
-export class SitesUserComponent {
+export class SitesUserComponent 
+{
     sites: Site[] = new Array();
 
-    constructor(private siteService: SiteService, private route: ActivatedRoute) {
-        let id = ""+this.route.snapshot.params['id'];
-        this.siteService.getSitesByUserId(id).then(sites => { this.sites = sites;});
-        
+    constructor(private siteService: SiteService, private route: ActivatedRoute) {        
+        this.update();
     }
 
-    create(): void
-    {
+    update() {
+        let id = "" + this.route.snapshot.params['id'];
+        this.siteService.getSitesByUserId(id).then(sites => {
+            this.sites = sites;
+        });
     }
 }

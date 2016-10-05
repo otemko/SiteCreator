@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Site } from '../../Shared/Models/site.model'
 import { Account } from '../../Shared/Models/account.model'
 import { SiteService } from '../../Shared/Services/sites.service'
+import { SitesUserComponent } from './sites-user.component'
+
 
 @Component({
     selector: 'site-user-item',
@@ -14,7 +16,7 @@ import { SiteService } from '../../Shared/Services/sites.service'
 export class SiteUserItemComponent {
     @Input() site: Site;
 
-    constructor(private siteService: SiteService, private account: Account, private route: Router)
+    constructor(private suc: SitesUserComponent, private siteService: SiteService, private account: Account, private route: Router)
     {
     }
 
@@ -23,6 +25,7 @@ export class SiteUserItemComponent {
             if (id == resId)
             {
                 this.route.navigate(['/sites-user', this.account.id]);
+                this.suc.update();
                 console.log('Succeed');
             }
             else
@@ -31,5 +34,8 @@ export class SiteUserItemComponent {
         
     }
 
-    edit(): void { console.log('ed'); }
+    edit(id: number): void {
+        this.route.navigate(['/site-create', id]);
+        this.suc.update();
+    }
 }

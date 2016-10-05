@@ -22,6 +22,7 @@ gulp.task("scriptsNStyles", () => {
             'jquery-validation/dist/**',
             'jquery-validation-unobtrusive/**',
             'bootstrap/dist/**',
+            'primeng/**',
             'font-awesome/**',
             'ng2-dnd/**',
             'angular2-dynamic-component/**',

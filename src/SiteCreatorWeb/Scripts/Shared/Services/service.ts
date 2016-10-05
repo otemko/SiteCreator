@@ -11,17 +11,14 @@ export class Service {
     constructor(private http: Http) {}
 
     get(url: string): Promise<any> {
-        console.log(url);
         return this.getPromise<any>(
             this.http.get(url));
     }
 
     post<T>(url: string, item: T): Promise<T> {
         let body = JSON.stringify(item);
-        console.log(body);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers });
-
         return this.getPromise<any>((this.http.post(url, body, options)));
     }
 
@@ -29,7 +26,14 @@ export class Service {
         return this.getPromise<any>(
             this.http.delete(url));
     }
-        
+
+    put<T>(url: string, item: T): Promise<T> {
+        let body = JSON.stringify(item);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers });
+        return this.getPromise<any>((this.http.put(url, body, options)));
+    }
+
     private getPromise<T>(response: Observable<Response>) : Promise<T> {
         return response.toPromise()
             .then(res => {

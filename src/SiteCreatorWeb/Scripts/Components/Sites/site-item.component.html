@@ -9,11 +9,11 @@
             <span class="lead">{{ site.name }}</span><br />
         </a>
         <span class="text-info">
-            <a [routerLink]="['/sites', tag.id]" *ngFor="let tag of site.tags">
-                <i class="fa fa-hashtag fa-fw"></i>
+            <a [routerLink]="['/sites', tag.id]" (click)="tagClick(tag.id)" *ngFor="let tag of site.tags">
+                <i  class="fa fa-hashtag fa-fw" style="cursor: pointer"></i>
                 {{ tag.name }}
             </a>
         </span><br />
-        <span><a href="#">{{ site.userName }}</a> </span>
+        <span><a [routerLink]="['/sites']">{{ site.userName }}</a> </span>
     </div>
 </div>

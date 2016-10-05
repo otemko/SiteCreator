@@ -41,7 +41,7 @@ const appRoutes: Routes = [
     {
         path: 'sites/:id',
         component: SitesComponent
-    },
+    }, 
     {
         path: 'users',
         component: UsersComponent
@@ -61,6 +61,10 @@ const appRoutes: Routes = [
     {
         path: 'page-edit',
         component: PageEditorComponent
+    },
+    {
+        path: 'site-create/:id',
+        component: SiteCreateComponent
     }
 ];
 

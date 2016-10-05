@@ -2,7 +2,8 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent }   from "./app.component";
 import { HttpModule } from "@angular/http";
-import { LocationStrategy, HashLocationStrategy } from "@angular/common";
+import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { AutoCompleteModule } from 'primeng/primeng';
 import { DndModule } from "ng2-dnd";
 import { FroalaModule } from "./Froala-editor/froala.module";
 import { DynamicComponentModule } from "angular2-dynamic-component";
@@ -38,7 +39,8 @@ import { routing } from "./routes";
         DndModule.forRoot(),
         FormsModule,
         FroalaModule,
-        DynamicComponentModule
+        DynamicComponentModule,
+        AutoCompleteModule
     ],
     declarations: [
         AppComponent,

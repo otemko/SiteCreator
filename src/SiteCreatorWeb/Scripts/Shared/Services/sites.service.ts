@@ -4,11 +4,14 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http'
 import 'rxjs/add/operator/toPromise';
 
 import { Site } from '../Models/site.model'
+import { SiteCreate } from '../Models/site-create.model'
 import { Service } from './service'
 
 
 @Injectable()
 export class SiteService {
+
+    allSites: Site[] = new Array();
 
     private url =  'api/Sites/';
 
@@ -20,8 +23,11 @@ export class SiteService {
         return this.service.get(this.url);
     }
 
+    getSiteById(siteId: number): Promise<Site> {
+        return this.service.get(this.url+'siteId/'+siteId);
+    }
+
     getSitesByUserId(userId: string): Promise<Site[]> {
-        console.log(this.url + userId);
         return this.service.get(this.url + userId);
     }
 
@@ -33,14 +39,11 @@ export class SiteService {
         return this.service.delete(this.url + id);
     }
 
-    createSite(site: Site): Promise<Site> {
-        return this.service.post(this.url, site);
+    createSite(newSite: SiteCreate): Promise<SiteCreate> {
+        return this.service.post(this.url, newSite);
     }
 
-    //updateSite(site: Site): void {
-    //    let index = sites.findIndex(p => p.id == site.id);
-    //    if (~index) {
-    //        sites[index] = site;
-    //    }
-    //}
+    updateSite(site: SiteCreate): Promise<SiteCreate> {
+        return this.service.put(this.url, site);
+    }
 }

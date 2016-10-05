@@ -1,18 +1,11 @@
-<div *ngIf="(site!=null)">
+<div *ngIf="(site)">
     <div class="form-group">
-        <input type="hidden" class="form-control" id="id" value="{{ site.id }}">
+        <h2 >{{site.name}}</h2>        
     </div>
-    <div class="form-group">
-        <label for="tittle">Tittle:</label>
-        <input type="text" class="form-control" id="tittle" value="{{ site.tittle }}">
-    </div>
-    <div class="form-group">
-        <label for="tags">Tags:</label>
-        <input type="text" class="form-control" id="tags" value="{{ site.tags }}">
-    </div>
-    <div class="form-group">
-        <label for="description">Description:</label>
-        <input type="text" class="form-control" id="description" value="{{ site.description }}">
-    </div>
-    <button class="btn btn-default" (click)="submit()" >Submit</button>
+    <div class="form-group" *ngIf="tagsView">
+        <div class="div-in-row" *ngFor="let tagView of tagsView">
+            <div (click)="deleteTag(tagView)" class="tag-cloud tag-cloud-info">{{tagView}}</div>
+        </div>
+    </div>   
+    <!-- Some about site -->
 </div>

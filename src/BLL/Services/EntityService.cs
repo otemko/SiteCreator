@@ -22,6 +22,11 @@ namespace SiteCreator.BLL.Services
             repository.Create<T>(entity);
         }
 
+        public virtual void CreateRangeAsync(T[] entities)
+        {
+            repository.CreateRange<T>(entities);
+        }
+
         public virtual void UpdateAsync(T entity)
         {
             repository.Update<T>(entity);
@@ -32,6 +37,10 @@ namespace SiteCreator.BLL.Services
             repository.Delete<T>(entity);
         }
 
+        public virtual void DeleteRangeAsync(T[] entities)
+        {
+            repository.DeleteRange<T>(entities);
+        }
         public virtual Task<IEnumerable<T>> GetAllAsync()
         {
             return repository.GetAllAsync<T>();
