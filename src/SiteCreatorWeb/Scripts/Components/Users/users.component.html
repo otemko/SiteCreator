@@ -1,17 +1,16 @@
 <h4>Your site</h4>
 <div class="row">
-    <div class="col-sm-9">
-        <div dnd-droppable (onDropSuccess)="addElement($event.dragData, elements)" [dropZones]="['add']" class="panel panel-default">
+    <div id="Site" class="col-sm-9">
+        <div dnd-droppable (onDropSuccess)="addElement($event.dragData, elements)"
+             [dropZones]="['add']" class="panel panel-default">
             <div class="panel-heading">Your site</div>
             <div class="panel-body">
-                <!--<div *ngFor="let el of elements; let i = index" dnd-draggable [dragEnabled]="true" [dragData]="el" [dropZones]="['add','trash']">
-                    <DynamicComponent [componentTemplate]="el.element" [componentInputData]="el.inputData" [componentModules]="extraModules">
-                    </DynamicComponent>
-                    
-                </div>-->
-
-                <div [froalaEditor]="options" [(froalaModel)]="content1"></div>
-                <div [froalaEditor]="options" [(froalaModel)]="content"></div>
+                <div dnd-sortable-container  [dropZones]="['trash']" [sortableData]="elements">
+                    <div *ngFor="let el of elements; let i = index" [dragEnabled]="editable" dnd-sortable [sortableIndex]="i">
+                        <DynamicComponent [componentTemplate]="el.element" [componentInputData]="el.inputData" [componentModules]="extraModules">
+                        </DynamicComponent>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -19,17 +18,15 @@
         <div class="panel panel-default">
             <div class="panel-heading">Available items</div>
             <div class="panel-body">
-                <div *ngFor="let el of availableElements; let i = index" dnd-draggable [dragEnabled]="true" [dragData]="el" [dropZones]="['add']">
+                <div *ngFor="let el of availableElements; let i = index" dnd-draggable [dragData]="el" [dropZones]="['add']">
                     <DynamicComponent [componentTemplate]="el.previous" [componentModules]="extraModules">
-                    </DynamicComponent>
-                    <DynamicComponent [componentTemplate]="el.element" [componentInputData]="el.inputData" [componentModules]="extraModules">
                     </DynamicComponent>
                 </div>
             </div>
         </div>
-        <div class="panel panel-default" dnd-droppable (onDropSuccess)="removeElement($event.dragData); log(index)" [dropZones]="['trash']">
+        <div class="panel panel-default" dnd-sortable-container [dropZones]="['trash']" [sortableData]="trash">
             <div class="panel-body text-center">
-                <img width="150" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQkBcVWdyEdwQRESMlraWji1HZqyMFnyBmmo9AraXbLV21yyIN1"
+                <img style="max-width: 150px" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQkBcVWdyEdwQRESMlraWji1HZqyMFnyBmmo9AraXbLV21yyIN1"
                 />
             </div>
         </div>
@@ -41,14 +38,6 @@
         <div class="panel panel-default">
             <div class="panel-heading">Your site</div>
         </div>
-        <div id="111" class="panel-body">
-            <div *ngFor="let el of availableElements; let i = index" dnd-draggable [dragEnabled]="true" [dragData]="el" [dropZones]="['add']">
-                <DynamicComponent [componentTemplate]="el.previous" [componentModules]="extraModules">
-                </DynamicComponent>
-                <DynamicComponent [componentTemplate]="el.element" [componentInputData]="el.inputData" [componentModules]="extraModules">
-                </DynamicComponent>
-            </div>
-        </div>
     </div>
     <div class="col-sm-3">
         <div class="panel panel-default">
@@ -58,3 +47,7 @@
         </div>
     </div>
 </div>
+
+<div id="preview"></div>
+
+<button (click)="click()">clik</button>
