@@ -31,7 +31,9 @@ import { PageItemComponent } from "./Components/Site/page-item.component";
 import { PageEditorComponent } from './Components/Page/page.editor.component';
 import { PageComponent } from './Components/Page/page.component';
 
-import { routing } from "./routes";
+import { SearchComponent } from './Components/Search/search.component'
+
+import { routing } from './routes';
 
 @NgModule({
     imports: [
@@ -58,6 +60,9 @@ import { routing } from "./routes";
         SitesUserComponent,
         SiteUserItemComponent,
         SiteCreateComponent,
+        FroalaEditorDirective,
+        FroalaViewDirective,
+        SearchComponent,
         PageEditorComponent,
         PageComponent,
         PageItemComponent

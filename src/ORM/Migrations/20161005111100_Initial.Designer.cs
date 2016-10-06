@@ -8,7 +8,7 @@ using SiteCreator.ORM;
 namespace ORM.Migrations
 {
     [DbContext(typeof(SiteCreatorDbContext))]
-    [Migration("20160927224406_Initial")]
+    [Migration("20161005111100_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -17,6 +17,8 @@ import { PageComponent } from './Components/Page/page.component';
 import { UsersComponent } from './Components/Users/users.component'
 import { AboutComponent } from './Components/About/about.component'
 
+import { SearchComponent } from './Components/Search/search.component'
+
 const appRoutes: Routes = [
     {
         path: '',
@@ -72,9 +74,13 @@ const appRoutes: Routes = [
         component: SiteCreateComponent
     },
     {
+        path: 'search/:id',
+        component: SearchComponent
+    },
+    {
         path: 'page/:id',
         component: PageComponent
-    }
+    }    
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

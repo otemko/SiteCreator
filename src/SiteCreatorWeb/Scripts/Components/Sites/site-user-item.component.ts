@@ -16,7 +16,8 @@ import { SitesUserComponent } from './sites-user.component'
 export class SiteUserItemComponent {
     @Input() site: Site;
 
-    constructor(private suc: SitesUserComponent, private siteService: SiteService, private account: Account, private route: Router)
+    constructor(private suc: SitesUserComponent, private siteService: SiteService, private account: Account,
+        private route: Router)
     {
     }
 
@@ -26,7 +27,6 @@ export class SiteUserItemComponent {
             {
                 this.route.navigate(['/sites-user', this.account.id]);
                 this.suc.update();
-                console.log('Succeed');
             }
             else
                 alert("You can't do it");
