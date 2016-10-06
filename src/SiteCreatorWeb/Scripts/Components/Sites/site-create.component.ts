@@ -42,7 +42,7 @@ export class SiteCreateComponent {
         if (id) {
             this.siteService.getSiteById(id).then(res => {
                 Object.assign(this.site, res);
-                this.site.oldTags.forEach(p => this.tagsView.push(p.name));
+                res.tags.forEach(p => this.tagsView.push(p.name));
             });
             this.isUpdate = true;
         }
@@ -72,14 +72,23 @@ export class SiteCreateComponent {
         else {
 
             if (this.isUpdate) {
-                this.siteService.updateSite(this.site).then(resId => { console.log(resId); });
+                this.siteService.updateSite(this.site).then(resId => {
+                    if (resId == this.site) {
+                        console.log(resId);
+                    }
+                });
             }
             else {
                 this.site.userId = this.account.id;
                 this.site.dateCreated = this.getDate();
-                this.siteService.createSite(this.site).then(resId => { console.log(resId); });
+                this.siteService.createSite(this.site).then(resId => {
+                    if (resId == 0) {
+                        this.route.navigate(['/sites-user', this.account.id]);
+                    }
+                });
+                
             }
-            setTimeout(() => { this.route.navigateByUrl("/sites-user/" + this.account.id); }, 100);
+            
 
         }
     }

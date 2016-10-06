@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using SiteCreator.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,25 +15,42 @@ namespace SiteCreator.ORM
         public SeedData(SiteCreatorDbContext context)
         {
             this.context = context;
+            
         }
 
         public async void Seed()
         {
-            //AddStyles();
-            
-            //AddLanguages();
-            
-            //AddStylesMenu();
-            
-            //AddTags();            
+            AddRoles();
 
-            //var userId = await AddUsers();
-            
-            //AddSites(userId);
-            
-            //AddTagSites();
+            AddStyles();
 
-            //await context.SaveChangesAsync();
+            AddLanguages();
+
+            AddStylesMenu();
+
+            AddTags();
+
+            var userId = await AddUsers();
+
+            AddSites(userId);
+
+            AddTagSites();
+
+            await context.SaveChangesAsync();
+        }
+
+        private void AddRoles()
+        {
+            if (context.Roles.Count() == 0)
+            {
+                var roleStore = new RoleStore<IdentityRole>(context);
+
+                var role1 = new IdentityRole { Name = "admin", NormalizedName="ADMIN"};
+                var role2 = new IdentityRole { Name = "user", NormalizedName = "USER" };
+
+                roleStore.CreateAsync(role1);
+                roleStore.CreateAsync(role2);
+            }
         }
 
         private void AddStylesMenu()

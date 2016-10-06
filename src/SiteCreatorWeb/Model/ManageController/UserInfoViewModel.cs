@@ -10,19 +10,17 @@ namespace SiteCreator.Web.Model
     {
         public string Id { get; set; }
         public string UserName { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public int LanguageId { get; set; }
         public int StyleId { get; set; }
+        public string Role { get; set; }
 
-        public UserInfoViewModel(User user)
+        public UserInfoViewModel(User user, string role)
         {
             Id = user.Id;
             UserName = user.UserName;
-            FirstName = user.FirstName;
-            LastName = user.LastName;
             LanguageId = user.LanguageId;
             StyleId = user.StyleId;
+            Role = role;
         }
     }
 }
