@@ -27,6 +27,8 @@ import { LanguagePanelComponent } from './Components/LanguagePanel/languagePanel
 
 import { SiteCreateComponent } from './Components/Sites/site-create.component'
 
+import { SearchComponent } from './Components/Search/search.component'
+
 import { routing } from './routes';
 
 @NgModule({
@@ -53,7 +55,8 @@ import { routing } from './routes';
         SiteUserItemComponent,
         SiteCreateComponent,
         FroalaEditorDirective,
-        FroalaViewDirective
+        FroalaViewDirective,
+        SearchComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

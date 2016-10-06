@@ -20,9 +20,23 @@
                 <li>
                     <a [routerLink]="['/about']"><i class="fa fa-info fa-fw"></i>&nbsp;About</a>
                 </li>
+                <li>
+                    <div class="form-inline">
+                        <input class="form-control" 
+                               type="text" 
+                               #inputBox
+                               placeholder="Search"
+                               [(ngModel)]="valueSearch" [ngModelOptions]="{standalone: true}"
+                               (keyup.enter) ="search()">
+                        <i class="fa fa-search" (click)="search(); inputBox.value=''" style="cursor: pointer" aria-hidden="true"></i>
+                    </div>
+                </li>
             </ul>
+
             <account-panel></account-panel>
             <language-panel></language-panel>
+
+            
         </div>
     </div>
 </nav>

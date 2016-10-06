@@ -15,7 +15,7 @@ export class Service {
             this.http.get(url));
     }
 
-    post<T>(url: string, item: T): Promise<T> {
+    post<T>(url: string, item: T): Promise<any> {
         let body = JSON.stringify(item);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers });

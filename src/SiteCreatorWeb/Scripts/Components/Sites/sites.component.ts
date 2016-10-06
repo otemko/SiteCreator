@@ -14,9 +14,9 @@ import { SiteService } from '../../Shared/Services/sites.service'
 export class SitesComponent{
     sites: Site[] = new Array();
     
-    //typesSort = [{ key: 0, value: "By user name"},
-    //            { key: 1, value: "By site name"},
-    //            { key: 2, value: "By date created"}];
+    typesSort = [{ key: 0, value: "By user name"},
+                { key: 1, value: "By site name"},
+                { key: 2, value: "By date created"}];
     typeSort = -1;
 
     constructor(private siteService: SiteService, private route: ActivatedRoute) {
@@ -34,7 +34,6 @@ export class SitesComponent{
         else {
             this.siteService.getSites().then(sites => {
                 this.sites = sites;
-                console.log(this.sites);
             });            
         }
     }
