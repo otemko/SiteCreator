@@ -10,10 +10,14 @@
         </a>
         <span class="text-info">
             <a [routerLink]="['/sites', tag.id]" (click)="tagClick(tag.id)" *ngFor="let tag of site.tags">
-                <i  class="fa fa-hashtag fa-fw" style="cursor: pointer"></i>
+                <i class="fa fa-hashtag fa-fw" style="cursor: pointer"></i>
                 {{ tag.name }}
             </a>
         </span><br />
         <span><a [routerLink]="['/sites']">{{ site.userName }}</a> </span>
+        <div *ngIf="account.role == 'admin'">
+            <button (click)="edit(site.id)" class="btn btn-primary">Edit</button>
+            <button (click)="delete(site.id)" class="btn btn-danger">Delete</button>
+        </div>
     </div>
 </div>

@@ -14,6 +14,7 @@ namespace SiteCreator.Web.Controllers
 {
     public class SitesController : Controller
     {
+        private IUserService userService;
         private ISiteService siteService;
         private ITagService tagService;
         private ITagSiteService tagSiteService;
@@ -21,14 +22,19 @@ namespace SiteCreator.Web.Controllers
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
 
-        public SitesController(ISiteService siteService, ITagService tagService, ITagSiteService tagSiteService,
-            UserManager<User> userManager, SignInManager<User> signInManager)
+        public SitesController(ISiteService siteService, 
+            ITagService tagService, 
+            ITagSiteService tagSiteService,
+            IUserService userService,
+            UserManager<User> userManager, 
+            SignInManager<User> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.siteService = siteService;
             this.tagService = tagService;
             this.tagSiteService = tagSiteService;
+            this.userService = userService;
         }
 
         [HttpGet]
@@ -152,59 +158,71 @@ namespace SiteCreator.Web.Controllers
         [Route("api/[controller]")]
         public async Task<int> Put([FromBody]CreateSiteViewModel createSite)
         {
-            var oldTagSites = await tagSiteService.GetTagSitesBySiteId(createSite.id);
-            await tagSiteService.DeleteRangeAsync(oldTagSites.ToArray());
+            if (!signInManager.IsSignedIn(User))
+                return -1;
 
-            var newTags = new List<Tag>();
-            var tagSites = new List<TagSite>();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await userService.GetSingleAsync(userId);
 
-            if (createSite.newTags != null)
+            if (createSite.userId == userId || await userManager.IsInRoleAsync(user, "admin"))
             {
-                foreach (var newTag in createSite.newTags)
-                {
-                    newTags.Add(new Tag
-                    {
-                        Name = newTag,
-                        TagSite = new List<TagSite>()
-                    });
-                }
-                await tagService.CreateRangeAsync(newTags.ToArray());
 
-                foreach (var newTag in newTags)
+                var oldTagSites = await tagSiteService.GetTagSitesBySiteId(createSite.id);
+                await tagSiteService.DeleteRangeAsync(oldTagSites.ToArray());
+
+                var newTags = new List<Tag>();
+                var tagSites = new List<TagSite>();
+
+                if (createSite.newTags != null)
                 {
-                    tagSites.Add(new TagSite
+                    foreach (var newTag in createSite.newTags)
                     {
-                        SiteId = createSite.id,
-                        TagId = newTag.Id
-                    });
+                        newTags.Add(new Tag
+                        {
+                            Name = newTag,
+                            TagSite = new List<TagSite>()
+                        });
+                    }
+                    await tagService.CreateRangeAsync(newTags.ToArray());
+
+                    foreach (var newTag in newTags)
+                    {
+                        tagSites.Add(new TagSite
+                        {
+                            SiteId = createSite.id,
+                            TagId = newTag.Id
+                        });
+                    }
                 }
+
+                if (createSite.oldTags != null)
+                {
+                    foreach (var oldTag in createSite.oldTags)
+                    {
+                        tagSites.Add(new TagSite
+                        {
+                            SiteId = createSite.id,
+                            TagId = oldTag.id
+                        });
+                    }
+                }
+
+                var site = new Site
+                {
+                    Id = createSite.id,
+                    TagSite = tagSites,
+                    Name = createSite.name,
+                    DateCreated = GetDateUpdtae(createSite.dateCreated),
+                    StyleMenuId = createSite.styleMenuId,
+                    UserId = createSite.userId
+                };
+
+                await siteService.UpdateAsync(site);
+
+                return createSite.id;
             }
-
-            if (createSite.oldTags != null)
-            {
-                foreach (var oldTag in createSite.oldTags)
-                {
-                    tagSites.Add(new TagSite
-                    {
-                        SiteId = createSite.id,
-                        TagId = oldTag.id
-                    });
-                }
-            }
-
-            var site = new Site
-            {
-                Id = createSite.id,
-                TagSite = tagSites,
-                Name = createSite.name,
-                DateCreated = GetDateUpdtae(createSite.dateCreated),
-                StyleMenuId = createSite.styleMenuId,
-                UserId = createSite.userId
-            };
-
-            await siteService.UpdateAsync(site);
-
-            return 0;
+            else
+                return -1;
         }
 
         // DELETE api/values/5
@@ -216,10 +234,11 @@ namespace SiteCreator.Web.Controllers
                 return -1;
 
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await userService.GetSingleAsync(userId);
 
             var site = await siteService.GetSingleAsync(id);
 
-            if (site.UserId == userId)
+            if (site.UserId == userId || await userManager.IsInRoleAsync(user, "admin"))
             {
                 await siteService.DeleteAsync(site);
                 return id;

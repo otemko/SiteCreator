@@ -73,6 +73,12 @@ namespace SiteCreator.Web.Controllers
             string userName = Guid.NewGuid().ToString().Replace("-", "");
             var user = new User { UserName = userName, LanguageId = 1, StyleId = 1 };
             var result = await userManager.CreateAsync(user);
+
+            if (!(await userManager.IsInRoleAsync(user, "admin")) && !(await userManager.IsInRoleAsync(user, "user")))
+            {
+                await userManager.AddToRoleAsync(user, "user");
+            }
+
             if (result.Succeeded)
             {
                 result = await userManager.AddLoginAsync(user, info);
