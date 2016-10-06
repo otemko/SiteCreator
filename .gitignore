@@ -3,6 +3,7 @@
 **/wwwroot/lib
 **/wwwroot/appScripts
 **/typings/
+**/appsettings.json
 
 # User-specific files
 *.suo
