@@ -60,8 +60,6 @@ import { routing } from './routes';
         SitesUserComponent,
         SiteUserItemComponent,
         SiteCreateComponent,
-        FroalaEditorDirective,
-        FroalaViewDirective,
         SearchComponent,
         PageEditorComponent,
         PageComponent,
