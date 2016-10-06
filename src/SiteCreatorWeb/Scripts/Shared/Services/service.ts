@@ -37,15 +37,15 @@ export class Service {
     private getPromise<T>(response: Observable<Response>): Promise<T> {
         return response.toPromise()
             .then(res => {
-                if (res.status == 204) return null;
+                if (!res.text()) return null;
                 else return res.json()
-            });
+            }).catch(res => this.handleError(res));
     }
 
 
 
     private handleError(error: any): Promise<void> {
-        console.log('Error12456', error);
+        console.log('Error', error);
         return Promise.reject(error.message || error);
     }
 

@@ -8,7 +8,7 @@
         </div>
     </div>
         <div *ngFor="let page of site.pages">
-            <page-item [page]="page"></page-item>
+            <page-item [page]="page" (delete)="onDelete($event)"></page-item>
         </div>
     <div>
         <a [routerLink]="['/page-edit']"  (click)="newPage()" class="btn btn-primary">Create</a>

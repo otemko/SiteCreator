@@ -22,7 +22,11 @@ export class PageService {
         return this.service.post(this.url, page);
     }
 
-    savePage(page: Page): Promise<number> {
+    savePage(page: Page): Promise<any> {
         return this.service.put(this.url + page.id, page);
     };
+
+    deletePage(id: number): Promise<any> {
+        return this.service.delete(this.url + id);
+    }
 }

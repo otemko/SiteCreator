@@ -23,10 +23,11 @@
             <div class="panel-body">
                 <div class="text-center">
                     <button class="btn btn-default" (click)="save()">
-                        <i class="fa fa-save fa-fw" *ngIf="!loading"></i>
-                        <i class="fa fa-spinner fa-pulse fa-fw" *ngIf="loading"></i>
+                        <i *ngIf="!loading" class="fa fa-save fa-fw"></i>
+                        <i *ngIf="loading" class="fa fa-spinner fa-pulse fa-fw"></i>
                         <span *ngIf="id"> Save</span>
                         <span *ngIf="!id"> Create</span>
+                        <i *ngIf="failload" class="fa fa-times-circle text-danger"></i>
                     </button>
                 </div>
             </div>

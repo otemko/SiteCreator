@@ -6,6 +6,8 @@ namespace SiteCreator.BLL.IService
 {
     public interface IPageService : IEntityService<Page, int>
     {
-        Task<Page> GetPageWithUserAndComments(int id);
+        Task<Page> GetPageWithUserAndContentAndComments(int id);
+        Task<Page> GetPageWithSiteAndContent(int id);
+        Task<Page> GetPageWithSite(int id);
     }
 }

@@ -18,7 +18,19 @@ namespace SiteCreator.BLL.Services
             this.repository = repository;
         }
 
-        public async Task<Page> GetPageWithUserAndComments(int id)
+        public async Task<Page> GetPageWithSiteAndContent(int id)
+        {
+            var page = await repository.GetSingleAsync<Page>(p => p.Id == id, p => p.PageContent, p => p.Site);
+            return page;
+        }
+
+        public async Task<Page> GetPageWithSite(int id)
+        {
+            var page = await repository.GetSingleAsync<Page>(p => p.Id == id, p => p.Site, p => p.Site);
+            return page;
+        }
+
+        public async Task<Page> GetPageWithUserAndContentAndComments(int id)
         {
             var page = await repository.GetSingleAsync<Page>(p => p.Id == id, p => p.PageContent,
                 p => p.Comment, p => p.Site, p => p.Site.User);

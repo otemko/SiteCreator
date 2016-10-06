@@ -57,5 +57,16 @@ namespace SiteCreator.Web.Model.PageController
             };
             return page;
         }
+
+        public Page UpdateBllPage(Page page)
+        {
+            page.Name = Name;
+            page.Preview = Preview;
+            page.Order = Order;
+            page.LastModififcation = DateTime.Now;
+            page.PageContent.Content = Content;
+
+            return page;
+        }
     }
 }

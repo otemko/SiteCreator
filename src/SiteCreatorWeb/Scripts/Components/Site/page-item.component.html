@@ -9,8 +9,12 @@
             </div>
         </a>
         <p class="text-center">
-            <button [routerLink]="['/page-edit', page.id]" class="btn btn-default btn-sm">Edit</button>
-            <button (click)="delete(page.id)"  class="btn btn-warning btn-sm">Delete</button>          
+            <button [routerLink]="['/page-edit', page.id]" class="btn btn-default">
+                <i class="fa fa-pencil fa-fw"></i>
+            </button>
+            <button (click)="onDelete(page.id)"  class="btn btn-default">
+                <i class="fa fa-trash-o fa-fw text-danger"></i>   
+            </button>          
         </p>
     </div>
 </div>

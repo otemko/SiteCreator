@@ -38,27 +38,27 @@ namespace SiteCreator.Web.Controllers
         [AllowAnonymous]
         public async Task<PageViewModel> GetPage(int id)
         {
-            var page = await pageService.GetPageWithUserAndComments(id);
+            var page = await pageService.GetPageWithUserAndContentAndComments(id);
             if (page == null) return null;
 
             return new PageViewModel(page);
         }
 
         [HttpPost]
-        public async Task<int> PostPage([FromBody] PageViewModel pageViewModel)
+        public async Task<IActionResult> PostPage([FromBody] PageViewModel pageViewModel)
         {
-            if (!await CheckTheRights(pageViewModel.SiteId)) throw new UnauthorizedAccessException();
+            var site = await siteService.GetSingleAsync(pageViewModel.SiteId);
+            if (!CheckTheRights(site)) return Unauthorized();
 
             var page = pageViewModel.CreateBllPage();
-            return await pageService.CreateAsync(page);
+            return Ok(await pageService.CreateAsync(page));
         }
 
-        private async Task<bool> CheckTheRights(int siteId)
+        private bool CheckTheRights(Site site)
         {
             if (User.IsInRole("Admin"))
                 return true;
 
-            var site = await siteService.GetSingleAsync(siteId);
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (site != null && site.UserId == userId)
                 return true;
@@ -66,16 +66,33 @@ namespace SiteCreator.Web.Controllers
             return false;
         }
 
-        // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<IActionResult> PutPage(int id, [FromBody]PageViewModel pageViewModel)
         {
+            var page = await pageService.GetPageWithSiteAndContent(id);
+            if (!CheckPageForUpdate(page, pageViewModel)) return BadRequest();
+            if (!CheckTheRights(page?.Site)) return Unauthorized();
+
+            page = pageViewModel.UpdateBllPage(page);
+            await pageService.UpdateAsync(page);
+
+            return Ok();
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        private bool CheckPageForUpdate(Page page, PageViewModel pageViewModel)
         {
+            if (page != null && page.SiteId == pageViewModel.SiteId) return true;
+            return false;
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var page = await pageService.GetPageWithSite(id);
+            if (page == null) return BadRequest();
+
+            await pageService.DeleteAsync(page);
+            return Ok();
         }
     }
 }

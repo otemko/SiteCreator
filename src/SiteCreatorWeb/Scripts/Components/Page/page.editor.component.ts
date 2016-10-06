@@ -24,6 +24,7 @@ export class PageEditorComponent {
     trash = [];
     id;
     loading: boolean = false;
+    failload: boolean = false;
 
     editable: boolean = true;
 
@@ -119,6 +120,7 @@ export class PageEditorComponent {
     }
 
     save() {
+        if (this.loading) return;
         this.loading = true;
         this.setContent();
         if (!this.id) this.createPage();
@@ -128,14 +130,23 @@ export class PageEditorComponent {
     createPage() {
         this.pageService.createPage(this.page).then(res => {
             this.id = res;
-            this.loading = false;
-        });
+            this.loaded();
+        }).catch(res => this.failloaded());
     }
 
     saveChangesToDb() {
-        this.pageService.savePage(this.page).then(res => {
-            this.loading = true;
-        });
+        this.pageService.savePage(this.page).then(res => this.loaded())
+            .catch(res => this.failloaded());
+    }
+
+    loaded() {
+        this.loading = false;
+        this.failload = false;
+    }
+
+    failloaded() {
+        this.loading = false;
+        this.failload = true;
     }
 
     setContent() {
