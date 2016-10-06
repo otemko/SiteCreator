@@ -1,15 +1,14 @@
-<button class="btn btn-success" (click)="save()"><i class="fa fa-save fa-fw"></i>
-<span *ngIf="id"> Save</span>
-<span *ngIf="!id"> Create</span>
-</button>
-<br/> 
 <div class="row">
     <div id="Site" class="col-sm-9">
-        <div dnd-droppable (onDropSuccess)="addElement($event.dragData, elements)"
-             [dropZones]="['add']" class="panel panel-default">
-            <div class="panel-heading">Your site</div>
+
+
+
+        <div dnd-droppable (onDropSuccess)="addElement($event.dragData, elements)" [dropZones]="['add']" class="panel panel-default">
+            <div class="panel-heading">
+                <h4>{{ page.name || "Unnamed" }}</h4>
+            </div>
             <div class="panel-body">
-                <div dnd-sortable-container  [dropZones]="['trash']" [sortableData]="elements">
+                <div dnd-sortable-container [dropZones]="['trash']" [sortableData]="elements">
                     <div *ngFor="let el of elements; let i = index" [dragEnabled]="editable" dnd-sortable [sortableIndex]="i">
                         <DynamicComponent [componentTemplate]="el.element" [componentInputData]="el.inputData" [componentModules]="extraModules">
                         </DynamicComponent>
@@ -20,16 +19,34 @@
     </div>
     <div class="col-sm-3">
         <div class="panel panel-default">
-            <div class="panel-heading">Available items</div>
+            <div class="panel-heading">Activity</div>
             <div class="panel-body">
-                <div *ngFor="let el of availableElements; let i = index" dnd-draggable [dragData]="el" [dropZones]="['add']">
-                    <DynamicComponent [componentTemplate]="el.previous" [componentModules]="extraModules">
-                    </DynamicComponent>
+                <div class="text-center">
+                    <button class="btn btn-default" (click)="save()">
+                        <i class="fa fa-save fa-fw" *ngIf="!loading"></i>
+                        <i class="fa fa-spinner fa-pulse fa-fw" *ngIf="loading"></i>
+                        <span *ngIf="id"> Save</span>
+                        <span *ngIf="!id"> Create</span>
+                    </button>
                 </div>
             </div>
         </div>
-        <div class="panel panel-default" dnd-sortable-container [dropZones]="['trash']" [sortableData]="trash">
-            <div class="panel-body text-center">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Available items</div>
+            <div>
+                <div class="panel-body">
+                    <span *ngFor="let el of availableElements; let i = index" dnd-draggable [dragData]="el" [dropZones]="['add']">
+                        <DynamicComponent [componentTemplate]="el.previous" [componentModules]="extraModules">
+                        </DynamicComponent>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Trash</div>
+            <div class="panel-body text-center" dnd-sortable-container [dropZones]="['trash']" [sortableData]="trash">
                 <img style="max-width: 150px" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQkBcVWdyEdwQRESMlraWji1HZqyMFnyBmmo9AraXbLV21yyIN1"
                 />
             </div>
@@ -51,5 +68,3 @@
         </div>
     </div>
 </div>-->
-
-

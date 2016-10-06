@@ -7,8 +7,8 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class Service {
-    
-    constructor(private http: Http) {}
+
+    constructor(private http: Http) { }
 
     get(url: string): Promise<any> {
         return this.getPromise<any>(
@@ -22,7 +22,7 @@ export class Service {
         return this.getPromise<any>((this.http.post(url, body, options)));
     }
 
-    delete(url: string): Promise<any> {        
+    delete(url: string): Promise<any> {
         return this.getPromise<any>(
             this.http.delete(url));
     }
@@ -34,13 +34,12 @@ export class Service {
         return this.getPromise<any>((this.http.put(url, body, options)));
     }
 
-    private getPromise<T>(response: Observable<Response>) : Promise<T> {
+    private getPromise<T>(response: Observable<Response>): Promise<T> {
         return response.toPromise()
             .then(res => {
-                 if (res.status == 204)  return null;
-                 else return res.json()
-                })
-            .catch(this.handleError);
+                if (res.status == 204) return null;
+                else return res.json()
+            });
     }
 
 

@@ -42,7 +42,7 @@ export class SiteCreateComponent {
         if (id) {
             this.siteService.getSiteById(id).then(res => {
                 Object.assign(this.site, res);
-                this.site.tags.forEach(p => this.tagsView.push(p.name));
+                this.site.oldTags.forEach(p => this.tagsView.push(p.name));
             });
             this.isUpdate = true;
         }
@@ -62,7 +62,7 @@ export class SiteCreateComponent {
     onSubmit() {
 
         this.getTags();
-        this.site.tags = this.oldTags;
+        this.site.oldTags = this.oldTags;
         this.site.newTags = this.newTags;
 
         if (this.tagsView.length == 0) {

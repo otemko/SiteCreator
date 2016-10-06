@@ -23,6 +23,7 @@ export class PageEditorComponent {
     elements = [];
     trash = [];
     id;
+    loading: boolean = false;
 
     editable: boolean = true;
 
@@ -37,8 +38,7 @@ export class PageEditorComponent {
         else this.getPage();
 
         this.availableElements.push({
-            previous: `<div class="text-center"><button class="btn btn-default">
-                <i class="fa fa-tint" aria-hidden="true"></i> text</button></div>`,
+            previous: `<button class="btn btn-default"><i class="fa fa-tint" aria-hidden="true"></i> Text</button>`,
             element: `<div *ngIf="editable" [froalaEditor]="options" [(froalaModel)]="content[0]"></div>
                         <div *ngIf="!editable" [froalaView]="content[0]"></div>`,
             inputData: {
@@ -51,10 +51,8 @@ export class PageEditorComponent {
             }
         },
             {
-                previous: `<div class="text-center"><button class="btn btn-default">
-                    <i class="fa fa-tint" aria-hidden="true"></i> panel</button></div>`,
-                element: `
-                            <div class="panel panel-default">
+                previous: `<button class="btn btn-default"><i class="fa fa-tint" aria-hidden="true"></i> Panel</button>`,
+                element: `<div class="panel panel-default">
                                 <div class="panel-heading">
                                     <div *ngIf="editable" [froalaEditor]="options" [(froalaModel)]="content[0]"></div>
                                         <div *ngIf="!editable" [froalaView]="content[0]"></div>
@@ -111,47 +109,37 @@ export class PageEditorComponent {
     parseContent() {
         if (this.page.content) {
             this.elements = JSON.parse(this.page.content);
-            this.editOn();
-            console.log(this.page.content);
+            this.changeEditable(true);
         }
     }
 
-    editOn() {
-        this.elements.forEach(p => p.inputData.editable = true);
-        this.editable = true;
+    changeEditable(value: boolean) {
+        this.elements.forEach(p => p.inputData.editable = value);
+        this.editable = value;
     }
-
-    editOff() {
-        this.elements.forEach(p => p.inputData.editable = false);
-        this.editable = false;
-    }
-
 
     save() {
-        if (!this.id) this.create();
-        else this.saveChanges();
+        this.loading = true;
+        this.setContent();
+        if (!this.id) this.createPage();
+        else this.saveChangesToDb();
     }
 
-    create() {
-        if (this.page.siteId == 0) {
-            console.log("Error. Need site Id");
-            return;
-        }
-        this.setContent();
-        console.log(this.page);
+    createPage() {
         this.pageService.createPage(this.page).then(res => {
-            console.log(res);
             this.id = res;
+            this.loading = false;
         });
     }
 
-    saveChanges() {
-
+    saveChangesToDb() {
+        this.pageService.savePage(this.page).then(res => {
+            this.loading = true;
+        });
     }
 
     setContent() {
         if (this.elements) {
-            console.log(this.page);
             let content = [];
             let elements = JSON.parse(JSON.stringify(this.elements));
 
