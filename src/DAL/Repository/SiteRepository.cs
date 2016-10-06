@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SiteCreator.Entities;
 using SiteCreator.ORM;
+using Microsoft.EntityFrameworkCore;
 
 namespace SiteCreator.DAL.Repository
 {
@@ -17,12 +18,13 @@ namespace SiteCreator.DAL.Repository
             this.context = context;
         }
 
-        public IEnumerable<Site> GetAllSitesWithUsersAndTagsByTagId(int tagId)
+        public async Task<IEnumerable<Site>> GetSitesWithUsersAndTagsByTagId(int tagId)
         {
             var sites = from site in context.Site
                         where site.TagSite.Any(p => p.TagId == tagId)
                         select site;
-            return sites.ToList();
+
+            return await sites.Include(p => p.User).ToListAsync();
         }
     }
 }

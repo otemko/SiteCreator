@@ -1,4 +1,5 @@
 ﻿using SiteCreator.Entities;
+using SiteCreator.Web.Model.PageController;
 using SiteCreator.Web.Model.Shared;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace SiteCreator.Web.Model.SiteController
         public string UserId { get; set; }
         public virtual int StyleMenuId { get; set; }
         public virtual List<TagViewModel> Tags { get; set; }
+        public virtual List<PageInfoViewModel> Pages { get; set; }
 
         public SiteViewModel(Site site, IEnumerable<Tag> tags)
         {
@@ -53,7 +55,10 @@ namespace SiteCreator.Web.Model.SiteController
             StyleMenuId = site.StyleMenuId;
 
             Tags = new List<TagViewModel>();
-            site.TagSite.ToList().ForEach(p => Tags.Add(new TagViewModel(p.Tag)));
+            site.TagSite?.ToList().ForEach(p => Tags.Add(new TagViewModel(p.Tag)));
+
+            Pages = new List<PageInfoViewModel>();
+            site.Page?.ToList().ForEach(p => Pages.Add(new PageInfoViewModel(p)));
         }
     }
 }

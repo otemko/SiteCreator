@@ -1,11 +1,16 @@
 <div *ngIf="(site)">
     <div class="form-group">
-        <h2 >{{site.name}}</h2>        
+        <h2>{{site.name}}</h2>
     </div>
-    <div class="form-group" *ngIf="tagsView">
-        <div class="div-in-row" *ngFor="let tagView of tagsView">
-            <div (click)="deleteTag(tagView)" class="tag-cloud tag-cloud-info">{{tagView}}</div>
+    <div class="form-group" *ngIf="site.tags">
+        <div class="div-in-row" *ngFor="let tag of site.tags">
+            <div (click)="deleteTag(tag)" class="tag-cloud tag-cloud-info">{{tag.name}}</div>
         </div>
-    </div>   
-    <!-- Some about site -->
+    </div>
+        <div *ngFor="let page of site.pages">
+            <page-item [page]="page"></page-item>
+        </div>
+    <div>
+        <a [routerLink]="['/page-edit']"  (click)="newPage()" class="btn btn-primary">Create</a>
+    </div>
 </div>

@@ -1,4 +1,5 @@
 import { Tag } from './tag.model';
+import { Page } from './page.model'
 
 export class Site{
     id: number;
@@ -8,4 +9,5 @@ export class Site{
     userId: string;
     styleMenuId: number;
     tags: Tag[];
+    pages: Page[];
 }

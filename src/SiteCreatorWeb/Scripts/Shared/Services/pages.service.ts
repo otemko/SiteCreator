@@ -10,18 +10,17 @@ import { Service } from './service'
 export class PageService {
 
     private url = 'api/Pages/';
-    constructor(private service: Service) {
+    constructor(private service: Service, private page: Page) {
     }
 
-    getPage(id: number) {
+    getPage(id: number): Promise<any> {
         console.log("service");
-        let page: Page = new Page();
-        this.service.get(this.url + id)
-            .then(res => {
-                Object.assign(page, res);
-                console.log(page);
-            });
-        return page;
+        return this.service.get(this.url + id)
+            .then(res => Object.assign(this.page, res ));
+    }
+
+    createPage(page: Page): Promise<number> {
+        return this.service.post(this.url, page);
     }
 
 

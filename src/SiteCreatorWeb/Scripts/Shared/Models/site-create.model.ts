@@ -6,6 +6,6 @@ export class SiteCreate {
     name: string;
     userId: string;
     styleMenuId: number;
-    oldTags: Tag[];
+    tags: Tag[] = [];
     newTags: string[];
 }

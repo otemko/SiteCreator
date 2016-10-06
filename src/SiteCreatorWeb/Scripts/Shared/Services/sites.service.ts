@@ -13,7 +13,7 @@ export class SiteService {
 
     allSites: Site[] = new Array();
 
-    private url =  'api/Sites/';
+    private url = 'api/Sites/';
 
     constructor(private service: Service) {
 
@@ -24,7 +24,7 @@ export class SiteService {
     }
 
     getSiteById(siteId: number): Promise<Site> {
-        return this.service.get(this.url+'siteId/'+siteId);
+        return this.service.get(this.url + 'siteId/' + siteId);
     }
 
     getSitesByUserId(userId: string): Promise<Site[]> {

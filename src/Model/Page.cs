@@ -7,6 +7,8 @@ namespace SiteCreator.Entities
     public class Page : WithId<int>
     {
         public virtual int Id { get; set; }
+        public string Name { get; set; }
+        public string Preview { get; set; }
         public virtual int Order { get; set; }
         public decimal Rating { get; set; }
         public int CountRated { get; set; }

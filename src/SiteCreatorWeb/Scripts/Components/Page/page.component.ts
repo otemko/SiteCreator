@@ -21,17 +21,16 @@ export class PageComponent {
     elements = [];
     public extraModules = [FroalaModule, DndModule.forRoot()];
 
-    constructor(private pageService: PageService, private route: ActivatedRoute) {
+    constructor(private pageService: PageService, private page: Page, private route: ActivatedRoute) {
         let id = +this.route.snapshot.params['id'];
         this.update(id);
     }
 
     update(id: number) {
-        let page = this.pageService.getPage(id);
-        if (!page) return;
-
-        if (page.content) {
-            this.elements = JSON.parse(page.content);
-        }
+        this.pageService.getPage(id).then(res => {
+            if (this.page && this.page.content) {
+                this.elements = JSON.parse(this.page.content);
+            }
+        });
     }
 }

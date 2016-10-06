@@ -26,6 +26,7 @@ import { AccountHeaderComponent } from "./Components/Account/AccountPanel/accoun
 import { LanguagePanelComponent } from "./Components/LanguagePanel/languagePanel.component";
 
 import { SiteCreateComponent } from "./Components/Sites/site-create.component";
+import { PageItemComponent } from "./Components/Site/page-item.component";
 
 import { PageEditorComponent } from './Components/Page/page.editor.component';
 import { PageComponent } from './Components/Page/page.component';
@@ -58,7 +59,8 @@ import { routing } from "./routes";
         SiteUserItemComponent,
         SiteCreateComponent,
         PageEditorComponent,
-        PageComponent
+        PageComponent,
+        PageItemComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy},

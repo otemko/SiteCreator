@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SiteCreator.BLL.Services
 {
-    public abstract class EntityService<T,Q> where T : class, WithId<Q>
+    public abstract class EntityService<T, Q> where T : class, WithId<Q>
     {
         IEntityRepository repository;
 
@@ -17,9 +17,10 @@ namespace SiteCreator.BLL.Services
             this.repository = repository;
         }
 
-        public virtual async Task CreateAsync(T entity)
+        public virtual async Task<Q> CreateAsync(T entity)
         {
-            await repository.CreateAsync<T>(entity);
+            return await repository.CreateAsync<T, Q>(entity);
+
         }
 
         public virtual async Task CreateRangeAsync(T[] entities)
@@ -29,17 +30,17 @@ namespace SiteCreator.BLL.Services
 
         public virtual async Task UpdateAsync(T entity)
         {
-            await repository.Update<T>(entity);
+            await repository.UpdateAsync<T>(entity);
         }
 
         public virtual async Task DeleteAsync(T entity)
         {
-            await repository.Delete<T>(entity);
+            await repository.DeleteAsync<T>(entity);
         }
 
         public virtual async Task DeleteRangeAsync(T[] entities)
         {
-            await repository.DeleteRange<T>(entities);
+            await repository.DeleteRangeAsync<T>(entities);
         }
         public virtual Task<IEnumerable<T>> GetAllAsync()
         {

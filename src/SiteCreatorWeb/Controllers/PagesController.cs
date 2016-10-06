@@ -9,6 +9,7 @@ using SiteCreator.Entities;
 using SiteCreator.Web.Model.PageController;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using SiteCreator.Web.Model.Shared;
 
 namespace SiteCreator.Web.Controllers
 {
@@ -44,12 +45,12 @@ namespace SiteCreator.Web.Controllers
         }
 
         [HttpPost]
-        public async Task PostPage(PageViewModel pageViewModel)
+        public async Task<int> PostPage([FromBody] PageViewModel pageViewModel)
         {
             if (!await CheckTheRights(pageViewModel.SiteId)) throw new UnauthorizedAccessException();
 
             var page = pageViewModel.CreateBllPage();
-            await pageService.CreateAsync(page);
+            return await pageService.CreateAsync(page);
         }
 
         private async Task<bool> CheckTheRights(int siteId)

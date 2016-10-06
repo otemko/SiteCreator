@@ -72,12 +72,10 @@ namespace SiteCreator.Web.Controllers
             var listResult = new List<SiteViewModel>();
 
             var sites = await siteService.GetSitesByTagId(tagId);
+            if (sites == null) return null;
 
             foreach (var site in sites)
-            {
-                var tags = site.TagSite.Select(t => t.Tag);
-                listResult.Add(new SiteViewModel(site, tags));
-            }
+                listResult.Add(new SiteViewModel(site));
 
             return listResult;
         }

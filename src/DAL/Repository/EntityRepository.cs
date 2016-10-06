@@ -19,10 +19,11 @@ namespace SiteCreator.DAL
         }
 
         #region CUD
-        public virtual async Task CreateAsync<T>(T entity) where T : class
+        public virtual async Task<Q> CreateAsync<T, Q>(T entity) where T : class, WithId<Q>
         {
             context.Add(entity);
             await context.SaveChangesAsync();
+            return entity.Id;
         }
 
         public virtual async Task CreateRangeAsync<T>(T[] entities) where T : class

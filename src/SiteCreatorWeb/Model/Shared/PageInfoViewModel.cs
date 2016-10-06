@@ -3,10 +3,11 @@ using SiteCreator.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
-namespace SiteCreator.Web.Model.PageController
+namespace SiteCreator.Web.Model.Shared
 {
-    public class PageViewModel
+    public class PageInfoViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -19,13 +20,11 @@ namespace SiteCreator.Web.Model.PageController
         public string SiteName { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
-        public string Content { get; set; }
 
-        public virtual List<CommentViewModel> Comments { get; set; }
 
-        public PageViewModel() { }
+        public PageInfoViewModel() { }
 
-        public PageViewModel(Page page)
+        public PageInfoViewModel(Page page)
         {
             Id = page.Id;
             Name = page.Name;
@@ -38,24 +37,7 @@ namespace SiteCreator.Web.Model.PageController
             SiteName = page.Site?.Name;
             UserId = page.Site?.UserId;
             UserName = page.Site?.User?.UserName;
-            Content = page.PageContent.Content;
-
-            Comments = new List<CommentViewModel>();
-            page.Comment.ToList().ForEach(p => Comments.Add(new CommentViewModel(p)));
         }
-
-        public Page CreateBllPage()
-        {
-            Page page = new Page()
-            {
-                Name = Name,
-                Preview = Preview,
-                Order = Order,
-                LastModififcation = DateTime.Now,
-                SiteId = SiteId,
-                PageContent = new PageContent { Content = Content },
-            };
-            return page;
-        }
+        
     }
 }

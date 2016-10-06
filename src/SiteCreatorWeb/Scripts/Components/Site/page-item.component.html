@@ -1,0 +1,17 @@
+<div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+        <a [routerLink]="['/page', page.id]">
+            <div class="text-center">
+                <i class="fa fa-picture-o fa-5x fa-fw"></i>                   
+                <h3>
+                    {{ page.name || "Unnamed" }}
+                </h3>
+            </div>
+        </a>
+        <p class="text-center">
+            <button [routerLink]="['/page-edit', page.id]" class="btn btn-default btn-sm">Edit</button>
+            <button (click)="delete(page.id)"  class="btn btn-warning btn-sm">Delete</button>          
+        </p>
+    </div>
+</div>
+  

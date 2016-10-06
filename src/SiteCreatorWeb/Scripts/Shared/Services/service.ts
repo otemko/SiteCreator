@@ -15,7 +15,7 @@ export class Service {
             this.http.get(url));
     }
 
-    post<T>(url: string, item: T): Promise<T> {
+    post(url: string, item): Promise<any> {
         let body = JSON.stringify(item);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers });
@@ -27,7 +27,7 @@ export class Service {
             this.http.delete(url));
     }
 
-    put<T>(url: string, item: T): Promise<T> {
+    put(url: string, item): Promise<any> {
         let body = JSON.stringify(item);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers });

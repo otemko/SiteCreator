@@ -18,11 +18,11 @@ import { TagService } from '../../Shared/Services/tag.service'
 })
 
 export class SiteCreateComponent {
-    site: SiteCreate;
+    site: SiteCreate = new SiteCreate();
     styleMenus: StyleMenu[];
     tags: Tag[];
 
-    tagNames: string[] = new Array();    
+    tagNames: string[] = new Array();
     filteredTags: any[];
     resultTag = "";
 
@@ -40,24 +40,13 @@ export class SiteCreateComponent {
         let id = +this.r.snapshot.params['id'];
 
         if (id) {
-            this.site = new SiteCreate();
-            this.siteService.getSiteById(id).then(site => {
-                this.site.name = site.name;
-                this.site.styleMenuId = site.styleMenuId;
-                this.site.id = site.id;
-                this.site.userId = site.userId;
-                this.site.dateCreated = site.dateCreated;
-
-                for (let i = 0; i < site.tags.length; i++) {
-                    this.tagsView.push(site.tags[i].name);
-                }
+            this.siteService.getSiteById(id).then(res => {
+                Object.assign(this.site, res);
+                this.site.tags.forEach(p => this.tagsView.push(p.name));
             });
             this.isUpdate = true;
         }
-        else {
-            this.site = new SiteCreate();
-        }           
-        
+
         this.styleMenuService.getStyleMenus().then(styleMenus => {
             this.styleMenus = styleMenus;
         });
@@ -65,22 +54,22 @@ export class SiteCreateComponent {
         this.tagService.getTags().then(tags => {
             this.tags = tags;
             for (let i = 0; i < this.tags.length; i++) {
-                this.tagNames.push(this.tags[i].name);                
-            }                  
-        });        
+                this.tagNames.push(this.tags[i].name);
+            }
+        });
     }
 
     onSubmit() {
 
         this.getTags();
-        this.site.oldTags = this.oldTags;
+        this.site.tags = this.oldTags;
         this.site.newTags = this.newTags;
 
         if (this.tagsView.length == 0) {
             let element = document.getElementById("invalid-tags");
             element.hidden = false;
         }
-        else {      
+        else {
 
             if (this.isUpdate) {
                 this.siteService.updateSite(this.site).then(resId => { console.log(resId); });
@@ -90,8 +79,8 @@ export class SiteCreateComponent {
                 this.site.dateCreated = this.getDate();
                 this.siteService.createSite(this.site).then(resId => { console.log(resId); });
             }
-            setTimeout(() => { this.route.navigateByUrl("/sites-user/" + this.account.id); }, 100);          
-            
+            setTimeout(() => { this.route.navigateByUrl("/sites-user/" + this.account.id); }, 100);
+
         }
     }
 
@@ -130,11 +119,11 @@ export class SiteCreateComponent {
             }
         }
     }
-    
+
     handleDropdownClick() {
         this.filteredTags = [];
-         setTimeout(() => {
-             this.filteredTags = this.tagNames;
+        setTimeout(() => {
+            this.filteredTags = this.tagNames;
         }, 100)
     }
 

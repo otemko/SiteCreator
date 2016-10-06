@@ -12,6 +12,8 @@ using SiteCreator.BLL.Services;
 using SiteCreator.DAL;
 using SiteCreator.BLL.IService;
 using System.Collections.Generic;
+using SiteCreator.DAL.IRepository;
+using SiteCreator.DAL.Repository;
 
 namespace SiteCreator.Web
 {
@@ -136,6 +138,7 @@ namespace SiteCreator.Web
             services.AddScoped<IPageService, PageService>();
 
             services.AddScoped<IEntityRepository, EntityRepository>();
+            services.AddScoped<ISiteRepository, SiteRepository>();
         }
     }
 }

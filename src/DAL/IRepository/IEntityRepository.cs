@@ -18,11 +18,11 @@ namespace SiteCreator.DAL
         Task<T> GetSingleAsync<T>(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties) where T : class;
         Task<T> GetSingleAsync<T, Q>(Q id) where T : class, WithId<Q>;
         
-        Task Create<T>(T entity) where T : class;
+        Task<Q> CreateAsync<T,Q>(T entity) where T : class, WithId<Q>;
         Task CreateRangeAsync<T>(T[] entities) where T : class;
-        Task Delete<T>(T entity) where T : class;
-        Task DeleteRange<T>(T[] entities) where T : class;
-        Task Update<T>(T entity) where T : class;
+        Task DeleteAsync<T>(T entity) where T : class;
+        Task DeleteRangeAsync<T>(T[] entities) where T : class;
+        Task UpdateAsync<T>(T entity) where T : class;
         
     }
 }

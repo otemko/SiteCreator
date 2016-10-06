@@ -1,4 +1,8 @@
-<h4>Your site<button class="btn btn-default" (click)="click()">clik</button></h4> 
+<button class="btn btn-success" (click)="save()"><i class="fa fa-save fa-fw"></i>
+<span *ngIf="id"> Save</span>
+<span *ngIf="!id"> Create</span>
+</button>
+<br/> 
 <div class="row">
     <div id="Site" class="col-sm-9">
         <div dnd-droppable (onDropSuccess)="addElement($event.dragData, elements)"
@@ -33,7 +37,7 @@
     </div>
 </div>
 
-<div class="row">
+<!--<div class="row">
     <div class="col-sm-9">
         <div class="panel panel-default">
             <div class="panel-heading">Your site</div>
@@ -46,6 +50,6 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 
