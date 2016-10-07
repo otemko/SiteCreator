@@ -48,6 +48,7 @@ export class SiteCreateComponent {
         if (id) {
             this.siteService.getSiteById(id).then(res => {
                 Object.assign(this.site, res);
+                console.log(this.site);
                 res.tags.forEach(p => this.tagsView.push(p.name));
             });
             this.isUpdate = true;
