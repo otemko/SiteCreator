@@ -39,6 +39,22 @@ export class PageEditorComponent {
         if (!this.id) this.newPage();
         else this.getPage();
 
+        this.options = {
+            placeholderText: 'Edit Your Content Here...',
+            charCounterCount: false,
+            toolbarInline: true,
+            disableRightClick: true,
+            toolbarVisibleWithoutSelection: true,
+            dragInline: false,
+            enter: $.FroalaEditor.ENTER_BR,
+            imageDefaultDisplay: 'inline',
+            pluginsEnabled: ['align', 'codeBeautifier', 'codeView', 'image', 'link', 'video', 'file',
+                'fontFamily', 'paragraphFormat', 'forms', 'imageManager', 'inlineStyle',
+                'lists', 'paragraphStyle',
+                'quote', 'table', 'url', 'save', 'entities', 'emoticons',
+                'draggable', 'colors'],
+        };
+
         this.availableElements.push({
             previous: `<button class="btn btn-default"><i class="fa fa-tint" aria-hidden="true"></i> Text</button>`,
             element: `<div *ngIf="editable" [froalaEditor]="options" [(froalaModel)]="content[0]"></div>
@@ -75,21 +91,8 @@ export class PageEditorComponent {
             }
         );
 
-        this.options = {
-                        placeholderText: 'Edit Your Content Here...',
-                        charCounterCount: false,
-                        toolbarInline: true,
-                        disableRightClick: true,
-                        toolbarVisibleWithoutSelection: true,
-                        dragInline: false,
-                        enter: $.FroalaEditor.ENTER_BR,
-                        imageDefaultDisplay: 'inline',
-                        pluginsEnabled: ['align', 'codeBeautifier', 'codeView', 'image', 'link', 'video', 'file',
-                         'fontFamily', 'paragraphFormat', 'forms', 'imageManager', 'inlineStyle',
-                        'lists', 'paragraphStyle',
-                        'quote', 'table', 'url', 'save', 'entities', 'emoticons',
-                        'draggable', 'colors'],
-                    };
+
+
     }
 
     addElement(data, elements) {
@@ -106,14 +109,9 @@ export class PageEditorComponent {
     }
 
     getPage() {
-        if (this.page.id == this.id) {
+        this.pageService.getPage(this.id).then(res => {
             this.parseContent();
-        }
-        else {
-            this.pageService.getPage(this.id).then(res => {
-                this.parseContent();
-            });
-        }
+        });
     }
 
     parseContent() {
