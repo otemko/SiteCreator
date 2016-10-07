@@ -33,6 +33,9 @@ import { PageComponent } from './Components/Page/page.component';
 
 import { SearchComponent } from './Components/Search/search.component'
 
+import { CommentComponent } from './Components/Comments/comments.component'
+import { CommentItemComponent } from './Components/Comments/comment-item.component'
+
 import { routing } from './routes';
 
 @NgModule({
@@ -63,7 +66,9 @@ import { routing } from './routes';
         SearchComponent,
         PageEditorComponent,
         PageComponent,
-        PageItemComponent
+        PageItemComponent,
+        CommentComponent,
+        CommentItemComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy},

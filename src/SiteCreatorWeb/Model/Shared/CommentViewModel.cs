@@ -12,6 +12,9 @@ namespace SiteCreator.Web.Model.PageController
         public string Content { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
+        public int PageId { get; set; }
+
+        public CommentViewModel() { }
 
         public CommentViewModel(Comment comment)
         {
@@ -19,6 +22,24 @@ namespace SiteCreator.Web.Model.PageController
             Content = comment.Content;
             UserId = comment.UserId;
             UserName = comment.User?.UserName;
+            PageId = comment.PageId;
         }
+
+        public Comment CreateBllComment()
+        {
+            return new Comment
+            {
+                Content = Content,
+                UserId = UserId,
+                PageId = PageId,
+            };
+        }
+
+        public Comment UpdateBllComment(Comment comment)
+        {
+            comment.Content = Content;
+            return comment;
+        }
+
     }
 }

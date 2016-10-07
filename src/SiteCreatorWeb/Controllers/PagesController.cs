@@ -20,7 +20,6 @@ namespace SiteCreator.Web.Controllers
         private IPageService pageService;
         private ISiteService siteService;
 
-
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
 
@@ -32,7 +31,6 @@ namespace SiteCreator.Web.Controllers
             this.pageService = pageService;
             this.siteService = siteService;
         }
-
 
         [HttpGet("{id}")]
         [AllowAnonymous]
@@ -54,18 +52,6 @@ namespace SiteCreator.Web.Controllers
             return Ok(await pageService.CreateAsync(page));
         }
 
-        private bool CheckTheRights(Site site)
-        {
-            if (User.IsInRole("Admin"))
-                return true;
-
-            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (site != null && site.UserId == userId)
-                return true;
-            
-            return false;
-        }
-
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPage(int id, [FromBody]PageViewModel pageViewModel)
         {
@@ -79,12 +65,6 @@ namespace SiteCreator.Web.Controllers
             return Ok();
         }
 
-        private bool CheckPageForUpdate(Page page, PageViewModel pageViewModel)
-        {
-            if (page != null && page.SiteId == pageViewModel.SiteId) return true;
-            return false;
-        }
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -93,6 +73,24 @@ namespace SiteCreator.Web.Controllers
 
             await pageService.DeleteAsync(page);
             return Ok();
+        }
+
+        private bool CheckTheRights(Site site)
+        {
+            if (User.IsInRole("Admin"))
+                return true;
+
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (site != null && site.UserId == userId)
+                return true;
+
+            return false;
+        }
+
+        private bool CheckPageForUpdate(Page page, PageViewModel pageViewModel)
+        {
+            if (page != null && page.SiteId == pageViewModel.SiteId) return true;
+            return false;
         }
     }
 }

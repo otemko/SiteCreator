@@ -47,6 +47,11 @@ export class PageEditorComponent {
                     placeholderText: 'Edit Your Content Here!',
                     charCounterCount: false,
                     toolbarInline: true,
+                    disableRightClick: true,
+                    toolbarVisibleWithoutSelection: true,
+                    dragInline: false,
+                    enter: $.FroalaEditor.ENTER_BR,
+                    imageDefaultDisplay: 'inline'
                 },
                 content: [""],
             }
@@ -76,6 +81,11 @@ export class PageEditorComponent {
                         placeholderText: 'Edit Your Content Here!',
                         charCounterCount: false,
                         toolbarInline: true,
+                        disableRightClick: true,
+                        toolbarVisibleWithoutSelection: true,
+                        dragInline: false,
+                        enter: $.FroalaEditor.ENTER_BR,
+                        imageDefaultDisplay: 'inline'
                     },
                     content: ["", "", ""],
                 },
@@ -135,6 +145,7 @@ export class PageEditorComponent {
     }
 
     saveChangesToDb() {
+        console.log(this.page);
         this.pageService.savePage(this.page).then(res => this.loaded())
             .catch(res => this.failloaded());
     }

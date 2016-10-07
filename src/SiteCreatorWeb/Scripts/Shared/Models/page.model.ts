@@ -7,4 +7,5 @@ export class Page {
     userName: string;
     siteId: number;
     siteName: number;
+    commentsEnabled: boolean;
 }

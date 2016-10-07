@@ -1,55 +1,57 @@
-﻿<div class="container">
-    <form (ngSubmit)="onSubmit()" >
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name"
-                   required
-                   [(ngModel)]="site.name" name="name"
-                   #name="ngModel">
-            <div [hidden]="name.valid || name.pristine">
-                Name is required
-            </div>
-        </div>
+﻿<div class="row">
+    <div class="col-sm-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">Your site</div>
+            <div class="panel-body">
+                <form (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" required [(ngModel)]="site.name" name="name" #name="ngModel">
+                        <div [hidden]="name.valid || name.pristine">
+                            Name is required
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            <label for="styleMenu">Style Menu</label>
-            <select class="form-control" id="styleMenu"
-                    required
-                    [(ngModel)]="site.styleMenuId" name="styleMenuId"
-                    #styleMenu="ngModel">
+                    <div class="form-group">
+                        <label for="styleMenu">Style Menu</label>
+                        <select class="form-control" id="styleMenu" required [(ngModel)]="site.styleMenuId" name="styleMenuId" #styleMenu="ngModel">
                 <option *ngFor="let styleMenu of styleMenus" [value]="styleMenu.id">{{styleMenu.name}}</option>
             </select>
-            <div [hidden]="styleMenu.valid || styleMenu.pristine">
-                Style Menu is required
+                        <div [hidden]="styleMenu.valid || styleMenu.pristine">
+                            Style Menu is required
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" *ngIf="tagsView">
+                        <div class="div-in-row" *ngFor="let tagView of tagsView">
+                            <div class="tag-cloud tag-cloud-info">{{tagView}} <i (click)="deleteTag(tagView)" class="fa fa-times"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <p-autoComplete #inputBox [(ngModel)]="resultTag" [ngModelOptions]="{standalone: true}" [suggestions]="filteredTags" (completeMethod)="filterTags($event)"
+                            [minLength]="1" placeholder="Chosse tag" [dropdown]="false" (onDropdownClick)="handleDropdownClick($event)"
+                            (keyup.enter)="addTag(); inputBox.value=''">
+                        </p-autoComplete>
+                        <i class="fa fa-plus-circle fa-lg fa-fw text-info" (click)="addTag(); inputBox.value=''"></i>
+                    </div>
+
+                    <div id="invalid-tags" hidden>
+                        One tag is required
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
             </div>
         </div>
-        
 
-        <div class="form-group" *ngIf="tagsView">
-            <div class="div-in-row" *ngFor="let tagView of tagsView">
-                <div class="tag-cloud tag-cloud-info" >{{tagView}} <i (click)="deleteTag(tagView)" class="fa fa-times" aria-hidden="true"></i></div>
+    </div>
+    <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">Sites</div>
+            <div class="panel-body">
             </div>
-        </div>       
-
-        <div class="form-group">
-            <p-autoComplete #inputBox
-                            [(ngModel)]="resultTag" [ngModelOptions]="{standalone: true}"
-                            [suggestions]="filteredTags"
-                            (completeMethod)="filterTags($event)"
-                            [minLength]="1"
-                            placeholder="Chosse tag"
-                            [dropdown]="true"
-                            (onDropdownClick)="handleDropdownClick($event)">
-            </p-autoComplete>
         </div>
-
-        <div id="invalid-tags" hidden>
-            One tag is required
-        </div>
-
-        <div class="form-group">
-            <button type="button" class="btn btn-default" (click)="addTag(); inputBox.value=''">Add tag</button>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>    
+    </div>
 </div>

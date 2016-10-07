@@ -9,6 +9,7 @@ import { Service } from './Shared/Services/service'
 import { AccountService } from './Shared/Services/account.service'
 import { SiteService } from './Shared/Services/sites.service'
 import { PageService } from './Shared/Services/pages.service'
+import { CommentService } from './Shared/Services/comments.service'
 
 
 
@@ -16,7 +17,7 @@ import { PageService } from './Shared/Services/pages.service'
     selector: 'my-app',
     templateUrl: './appScripts/app.component.html',
     styleUrls: ['./appScripts/app.component.css'],
-    providers: [Account, Page, Service, AccountService, SiteService, PageService],
+    providers: [Account, Page, Service, AccountService, SiteService, PageService, CommentService],
 })
 export class AppComponent {
 
