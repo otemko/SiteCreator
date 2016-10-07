@@ -20,6 +20,7 @@ namespace SiteCreator.Web.Model.Shared
         public string SiteName { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
+        public bool CommentsEnabled { get; set; }
 
 
         public PageInfoViewModel() { }
@@ -37,6 +38,7 @@ namespace SiteCreator.Web.Model.Shared
             SiteName = page.Site?.Name;
             UserId = page.Site?.UserId;
             UserName = page.Site?.User?.UserName;
+            CommentsEnabled = page.CommentsEnabled;
         }
         
     }

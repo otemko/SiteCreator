@@ -14,7 +14,6 @@ export class PageService {
     }
 
     getPage(id: number): Promise<any> {
-        console.log("service");
         return this.service.get(this.url + id)
             .then(res => Object.assign(this.page, res ));
     }
@@ -23,8 +22,11 @@ export class PageService {
         return this.service.post(this.url, page);
     }
 
+    savePage(page: Page): Promise<any> {
+        return this.service.put(this.url + page.id, page);
+    };
 
-
-    
-
+    deletePage(id: number): Promise<any> {
+        return this.service.delete(this.url + id);
+    }
 }

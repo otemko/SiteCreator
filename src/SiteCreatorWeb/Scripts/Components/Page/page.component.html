@@ -1,8 +1,23 @@
-<h4>Your site</h4>
 <div class="row">
+    <div class="col-sm-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">Navigation menu</div>
+            <div class="panel-body">
+            </div>
+        </div>
+    </div>
     <div id="Site" class="col-sm-9">
         <div class="panel panel-default">
-            <div class="panel-heading">Your site</div>
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-2 text-center">
+                        <i class="fa fa-picture-o fa-fw fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 col-sm-10">
+                        <h4>{{ page.name || "Unnamed" }}</h4>
+                    </div>
+                </div>
+            </div>
             <div class="panel-body">
                 <div *ngFor="let el of elements">
                     <DynamicComponent [componentTemplate]="el.element" [componentInputData]="el.inputData" [componentModules]="extraModules">
@@ -10,12 +25,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">Available items</div>
-            <div class="panel-body">
-            </div>
+        <div *ngIf="page.commentsEnabled">
+            <comments [pageId]="page.id"></comments>
         </div>
     </div>
 </div>

@@ -20,7 +20,7 @@ namespace SiteCreator.Web.Model.PageController
         public string UserId { get; set; }
         public string UserName { get; set; }
         public string Content { get; set; }
-
+        public bool CommentsEnabled { get; set; }
         public virtual List<CommentViewModel> Comments { get; set; }
 
         public PageViewModel() { }
@@ -39,9 +39,13 @@ namespace SiteCreator.Web.Model.PageController
             UserId = page.Site?.UserId;
             UserName = page.Site?.User?.UserName;
             Content = page.PageContent.Content;
+            CommentsEnabled = page.CommentsEnabled;
 
-            Comments = new List<CommentViewModel>();
-            page.Comment.ToList().ForEach(p => Comments.Add(new CommentViewModel(p)));
+            if (CommentsEnabled)
+            {
+                Comments = new List<CommentViewModel>();
+                page.Comment.ToList().ForEach(p => Comments.Add(new CommentViewModel(p)));
+            }
         }
 
         public Page CreateBllPage()
@@ -54,7 +58,20 @@ namespace SiteCreator.Web.Model.PageController
                 LastModififcation = DateTime.Now,
                 SiteId = SiteId,
                 PageContent = new PageContent { Content = Content },
+                CommentsEnabled = CommentsEnabled
             };
+            return page;
+        }
+
+        public Page UpdateBllPage(Page page)
+        {
+            page.Name = Name;
+            page.Preview = Preview;
+            page.Order = Order;
+            page.LastModififcation = DateTime.Now;
+            page.PageContent.Content = Content;
+            page.CommentsEnabled = CommentsEnabled;
+
             return page;
         }
     }

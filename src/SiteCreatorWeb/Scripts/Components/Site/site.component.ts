@@ -17,12 +17,14 @@ export class SiteComponent {
     site: Site = new Site();
 
     constructor(private siteService: SiteService, private pageService: PageService,
-        private activatedRoute: ActivatedRoute, private currentPage: Page, private route: Router) {
+            private activatedRoute: ActivatedRoute, private currentPage: Page, private route: Router) {
+        this.updateModel();
+    }
 
+    updateModel() {
         let id = +this.activatedRoute.snapshot.params['id'];
         this.siteService.getSiteById(id).then(res => {
             Object.assign(this.site, res)
-            console.log(this.site);
         });
     }
 
@@ -34,6 +36,10 @@ export class SiteComponent {
         let page = new Page();
         Object.assign(this.currentPage, page);
         this.currentPage.siteId = this.site.id;
+    }
+
+    onDelete(id: number) {
+        this.pageService.deletePage(id).then(res => this.updateModel());
     }
 
 }

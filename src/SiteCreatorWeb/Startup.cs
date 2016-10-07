@@ -137,6 +137,7 @@ namespace SiteCreator.Web
             services.AddScoped<IStyleMenuService, StyleMenuService>();
             services.AddScoped<ISearchService, SearchService>();
             services.AddScoped<IPageService, PageService>();
+            services.AddScoped<ICommentService, CommentService>();
 
             services.AddScoped<ISearchRepository, SearchRepository>();
             services.AddScoped<IEntityRepository, EntityRepository>();

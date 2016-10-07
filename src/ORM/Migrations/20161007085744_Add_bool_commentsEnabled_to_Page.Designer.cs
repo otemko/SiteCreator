@@ -8,9 +8,10 @@ using SiteCreator.ORM;
 namespace ORM.Migrations
 {
     [DbContext(typeof(SiteCreatorDbContext))]
-    partial class SiteCreatorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161007085744_Add_bool_commentsEnabled_to_Page")]
+    partial class Add_bool_commentsEnabled_to_Page
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")

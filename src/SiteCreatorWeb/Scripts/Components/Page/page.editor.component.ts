@@ -23,6 +23,9 @@ export class PageEditorComponent {
     elements = [];
     trash = [];
     id;
+    loading: boolean = false;
+    failload: boolean = false;
+    options: any;
 
     editable: boolean = true;
 
@@ -36,25 +39,34 @@ export class PageEditorComponent {
         if (!this.id) this.newPage();
         else this.getPage();
 
+        this.options = {
+            placeholderText: 'Edit Your Content Here...',
+            charCounterCount: false,
+            toolbarInline: true,
+            disableRightClick: true,
+            toolbarVisibleWithoutSelection: true,
+            dragInline: false,
+            enter: $.FroalaEditor.ENTER_BR,
+            imageDefaultDisplay: 'inline',
+            pluginsEnabled: ['align', 'codeBeautifier', 'codeView', 'image', 'link', 'video', 'file',
+                'fontFamily', 'paragraphFormat', 'forms', 'imageManager', 'inlineStyle',
+                'lists', 'paragraphStyle',
+                'quote', 'table', 'url', 'save', 'entities', 'emoticons',
+                'draggable', 'colors'],
+        };
+
         this.availableElements.push({
-            previous: `<div class="text-center"><button class="btn btn-default">
-                <i class="fa fa-tint" aria-hidden="true"></i> text</button></div>`,
+            previous: `<button class="btn btn-default"><i class="fa fa-tint" aria-hidden="true"></i> Text</button>`,
             element: `<div *ngIf="editable" [froalaEditor]="options" [(froalaModel)]="content[0]"></div>
                         <div *ngIf="!editable" [froalaView]="content[0]"></div>`,
             inputData: {
-                options: {
-                    placeholderText: 'Edit Your Content Here!',
-                    charCounterCount: false,
-                    toolbarInline: true,
-                },
+                options: this.options,
                 content: [""],
             }
         },
             {
-                previous: `<div class="text-center"><button class="btn btn-default">
-                    <i class="fa fa-tint" aria-hidden="true"></i> panel</button></div>`,
-                element: `
-                            <div class="panel panel-default">
+                previous: `<button class="btn btn-default"><i class="fa fa-tint" aria-hidden="true"></i> Panel</button>`,
+                element: `<div class="panel panel-default">
                                 <div class="panel-heading">
                                     <div *ngIf="editable" [froalaEditor]="options" [(froalaModel)]="content[0]"></div>
                                         <div *ngIf="!editable" [froalaView]="content[0]"></div>
@@ -73,15 +85,14 @@ export class PageEditorComponent {
                             </div>
                         </div>`,
                 inputData: {
-                    options: {
-                        placeholderText: 'Edit Your Content Here!',
-                        charCounterCount: false,
-                        toolbarInline: true,
-                    },
+                    options: this.options,
                     content: ["", "", ""],
                 },
             }
         );
+
+
+
     }
 
     addElement(data, elements) {
@@ -98,60 +109,57 @@ export class PageEditorComponent {
     }
 
     getPage() {
-        if (this.page.id == this.id) {
+        this.pageService.getPage(this.id).then(res => {
             this.parseContent();
-        }
-        else {
-            this.pageService.getPage(this.id).then(res => {
-                this.parseContent();
-            });
-        }
+        });
     }
 
     parseContent() {
         if (this.page.content) {
             this.elements = JSON.parse(this.page.content);
-            this.editOn();
-            console.log(this.page.content);
+            this.elements.forEach(p => p.inputData.options = this.options);
+            this.changeEditable(true);
         }
     }
 
-    editOn() {
-        this.elements.forEach(p => p.inputData.editable = true);
-        this.editable = true;
+    changeEditable(value: boolean) {
+        this.elements.forEach(p => p.inputData.editable = value);
+        this.editable = value;
     }
-
-    editOff() {
-        this.elements.forEach(p => p.inputData.editable = false);
-        this.editable = false;
-    }
-
 
     save() {
-        if (!this.id) this.create();
-        else this.saveChanges();
-    }
-
-    create() {
-        if (this.page.siteId == 0) {
-            console.log("Error. Need site Id");
-            return;
-        }
+        if (this.loading) return;
+        this.loading = true;
         this.setContent();
-        console.log(this.page);
-        this.pageService.createPage(this.page).then(res => {
-            console.log(res);
-            this.id = res;
-        });
+        if (!this.id) this.createPage();
+        else this.saveChangesToDb();
     }
 
-    saveChanges() {
+    createPage() {
+        this.pageService.createPage(this.page).then(res => {
+            this.id = res;
+            this.loaded();
+        }).catch(res => this.failloaded());
+    }
 
+    saveChangesToDb() {
+        console.log(this.page);
+        this.pageService.savePage(this.page).then(res => this.loaded())
+            .catch(res => this.failloaded());
+    }
+
+    loaded() {
+        this.loading = false;
+        this.failload = false;
+    }
+
+    failloaded() {
+        this.loading = false;
+        this.failload = true;
     }
 
     setContent() {
         if (this.elements) {
-            console.log(this.page);
             let content = [];
             let elements = JSON.parse(JSON.stringify(this.elements));
 

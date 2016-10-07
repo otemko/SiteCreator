@@ -10,29 +10,28 @@
             <a class="navbar-brand" [routerLink]="['/home']"><i class="fa fa-diamond fa-fw"></i>&nbsp;Designing</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav ">
+            <ul class="nav navbar-nav">
                 <li>
-                    <a [routerLink]="['/sites']"><i class="fa fa-sitemap fa-fw"></i>&nbsp;Sites</a>
+                    <a [routerLink]="['/sites']"><i class="fa fa-sitemap fa-fw"></i>&nbsp;<span class="hidden-sm">&nbsp;Sites</span></a>
                 </li>
                 <li>
-                    <a [routerLink]="['/users']"><i class="fa fa-users fa-fw"></i>&nbsp;Users</a>
+                    <a [routerLink]="['/users']"><i class="fa fa-users fa-fw"></i>&nbsp;<span class="hidden-sm">&nbsp;Users</span></a>
                 </li>
                 <li>
-                    <a [routerLink]="['/about']"><i class="fa fa-info fa-fw"></i>&nbsp;About</a>
+                    <a [routerLink]="['/about']"><i class="fa fa-info fa-fw"></i>&nbsp;<span class="hidden-sm">&nbsp;About</span></a>
                 </li>
-                <li>
-                    <div class="form-inline">
-                        <input class="form-control" 
+                <li style="margin-top: -5px; margin-bottom: -5px">
+                    <a class="form-inline">
+                        <input style="font-size: 12px; height: 30px" class="form-control" 
                                type="text" 
                                #inputBox
                                placeholder="Search"
                                [(ngModel)]="valueSearch" [ngModelOptions]="{standalone: true}"
                                (keyup.enter) ="search()">
-                        <i class="fa fa-search" (click)="search(); inputBox.value=''" style="cursor: pointer" aria-hidden="true"></i>
-                    </div>
-                </li>
-                <li>
-                    <a [routerLink]="['/page-edit']"><i class="fa fa-edit fa-fw"></i>&nbsp;Edit Page</a>
+                        <span class="hidden-sm">&nbsp;
+                            <i class="fa fa-search" (click)="search(); inputBox.value=''" style="cursor: pointer"></i>
+                        </span>
+                    </a>
                 </li>
             </ul>
 
