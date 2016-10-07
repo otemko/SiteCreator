@@ -29,6 +29,15 @@ export class PageEditorComponent {
 
     editable: boolean = true;
 
+    public nameModel = { innerHTML: this.page.name || "Unnamed" };
+    public previewModel = {
+        src: this.page.previev || 'http://www.iconarchive.com/download/i94287/bokehlicia/captiva/browser-web.ico',
+    };
+
+    public previewEditor = {
+        	imageEditButtons: ['imageReplace', '|', '-', 'imageStyle']
+    };
+
     public extraModules = [FroalaModule, DndModule.forRoot()];
 
     constructor(private account: Account, private route: ActivatedRoute,
@@ -160,6 +169,7 @@ export class PageEditorComponent {
 
     setContent() {
         if (this.elements) {
+            this.page.name = this.nameModel.innerHTML;
             let content = [];
             let elements = JSON.parse(JSON.stringify(this.elements));
 

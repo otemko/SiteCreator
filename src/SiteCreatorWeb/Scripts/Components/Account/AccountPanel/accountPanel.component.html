@@ -8,10 +8,10 @@
         </a>
         <ul *ngIf="account.userName" class="dropdown-menu">
             <li>
-                <a [routerLink]="">&nbsp;<span class="hidden-sm"><i class="fa fa-user-md fa-fw"></i>&nbsp;Accout</span></a>
+                <a [routerLink]=""><i class="fa fa-user-md fa-fw"></i>&nbsp;Accout</a>
             </li>
             <li>
-                <a [routerLink]="['/sites-user', account.id]">&nbsp;<span class="hidden-sm"><i class="fa fa-book"></i>&nbsp;My sites</span></a>
+                <a [routerLink]="['/sites-user', account.id]"><i class="fa fa-book"></i>&nbsp;My sites</a>
             </li>
             <li class="divider"></li>
             <li>
