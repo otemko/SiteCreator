@@ -152,8 +152,7 @@ namespace SiteCreator.Web.Controllers
 
             return 0;
         }
-
-        // PUT api/values/5
+        
         [HttpPut]
         [Route("api/[controller]")]
         public async Task<int> Put([FromBody]CreateSiteViewModel createSite)

@@ -10,20 +10,22 @@ import { AccountService } from './Shared/Services/account.service'
 import { SiteService } from './Shared/Services/sites.service'
 import { PageService } from './Shared/Services/pages.service'
 
-
+import { GlobalService } from './Shared/Services/global.service'
 
 @Component({
     selector: 'my-app',
     templateUrl: './appScripts/app.component.html',
     styleUrls: ['./appScripts/app.component.css'],
-    providers: [Account, Page, Service, AccountService, SiteService, PageService],
+    providers: [Account, Page, Service, AccountService, SiteService, PageService, GlobalService],
 })
 export class AppComponent {
 
     valueSearch: string;
 
-    constructor(public location: Location, private accountService: AccountService,
+    constructor(public location: Location,
+        private accountService: AccountService,
         private route: Router) { 
+
             this.accountService.getAccountInfo();
     }
 

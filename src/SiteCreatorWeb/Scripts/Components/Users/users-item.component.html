@@ -1,0 +1,26 @@
+﻿<div class="row">
+    <div class="col-md-2 text-center">
+        <i class="fa fa-user fa-5x fa-fw"></i>
+    </div>
+    <div class="col-md-10">
+        {{user.userName}}
+    </div>
+
+    <div *ngIf="account.role == 'admin'">
+        <button *ngIf="user.isLockoutEnabled == true"
+                (click)="lockout(user.isLockoutEnabled)"
+                class="btn btn-primary">
+            Lockout Disabled
+        </button>
+        <button *ngIf="user.isLockoutEnabled == false"
+                (click)="lockout(user.isLockoutEnabled)"
+                class="btn btn-primary">
+            Lockout Ebabled
+        </button>
+        <button (click)="delete(user.id)"
+                class="btn btn-danger">
+            Delete
+        </button>
+    </div>
+
+</div>

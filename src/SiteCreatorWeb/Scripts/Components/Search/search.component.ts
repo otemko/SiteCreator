@@ -23,7 +23,6 @@ export class SearchComponent {
         let id = "" + this.route.snapshot.params['id'];
         this.searchService.getSearchResultByTerm(id).then(res => {
             this.sr = res;
-            console.log(this.sr);
         });        
     }
 }

@@ -13,6 +13,7 @@ namespace SiteCreator.Web.Model
         public int LanguageId { get; set; }
         public int StyleId { get; set; }
         public string Role { get; set; }
+        public bool IsLockoutEnabled { get; set; }
 
         public UserInfoViewModel(User user, string role)
         {
@@ -21,6 +22,7 @@ namespace SiteCreator.Web.Model
             LanguageId = user.LanguageId;
             StyleId = user.StyleId;
             Role = role;
+            IsLockoutEnabled = user.LockoutEnabled;
         }
     }
 }

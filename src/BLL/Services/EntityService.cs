@@ -33,6 +33,11 @@ namespace SiteCreator.BLL.Services
             await repository.UpdateAsync<T>(entity);
         }
 
+        public virtual async Task UpdateRangeAsync(T[] entities)
+        {
+            await repository.UpdateRangeAsync<T>(entities);
+        }
+
         public virtual async Task DeleteAsync(T entity)
         {
             await repository.DeleteAsync<T>(entity);

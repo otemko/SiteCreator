@@ -1,0 +1,10 @@
+<div *ngIf="users">
+    <div class="list-group">
+        <div class="list-group-item" *ngFor="let user of users">
+            <users-item [user]="user"></users-item>
+        </div>
+    </div>
+    <button *ngIf="account.role == 'admin' && users.length != 0" (click)="save()" class="btn btn-primary">
+        Save
+    </button>
+</div>

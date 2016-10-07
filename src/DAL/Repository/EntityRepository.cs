@@ -38,6 +38,12 @@ namespace SiteCreator.DAL
             await context.SaveChangesAsync();
         }
 
+        public virtual async Task UpdateRangeAsync<T>(T[] entities) where T : class
+        {
+            context.UpdateRange(entities);
+            await context.SaveChangesAsync();
+        }
+
         public virtual async Task DeleteAsync<T>(T entity) where T : class
         {
             context.Remove(entity);
@@ -115,6 +121,7 @@ namespace SiteCreator.DAL
             return await context.Set<T>()
                 .Where(predicate).FirstOrDefaultAsync();
         }
+
         #endregion
     }
 }

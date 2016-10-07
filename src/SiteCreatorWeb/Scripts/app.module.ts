@@ -21,6 +21,9 @@ import { SitesUserComponent } from "./Components/Sites/sites-user.component";
 import { SiteUserItemComponent } from "./Components/Sites/site-user-item.component";
 
 import { UsersComponent } from "./Components/Users/users.component";
+import { UsersItemComponent } from "./Components/Users/users-item.component";
+
+
 import { AboutComponent } from "./Components/About/about.component";
 import { AccountHeaderComponent } from "./Components/Account/AccountPanel/accountPanel.component";
 import { LanguagePanelComponent } from "./Components/LanguagePanel/languagePanel.component";
@@ -53,6 +56,7 @@ import { routing } from './routes';
         SiteComponent,
         SitesComponent,
         UsersComponent,
+        UsersItemComponent,
         AboutComponent,
         SiteItemComponent,
         AccountHeaderComponent,
@@ -68,6 +72,6 @@ import { routing } from './routes';
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy},
     ],
-    bootstrap: [ AppComponent],
+    bootstrap: [AppComponent],
 })
 export class AppModule { }

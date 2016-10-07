@@ -23,6 +23,7 @@ namespace SiteCreator.DAL
         Task DeleteAsync<T>(T entity) where T : class;
         Task DeleteRangeAsync<T>(T[] entities) where T : class;
         Task UpdateAsync<T>(T entity) where T : class;
-        
+        Task UpdateRangeAsync<T>(T[] entities) where T : class;
+
     }
 }

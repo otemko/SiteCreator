@@ -39,9 +39,9 @@ namespace SiteCreator.Web.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await userservice.GetSingleAsync(userId);
 
-            var role = await userManager.GetRolesAsync(user);
+            var roles = await userManager.GetRolesAsync(user);
 
-            return new UserInfoViewModel(user, role[0]);
+            return new UserInfoViewModel(user, roles[0]);
         }
     }
 }

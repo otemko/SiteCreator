@@ -10,6 +10,7 @@ namespace SiteCreator.BLL.IService
         Task<Q> CreateAsync(T entity);
         Task CreateRangeAsync(T[] entities);
         Task UpdateAsync(T entity);
+        Task UpdateRangeAsync(T[] entities);
         Task DeleteAsync(T entity);
         Task DeleteRangeAsync(T[] entities);
         Task<IEnumerable<T>> GetAllAsync();

@@ -6,6 +6,7 @@ import { Account } from '../../Shared/Models/account.model'
 import { SiteService } from '../../Shared/Services/sites.service'
 import { SitesUserComponent } from './sites-user.component'
 
+import { GlobalService } from '../../Shared/Services/global.service'
 
 @Component({
     selector: 'site-user-item',
@@ -16,8 +17,11 @@ import { SitesUserComponent } from './sites-user.component'
 export class SiteUserItemComponent {
     @Input() site: Site;
 
-    constructor(private suc: SitesUserComponent, private siteService: SiteService, private account: Account,
-        private route: Router)
+    constructor(private suc: SitesUserComponent,
+        private siteService: SiteService,
+        private account: Account,
+        private route: Router,
+        private gs: GlobalService)
     {
     }
 
@@ -36,6 +40,6 @@ export class SiteUserItemComponent {
 
     edit(id: number): void {
         this.route.navigate(['/site-create', id]);
-        this.suc.update();
+        this.gs.prevUrl = this.route.url;
     }
 }

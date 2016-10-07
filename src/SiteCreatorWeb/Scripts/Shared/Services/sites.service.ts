@@ -43,7 +43,7 @@ export class SiteService {
         return this.service.post(this.url, newSite);
     }
 
-    updateSite(site: SiteCreate): Promise<SiteCreate> {
+    updateSite(site: SiteCreate): Promise<number> {
         return this.service.put(this.url, site);
     }
 }

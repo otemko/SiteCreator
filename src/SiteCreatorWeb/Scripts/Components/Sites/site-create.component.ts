@@ -10,6 +10,8 @@ import { SiteService } from '../../Shared/Services/sites.service'
 import { StyleMenuService } from '../../Shared/Services/style-menu.service'
 import { TagService } from '../../Shared/Services/tag.service'
 
+import { GlobalService } from '../../Shared/Services/global.service'
+
 @Component({
     selector: 'site-create',
     styleUrls: ['./appScripts/Components/Sites/site-create.component.css'],
@@ -33,9 +35,13 @@ export class SiteCreateComponent {
 
     isUpdate = false;
 
-    constructor(private siteService: SiteService, private styleMenuService: StyleMenuService,
-        private route: Router, private tagService: TagService, private account: Account,
-        private r: ActivatedRoute) {
+    constructor(private siteService: SiteService,
+        private styleMenuService: StyleMenuService,
+        private route: Router,
+        private tagService: TagService,
+        private account: Account,
+        private r: ActivatedRoute,
+        private gs: GlobalService) {
 
         let id = +this.r.snapshot.params['id'];
 
@@ -73,8 +79,8 @@ export class SiteCreateComponent {
 
             if (this.isUpdate) {
                 this.siteService.updateSite(this.site).then(resId => {
-                    if (resId == this.site) {
-                        console.log(resId);
+                    if (resId == this.site.id) {
+                        this.route.navigate([this.gs.prevUrl]);
                     }
                 });
             }

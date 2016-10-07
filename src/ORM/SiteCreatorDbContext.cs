@@ -22,7 +22,7 @@ namespace SiteCreator.ORM
         public SiteCreatorDbContext(DbContextOptions<SiteCreatorDbContext> options)
             : base(options)
         {
-        }
-        
+            
+        }        
     }
 }
