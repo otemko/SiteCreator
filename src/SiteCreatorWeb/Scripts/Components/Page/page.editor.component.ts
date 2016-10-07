@@ -25,6 +25,7 @@ export class PageEditorComponent {
     id;
     loading: boolean = false;
     failload: boolean = false;
+    options: any;
 
     editable: boolean = true;
 
@@ -43,16 +44,7 @@ export class PageEditorComponent {
             element: `<div *ngIf="editable" [froalaEditor]="options" [(froalaModel)]="content[0]"></div>
                         <div *ngIf="!editable" [froalaView]="content[0]"></div>`,
             inputData: {
-                options: {
-                    placeholderText: 'Edit Your Content Here!',
-                    charCounterCount: false,
-                    toolbarInline: true,
-                    disableRightClick: true,
-                    toolbarVisibleWithoutSelection: true,
-                    dragInline: false,
-                    enter: $.FroalaEditor.ENTER_BR,
-                    imageDefaultDisplay: 'inline'
-                },
+                options: this.options,
                 content: [""],
             }
         },
@@ -77,20 +69,27 @@ export class PageEditorComponent {
                             </div>
                         </div>`,
                 inputData: {
-                    options: {
-                        placeholderText: 'Edit Your Content Here!',
+                    options: this.options,
+                    content: ["", "", ""],
+                },
+            }
+        );
+
+        this.options = {
+                        placeholderText: 'Edit Your Content Here...',
                         charCounterCount: false,
                         toolbarInline: true,
                         disableRightClick: true,
                         toolbarVisibleWithoutSelection: true,
                         dragInline: false,
                         enter: $.FroalaEditor.ENTER_BR,
-                        imageDefaultDisplay: 'inline'
-                    },
-                    content: ["", "", ""],
-                },
-            }
-        );
+                        imageDefaultDisplay: 'inline',
+                        pluginsEnabled: ['align', 'codeBeautifier', 'codeView', 'image', 'link', 'video', 'file',
+                         'fontFamily', 'paragraphFormat', 'forms', 'imageManager', 'inlineStyle',
+                        'lists', 'paragraphStyle',
+                        'quote', 'table', 'url', 'save', 'entities', 'emoticons',
+                        'draggable', 'colors'],
+                    };
     }
 
     addElement(data, elements) {
@@ -120,6 +119,7 @@ export class PageEditorComponent {
     parseContent() {
         if (this.page.content) {
             this.elements = JSON.parse(this.page.content);
+            this.elements.forEach(p => p.inputData.options = this.options);
             this.changeEditable(true);
         }
     }

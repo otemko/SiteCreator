@@ -27,9 +27,10 @@ export class CommentItemComponent {
         toolbarInline: true,
         disableRightClick: true,
         toolbarVisibleWithoutSelection: true,
-        dragInline: false,
         enter: $.FroalaEditor.ENTER_BR,
-        imageDefaultDisplay: 'inline'
+        imageDefaultDisplay: 'inline',
+        heightMax: 500,
+        pluginsEnabled: ['align', 'link', 'file', 'lists', 'emoticons', 'draggable'],
     };
     oldContent = "";
     

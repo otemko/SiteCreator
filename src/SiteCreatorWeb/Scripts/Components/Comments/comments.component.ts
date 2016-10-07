@@ -36,7 +36,7 @@ export class CommentComponent implements OnInit {
         this.commentsService.getComments(this.pageId).then(res => {
             if (res) {
                 this.comments = [];
-                Object.assign(this.comments, res);
+                Object.assign(this.comments, res.reverse());
             }
         });
     }
