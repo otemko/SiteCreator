@@ -43,7 +43,8 @@ export class HomeComponent {
 
     // Sample 5 model
     public imgModel: Object = {
-        src: 'http://weknowyourdreams.com/images/stars/stars-05.jpg'
+        src: 'http://www.iconarchive.com/download/i94287/bokehlicia/captiva/browser-web.ico',
+        imageResize: false
     };
 
     // Sample 6 model
