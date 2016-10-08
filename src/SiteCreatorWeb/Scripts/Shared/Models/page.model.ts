@@ -1,11 +1,25 @@
 export class Page {
     id: number;
     name: string;
-    previev: string;
+    preview: string;
+    elements: string;
     content: string;
     userId: string;
     userName: string;
     siteId: number;
-    siteName: number;
+    siteName: string;
     commentsEnabled: boolean;
+
+    constructor() {
+        this.id = 0;
+        this.siteId = 0;
+        this.userId = "";
+        this.userName = "";
+        this.siteName = "";
+        this.commentsEnabled = true;
+        this.content = "";
+        this.elements = "";
+        this.preview = "";
+        this.name = "";
+    }
 }

@@ -9,6 +9,7 @@ namespace SiteCreator.Model
     {
         public int Id { get; set; }
         public string Content { get; set; }
+        public string Elements { get; set; }
         public int PageId { get; set; }
     }
 }

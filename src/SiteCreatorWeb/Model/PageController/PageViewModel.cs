@@ -20,6 +20,7 @@ namespace SiteCreator.Web.Model.PageController
         public string UserId { get; set; }
         public string UserName { get; set; }
         public string Content { get; set; }
+        public string Elements { get; set; }
         public bool CommentsEnabled { get; set; }
         public virtual List<CommentViewModel> Comments { get; set; }
 
@@ -39,6 +40,7 @@ namespace SiteCreator.Web.Model.PageController
             UserId = page.Site?.UserId;
             UserName = page.Site?.User?.UserName;
             Content = page.PageContent.Content;
+            Elements = page.PageContent.Elements;
             CommentsEnabled = page.CommentsEnabled;
 
             if (CommentsEnabled)
@@ -57,7 +59,7 @@ namespace SiteCreator.Web.Model.PageController
                 Order = Order,
                 LastModififcation = DateTime.Now,
                 SiteId = SiteId,
-                PageContent = new PageContent { Content = Content },
+                PageContent = new PageContent { Content = Content, Elements = Elements },
                 CommentsEnabled = CommentsEnabled
             };
             return page;
@@ -70,6 +72,7 @@ namespace SiteCreator.Web.Model.PageController
             page.Order = Order;
             page.LastModififcation = DateTime.Now;
             page.PageContent.Content = Content;
+            page.PageContent.Elements = Elements;
             page.CommentsEnabled = CommentsEnabled;
 
             return page;

@@ -29,7 +29,7 @@ export class PageComponent {
     update(id: number) {
         this.pageService.getPage(id).then(res => {
             if (this.page && this.page.content) {
-                this.elements = JSON.parse(this.page.content);
+                this.elements = this.pageService.parseContentFromDb(null);
             }
         });
     }

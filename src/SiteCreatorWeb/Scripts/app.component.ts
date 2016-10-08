@@ -14,6 +14,9 @@ import { CommentService } from './Shared/Services/comments.service'
 import { Language } from './Shared/Models/language.model'
 import { LanguageService } from './Shared/Services/language.service'
 
+import { Elements } from './Shared/Models/elements.model'
+import { ElementService } from './Shared/Services/elements.service'
+
 import { GlobalService } from './Shared/Services/global.service'
 
 @Component({
@@ -21,7 +24,7 @@ import { GlobalService } from './Shared/Services/global.service'
     templateUrl: './appScripts/app.component.html',
     styleUrls: ['./appScripts/app.component.css'],
     providers: [Account, Page, Service, AccountService, SiteService, PageService, GlobalService, CommentService,
-                Language, LanguageService],
+                Language, LanguageService, Elements, ElementService],
 })
 export class AppComponent {
 
@@ -32,7 +35,6 @@ export class AppComponent {
         private languageService: LanguageService,
         private l: Language,
         private route: Router) { 
-
             this.accountService.getAccountInfo();
             this.languageService.getLanguage();
     }

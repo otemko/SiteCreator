@@ -36,6 +36,7 @@ export class SiteComponent {
         let page = new Page();
         Object.assign(this.currentPage, page);
         this.currentPage.siteId = this.site.id;
+        this.route.navigate(['/page-edit']);
     }
 
     onDelete(id: number) {
