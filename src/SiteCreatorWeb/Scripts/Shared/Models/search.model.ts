@@ -1,10 +1,10 @@
-﻿import { SearchTag } from './searchTag.model'
+﻿import { SearchPage } from './searchPage.model'
 import { SearchUser } from './searchUser.model'
 import { SearchSite } from './searchSite.model'
 
 
 export class SearchResult {
     searchSites: SearchSite[]
-    searchTags: SearchTag[];
+    searchPages: SearchPage[];
     searchUsers: SearchUser[];
 }

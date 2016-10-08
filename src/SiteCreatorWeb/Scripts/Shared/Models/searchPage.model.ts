@@ -1,4 +1,4 @@
-﻿export class SearchTag {
+﻿export class SearchPage {
     id: number;
     name: string;
 }
