@@ -11,13 +11,17 @@ import { SiteService } from './Shared/Services/sites.service'
 import { PageService } from './Shared/Services/pages.service'
 import { CommentService } from './Shared/Services/comments.service'
 
+import { Language } from './Shared/Models/language.model'
+import { LanguageService } from './Shared/Services/language.service'
+
 import { GlobalService } from './Shared/Services/global.service'
 
 @Component({
     selector: 'my-app',
     templateUrl: './appScripts/app.component.html',
     styleUrls: ['./appScripts/app.component.css'],
-    providers: [Account, Page, Service, AccountService, SiteService, PageService, GlobalService, CommentService],
+    providers: [Account, Page, Service, AccountService, SiteService, PageService, GlobalService, CommentService,
+                Language, LanguageService],
 })
 export class AppComponent {
 
@@ -25,9 +29,12 @@ export class AppComponent {
 
     constructor(public location: Location,
         private accountService: AccountService,
+        private languageService: LanguageService,
+        private l: Language,
         private route: Router) { 
 
             this.accountService.getAccountInfo();
+            this.languageService.getLanguage();
     }
 
     search()

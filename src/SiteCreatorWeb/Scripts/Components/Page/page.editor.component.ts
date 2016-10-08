@@ -29,13 +29,11 @@ export class PageEditorComponent {
 
     editable: boolean = true;
 
-    public nameModel = { innerHTML: this.page.name || "Unnamed" };
-    public previewModel = {
-        src: this.page.previev || 'http://www.iconarchive.com/download/i94287/bokehlicia/captiva/browser-web.ico',
-    };
+    public nameModel: any = { };
+    public previewModel: any = { };
 
     public previewEditor = {
-        	imageEditButtons: ['imageReplace', '|', '-', 'imageStyle']
+        	imageEditButtons: ['imageReplace', 'imageStyle']
     };
 
     public extraModules = [FroalaModule, DndModule.forRoot()];
@@ -120,6 +118,10 @@ export class PageEditorComponent {
     getPage() {
         this.pageService.getPage(this.id).then(res => {
             this.parseContent();
+            this.nameModel = { innerHTML: this.page.name || "Unnamed" };
+            this.previewModel = {
+                src: this.page.previev || 'http://www.iconarchive.com/download/i94287/bokehlicia/captiva/browser-web.ico',
+            };
         });
     }
 
@@ -178,7 +180,6 @@ export class PageEditorComponent {
                 obj.inputData.editable = null;
                 content.push(obj);
             });
-
             this.page.content = JSON.stringify(content);
         }
     }

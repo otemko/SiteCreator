@@ -14,6 +14,7 @@ using SiteCreator.BLL.IService;
 using System.Collections.Generic;
 using SiteCreator.DAL.IRepository;
 using SiteCreator.DAL.Repository;
+using Microsoft.AspNetCore.Localization;
 
 namespace SiteCreator.Web
 {
@@ -82,6 +83,7 @@ namespace SiteCreator.Web
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseRequestLocalization();
 
             app.UseIdentity();
 

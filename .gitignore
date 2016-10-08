@@ -3,7 +3,7 @@
 **/wwwroot/lib
 **/wwwroot/appScripts
 **/typings/
-**/appsettings.json
+
 
 # User-specific files
 *.suo
@@ -206,6 +206,7 @@ UpgradeLog*.htm
 # SQL Server files
 *.mdf
 *.ldf
+**/*settings.json
 
 # Business Intelligence projects
 *.rdl.data
