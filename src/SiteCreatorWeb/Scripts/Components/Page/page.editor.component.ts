@@ -182,7 +182,6 @@ export class PageEditorComponent {
 
     setContent() {
         if (this.elements) {
-            if (!this.nameModel.innerHtml) this.setPageName();
             this.page.name = this.nameModel.innerHTML;
             if (!this.previewModel.src) this.setPreview();
             this.page.preview = this.previewModel.src;
