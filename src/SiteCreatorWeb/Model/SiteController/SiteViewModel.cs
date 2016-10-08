@@ -9,12 +9,13 @@ namespace SiteCreator.Web.Model.SiteController
 {
     public class SiteViewModel
     {
-        public virtual int Id { get; set; }
-        public virtual DateTime DateCreated { get; set; }
-        public virtual string Name { get; set; }
+        public int Id { get; set; }
+        public DateTime DateCreated { get; set; }
+        public string Name { get; set; }
+        public string Preview { get; set; }
         public string UserName { get; set; }
         public string UserId { get; set; }
-        public virtual int StyleMenuId { get; set; }
+        public int StyleMenuId { get; set; }
         public virtual List<TagViewModel> Tags { get; set; }
         public virtual List<PageInfoViewModel> Pages { get; set; }
 
@@ -23,6 +24,7 @@ namespace SiteCreator.Web.Model.SiteController
             Id = site.Id;
             DateCreated = site.DateCreated;
             Name = site.Name;
+            Preview = site.Preview;
 
             UserName = site.User.UserName;
             UserId = site.UserId;
@@ -48,6 +50,7 @@ namespace SiteCreator.Web.Model.SiteController
             Id = site.Id;
             DateCreated = site.DateCreated;
             Name = site.Name;
+            Preview = site.Preview;
 
             UserName = site.User.UserName;
             UserId = site.UserId;

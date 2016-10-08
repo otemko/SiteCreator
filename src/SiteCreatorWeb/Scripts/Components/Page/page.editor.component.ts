@@ -29,11 +29,11 @@ export class PageEditorComponent {
 
     editable: boolean = true;
 
-    public nameModel: any = { };
-    public previewModel: any = { };
+    public nameModel: any = {};
+    public previewModel: any = {};
 
     public previewEditor = {
-        	imageEditButtons: ['imageReplace', 'imageStyle']
+        imageEditButtons: ['imageReplace']
     };
 
     public extraModules = [FroalaModule, DndModule.forRoot()];
@@ -59,7 +59,7 @@ export class PageEditorComponent {
                 'fontFamily', 'paragraphFormat', 'forms', 'imageManager', 'inlineStyle',
                 'lists', 'paragraphStyle',
                 'quote', 'table', 'url', 'save', 'entities', 'emoticons',
-                'draggable', 'colors'],
+                'draggable', 'colors']
         };
 
         this.availableElements.push({
@@ -102,6 +102,7 @@ export class PageEditorComponent {
 
     }
 
+
     addElement(data, elements) {
         let obj = JSON.parse(JSON.stringify(data));
         obj.inputData.editable = this.editable;
@@ -119,10 +120,14 @@ export class PageEditorComponent {
         this.pageService.getPage(this.id).then(res => {
             this.parseContent();
             this.nameModel = { innerHTML: this.page.name || "Unnamed" };
-            this.previewModel = {
-                src: this.page.previev || 'http://www.iconarchive.com/download/i94287/bokehlicia/captiva/browser-web.ico',
-            };
+            this.setPreview();
         });
+    }
+
+    setPreview() {
+        this.previewModel = {
+            src: this.page.preview || 'http://www.iconsfind.com/wp-content/uploads/2016/04/20160406_5704784546154.png',
+        };
     }
 
     parseContent() {
@@ -154,7 +159,6 @@ export class PageEditorComponent {
     }
 
     saveChangesToDb() {
-        console.log(this.page);
         this.pageService.savePage(this.page).then(res => this.loaded())
             .catch(res => this.failloaded());
     }
@@ -172,6 +176,8 @@ export class PageEditorComponent {
     setContent() {
         if (this.elements) {
             this.page.name = this.nameModel.innerHTML;
+            if (this.previewModel.src == null) this.setPreview();
+            this.page.preview = this.previewModel.src;
             let content = [];
             let elements = JSON.parse(JSON.stringify(this.elements));
 

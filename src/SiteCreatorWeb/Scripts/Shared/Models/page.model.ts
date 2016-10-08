@@ -1,7 +1,7 @@
 export class Page {
     id: number;
     name: string;
-    previev: string;
+    preview: string;
     content: string;
     userId: string;
     userName: string;

@@ -1,11 +1,14 @@
-<div class="col-sm-6 col-md-3">
+<div class="col-sm-4 col-md-2" >
     <div class="thumbnail">
         <a [routerLink]="['/page', page.id]">
             <div class="text-center">
-                <i class="fa fa-picture-o fa-5x fa-fw"></i>                   
-                <h3>
+                <div style="height: 80px">
+                <img [src]="page.preview"
+                            style="max-width: 100px; max-height: 70px; margin: 5px" />  
+                </div>               
+                <h4>
                     {{ page.name || "Unnamed" }}
-                </h3>
+                </h4>
             </div>
         </a>
         <p class="text-center">

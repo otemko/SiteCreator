@@ -105,6 +105,7 @@ namespace SiteCreator.Web.Controllers
             {
                 Name = createSite.name,
                 DateCreated = GetDate(createSite.dateCreated),
+                Preview = createSite.preview,
                 StyleMenuId = createSite.styleMenuId,
                 UserId = createSite.userId
             };
@@ -211,6 +212,7 @@ namespace SiteCreator.Web.Controllers
                     Id = createSite.id,
                     TagSite = tagSites,
                     Name = createSite.name,
+                    Preview = createSite.preview,
                     DateCreated = GetDateUpdtae(createSite.dateCreated),
                     StyleMenuId = createSite.styleMenuId,
                     UserId = createSite.userId
