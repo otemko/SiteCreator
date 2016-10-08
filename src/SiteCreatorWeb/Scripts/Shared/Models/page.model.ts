@@ -10,7 +10,7 @@ export class Page {
     siteName: string;
     commentsEnabled: boolean;
 
-    constructor() {
+    setNull() : Page {
         this.id = 0;
         this.siteId = 0;
         this.userId = "";
@@ -21,5 +21,7 @@ export class Page {
         this.elements = "";
         this.preview = "";
         this.name = "";
+
+        return this;
     }
 }

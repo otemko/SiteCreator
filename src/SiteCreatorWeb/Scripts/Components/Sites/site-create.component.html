@@ -50,6 +50,14 @@
     <div class="col-sm-9">
         <div class="panel panel-default">
             <div class="panel-heading">Sites</div>
+            <div *ngIf="site">
+                <div class="row">
+                    <page-item *ngFor="let page of site.pages" [page]="page" (delete)="onDelete($event)"></page-item>
+                </div>
+                <div>
+                    <button (click)="newPage()" class="btn btn-primary">Create</button>
+                </div>
+            </div>
             <div class="panel-body">
             </div>
         </div>

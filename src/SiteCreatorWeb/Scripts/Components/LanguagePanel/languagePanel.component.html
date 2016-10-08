@@ -4,7 +4,7 @@
            <span class="hidden-sm">Language</span>&nbsp;<b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li *ngFor="let language of languages">
-                <a href="#" (click)="changeLanguage(language.key)">{{ language.value }}</a>
+                <a class="link-cursore"  (click)="changeLanguage(language.key)">{{ language.value }}</a>
             </li>
         </ul>
     </li>

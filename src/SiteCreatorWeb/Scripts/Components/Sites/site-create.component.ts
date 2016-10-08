@@ -10,7 +10,11 @@ import { SiteService } from '../../Shared/Services/sites.service'
 import { StyleMenuService } from '../../Shared/Services/style-menu.service'
 import { TagService } from '../../Shared/Services/tag.service'
 
+import { Page } from '../../Shared/Models/page.model'
+import { PageService } from '../../Shared/Services/pages.service'
+
 import { GlobalService } from '../../Shared/Services/global.service'
+
 
 @Component({
     selector: 'site-create',
@@ -41,19 +45,22 @@ export class SiteCreateComponent {
         private tagService: TagService,
         private account: Account,
         private r: ActivatedRoute,
+        private pageService: PageService,
+        private currentPage: Page,
         private gs: GlobalService) {
 
-        let id = +this.r.snapshot.params['id'];
+        this.updateSite();
+    }
 
+    updateSite() {
+        let id = +this.r.snapshot.params['id'];
         if (id) {
             this.siteService.getSiteById(id).then(res => {
                 Object.assign(this.site, res);
-                console.log(this.site);
                 res.tags.forEach(p => this.tagsView.push(p.name));
             });
             this.isUpdate = true;
         }
-
         this.styleMenuService.getStyleMenus().then(styleMenus => {
             this.styleMenus = styleMenus;
         });
@@ -66,8 +73,18 @@ export class SiteCreateComponent {
         });
     }
 
-    onSubmit() {
+    newPage() {
+        let page = new Page().setNull();
+        Object.assign(this.currentPage, page);
+        this.currentPage.siteId = this.site.id;
+        this.route.navigate(['/page-edit']);
+    }
 
+    onDelete(id: number) {
+        this.pageService.deletePage(id).then(res => this.updateSite());
+    }
+
+    onSubmit() {
         this.getTags();
         this.site.oldTags = this.oldTags;
         this.site.newTags = this.newTags;
@@ -80,23 +97,16 @@ export class SiteCreateComponent {
 
             if (this.isUpdate) {
                 this.siteService.updateSite(this.site).then(resId => {
-                    if (resId == this.site.id) {
-                        this.route.navigate([this.gs.prevUrl]);
-                    }
+                    this.updateSite();
                 });
             }
             else {
                 this.site.userId = this.account.id;
                 this.site.dateCreated = this.getDate();
                 this.siteService.createSite(this.site).then(resId => {
-                    if (resId == 0) {
-                        this.route.navigate(['/sites-user', this.account.id]);
-                    }
+                    this.updateSite();
                 });
-                
             }
-            
-
         }
     }
 

@@ -55,3 +55,7 @@ textarea {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.link-cursore {
+    cursor: pointer;
+}
