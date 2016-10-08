@@ -14,6 +14,7 @@
         'ts-metadata-helper': 'lib/ts-metadata-helper',
         'core-js': 'lib/core-js',
         'primeng': 'lib/primeng',
+        'ng2-pagination': 'lib/ng2-pagination',
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
@@ -24,7 +25,8 @@
         'angular2-dynamic-component': { main: 'index.js',  defaultExtension: 'js' },
         'ts-metadata-helper': { main: 'index.js',  defaultExtension: 'js' },
         'core-js': { main: 'index.js', defaultExtension: 'js' },
-        'primeng': { main: 'index.js', defaultExtension: 'js' }
+        'primeng': { main: 'index.js', defaultExtension: 'js' },
+        'ng2-pagination': { main: 'index.js', defaultExtension: 'js' }
     };
     var ngPackageNames = [
       'common',

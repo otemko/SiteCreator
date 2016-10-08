@@ -20,6 +20,6 @@ export class AccountHeaderComponent {
     }
 
     logoff() {
-        this.service.logoff(document.URL);
+        this.service.logoff('/');
     }
 }
