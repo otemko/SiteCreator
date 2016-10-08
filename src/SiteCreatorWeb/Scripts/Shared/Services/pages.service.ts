@@ -15,7 +15,23 @@ export class PageService {
 
     getPage(id: number): Promise<any> {
         return this.service.get(this.url + id)
-            .then(res => Object.assign(this.page, res ));
+            .then(res => Object.assign(this.page, res));
+    }
+
+    parseContentFromDb(options) {
+        let elements = [];
+        let elementsFromDb = JSON.parse(this.page.elements);
+        let contentFromDb = JSON.parse(this.page.content);
+        for (let i = 0; i < elementsFromDb.length; i++) {
+            elements.push({
+                element: elementsFromDb[i],
+                inputData: {
+                    options: options,
+                    content: contentFromDb[i]
+                }
+            });
+        }
+        return elements;
     }
 
     createPage(page: Page): Promise<number> {

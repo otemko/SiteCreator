@@ -2,7 +2,7 @@ import { Component, OnInit, NgModule } from '@angular/core'
 import { FroalaModule } from '../../Froala-editor/froala.module'
 import { DndModule } from 'ng2-dnd';
 import { DynamicComponentModule } from "angular2-dynamic-component";
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 
 import { SiteContent } from '../../Shared/Models/site.content.model';
 import { FroalaEditorDirective, FroalaViewDirective } from '../../Froala-editor/froala.directives';
@@ -10,6 +10,8 @@ import { FroalaEditorDirective, FroalaViewDirective } from '../../Froala-editor/
 import { Page } from '../../Shared/Models/page.model'
 import { PageService } from '../../Shared/Services/pages.service'
 import { Account } from '../../Shared/Models/account.model'
+import { Elements } from '../../Shared/Models/elements.model'
+import { ElementService } from '../../Shared/Services/elements.service'
 
 declare var $: any;
 
@@ -18,15 +20,14 @@ declare var $: any;
     templateUrl: './appScripts/Components/Page/page.editor.component.html',
 })
 
-export class PageEditorComponent {
+export class PageEditorComponent implements OnInit {
     availableElements = [];
     elements = [];
+    options;
     trash = [];
     id;
     loading: boolean = false;
     failload: boolean = false;
-    options: any;
-
     editable: boolean = true;
 
     public nameModel: any = {};
@@ -38,68 +39,24 @@ export class PageEditorComponent {
 
     public extraModules = [FroalaModule, DndModule.forRoot()];
 
-    constructor(private account: Account, private route: ActivatedRoute,
-        private pageService: PageService, private page: Page) {
+    constructor(private account: Account, private route: ActivatedRoute, private router: Router,
+        private pageService: PageService, private page: Page, private allElements: Elements,
+        private elementService: ElementService) {
+    }
 
-        this.id = +this.route.snapshot.params['id'];
+    ngOnInit() {
+        this.elementService.getElements().then(res => {
+            this.availableElements = this.allElements.all;
+            this.options = this.allElements.options;
+            this.id = +this.route.snapshot.params['id'];
+            if (!this.id) this.newPage();
+            else this.getPage();
+        });
+    }
 
-        if (!this.id) this.newPage();
-        else this.getPage();
-
-        this.options = {
-            placeholderText: 'Edit Your Content Here...',
-            charCounterCount: false,
-            toolbarInline: true,
-            disableRightClick: true,
-            toolbarVisibleWithoutSelection: true,
-            dragInline: false,
-            enter: $.FroalaEditor.ENTER_BR,
-            imageDefaultDisplay: 'inline',
-            pluginsEnabled: ['align', 'codeBeautifier', 'codeView', 'image', 'link', 'video', 'file',
-                'fontFamily', 'paragraphFormat', 'forms', 'imageManager', 'inlineStyle',
-                'lists', 'paragraphStyle',
-                'quote', 'table', 'url', 'save', 'entities', 'emoticons',
-                'draggable', 'colors']
-        };
-
-        this.availableElements.push({
-            previous: `<button class="btn btn-default"><i class="fa fa-tint" aria-hidden="true"></i> Text</button>`,
-            element: `<div *ngIf="editable" [froalaEditor]="options" [(froalaModel)]="content[0]"></div>
-                        <div *ngIf="!editable" [froalaView]="content[0]"></div>`,
-            inputData: {
-                options: this.options,
-                content: [""],
-            }
-        },
-            {
-                previous: `<button class="btn btn-default"><i class="fa fa-tint" aria-hidden="true"></i> Panel</button>`,
-                element: `<div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <div *ngIf="editable" [froalaEditor]="options" [(froalaModel)]="content[0]"></div>
-                                        <div *ngIf="!editable" [froalaView]="content[0]"></div>
-                                </div>
-                                <div class="row">
-                                <div class="panel-body">
-                                    <div style="min-height: 20px" class="col-sm-6">
-                                        <div *ngIf="editable" [froalaEditor]="options" [(froalaModel)]="content[1]"></div>
-                                        <div *ngIf="!editable" [froalaView]="content[1]"></div>
-                                    </div>
-                                    <div style="min-height: 20px" class="col-sm-6">
-                                        <div *ngIf="editable" [froalaEditor]="options" [(froalaModel)]="content[2]"></div>
-                                        <div *ngIf="!editable" [froalaView]="content[2]"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`,
-                inputData: {
-                    options: this.options,
-                    content: ["", "", ""],
-                },
-            }
-        );
-
-
-
+    checkTheRights() {
+        if (this.account.role != 'Admin' && this.account.id != this.page.userId)
+            this.router.navigate(['/home']);
     }
 
 
@@ -110,16 +67,19 @@ export class PageEditorComponent {
     }
 
     newPage(userId = null) {
+        if (!this.page.siteId) this.router.navigate(['/home']);
         if (!userId)
             this.page.userId = this.account.id;
         else
             this.page.userId = userId;
+        this.checkTheRights();
         this.setPreview();
         this.setPageName();
     }
 
     getPage() {
         this.pageService.getPage(this.id).then(res => {
+            this.checkTheRights();
             this.parseContent();
             this.setPreview();
             this.setPageName();
@@ -139,8 +99,7 @@ export class PageEditorComponent {
 
     parseContent() {
         if (this.page.content) {
-            this.elements = JSON.parse(this.page.content);
-            this.elements.forEach(p => p.inputData.options = this.options);
+            this.elements = this.pageService.parseContentFromDb(this.options);
             this.changeEditable(true);
         }
     }
@@ -185,16 +144,16 @@ export class PageEditorComponent {
             this.page.name = this.nameModel.innerHTML;
             if (!this.previewModel.src) this.setPreview();
             this.page.preview = this.previewModel.src;
-            
-            let content = [];
-            let elements = JSON.parse(JSON.stringify(this.elements));
 
-            elements.forEach(p => {
-                let obj = { element: p.element, inputData: p.inputData };
-                obj.inputData.editable = null;
-                content.push(obj);
+            let elementsToSave = [];
+            let contentToSave = [];
+
+            this.elements.forEach(p => {
+                elementsToSave.push(p.element);
+                contentToSave.push(p.inputData.content);
             });
-            this.page.content = JSON.stringify(content);
+            this.page.content = JSON.stringify(contentToSave);
+            this.page.elements = JSON.stringify(elementsToSave);
         }
     }
 }

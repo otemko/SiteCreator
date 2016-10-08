@@ -11,6 +11,6 @@
             <page-item  *ngFor="let page of site.pages" [page]="page" (delete)="onDelete($event)"></page-item>
         </div>
     <div>
-        <a [routerLink]="['/page-edit']"  (click)="newPage()" class="btn btn-primary">Create</a>
+        <button (click)="newPage()" class="btn btn-primary">Create</button>
     </div>
 </div>
