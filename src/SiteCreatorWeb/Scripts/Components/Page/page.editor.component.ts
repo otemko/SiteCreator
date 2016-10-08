@@ -114,13 +114,15 @@ export class PageEditorComponent {
             this.page.userId = this.account.id;
         else
             this.page.userId = userId;
+        this.setPreview();
+        this.setPageName();
     }
 
     getPage() {
         this.pageService.getPage(this.id).then(res => {
             this.parseContent();
-            this.nameModel = { innerHTML: this.page.name || "Unnamed" };
             this.setPreview();
+            this.setPageName();
         });
     }
 
@@ -128,6 +130,11 @@ export class PageEditorComponent {
         this.previewModel = {
             src: this.page.preview || 'http://www.iconsfind.com/wp-content/uploads/2016/04/20160406_5704784546154.png',
         };
+
+    }
+
+    setPageName() {
+        this.nameModel = { innerHTML: this.page.name || "Unnamed" };
     }
 
     parseContent() {
@@ -147,13 +154,13 @@ export class PageEditorComponent {
         if (this.loading) return;
         this.loading = true;
         this.setContent();
-        if (!this.id) this.createPage();
+        if (!this.page.id) this.createPage();
         else this.saveChangesToDb();
     }
 
     createPage() {
         this.pageService.createPage(this.page).then(res => {
-            this.id = res;
+            this.page.id = res;
             this.loaded();
         }).catch(res => this.failloaded());
     }
@@ -175,9 +182,11 @@ export class PageEditorComponent {
 
     setContent() {
         if (this.elements) {
+            if (!this.nameModel.innerHtml) this.setPageName();
             this.page.name = this.nameModel.innerHTML;
-            if (this.previewModel.src == null) this.setPreview();
+            if (!this.previewModel.src) this.setPreview();
             this.page.preview = this.previewModel.src;
+            
             let content = [];
             let elements = JSON.parse(JSON.stringify(this.elements));
 
