@@ -21,7 +21,7 @@ export class SiteItemComponent {
         private route: Router,
         private siteService: SiteService,
         private gs: GlobalService
-        ) {
+    ) {
     }
 
     tagClick(id: number): void {
@@ -30,17 +30,13 @@ export class SiteItemComponent {
 
     delete(id: number): void {
         this.siteService.deleteSite(id).then(resId => {
-            if (id == resId) {
-                this.route.navigate([this.route.url]);
-                this.sc.update(null);
-            }
-            else
-                alert("You can't do it");
+            this.route.navigate([this.route.url]);
+            this.sc.update(null);
         });
     }
 
     edit(id: number): void {
         this.route.navigate(['/site-create', id]);
-        this.gs.prevUrl =  this.route.url;
+        this.gs.prevUrl = this.route.url;
     }
 }

@@ -8,11 +8,13 @@ using SiteCreator.BLL.IService;
 using Microsoft.AspNetCore.Identity;
 using SiteCreator.Entities;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SiteCreator.Web.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class UserController : Controller
     {
@@ -31,22 +33,16 @@ namespace SiteCreator.Web.Controllers
 
         // GET: api/values
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IEnumerable<UserViewModel>> Get()
         {
             var users = await userService.GetAllAsync();
-
             var result = new List<UserViewModel>();
 
             foreach (var user in users)
             {
                 var roles = await userManager.GetRolesAsync(user);
-                result.Add(new UserViewModel
-                {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    IsLockoutEnabled = user.LockoutEnabled,
-                    Role = roles[0]
-                });
+                result.Add(new UserViewModel(user, roles[0]));                
             }
 
             return result;
@@ -67,8 +63,10 @@ namespace SiteCreator.Web.Controllers
 
         // PUT api/values/5
         [HttpPut]
-        public async Task<int> Put(int id, [FromBody]UserViewModel[] usersViewModel)
+        public async Task<IActionResult> PutUsers(int id, [FromBody]UserViewModel[] usersViewModel)
         {
+            if (usersViewModel == null) return BadRequest();
+            if (!await CheckTheRights()) return Unauthorized();
             foreach (var userViewModel in usersViewModel)
             {
                 var user = await userService.GetSingleAsync(userViewModel.Id);
@@ -79,26 +77,30 @@ namespace SiteCreator.Web.Controllers
                 await userManager.UpdateAsync(user);
             }
 
-            return 0;
+            return Ok();
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public async Task<int> Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
-            if (!signInManager.IsSignedIn(User))
-                return -1;
+            if (id == null) return BadRequest();
+            if (!await CheckTheRights()) return Unauthorized();
 
+            var user = await userService.GetSingleAsync(id);
+            if (user == null) return BadRequest();
+            await userManager.DeleteAsync(user);
+            return Ok();
+        }
+
+        async Task<bool> CheckTheRights()
+        {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var currentUser = await userService.GetSingleAsync(userId);
+            if (userId == null) return false;
+            var user = await userService.GetSingleAsync(userId);
+            if (await userManager.IsInRoleAsync(user, "admin")) return true;
 
-            if (await userManager.IsInRoleAsync(currentUser, "admin"))
-            {
-                var user = await userService.GetSingleAsync(id);
-                await userManager.DeleteAsync(user);
-                return 0;
-            }
-            return -1;
+            return false;
         }
     }
 }

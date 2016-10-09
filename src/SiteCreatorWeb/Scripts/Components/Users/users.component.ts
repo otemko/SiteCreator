@@ -31,6 +31,7 @@ export class UsersComponent {
                 }
                 if (index != -1)
                     this.users.splice(index, 1);
+                console.log(this.users);
             }
         });
     }
