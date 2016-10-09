@@ -7,6 +7,7 @@ import { AutoCompleteModule } from 'primeng/primeng';
 import { DndModule } from "ng2-dnd";
 import { FroalaModule } from "./Froala-editor/froala.module";
 import { DynamicComponentModule } from "angular2-dynamic-component";
+import { Ng2PaginationModule } from 'ng2-pagination';
 
 import { FormsModule }   from "@angular/forms";
 
@@ -35,9 +36,11 @@ import { PageEditorComponent } from './Components/Page/page.editor.component';
 import { PageComponent } from './Components/Page/page.component';
 
 import { SearchComponent } from './Components/Search/search.component'
+import { LockoutComponent } from './Components/Lockout/lockout.component'
 
 import { CommentComponent } from './Components/Comments/comments.component'
 import { CommentItemComponent } from './Components/Comments/comment-item.component'
+
 
 import { routing } from './routes';
 
@@ -50,7 +53,8 @@ import { routing } from './routes';
         FormsModule,
         FroalaModule,
         DynamicComponentModule,
-        AutoCompleteModule
+        AutoCompleteModule,
+        Ng2PaginationModule
     ],
     declarations: [
         AppComponent,
@@ -72,7 +76,8 @@ import { routing } from './routes';
         PageComponent,
         PageItemComponent,
         CommentComponent,
-        CommentItemComponent
+        CommentItemComponent,
+        LockoutComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy},

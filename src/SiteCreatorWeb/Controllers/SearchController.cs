@@ -36,48 +36,13 @@ namespace SiteCreator.Web.Controllers
 
         // POST api/values
         [HttpPost]
-        public SearchResult Post([FromBody]string searchTerm)
+        public SearchResultViewModel Post([FromBody]string searchTerm)
         {
-            var sites = searchService.GetSitesIdBySiteName(searchTerm);
-            var resultSites = new List<SearchSite>();
-
-            foreach (var site in sites)
+            return new SearchResultViewModel
             {
-                resultSites.Add(new SearchSite {
-                    Id = site.Id,
-                    Name = site.Name
-                });
-            }
-
-            var tags = searchService.GetTagsIdByTagName(searchTerm);
-            var resultTags = new List<SearchTag>();
-
-            foreach (var tag in tags)
-            {
-                resultTags.Add(new SearchTag
-                {
-                    Id = tag.Id,
-                    Name = tag.Name
-                });
-            }
-
-            var users = searchService.GetUsersIdByNick(searchTerm);
-            var resultUsers = new List<SearchUser>();
-
-            foreach (var user in users)
-            {
-                resultUsers.Add(new SearchUser
-                {
-                    Id = user.Id,
-                    UserName = user.UserName
-                });
-            }
-            
-            return new SearchResult
-            {
-                SearchSites = resultSites,
-                SearchTags = resultTags,
-                SearchUsers = resultUsers
+                SearchSites = GetSitesViewModel(searchTerm),
+                SearchPages = GetPagesViewModel(searchTerm),
+                SearchUsers = GetUsersViewModel(searchTerm)
             };
         }
 
@@ -91,6 +56,42 @@ namespace SiteCreator.Web.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        private List<SearchSiteViewModel> GetSitesViewModel(string searchTerm)
+        {
+            var resultSites = new List<SearchSiteViewModel>();
+
+            var sitesBySiteName = searchService.GetSitesBySiteName(searchTerm).ToList();
+            sitesBySiteName.ForEach(s => resultSites.Add(new SearchSiteViewModel(s)));
+
+            var sitesByTagName = searchService.GetSitesByTagName(searchTerm).ToList();
+            sitesByTagName.ForEach(s => resultSites.Add(new SearchSiteViewModel(s)));
+
+            return resultSites;
+        }
+
+        private List<SearchPageViewModel> GetPagesViewModel(string searchTerm)
+        {
+            var resultPages = new List<SearchPageViewModel>();
+
+            var pagesByComment = searchService.GetPagesByComment(searchTerm).ToList();
+            pagesByComment.ForEach(p => resultPages.Add(new SearchPageViewModel(p)));
+
+            var pagesByContent = searchService.GetPagesByContent(searchTerm).ToList();
+            pagesByContent.ForEach(p => resultPages.Add(new SearchPageViewModel(p)));
+
+            return resultPages;
+        }
+
+        private List<SearchUserViewModel> GetUsersViewModel(string searchTerm)
+        {
+            var resultUsers = new List<SearchUserViewModel>();
+
+            var usersByUserName = searchService.GetUsersByUserName(searchTerm).ToList();
+            usersByUserName.ForEach(u => resultUsers.Add(new SearchUserViewModel(u)));
+
+            return resultUsers;
         }
     }
 }

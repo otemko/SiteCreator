@@ -39,13 +39,6 @@ export class SitesComponent{
     }
 
     sortBy() {
-        //for (let i = 0; i < this.typesSort.length; i++) {
-        //    if (this.typeSort == this.typesSort[i].key)
-        //    {
-        //        var k = this.typesSort[i].func.call();
-        //        break;
-        //    }
-        //}
         if (this.typeSort == 0) {
             this.sortByUserName();
         }

@@ -3,13 +3,9 @@
         <a [routerLink]="['/site', searchSite.id]"><i class="fa fa-folder" aria-hidden="true"></i>{{searchSite.name}}</a>
     </div>
 
-
-
-    <div *ngFor="let searchTag of sr.searchTags">
-        <a [routerLink]="['/sites', searchTag.id]"><i class="fa fa-tag" aria-hidden="true"></i>{{searchTag.name}}</a>
+    <div *ngFor="let searchPage of sr.searchPages">
+        <a [routerLink]="['/page', searchPage.id]"><i class="fa fa-tag" aria-hidden="true"></i>{{searchPage.name}}</a>
     </div>
-
-
 
     <div *ngFor="let searchUser of sr.searchUsers">
         <a [routerLink]="['/site']"><i class="fa fa-user" aria-hidden="true"></i>{{searchUser.userName}}</a>

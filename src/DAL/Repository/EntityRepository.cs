@@ -7,7 +7,7 @@ using SiteCreator.ORM;
 using SiteCreator.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace SiteCreator.DAL
+namespace SiteCreator.DAL.Repository
 {
     public class EntityRepository : IEntityRepository
     {

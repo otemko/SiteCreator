@@ -1,10 +1,8 @@
 ﻿using SiteCreator.BLL.IService;
-using SiteCreator.DAL;
+using SiteCreator.DAL.IRepository;
 using SiteCreator.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System;
 
 namespace SiteCreator.BLL.Services
 {
@@ -17,19 +15,30 @@ namespace SiteCreator.BLL.Services
             this.repository = repository;
         }
 
-        public ICollection<Site> GetSitesIdBySiteName(string searchTerm)
+        public ICollection<Page> GetPagesByComment(string searchTerm)
+        {
+            return repository.GetPagesByComment(searchTerm);
+        }
+
+        public ICollection<Page> GetPagesByContent(string searchTerm)
+        {
+            return repository.GetPagesByContent(searchTerm);
+        }
+
+        public ICollection<Site> GetSitesBySiteName(string searchTerm)
         {
             return repository.GetSitesBySiteName(searchTerm);
         }
 
-        public ICollection<Tag> GetTagsIdByTagName(string searchTerm)
+        public ICollection<Site> GetSitesByTagName(string searchTerm)
         {
-            return repository.GetTagsByTagName(searchTerm);
+            return repository.GetSitesByTagName(searchTerm);
         }
 
-        public ICollection<User> GetUsersIdByNick(string searchTerm)
+        public ICollection<User> GetUsersByUserName(string searchTerm)
         {
-            return repository.GetUsersByNick(searchTerm);
+            return repository.GetUsersByUserName(searchTerm);
         }
+
     }
 }

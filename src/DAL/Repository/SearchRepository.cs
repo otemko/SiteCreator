@@ -6,8 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SiteCreator.Entities;
+using SiteCreator.DAL.IRepository;
 
-namespace SiteCreator.DAL
+namespace SiteCreator.DAL.Repository
 {
     public class SearchRepository : ISearchRepository
     {
@@ -16,17 +17,28 @@ namespace SiteCreator.DAL
         {
             this.context = context;
         }
+
+        public ICollection<Page> GetPagesByComment(string searchTerm)
+        {
+            return context.Set<Page>().FromSql("dbo.SearchComment {0}", searchTerm).ToList();
+        }
+
+        public ICollection<Page> GetPagesByContent(string searchTerm)
+        {
+            return context.Set<Page>().FromSql("dbo.SearchPageContent {0}", searchTerm).ToList();
+        }
+
         public ICollection<Site> GetSitesBySiteName(string searchTerm)
         {
             return context.Set<Site>().FromSql("dbo.SearchSiteName {0}", searchTerm).ToList();
         }
 
-        public ICollection<Tag> GetTagsByTagName(string searchTerm)
+        public ICollection<Site> GetSitesByTagName(string searchTerm)
         {
-            return context.Set<Tag>().FromSql("dbo.SearchTagName {0}", searchTerm).ToList();            
+            return context.Set<Site>().FromSql("dbo.SearchTagName {0}", searchTerm).ToList();
         }
 
-        public ICollection<User> GetUsersByNick(string searchTerm)
+        public ICollection<User> GetUsersByUserName(string searchTerm)
         {
             return context.Set<User>().FromSql("dbo.SearchUserName {0}", searchTerm).ToList();
         }

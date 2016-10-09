@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SiteCreator.BLL.IService
+namespace SiteCreator.DAL.IRepository
 {
-    public interface ISearchService
+    public interface ISearchRepository
     {
         ICollection<Site> GetSitesByTagName(string searchTerm);
         ICollection<Site> GetSitesBySiteName(string searchTerm);

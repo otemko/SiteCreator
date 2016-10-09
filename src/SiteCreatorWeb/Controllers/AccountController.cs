@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using SiteCreator.Entities;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace SiteCreator.Web.Controllers
 {
@@ -38,10 +40,17 @@ namespace SiteCreator.Web.Controllers
                 return RedirectToLocal(returnUrl);
             }
 
-            var info = await signInManager.GetExternalLoginInfoAsync();
+            var info = await signInManager.GetExternalLoginInfoAsync(); 
             if (info == null)
             {
                 return RedirectToLocal(returnUrl);
+            }
+
+            var user = await userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+            if(!user.LockoutEnabled)
+            {
+                await signInManager.SignOutAsync();
+                return Redirect("/#/lockout");
             }
 
             var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: true);

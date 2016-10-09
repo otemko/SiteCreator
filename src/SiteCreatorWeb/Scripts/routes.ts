@@ -18,6 +18,7 @@ import { UsersComponent } from './Components/Users/users.component'
 import { AboutComponent } from './Components/About/about.component'
 
 import { SearchComponent } from './Components/Search/search.component'
+import { LockoutComponent } from './Components/Lockout/lockout.component'
 
 const appRoutes: Routes = [
     {
@@ -80,7 +81,11 @@ const appRoutes: Routes = [
     {
         path: 'page/:id',
         component: PageComponent
-    }    
+    },
+    {
+        path: 'lockout',
+        component: LockoutComponent
+    }     
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
