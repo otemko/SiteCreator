@@ -30,14 +30,6 @@ export class UsersItemComponent {
     }
 
     delete(id: string) {
-        this.userService.deleteUser(id).then(res => {
-            console.log(res);
-            if (res == 0) {
-                console.log('delete succed');
-                this.uc.update();
-            }
-            else
-                alert("You can't do it");
-        });
+        this.userService.deleteUser(id).then(res => this.uc.update());
     }
 }

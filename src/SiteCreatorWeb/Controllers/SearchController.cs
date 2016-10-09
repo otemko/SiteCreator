@@ -19,22 +19,7 @@ namespace SiteCreator.Web.Controllers
         {
             this.searchService = searchService;
         }
-
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        [HttpGet("{searchTerm}")]
-
-        public void Get(string searchTerm)
-        {
-            
-        }
-
-        // POST api/values
+        
         [HttpPost]
         public SearchResultViewModel Post([FromBody]string searchTerm)
         {
@@ -45,19 +30,7 @@ namespace SiteCreator.Web.Controllers
                 SearchUsers = GetUsersViewModel(searchTerm)
             };
         }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-
+        
         private List<SearchSiteViewModel> GetSitesViewModel(string searchTerm)
         {
             var resultSites = new List<SearchSiteViewModel>();

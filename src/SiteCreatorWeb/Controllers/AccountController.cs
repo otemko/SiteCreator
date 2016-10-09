@@ -47,10 +47,13 @@ namespace SiteCreator.Web.Controllers
             }
 
             var user = await userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
-            if(!user.LockoutEnabled)
+            if (user != null)
             {
-                await signInManager.SignOutAsync();
-                return Redirect("/#/lockout");
+                if (!user.LockoutEnabled)
+                {
+                    await signInManager.SignOutAsync();
+                    return Redirect("/#/lockout");
+                }
             }
 
             var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: true);

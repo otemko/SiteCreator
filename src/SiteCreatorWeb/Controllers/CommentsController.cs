@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using SiteCreator.Entities;
 using SiteCreator.Web.Model.PageController;
 using System.Security.Claims;
+using System.Net;
 
 namespace SiteCreator.Web.Controllers
 {
@@ -16,17 +17,19 @@ namespace SiteCreator.Web.Controllers
     {
         private IPageService pageService;
         private ICommentService commentService;
+        private IUserService userService;
 
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
 
-        public CommentsController(IPageService pageService, ICommentService commentService,
+        public CommentsController(IPageService pageService, IUserService userService, ICommentService commentService,
             UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.pageService = pageService;
             this.commentService = commentService;
+            this.userService = userService;
         }
 
         [HttpGet("{pageId}")]
@@ -45,6 +48,8 @@ namespace SiteCreator.Web.Controllers
             var page = await pageService.GetSingleAsync(commentViewModel.PageId);
             if (!CanCommentPage(page)) return BadRequest();
 
+            if (!await CheckLockout()) return StatusCode((int)HttpStatusCode.Forbidden);
+
             var comment = commentViewModel.CreateBllComment();
             await commentService.CreateAsync(comment);
             return Ok(comment.Id);
@@ -57,6 +62,7 @@ namespace SiteCreator.Web.Controllers
             var comment = await commentService.GetSingleAsync(id);
             if (comment == null) return Ok();
             if (!CheckTheRights(comment)) return BadRequest();
+            if (!await CheckLockout()) return StatusCode((int)HttpStatusCode.Forbidden);
             var page = await pageService.GetSingleAsync(commentViewModel.PageId);
             if (!CanCommentPage(page)) return BadRequest();
             
@@ -72,6 +78,7 @@ namespace SiteCreator.Web.Controllers
             var comment = await commentService.GetSingleAsync(id);
             if (comment == null) return Ok();
             if (!CheckTheRights(comment)) return BadRequest();
+            if (!await CheckLockout()) return StatusCode((int)HttpStatusCode.Forbidden);
             var page = await pageService.GetSingleAsync(comment.PageId);
             if (!CanCommentPage(page)) return BadRequest();
 
@@ -82,6 +89,16 @@ namespace SiteCreator.Web.Controllers
         private bool CanCommentPage(Page page)
         {
             if (page != null && page.CommentsEnabled) return true;
+            return false;
+        }
+
+        private async Task<bool> CheckLockout()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await userService.GetSingleAsync(userId);
+            if (user.LockoutEnabled)
+                return true;
+
             return false;
         }
 

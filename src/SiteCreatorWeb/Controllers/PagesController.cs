@@ -10,6 +10,7 @@ using SiteCreator.Web.Model.PageController;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using SiteCreator.Web.Model.Shared;
+using System.Net;
 
 namespace SiteCreator.Web.Controllers
 {
@@ -19,17 +20,19 @@ namespace SiteCreator.Web.Controllers
     {
         private IPageService pageService;
         private ISiteService siteService;
+        private IUserService userService;
 
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
 
         public PagesController(IPageService pageService, ISiteService siteService,
-            UserManager<User> userManager, SignInManager<User> signInManager)
+            UserManager<User> userManager, SignInManager<User> signInManager, IUserService userService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.pageService = pageService;
             this.siteService = siteService;
+            this.userService = userService;
         }
 
         [HttpGet("{id}")]
@@ -45,8 +48,11 @@ namespace SiteCreator.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> PostPage([FromBody] PageViewModel pageViewModel)
         {
+            if (pageViewModel == null) return BadRequest();
             var site = await siteService.GetSingleAsync(pageViewModel.SiteId);
+
             if (!CheckTheRights(site)) return Unauthorized();
+            if (! await CheckLockout()) return StatusCode((int)HttpStatusCode.Forbidden);
 
             var page = pageViewModel.CreateBllPage();
             await pageService.CreateAsync(page);
@@ -59,6 +65,7 @@ namespace SiteCreator.Web.Controllers
             var page = await pageService.GetPageWithSiteAndContent(id);
             if (!CheckPageForUpdate(page, pageViewModel)) return BadRequest();
             if (!CheckTheRights(page?.Site)) return Unauthorized();
+            if (!await CheckLockout()) return StatusCode((int)HttpStatusCode.Forbidden);
 
             page = pageViewModel.UpdateBllPage(page);
             await pageService.UpdateAsync(page);
@@ -72,6 +79,9 @@ namespace SiteCreator.Web.Controllers
             var page = await pageService.GetPageWithSite(id);
             if (page == null) return BadRequest();
 
+            if (!CheckTheRights(page?.Site)) return Unauthorized();
+            if (!await CheckLockout()) return StatusCode((int)HttpStatusCode.Forbidden);
+
             await pageService.DeleteAsync(page);
             return Ok();
         }
@@ -83,6 +93,16 @@ namespace SiteCreator.Web.Controllers
 
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (site != null && site.UserId == userId)
+                return true;
+            
+            return false;
+        }
+
+        private async Task<bool> CheckLockout()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await userService.GetSingleAsync(userId);
+            if (user.LockoutEnabled)
                 return true;
 
             return false;

@@ -8,6 +8,8 @@ using SiteCreator.Web.Model.SiteController;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using System.Net;
+using System.Net.Http;
 
 namespace SiteCreator.Web.Controllers
 {
@@ -78,6 +80,8 @@ namespace SiteCreator.Web.Controllers
             if (createSite == null) return BadRequest();
             var site = createSite.GetBllSiteCreate();
             if (!await CheckTheRights(site)) return Unauthorized();
+            if (!await CheckLockout())
+                return StatusCode((int)HttpStatusCode.Forbidden);
 
             var tags = await SaveTagsToDb(createSite);
             await siteService.CreateSiteWithTagsAsync(site, tags);
@@ -93,6 +97,7 @@ namespace SiteCreator.Web.Controllers
             var site = await siteService.GetSitesById(createSite.id);
             if (site == null) return BadRequest();
             if (!await CheckTheRights(site)) return Unauthorized();
+            if (!await CheckLockout()) return StatusCode((int)HttpStatusCode.Forbidden);
 
             var tags = await SaveTagsToDb(createSite);
             await siteService.UpdateSiteWithTagsAsync(site, tags);
@@ -107,6 +112,7 @@ namespace SiteCreator.Web.Controllers
             var site = await siteService.GetSingleAsync(id);
             if (site == null) return Ok();
             if (!await CheckTheRights(site)) return Unauthorized();
+            if (!await CheckLockout()) return StatusCode((int)HttpStatusCode.Forbidden);
 
             await siteService.DeleteAsync(site);
             return Ok();
@@ -116,12 +122,20 @@ namespace SiteCreator.Web.Controllers
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await userService.GetSingleAsync(userId);
-            if (site.UserId == userId || await userManager.IsInRoleAsync(user, "admin")
-                && !user.LockoutEnabled) return true;
+            if (site.UserId == userId || await userManager.IsInRoleAsync(user, "admin")) return true;
 
             return false;
         }
 
+        private async Task<bool> CheckLockout()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await userService.GetSingleAsync(userId);
+            if (user.LockoutEnabled)
+                return true;
+
+            return false;
+        }
 
         async Task<List<Tag>> SaveTagsToDb(CreateSiteViewModel createSite)
         {
