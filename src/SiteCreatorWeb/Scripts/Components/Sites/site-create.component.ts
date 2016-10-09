@@ -84,8 +84,8 @@ export class SiteCreateComponent {
     }
 
     onSubmit() {
+        this.loading = true;
         this.getTags();
-
         if (this.tagsView.length == 0) {
             let element = document.getElementById("invalid-tags");
             element.hidden = false;

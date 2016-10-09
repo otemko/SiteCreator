@@ -59,3 +59,9 @@ textarea {
 .link-cursore {
     cursor: pointer;
 }
+
+
+
+div.hover-blue:hover {
+    background: linear-gradient(-60deg, #e5fffb, #e1f2ef)
+}
