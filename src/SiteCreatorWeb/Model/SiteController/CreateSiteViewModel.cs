@@ -18,7 +18,7 @@ namespace SiteCreator.Web.Model.SiteController
         public TagViewModel[] tags { get; set; }
 
 
-        public Site GetBllSiteCreate()
+        public Site createBllSite()
         {
             return new Site
             {
@@ -29,6 +29,12 @@ namespace SiteCreator.Web.Model.SiteController
                 UserId = userId
             };
         }
-        
+
+        internal void UpdateBllSite(Site site)
+        {
+            site.Name = name;
+            site.Preview = preview;
+            site.StyleMenuId = styleMenuId;
+        }
     }
 }

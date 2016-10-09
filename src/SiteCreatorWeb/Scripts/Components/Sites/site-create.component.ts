@@ -46,6 +46,7 @@ export class SiteCreateComponent {
 
         this.id = +this.r.snapshot.params['id'];
         this.updateSite();
+        this.site.pages = [];
 
         this.styleMenuService.getStyleMenus().then(styleMenus => {
             this.styleMenus = styleMenus;
@@ -56,6 +57,7 @@ export class SiteCreateComponent {
         if (this.id) {
             this.siteService.getSiteById(this.id).then(res => {
                 Object.assign(this.site, res);
+                console.log(this.site);
                 res.tags.forEach(p => this.tagsView.push(p.name));
             });
         }
@@ -87,13 +89,13 @@ export class SiteCreateComponent {
         else {
             if (this.id) {
                 this.siteService.updateSite(this.site).then(resId => {
-                    this.id = resId;
                     this.updateSite();
                 });
             }
             else {
                 this.site.userId = this.account.id;
                 this.siteService.createSite(this.site).then(resId => {
+                    this.id = resId;
                     this.updateSite();
                 });
             }

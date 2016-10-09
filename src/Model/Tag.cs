@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SiteCreator.Entities
 {
@@ -9,5 +10,6 @@ namespace SiteCreator.Entities
 
         public virtual ICollection<TagSite> TagSite { get; set; }
 
+       
     }
 }

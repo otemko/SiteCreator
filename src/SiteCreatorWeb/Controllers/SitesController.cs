@@ -78,7 +78,7 @@ namespace SiteCreator.Web.Controllers
         public async Task<IActionResult> Post([FromBody]CreateSiteViewModel createSite)
         {
             if (createSite == null) return BadRequest();
-            var site = createSite.GetBllSiteCreate();
+            var site = createSite.createBllSite();
             if (!await CheckTheRights(site)) return Unauthorized();
             if (!await CheckLockout())
                 return StatusCode((int)HttpStatusCode.Forbidden);
@@ -99,6 +99,7 @@ namespace SiteCreator.Web.Controllers
             if (!await CheckTheRights(site)) return Unauthorized();
             if (!await CheckLockout()) return StatusCode((int)HttpStatusCode.Forbidden);
 
+            createSite.UpdateBllSite(site);
             var tags = await SaveTagsToDb(createSite);
             await siteService.UpdateSiteWithTagsAsync(site, tags);
 
@@ -141,8 +142,8 @@ namespace SiteCreator.Web.Controllers
         {
             List<Tag> tags = new List<Tag>();
             createSite.tags.ToList().ForEach(p => tags.Add(p.GetBllTag()));
-            await tagService.CreateTags(tags);
-            return tags;
+            var tagsFromDb = await tagService.CreateTags(tags);
+            return tagsFromDb.ToList();
         }
 
         IEnumerable<SiteViewModel> GetSitesViewModel(IEnumerable<Site> sites)
