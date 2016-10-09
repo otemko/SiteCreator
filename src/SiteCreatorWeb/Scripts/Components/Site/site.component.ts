@@ -28,17 +28,6 @@ export class SiteComponent {
         });
     }
 
-    submit() {
-        //this.siteService.updateSite(this.site);
-    }
-
-    newPage() {
-        let page = new Page();
-        Object.assign(this.currentPage, page);
-        this.currentPage.siteId = this.site.id;
-        this.route.navigate(['/page-edit']);
-    }
-
     onDelete(id: number) {
         this.pageService.deletePage(id).then(res => this.updateModel());
     }

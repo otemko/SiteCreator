@@ -23,72 +23,44 @@ namespace SiteCreator.BLL.Services
 
         public async Task<IEnumerable<Site>> GetAllSitesWithUserAndTag()
         {
-            var result = new List<Site>();
-
-            var tagsites = await repository.AllIncludingAsync<TagSite>(ts => ts.Site, ts => ts.Site.User, ts => ts.Tag);
-
-            foreach (var tagsite in tagsites)
-            {
-                if (!result.Contains(tagsite.Site))
-                {
-                    result.Add(tagsite.Site);
-                }
-            }
-
-            return result;
+            var sites = await siteRepository.GetSitesIncludeAllBy();
+            return sites;
         }
 
         public async Task<Site> GetSitesById(int siteId)
         {
-            var tagsites = await repository.GetAllAsync<TagSite>(ts => ts.SiteId == siteId,
-                ts => ts.Site, ts => ts.Site.User, ts => ts.Tag, ts => ts.Site.Page);
-
-            var site = tagsites.FirstOrDefault()?.Site;
-
-            return site;
+            var sites = await siteRepository.GetSitesIncludeAllAndPagesBy(p => p.Id == siteId);
+            return sites.FirstOrDefault();
         }
 
         public async Task<IEnumerable<Site>> GetSitesByTagId(int tagId)
         {
-            var result = new List<Site>();
-
-            var tagsitesese = new List<TagSite>();
-
-            var tagsites = await repository.GetAllAsync<TagSite>(ts => ts.TagId == tagId);
-            foreach (var item in tagsites)
-            {
-                tagsitesese.AddRange(await repository.GetAllAsync<TagSite>(ts => ts.SiteId == item.SiteId, 
-                    ts => ts.Site, ts => ts.Site.User, ts => ts.Tag));
-            }
-            
-
-            foreach (var tagsite in tagsitesese)
-            {
-                if (!result.Contains(tagsite.Site))
-                {
-                    result.Add(tagsite.Site);
-                }
-            }
-
-            return result;
+            var sites = await siteRepository.GetSitesIncludeAllBy(p => p.TagSite.Any(q => q.TagId == tagId));
+            return sites;
         }
 
         public async Task<IEnumerable<Site>> GetSitesByUserId(string userId)
         {
-            var result = new List<Site>();
+            var sites = await siteRepository.GetSitesIncludeAllBy(p => p.UserId == userId);
+            return sites;
+        }
 
-            var tagsites = await repository.GetAllAsync<TagSite>(ts => ts.Site.UserId == userId,
-                ts=> ts.Site, ts => ts.Site.User, ts => ts.Tag);
+        public async Task CreateSiteWithTagsAsync(Site site, List<Tag> tags)
+        {
+            FillTagsToSite(site, tags);
+            await repository.CreateAsync(site);
+        }
 
-            foreach (var tagsite in tagsites)
-            {
-                if (!result.Contains(tagsite.Site))
-                {
-                    result.Add(tagsite.Site);
-                }
-            }
+        public async Task UpdateSiteWithTagsAsync(Site site, List<Tag> tags)
+        {
+            FillTagsToSite(site, tags);
+            await repository.UpdateAsync(site);
+        }
 
-            return result;
+        void FillTagsToSite(Site site, List<Tag> tags)
+        {
+            site.TagSite = new List<TagSite>();
+            tags.ForEach(p => site.TagSite.Add(new TagSite { Site = site, Tag = p }));
         }
     }
 }

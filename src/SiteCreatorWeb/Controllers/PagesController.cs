@@ -49,7 +49,8 @@ namespace SiteCreator.Web.Controllers
             if (!CheckTheRights(site)) return Unauthorized();
 
             var page = pageViewModel.CreateBllPage();
-            return Ok(await pageService.CreateAsync(page));
+            await pageService.CreateAsync(page);
+            return Ok(page);
         }
 
         [HttpPut("{id}")]

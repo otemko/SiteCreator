@@ -31,11 +31,11 @@ namespace SiteCreator.Web.Model.SiteController
 
             StyleMenuId = site.StyleMenuId;
 
-            var listTags = new List<TagViewModel>();
+            var listTags = new List<Shared.TagViewModel>();
 
             foreach (var tag in tags)
             {
-                listTags.Add(new TagViewModel
+                listTags.Add(new Shared.TagViewModel
                 {
                     Id = tag.Id,
                     Name = tag.Name
@@ -47,6 +47,8 @@ namespace SiteCreator.Web.Model.SiteController
 
         public SiteViewModel(Site site)
         {
+            if (site == null) return;
+
             Id = site.Id;
             DateCreated = site.DateCreated;
             Name = site.Name;
@@ -58,7 +60,7 @@ namespace SiteCreator.Web.Model.SiteController
             StyleMenuId = site.StyleMenuId;
 
             Tags = new List<TagViewModel>();
-            site.TagSite?.ToList().ForEach(p => Tags.Add(new TagViewModel(p.Tag)));
+            site.TagSite?.ToList().ForEach(p => Tags.Add(new Shared.TagViewModel(p.Tag)));
 
             Pages = new List<PageInfoViewModel>();
             site.Page?.ToList().ForEach(p => Pages.Add(new PageInfoViewModel(p)));

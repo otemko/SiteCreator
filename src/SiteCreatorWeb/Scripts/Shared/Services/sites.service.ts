@@ -39,11 +39,11 @@ export class SiteService {
         return this.service.delete(this.url + id);
     }
 
-    createSite(newSite: SiteCreate): Promise<number> {
+    createSite(newSite: Site): Promise<number> {
         return this.service.post(this.url, newSite);
     }
 
-    updateSite(site: SiteCreate): Promise<number> {
+    updateSite(site: Site): Promise<number> {
         return this.service.put(this.url, site);
     }
 }

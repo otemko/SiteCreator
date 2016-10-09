@@ -1,4 +1,4 @@
-<div class="col-lg-2 col-md-3 col-sm-4 cols-xs-6" >
+<div class="col-lg-3 col-md-4 col-sm-6 cols-xs-6" >
     <div class="thumbnail">
         <a [routerLink]="['/page', page.id]">
             <div class="text-center">
@@ -6,9 +6,9 @@
                 <img [src]="page.preview"
                             style="max-width: 100px; max-height: 70px; margin: 5px" />  
                 </div>               
-                <h4>
-                    {{ page.name || "Unnamed" }}
-                </h4>
+                <span class="text-muted">
+                   {{ page.name || "Unnamed" }}
+                </span>
             </div>
         </a>
         <p class="text-center">

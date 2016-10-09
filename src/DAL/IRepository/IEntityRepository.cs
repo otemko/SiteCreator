@@ -18,7 +18,7 @@ namespace SiteCreator.DAL
         Task<T> GetSingleAsync<T>(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties) where T : class;
         Task<T> GetSingleAsync<T, Q>(Q id) where T : class, WithId<Q>;
         
-        Task<Q> CreateAsync<T,Q>(T entity) where T : class, WithId<Q>;
+        Task CreateAsync<T>(T entity) where T : class;
         Task CreateRangeAsync<T>(T[] entities) where T : class;
         Task DeleteAsync<T>(T entity) where T : class;
         Task DeleteRangeAsync<T>(T[] entities) where T : class;

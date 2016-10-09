@@ -1,4 +1,5 @@
-﻿using SiteCreator.Entities;
+﻿using System;
+using SiteCreator.Entities;
 
 namespace SiteCreator.Web.Model.Shared
 {
@@ -6,16 +7,24 @@ namespace SiteCreator.Web.Model.Shared
     {
         public virtual int Id { get; set; }
         public virtual string Name { get; set; }
-        
+
         public TagViewModel()
         {
-
         }
 
         public TagViewModel(Tag tag)
         {
             Id = tag.Id;
             Name = tag.Name;
+        }
+
+        public Tag GetBllTag()
+        {
+            return new Tag
+            {
+                Id = Id,
+                Name = Name
+            };
         }
     }
 }

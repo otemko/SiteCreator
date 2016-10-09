@@ -17,9 +17,9 @@ namespace SiteCreator.BLL.Services
             this.repository = repository;
         }
 
-        public virtual async Task<Q> CreateAsync(T entity)
+        public virtual async Task CreateAsync(T entity)
         {
-            return await repository.CreateAsync<T, Q>(entity);
+            await repository.CreateAsync<T>(entity);
 
         }
 

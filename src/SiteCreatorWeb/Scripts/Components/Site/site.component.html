@@ -7,10 +7,7 @@
             <div (click)="deleteTag(tag)" class="tag-cloud tag-cloud-info">{{tag.name}}</div>
         </div>
     </div>
-        <div class="row">
-            <page-item  *ngFor="let page of site.pages" [page]="page" (delete)="onDelete($event)"></page-item>
-        </div>
-    <div>
-        <button (click)="newPage()" class="btn btn-primary">Create</button>
+    <div class="row">
+        <page-item *ngFor="let page of site.pages" [page]="page" (delete)="onDelete($event)"></page-item>
     </div>
 </div>
