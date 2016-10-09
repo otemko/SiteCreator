@@ -97,7 +97,6 @@ export class TagCloudService{
 			if (a.name > b.name) return 1;
 			return -1;
         });
-        console.log({ "tags": tags, "max": max });
 		return { "tags": tags, "max": max };
 	}
 

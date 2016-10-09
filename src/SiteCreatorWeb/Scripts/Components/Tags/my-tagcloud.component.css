@@ -1,7 +1,6 @@
-﻿tag-cloud {
+﻿#tag-cloud1 {
 	font-family: Arial;
-	font-size: 5pt;    
-    cursor: pointer;
+	font-size: 10pt; 
 }
 .highlight {
 	color: #FF0;
