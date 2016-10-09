@@ -8,7 +8,7 @@
     </div>
 
     <div *ngFor="let searchUser of sr.searchUsers">
-        <a [routerLink]="['/site']"><i class="fa fa-user" aria-hidden="true"></i>{{searchUser.userName}}</a>
+        <a [routerLink]="['/sites-user', searchUser.id]"><i class="fa fa-user" aria-hidden="true"></i>{{searchUser.userName}}</a>
     </div>
 
 
