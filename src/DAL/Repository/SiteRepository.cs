@@ -21,19 +21,31 @@ namespace SiteCreator.DAL.Repository
             this.context = context;
         }
 
-        public async Task<IEnumerable<Site>> GetSitesIncludeAllBy
-            (Expression<Func<Site, bool>> predicate =null, int take = 0, int skip = 0)
+        public async Task<IEnumerable<Site>> GetSitesIncludeAllOrderBy<TKey>
+            (bool orderByDescending, Expression<Func<Site, TKey>> predicateOrder,
+                int take = 0, int skip = 0, Expression<Func<Site, bool>> predicate = null)
         {
-            return await GetAllQuery(predicate, take, skip).ToListAsync();
+            var res = GetAllQuery(take, skip, predicate);
+            if (orderByDescending) res.OrderByDescending(predicateOrder);
+            else res.OrderBy(predicateOrder);
+
+            return await res.ToListAsync();
+        }
+
+        public async Task<IEnumerable<Site>> GetSitesIncludeAllBy
+            (int take = 0, int skip = 0, Expression<Func<Site, bool>> predicate = null)
+        {
+            return await GetAllQuery(take, skip, predicate).ToListAsync();
+            
         }
 
         public async Task<IEnumerable<Site>> GetSitesIncludeAllAndPagesBy
-            (Expression<Func<Site, bool>> predicate = null, int take = 0, int skip = 0)
+            (int take = 0, int skip = 0, Expression<Func<Site, bool>> predicate = null)
         {
-            return await GetAllQuery(predicate, take, skip).Include(p => p.Page).ToListAsync();
+            return await GetAllQuery(take, skip, predicate).Include(p => p.Page).ToListAsync();
         }
 
-        public IQueryable<Site> GetAllQuery(Expression<Func<Site, bool>> predicate = null, int take = 0, int skip = 0)
+        public IQueryable<Site> GetAllQuery(int take = 0, int skip = 0, Expression<Func<Site, bool>> predicate = null)
         {
             var res = IncludeAll(Skipping(take, skip));
             if (predicate != null) res = res.Where(predicate);

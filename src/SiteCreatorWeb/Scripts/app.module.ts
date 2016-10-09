@@ -12,6 +12,10 @@ import { Ng2PaginationModule } from 'ng2-pagination';
 import { FormsModule }   from "@angular/forms";
 
 import { HomeComponent } from "./Components/Home/home.component";
+import { LastCreatedSitesComponent } from "./Components/Home/Parts/last-created-sites.component";
+import { MostCommentedPages } from "./Components/Home/Parts/most-commented-pages.component";
+import { MostRatedPages } from "./Components/Home/Parts/most-rated-pages.component";
+
 import { AccountComponent } from "./Components/Account/account.component";
 
 import { SiteComponent } from "./Components/Site/site.component";
@@ -77,7 +81,10 @@ import { routing } from './routes';
         PageItemComponent,
         CommentComponent,
         CommentItemComponent,
-        LockoutComponent
+        LockoutComponent,
+        LastCreatedSitesComponent,
+        MostCommentedPages,
+        MostRatedPages
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy},

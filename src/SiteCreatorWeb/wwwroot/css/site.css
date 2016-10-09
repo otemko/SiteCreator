@@ -50,10 +50,25 @@ textarea {
     display:inline-block;    
 }
 
-.truncate {
-  white-space: nowrap;
+.truncate-1 {
   overflow: hidden;
-  text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical; 
+}
+
+.truncate-2 {
+  overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; 
+}
+
+.truncate-3 {
+  overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; 
 }
 
 .link-cursore {
@@ -61,7 +76,53 @@ textarea {
 }
 
 
+div.hover-blue {
+    background: transparent;
+}
 
 div.hover-blue:hover {
-    background: linear-gradient(-60deg, #e5fffb, #e1f2ef)
+    background: linear-gradient(-60deg, #e0eaf9, #e1f2ef);
+}
+
+.fr-wrapper:hover {
+    cursor: text;
+}
+
+.site-name {
+    font-size: 17px;
+    color:darkslategray;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+.user-name {
+    font-size: 14px;
+    color:darkslategray;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.hashtag {
+    font-size: 12px;
+    font-family: cursive;
+    font-style: italic;
+}
+
+.home-header {
+    font-size: 26px;
+    padding-left: 20px;
+    color:#787789;
+    font-family: sans-serif;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.home-panel {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 150px;
+    padding-right: 150px;
+    margin-left: -150px;
+    margin-right: -150px;
 }

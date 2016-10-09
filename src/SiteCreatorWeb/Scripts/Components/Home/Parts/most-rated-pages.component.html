@@ -1,0 +1,29 @@
+<div class="home-panel" style="background: #edfffc">
+    <span class="home-header">Last publishing sites</span>
+    <div class="row">
+        <div *ngFor="let site of sites" class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+            <div class="thumbnail hover-blue text-center" style="height: 200px; margin: 20px">
+                <a [routerLink]="['/site', site.id]">
+                    <div style="height: 80px">
+                        <img style="max-width: 100px; max-height: 70px; margin: 5px" [src]="page.preview" />
+                    </div>
+                    <div class="truncate-1" style="padding: 5px; padding-top: 15px">
+                        <i class="fa fa-sitemap"></i><span class="site-name">&nbsp;{{ site.name }}</span>
+                    </div>
+                </a>
+                <div style="height: 37px">
+                    <span class="text-info truncate-2 hashtag" style="padding-top: 5px">
+                <i class="fa fa-hashtag fa-fw" style="cursor: pointer"></i>
+                <span *ngFor="let tag of site.tags; let i = index">
+                    <a [routerLink]="['/sites', tag.id]" (click)="tagClick(tag.id)">{{ tag.name }}</a>
+                    <span *ngIf="i<site.tags.length-1">,&nbsp;</span>
+                    </span>
+                    </span>
+                </div>
+                <div style="padding-top: 10px">
+                    <span class="user-name truncate-1">By&nbsp;<a [routerLink]="['/sites']">{{ site.userName }}</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

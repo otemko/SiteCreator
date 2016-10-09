@@ -67,6 +67,9 @@ export class SiteCreateComponent {
                 this.isReady = true;
             });
         }
+        else
+            this.isReady = true;
+            
         this.tagService.getTags().then(tags => {
             this.tags = tags;
             this.tagNames = [];

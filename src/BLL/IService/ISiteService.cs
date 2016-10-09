@@ -12,5 +12,7 @@ namespace SiteCreator.BLL.IService
         Task<Site> GetSitesById(int siteId);
         Task CreateSiteWithTagsAsync(Site site, List<Tag> tags);
         Task UpdateSiteWithTagsAsync(Site site, List<Tag> tags);
+        Task<IEnumerable<Site>> GetLastCreatedSites(int take = 0, int skip = 0);
+        
     }
 }

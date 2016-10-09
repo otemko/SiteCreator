@@ -10,9 +10,13 @@ namespace SiteCreator.DAL.IRepository
     public interface ISiteRepository
     {
         Task<IEnumerable<Site>> GetSitesIncludeAllBy
-            (Expression<Func<Site, bool>> predicate = null, int take = 0, int skip = 0);
+            (int take = 0, int skip = 0, Expression<Func<Site, bool>> predicate = null);
+
+        Task<IEnumerable<Site>> GetSitesIncludeAllOrderBy<TKey>
+            (bool orderByDescending, Expression<Func<Site, TKey>> predicateOrder = null,
+                int take = 0, int skip = 0, Expression<Func<Site, bool>> predicate = null);
 
         Task<IEnumerable<Site>> GetSitesIncludeAllAndPagesBy
-            (Expression<Func<Site, bool>> predicate = null, int take = 0, int skip = 0);
+            (int take = 0, int skip = 0, Expression<Func<Site, bool>> predicate = null);
     }
 }

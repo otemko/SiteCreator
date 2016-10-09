@@ -29,19 +29,19 @@ namespace SiteCreator.BLL.Services
 
         public async Task<Site> GetSitesById(int siteId)
         {
-            var sites = await siteRepository.GetSitesIncludeAllAndPagesBy(p => p.Id == siteId);
+            var sites = await siteRepository.GetSitesIncludeAllAndPagesBy(0, 0, p => p.Id == siteId);
             return sites.FirstOrDefault();
         }
 
         public async Task<IEnumerable<Site>> GetSitesByTagId(int tagId)
         {
-            var sites = await siteRepository.GetSitesIncludeAllBy(p => p.TagSite.Any(q => q.TagId == tagId));
+            var sites = await siteRepository.GetSitesIncludeAllBy(0, 0, p => p.TagSite.Any(q => q.TagId == tagId));
             return sites;
         }
 
         public async Task<IEnumerable<Site>> GetSitesByUserId(string userId)
         {
-            var sites = await siteRepository.GetSitesIncludeAllBy(p => p.UserId == userId);
+            var sites = await siteRepository.GetSitesIncludeAllBy(0, 0, p => p.UserId == userId);
             return sites;
         }
 
@@ -61,6 +61,11 @@ namespace SiteCreator.BLL.Services
         {
             site.TagSite = new List<TagSite>();
             tags.ForEach(p => site.TagSite.Add(new TagSite { Site = site, Tag = p }));
+        }
+
+        public async Task<IEnumerable<Site>> GetLastCreatedSites(int take = 0, int skip = 0)
+        {
+            return await siteRepository.GetSitesIncludeAllOrderBy(true, p => p.DateCreated, take, skip);
         }
     }
 }

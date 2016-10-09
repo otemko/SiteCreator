@@ -24,7 +24,6 @@ export class PageComponent {
 
     constructor(private pageService: PageService, private page: Page, private route: ActivatedRoute) {
         let id = +this.route.snapshot.params['id'];
-        this.page.setNull();
         this.update(id);
     }
 
