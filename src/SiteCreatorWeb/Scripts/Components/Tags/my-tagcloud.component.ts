@@ -1,48 +1,4 @@
-﻿//import { Component, Input} from '@angular/core';
-//import { TagCloudComponent } from '../../tag-cloud/tag-cloud.component';
-//import { TagSiteService } from '../../Shared/Services/tag-site.service';
-//import { TagSite } from '../../Shared/Models/tag-site.model'
-
-//@Component({
-//    selector: 'my-tagcloud',
-//    templateUrl: './appScripts/Components/Tags/my-tagcloud.component.html',
-//    styleUrls: ['./appScripts/Components/Tags/my-tagcloud.component.css'],
-//    providers: [TagSiteService]
-//})
-
-//export class MyTagCloudComponent{
-//    public size = 10;
-//    public latestSelected: string = "";
-//    public showSize: boolean = true;
-
-
-//    private tagSite: TagSite[] = new Array();
-//    tagSiteView: string = "asd";
-
-//    constructor(private tagSiteService: TagSiteService) {
-//        this.tagSiteView;
-//        this.tagSiteService.getTagSites().then(res => {
-//            this.tagSite = res;
-//            this.tagSiteView = this.createString(this.tagSite);
-//            console.log(this.tagSiteView);
-//        });
-//    }
-
-//    ss() { console.log('ss'); console.log('ss') };
-
-//    onSelectedTag(name: string) {
-//        console.log(name);
-//        this.latestSelected = name;
-//    }
-
-//    createString(tagSite: TagSite[]): string {
-//        let result = "";
-//        tagSite.forEach(ts => result += ts.tagName + ' ');
-//        return result;
-//    }
-//}
-
-import {Component, OnInit, EventEmitter, Directive} from '@angular/core';
+﻿import {Component, OnInit, EventEmitter, Directive} from '@angular/core';
 import {Tag} from '../../Tag-cloud/tag';
 import {TagCloud} from '../../Tag-cloud/tag-cloud';
 import {TagBadgeComponent} from '../../Tag-cloud/tag-badge.component';
