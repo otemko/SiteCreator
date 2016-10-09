@@ -1,4 +1,4 @@
-<div class="row">
+<div *ngIf="isReady" class="row">
     <div id="Site" class="col-sm-9">
         <div dnd-droppable (onDropSuccess)="addElement($event.dragData, elements)" [dropZones]="['add']" class="panel panel-default">
             <div class="panel-heading">

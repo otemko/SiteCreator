@@ -18,11 +18,13 @@ declare var $: any;
 })
 
 export class PageComponent {
+    isReady: boolean;
     elements = [];
     public extraModules = [FroalaModule, DndModule.forRoot()];
 
     constructor(private pageService: PageService, private page: Page, private route: ActivatedRoute) {
         let id = +this.route.snapshot.params['id'];
+        this.page.setNull();
         this.update(id);
     }
 
@@ -31,6 +33,7 @@ export class PageComponent {
             if (this.page && this.page.content) {
                 this.elements = this.pageService.parseContentFromDb(null);
             }
+            this.isReady = true;
         });
     }
 }
