@@ -29,7 +29,7 @@
 
                 <div class="form-group">
                     <p-autoComplete #inputBox [(ngModel)]="resultTag" [ngModelOptions]="{standalone: true}" [suggestions]="filteredTags" (completeMethod)="filterTags($event)"
-                        [minLength]="1" placeholder="Chosse tag" [dropdown]="false" (onDropdownClick)="handleDropdownClick($event)"
+                        [minLength]="1" placeholder="Input tag..." [dropdown]="false" (onDropdownClick)="handleDropdownClick($event)"
                         (keyup.enter)="addTag(); inputBox.value=''">
                     </p-autoComplete>
                     <i class="fa fa-plus-circle fa-lg fa-fw text-info" (click)="addTag(); inputBox.value=''"></i>
@@ -38,7 +38,11 @@
                 <div id="invalid-tags" hidden>
                     One tag is required
                 </div>
-                <button (click)="onSubmit()" class="btn btn-default">Submit</button>
+                <button (click)="onSubmit()" class="btn btn-default text-center">
+                    <i *ngIf="loading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                    <i *ngIf="!loading" class="fa fa-save fa-fw text-success"></i>
+                    &nbsp;Submit
+                    </button>
             </div>
         </div>
 
@@ -47,12 +51,11 @@
         <div class="panel panel-default">
             <div class="panel-heading">Sites</div>
             <div *ngIf="site">
-                <div class="row" >
-                    <page-item *ngFor="let page of site.pages"
-                        [page]="page" (delete)="onDelete($event)"></page-item>
+                <div class="row" dnd-sortable-container [dropZones]="['p']" [sortableData]="site.pages">
+                    <page-item *ngFor="let page of site.pages; let i = index" dnd-sortable [sortableIndex]="i" [page]="page" (delete)="onDelete($event)"></page-item>
                 </div>
                 <div>
-                    <button (click)="newPage()" class="btn btn-primary">Create</button>
+                    <button *ngIf="site.id" (click)="newPage()" class="btn btn-primary"><i class="fa fa-plus"></i> Create</button>
                 </div>
             </div>
             <div class="panel-body">

@@ -4,6 +4,7 @@ export class Page {
     preview: string;
     elements: string;
     content: string;
+    order: number;
     userId: string;
     userName: string;
     siteId: number;
@@ -21,6 +22,7 @@ export class Page {
         this.elements = "";
         this.preview = "";
         this.name = "";
+        this.order = 0;
 
         return this;
     }

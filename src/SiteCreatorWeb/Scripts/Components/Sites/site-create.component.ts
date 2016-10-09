@@ -28,6 +28,7 @@ export class SiteCreateComponent {
     styleMenus: StyleMenu[];
     tags: Tag[];
     id;
+    loading: boolean;
     tagNames: string[] = new Array();
     filteredTags: any[];
     resultTag = "";
@@ -55,10 +56,13 @@ export class SiteCreateComponent {
 
     updateSite() {
         if (this.id) {
+            this.loading = true;
             this.siteService.getSiteById(this.id).then(res => {
                 Object.assign(this.site, res);
-                console.log(this.site);
+                this.getPagesOrder();
+                this.tagsView = [];
                 res.tags.forEach(p => this.tagsView.push(p.name));
+                this.loading = false;
             });
         }
         this.tagService.getTags().then(tags => {
@@ -88,6 +92,7 @@ export class SiteCreateComponent {
         }
         else {
             if (this.id) {
+                let i = 0; this.site.pages.forEach(p => p.order = i++);
                 this.siteService.updateSite(this.site).then(resId => {
                     this.updateSite();
                 });
@@ -102,6 +107,14 @@ export class SiteCreateComponent {
         }
     }
 
+    getPagesOrder() {
+        this.site.pages.sort((a, b) => a.order - b.order);
+    }
+
+    setPagesOrder() {
+
+    }
+
     getTags(): void {
         this.site.tags = [];
         this.tagsView.forEach(tagView => {
@@ -112,7 +125,7 @@ export class SiteCreateComponent {
     addTag() {
         let element = document.getElementById("invalid-tags");
         element.hidden = true;
-        if (this.resultTag != "" && !this.tagsView.find(p => p.toLowerCase() == this.resultTag.toLowerCase()) ) {
+        if (this.resultTag != "" && !this.tagsView.find(p => p.toLowerCase() == this.resultTag.toLowerCase())) {
             this.tagsView.push(this.resultTag);
             this.resultTag = "";
         };
@@ -139,5 +152,5 @@ export class SiteCreateComponent {
         }, 100)
     }
 
-    
+
 }

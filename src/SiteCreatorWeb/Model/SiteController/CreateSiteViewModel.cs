@@ -15,6 +15,7 @@ namespace SiteCreator.Web.Model.SiteController
         public string name { get; set; }
         public string userId { get; set; }
         public int styleMenuId { get; set; }
+        public Page[] pages { get; set; }
         public TagViewModel[] tags { get; set; }
 
 
@@ -35,6 +36,12 @@ namespace SiteCreator.Web.Model.SiteController
             site.Name = name;
             site.Preview = preview;
             site.StyleMenuId = styleMenuId;
+
+            foreach (var page in pages)
+            {
+                var p = site.Page.FirstOrDefault(q => q.Id == page.Id);
+                if (p != null) p.Order = page.Order;
+            }
         }
     }
 }
