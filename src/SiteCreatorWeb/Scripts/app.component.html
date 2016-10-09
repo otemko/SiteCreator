@@ -22,13 +22,14 @@
                 </li>
                 <li style="margin-top: -5px; margin-bottom: -5px">
                     <a class="form-inline">
-                        <input style="font-size: 12px; height: 30px" class="form-control" 
-                               type="text" 
+                        <input style="font-size: 12px; height: 30px" class="form-control"
+                               type="text"
                                #inputBox
                                placeholder="Search"
                                [(ngModel)]="valueSearch" [ngModelOptions]="{standalone: true}"
-                               (keyup.enter) ="search()">
-                        <span class="hidden-sm">&nbsp;
+                               (keyup.enter)="search()">
+                        <span class="hidden-sm">
+                            &nbsp;
                             <i class="fa fa-search" (click)="search(); inputBox.value=''" style="cursor: pointer"></i>
                         </span>
                     </a>
@@ -38,11 +39,11 @@
             <account-panel></account-panel>
             <language-panel></language-panel>
 
-            
+
         </div>
     </div>
 </nav>
 
-<div class="container app-body">
+<div class="container app-body">    
     <router-outlet></router-outlet>
 </div>

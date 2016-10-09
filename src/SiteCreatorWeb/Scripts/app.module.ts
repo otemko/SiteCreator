@@ -45,6 +45,11 @@ import { LockoutComponent } from './Components/Lockout/lockout.component'
 import { CommentComponent } from './Components/Comments/comments.component'
 import { CommentItemComponent } from './Components/Comments/comment-item.component'
 
+import { TagCloudComponent } from './tag-cloud/tag-cloud.component';
+import { SimpleTagCloudComponent } from './tag-cloud/simple-tag-cloud.component';
+import { TagBadgeComponent } from './tag-cloud/tag-badge.component';
+
+import { MyTagCloudComponent } from './Components/Tags/my-tagcloud.component';
 
 import { routing } from './routes';
 
@@ -82,6 +87,10 @@ import { routing } from './routes';
         CommentComponent,
         CommentItemComponent,
         LockoutComponent,
+        TagCloudComponent,
+        SimpleTagCloudComponent,
+        TagBadgeComponent,
+        MyTagCloudComponent,
         LastCreatedSitesComponent,
         MostCommentedPages,
         MostRatedPages
