@@ -19,18 +19,15 @@ namespace SiteCreator.Web.Controllers
             this.tagService = tagService;
         }
 
-        // GET: api/values
         [HttpGet]
         public async Task<IEnumerable<TagViewModel>> Get()
         {
             var listResult = new List<TagViewModel>();
 
-            var tags = await tagService.GetAllAsync();
+            var tags = await tagService.GetAllNonRepeatTagsAsync();
 
             foreach (var item in tags)
-            {
                 listResult.Add(new TagViewModel(item));
-            }
 
             return listResult;
         }

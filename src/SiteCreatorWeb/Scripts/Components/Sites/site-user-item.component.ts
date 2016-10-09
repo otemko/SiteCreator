@@ -21,21 +21,14 @@ export class SiteUserItemComponent {
         private siteService: SiteService,
         private account: Account,
         private route: Router,
-        private gs: GlobalService)
-    {
+        private gs: GlobalService) {
     }
 
     delete(id: number): void {
-        this.siteService.deleteSite(id).then(resId => {
-            if (id == resId)
-            {
-                this.route.navigate(['/sites-user', this.account.id]);
-                this.suc.update();
-            }
-            else
-                alert("You can't do it");
-        });
-        
+        this.siteService.deleteSite(id).then(res => {
+            this.route.navigate(['/sites-user', this.account.id]);
+            this.suc.update();
+        }).catch(res => alert("You can't do it"))
     }
 
     edit(id: number): void {
