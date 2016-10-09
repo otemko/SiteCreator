@@ -1,0 +1,21 @@
+﻿tag-cloud {
+	font-family: Arial;
+	font-size: 5pt;    
+    cursor: pointer;
+}
+.highlight {
+	color: #FF0;
+	font-weight: normal;
+}
+.badge {
+  font-size: smaller;
+  color: #369;
+  line-height: 1em;
+  position: relative;
+  left: -1px;
+  top: -1px;
+}
+tag-cloud .highlight {
+	color: #F00;
+	font-weight: bold;
+}

@@ -8,6 +8,6 @@ namespace SiteCreator.BLL.IService
 {
     public interface ITagSiteService : IEntityService<TagSite, int>
     {
-        Task<IEnumerable<TagSite>> GetTagSitesBySiteId(int siteId);
+        Task<IEnumerable<TagSite>> GetTagSitesWithTag();
     }
 }
