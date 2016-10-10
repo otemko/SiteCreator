@@ -15,15 +15,24 @@ import { Account } from '../../Shared/Models/account.model'
 export class SitesUserComponent 
 {
     sites: Site[] = new Array();
+    id: string;
 
-    constructor(private siteService: SiteService, private route: ActivatedRoute) {        
+    constructor(private siteService: SiteService,
+        private route: ActivatedRoute,
+        private account: Account) {        
         this.update();
     }
 
     update() {
-        let id = "" + this.route.snapshot.params['id'];
-        this.siteService.getSitesByUserId(id).then(sites => {
+        this.id = "" + this.route.snapshot.params['id'];
+        this.siteService.getSitesByUserId(this.id).then(sites => {
             this.sites = sites;
         });
+    }
+
+    checkPermission() {
+        if (this.account.id == this.id)
+            return true;
+        return false;
     }
 }

@@ -3,7 +3,7 @@
         <i class="fa fa-comments fa-fw"></i> Comments
     </div>
     <div class="panel-body">
-        <comment-item [comment]="newComment" [editing]="true" (create)="createComment($event)"></comment-item>
+        <comment-item *ngIf="checkPermission()" [comment]="newComment" [editing]="true" (create)="createComment($event)"></comment-item>
 
         <comment-item *ngFor="let comment of comments" [comment]="comment" [canEdit]="canEdit(comment)" (save)="editComment($event)"
             (delete)="delete($event)"></comment-item>

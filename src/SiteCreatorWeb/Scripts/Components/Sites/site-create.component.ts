@@ -92,18 +92,31 @@ export class SiteCreateComponent {
         }
         else {
             if (this.id) {
+                this.checkTheRights();
                 let i = 0; this.site.pages.forEach(p => p.order = i++);
                 this.siteService.updateSite(this.site).then(resId => {
                     this.updateSite();
                 });
             }
             else {
+                this.checkThePermission();
                 this.site.userId = this.account.id;
                 this.siteService.createSite(this.site).then(resId => {
                     this.id = resId;
                     this.updateSite();
                 });
             }
+        }
+    }
+
+    checkTheRights() {
+        if (this.account.role != 'Admin' && this.account.id != this.site.userId)
+            this.route.navigate(['/home']);
+    }
+
+    checkThePermission() {
+        if (!this.account.id) {
+            this.route.navigate(['/home']);
         }
     }
 

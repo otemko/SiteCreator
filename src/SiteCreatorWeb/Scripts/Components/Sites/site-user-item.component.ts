@@ -17,12 +17,16 @@ import { GlobalService } from '../../Shared/Services/global.service'
 export class SiteUserItemComponent {
     @Input() site: Site;
 
+    isHavePermisssion = false;
+
+
     constructor(private suc: SitesUserComponent,
         private siteService: SiteService,
         private account: Account,
         private route: Router,
         private gs: GlobalService) {
     }
+    
 
     delete(id: number): void {
         this.siteService.deleteSite(id).then(res => {
@@ -34,5 +38,13 @@ export class SiteUserItemComponent {
     edit(id: number): void {
         this.route.navigate(['/site-create', id]);
         this.gs.prevUrl = this.route.url;
+    }
+
+    checkPermission() {
+        if (this.account.role == 'admin')
+            return true;
+        if (this.account.id == this.site.userId)
+            return true;
+        return false;
     }
 }
