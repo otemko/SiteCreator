@@ -18,6 +18,8 @@ declare var $;
 export class SitesUserComponent {
     sites: Site[] = new Array();
     id: string;
+    loading: boolean;
+    invalidMsg: string;
     nameModel: any = {};
 
     constructor(private siteService: SiteService,
@@ -45,12 +47,37 @@ export class SitesUserComponent {
     }
 
     setPageName() {
-        this.nameModel = { innerHTML: this.account.id };
+        this.nameModel = { innerHTML: this.account.userName };
         $('.fr-submit').click(console.log(this.nameModel));
     }
 
-    updateName() {
-        console.log(this.nameModel.innerHtml);
-        // this.accountService.updateUserName(this.nameModel.innerHtml);
+    invalidate(msg: string) {
+        this.invalidMsg = msg;
+        this.loading = false;
     }
+
+    validate() {
+        this.update();
+        this.invalidMsg = "";
+        this.loading = false;
+    }
+
+    updateName() {
+        this.loading = true;
+        console.log(this.nameModel.innerHTML);
+        this.accountService.updateName(this.nameModel.innerHTML).then(res => {
+            this.accountService.getAccountInfo().then(res => {
+                if (this.account.userName != this.nameModel.innerHTML) {
+                    this.invalidate("Invalid input");
+                }
+                else {
+                    this.validate;
+                }
+            })
+        }).catch(res => {
+            this.invalidate("User with this name exists");
+        })
+    }
+
+
 }

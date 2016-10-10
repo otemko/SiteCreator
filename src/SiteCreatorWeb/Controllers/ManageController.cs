@@ -43,5 +43,18 @@ namespace SiteCreator.Web.Controllers
 
             return new UserInfoViewModel(user, roles[0]);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateUserName([FromBody] string userName)
+        {
+            if (!signInManager.IsSignedIn(User) || userName == null) return BadRequest();
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await userservice.GetSingleAsync(userId);
+            var userWithTheSameName = await userManager.FindByNameAsync(userName);
+            if (userWithTheSameName != null && user.Id != userWithTheSameName.Id) return BadRequest();
+            await userManager.SetUserNameAsync(user, userName);
+
+            return Ok();
+        }
     }
 }
