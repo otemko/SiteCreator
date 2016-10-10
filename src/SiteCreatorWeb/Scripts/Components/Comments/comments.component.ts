@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core'
 import { Comment } from '../../Shared/Models/comment.model'
 import { CommentService } from '../../Shared/Services/comments.service'
 import { Account } from '../../Shared/Models/account.model'
+import { Language } from '../../Shared/Models/language.model'
 
 @Component({
     selector: 'comments',
@@ -14,7 +15,7 @@ export class CommentComponent implements OnInit {
     comments: Comment[] = [];
     newComment: Comment = new Comment();
 
-    constructor(private commentsService: CommentService, private account: Account) {
+    constructor(private commentsService: CommentService, private account: Account, private l: Language) {
     }
 
     ngOnInit() {

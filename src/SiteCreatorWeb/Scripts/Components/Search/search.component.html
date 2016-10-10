@@ -1,14 +1,47 @@
-﻿
-    <div *ngFor="let searchSite of sr.searchSites">
-        <a [routerLink]="['/site', searchSite.id]"><i class="fa fa-folder" aria-hidden="true"></i>{{searchSite.name}}</a>
+﻿<div class="panel-group" id="collapse-group1">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#collapse-group1" href="#el1"><i class="fa fa-folder" aria-hidden="true"></i> {{l.Sites}}</a>
+            </h4>
+        </div>
+        <div id="el1" class="collapse in">
+            <div class="hover-blue panel-body" *ngFor="let searchSite of sr.searchSites">
+                <a [routerLink]="['/site', searchSite.id]"><i class="fa fa-folder" aria-hidden="true"></i>{{searchSite.name}}</a>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div *ngFor="let searchPage of sr.searchPages">
-        <a [routerLink]="['/page', searchPage.id]"><i class="fa fa-tag" aria-hidden="true"></i>{{searchPage.name}}</a>
+<div class="panel-group" id="collapse-group2">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#collapse-group2" href="#el2"><i class="fa fa-tag" aria-hidden="true"></i> {{l.Pages}}</a>
+            </h4>
+        </div>
+        <div id="el2" class="collapse in">
+            <div class="hover-blue panel-body" *ngFor="let searchPage of sr.searchPages">
+                <a [routerLink]="['/page', searchPage.id]"><i class="fa fa-tag" aria-hidden="true"></i>{{searchPage.name}}</a>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div *ngFor="let searchUser of sr.searchUsers">
-        <a [routerLink]="['/sites-user', searchUser.id]"><i class="fa fa-user" aria-hidden="true"></i>{{searchUser.userName}}</a>
+<div class="panel-group" id="collapse-group3">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#collapse-group3" href="#el3"><i class="fa fa-user" aria-hidden="true"></i> {{l.Users}}</a>
+            </h4>
+        </div>
+        <div id="el3" class="collapse in">
+            <div class="hover-blue panel-body" *ngFor="let searchUser of sr.searchUsers">
+                <a [routerLink]="['/sites-user', searchUser.id]"><i class="fa fa-user" aria-hidden="true"></i>{{searchUser.userName}}</a>
+            </div>
+        </div>
     </div>
+</div>
+
 
 

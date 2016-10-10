@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-xs-9 col-sm-10">
                         <button class="btn-link h4" style="color: black" [froalaEditor] [(froalaModel)]="nameModel"></button><br>
-                        <span style="margin-left: 0.5em"><input type="checkbox" [(ngModel)]="page.commentsEnabled"> Add comments</span>
+                        <span style="margin-left: 0.5em"><input type="checkbox" [(ngModel)]="page.commentsEnabled"> {{l.PageEditorComments}}</span>
                     </div>
                 </div>
             </div>
@@ -24,14 +24,14 @@
     </div>
     <div class="col-sm-3">
         <div class="panel panel-default">
-            <div class="panel-heading">Activity</div>
+            <div class="panel-heading">{{l.PageEditorActivity}}</div>
             <div class="panel-body">
                 <div class="text-center">
                     <button class="btn btn-default" (click)="save()">
                         <i *ngIf="!loading" class="fa fa-save fa-fw"></i>
                         <i *ngIf="loading" class="fa fa-spinner fa-pulse fa-fw"></i>
-                        <span *ngIf="id"> Save</span>
-                        <span *ngIf="!id"> Create</span>
+                        <span *ngIf="id"> {{l.Save}}</span>
+                        <span *ngIf="!id"> {{l.Create}}</span>
                         <i *ngIf="failload" class="fa fa-times-circle text-danger"></i>
                     </button>
                 </div>
@@ -39,7 +39,7 @@
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">Available items</div>
+            <div class="panel-heading">{{l.PageEditorAvailable}}</div>
             <div>
                 <div class="panel-body">
                     <span *ngFor="let el of availableElements; let i = index" dnd-draggable [dragData]="el" [dropZones]="['add']">
@@ -51,7 +51,7 @@
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">Trash</div>
+            <div class="panel-heading">{{l.Trash}}</div>
             <div class="panel-body text-center" dnd-sortable-container [dropZones]="['trash']" [sortableData]="trash">
                 <img style="max-width: 150px" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQkBcVWdyEdwQRESMlraWji1HZqyMFnyBmmo9AraXbLV21yyIN1"
                 />

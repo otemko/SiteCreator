@@ -12,6 +12,7 @@ import { PageService } from '../../Shared/Services/pages.service'
 import { Account } from '../../Shared/Models/account.model'
 import { Elements } from '../../Shared/Models/elements.model'
 import { ElementService } from '../../Shared/Services/elements.service'
+import { Language } from '../../Shared/Models/language.model'
 
 declare var $: any;
 
@@ -43,7 +44,7 @@ export class PageEditorComponent implements OnInit {
 
     constructor(private account: Account, private route: ActivatedRoute, private router: Router,
         private pageService: PageService, private page: Page, private allElements: Elements,
-        private elementService: ElementService) {
+        private elementService: ElementService, private l: Language) {
     }
 
     ngOnInit() {
@@ -60,8 +61,7 @@ export class PageEditorComponent implements OnInit {
         if (this.account.role != 'Admin' && this.account.id != this.page.userId)
             this.router.navigate(['/home']);
     }
-
-
+    
     addElement(data, elements) {
         let obj = JSON.parse(JSON.stringify(data));
         obj.inputData.editable = this.editable;

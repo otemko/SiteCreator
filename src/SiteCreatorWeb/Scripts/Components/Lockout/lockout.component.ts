@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 
 import { Account } from '../../Shared/Models/account.model'
 import { AccountService } from '../../Shared/Services/account.service'
+import { Language } from '../../Shared/Models/language.model'
 
 @Component({
     selector: 'lockout',
@@ -12,7 +13,10 @@ import { AccountService } from '../../Shared/Services/account.service'
 
 export class LockoutComponent implements OnDestroy {
 
-    constructor(private account: Account, private accountService: AccountService, private route: ActivatedRoute) {
+    constructor(private account: Account,
+        private accountService: AccountService,
+        private route: ActivatedRoute,
+        private l: Language) {
         
     }    
 

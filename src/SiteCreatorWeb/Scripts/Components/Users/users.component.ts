@@ -3,6 +3,7 @@ import { Component } from '@angular/core'
 import { User } from '../../Shared/Models/user.model'
 import { Account } from '../../Shared/Models/account.model'
 import { UserService } from '../../Shared/Services/user.service'
+import { Language } from '../../Shared/Models/language.model'
 
 @Component({
     selector: 'users',
@@ -13,7 +14,8 @@ import { UserService } from '../../Shared/Services/user.service'
 export class UsersComponent {
     users: User[] = new Array();
 
-    constructor(private userService: UserService,
+    constructor(private l: Language,
+        private userService: UserService,
         private account: Account) {
         this.update();
     }

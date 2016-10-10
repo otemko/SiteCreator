@@ -1,13 +1,15 @@
 <div *ngIf="sites">
 
 
-    <label for="sort">Sort</label>
+    <label for="sort">{{l.Sort}}</label>
     <select class="form-control"
             id="sort"
             [(ngModel)]="typeSort" [ngModelOptions]="{standalone: true}"
             (ngModelChange)="sortBy()"
             name="sort">
-        <option *ngFor="let ts of typesSort" [value]=ts.key>{{ts.value}}</option>
+        <option [value]=0>{{l.SortByUserName}}</option>
+        <option [value]=1>{{l.SortBySiteName}}</option>
+        <option [value]=2>{{l.SortByDateCreated}}</option>
     </select>
 
 

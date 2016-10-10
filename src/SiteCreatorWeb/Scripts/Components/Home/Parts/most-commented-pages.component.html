@@ -1,5 +1,5 @@
 <div *ngIf="pages.length" class="home-panel" style="background: #edfffc">
-    <span class="home-header">Most commented pages</span>
+    <span class="home-header">{{l.HomeCommented}}</span>
     <div class="row" style="margin-right: -25px; margin-left: -25px;">
         <div *ngFor="let page of pages" class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
             <div class="thumbnail hover-blue text-center" style="height: 220px; margin: 20px">
@@ -20,7 +20,7 @@
                     <i class="fa fa-comments"></i>&nbsp;<span class="badge">{{ page.commentsCount }}</span>
                 </div>
                 <div style="padding-top: 10px">
-                    <span class="user-name truncate-1">By&nbsp;<a [routerLink]="['/pages']">{{ page.userName }}</a></span>
+                    <span class="user-name truncate-1">{{l.HomeBy}}&nbsp;<a [routerLink]="['/pages']">{{ page.userName }}</a></span>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import { Site } from '../../Shared/Models/site.model'
 import { Account } from '../../Shared/Models/account.model'
 import { SiteService } from '../../Shared/Services/sites.service'
 import { SitesUserComponent } from './sites-user.component'
+import { Language } from '../../Shared/Models/language.model'
 
 import { GlobalService } from '../../Shared/Services/global.service'
 
@@ -20,7 +21,8 @@ export class SiteUserItemComponent {
     isHavePermisssion = false;
 
 
-    constructor(private suc: SitesUserComponent,
+    constructor(private l: Language,
+        private suc: SitesUserComponent,
         private siteService: SiteService,
         private account: Account,
         private route: Router,

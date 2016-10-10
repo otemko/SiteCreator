@@ -6,6 +6,7 @@ import { SiteUserItemComponent } from './site-user-item.component';
 import { SiteService } from '../../Shared/Services/sites.service'
 import { Account } from '../../Shared/Models/account.model'
 import { AccountService } from '../../Shared/Services/account.service'
+import { Language } from '../../Shared/Models/language.model'
 
 declare var $;
 
@@ -22,7 +23,8 @@ export class SitesUserComponent {
     invalidMsg: string;
     nameModel: any = {};
 
-    constructor(private siteService: SiteService,
+    constructor(private l: Language,
+        private siteService: SiteService,
         private route: ActivatedRoute,
         private account: Account,
         private accountService: AccountService) {

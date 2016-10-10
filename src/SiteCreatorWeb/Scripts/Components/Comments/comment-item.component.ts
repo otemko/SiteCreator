@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Comment } from '../../Shared/Models/comment.model'
+import { Language } from '../../Shared/Models/language.model'
 
 declare var $: any;
 
@@ -17,12 +18,11 @@ export class CommentItemComponent {
     @Output() delete = new EventEmitter();
     @Output() create = new EventEmitter();
 
-    costructor() {
-        console.log(this.comment);
+    constructor(private l: Language) {
     }
 
     options = {
-        placeholderText: 'Type here...',
+        placeholderText: this.l.CommentType,
         charCounterCount: false,
         toolbarInline: true,
         disableRightClick: true,

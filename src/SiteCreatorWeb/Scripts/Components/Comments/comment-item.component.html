@@ -2,13 +2,13 @@
     <div class="panel-body">
         <div class="row" style="padding-bottom: 0.5em">
             <div class="col-xs-8">
-                <span class="text-muted" *ngIf="!comment.id"><i class="fa fa-comment-o"></i> Add new comment</span>
-                <a *ngIf="comment.id" class="user-name-link"><i class="fa fa-user"></i> {{ comment.userName }} </a>
+                <span class="text-muted" *ngIf="!comment.id"><i class="fa fa-comment-o"></i> {{l.CommentAdd}}</span>
+                <a *ngIf="comment.id"  [routerLink]="['/sites-user', comment.userId]" class="user-name-link"><i class="fa fa-user"></i> {{ comment.userName }} </a>
             </div>
             <div class="col-xs-4 text-right">
                 <div *ngIf="!comment.id">
                     <button (click)="onCreateComment()" class="btn btn-default btn-sm">
-                        <i class="fa fa-check-circle fa-fw text-info"></i> Save 
+                        <i class="fa fa-check-circle fa-fw text-info"></i> {{l.Save}}
                     </button>
                 </div>
 

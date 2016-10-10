@@ -13,6 +13,7 @@ import { TagService } from '../../Shared/Services/tag.service'
 import { Page } from '../../Shared/Models/page.model'
 import { PageService } from '../../Shared/Services/pages.service'
 
+import { Language } from '../../Shared/Models/language.model'
 import { GlobalService } from '../../Shared/Services/global.service'
 
 
@@ -48,7 +49,8 @@ export class SiteCreateComponent {
         private r: ActivatedRoute,
         private pageService: PageService,
         private currentPage: Page,
-        private gs: GlobalService) {
+        private gs: GlobalService,
+        private l: Language) {
 
         this.id = +this.r.snapshot.params['id'];
         this.updateSite();

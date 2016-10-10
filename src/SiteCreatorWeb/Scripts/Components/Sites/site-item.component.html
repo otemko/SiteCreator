@@ -29,7 +29,7 @@
             </span>
         </div>
         <div style="padding-top: 5px; padding-bottom: 5px">
-            <span class="user-name truncate-1">By&nbsp;<a [routerLink]="['/sites-user', site.userId]">{{ site.userName }}</a></span>
+            <span class="user-name truncate-1">{{l.HomeBy}}&nbsp;<a [routerLink]="['/sites-user', site.userId]">{{ site.userName }}</a></span>
         </div>
     </div>
     <div class="col-lg-1 text-right hidden-xs hidden-sm hidden-md" style="padding-top: 5px" *ngIf="checkPermission()">

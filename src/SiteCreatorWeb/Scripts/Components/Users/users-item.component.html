@@ -10,16 +10,16 @@
         <button *ngIf="user.isLockoutEnabled == true"
                 (click)="lockout(user.isLockoutEnabled)"
                 class="btn btn-primary">
-            Lockout Disabled
+            {{l.LockoutDisabled}}
         </button>
         <button *ngIf="user.isLockoutEnabled == false"
                 (click)="lockout(user.isLockoutEnabled)"
                 class="btn btn-primary">
-            Lockout Ebabled
+            {{l.LockoutEbabled}}
         </button>
         <button (click)="delete(user.id)"
                 class="btn btn-danger">
-            Delete
+            {{l.Delete}}
         </button>
     </div>
 
