@@ -1,11 +1,13 @@
 <div *ngIf="users">
-    <div class="list-group">
-        <div class="list-group-item" *ngFor="let user of users | paginate: { itemsPerPage: 2, currentPage: p }">
+    <button *ngIf="account.role == 'admin' && users.length != 0" (click)="save()" class="btn btn-default">
+        <i class="fa fa-floppy-o" aria-hidden="true"></i>
+    </button>
+    <div class="list-group" style="padding-top: 20px;">
+        <div *ngFor="let user of users | paginate: { itemsPerPage: 2, currentPage: p }">
             <users-item [user]="user"></users-item>
         </div>
     </div>
     <div class="text-center" style="margin-top: 5px">
         <pagination-controls style="cursor:pointer" directionLinks="false" (pageChange)="p = $event"></pagination-controls>
-    </div>
-    <button *ngIf="account.role == 'admin' && users.length != 0" (click)="save()" class="btn btn-primary">{{l.Save}}</button>
+    </div>    
 </div>

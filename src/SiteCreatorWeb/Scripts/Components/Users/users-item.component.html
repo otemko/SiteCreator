@@ -1,26 +1,30 @@
-﻿<div class="row">
-    <div class="col-md-2 text-center">
-        <i class="fa fa-user fa-5x fa-fw"></i>
+﻿<div class="row thumbnail hover-blue">
+    <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
+        <a class="user-name" [routerLink]="['/sites-user', user.id]">
+            <i class="fa fa-user fa-5x fa-fw"></i>
+        </a>
     </div>
-    <div class="col-md-10">
-        {{user.userName}}
+    <div>
+        <a class="user-name" [routerLink]="['/sites-user', user.id]">
+            <div class="truncate-1">
+                {{user.userName}}
+            </div>
+        </a>
     </div>
-
-    <div *ngIf="account.role == 'admin'">
+    <div style="padding-top: 5px" *ngIf="account.role == 'admin'">
         <button *ngIf="user.isLockoutEnabled == true"
                 (click)="lockout(user.isLockoutEnabled)"
-                class="btn btn-primary">
-            {{l.LockoutDisabled}}
+                class="btn btn-default">
+            <i class="fa fa-lock" aria-hidden="true"></i>
         </button>
         <button *ngIf="user.isLockoutEnabled == false"
                 (click)="lockout(user.isLockoutEnabled)"
-                class="btn btn-primary">
-            {{l.LockoutEbabled}}
+                class="btn btn-default">
+            <i class="fa fa-unlock" aria-hidden="true"></i>
         </button>
         <button (click)="delete(user.id)"
-                class="btn btn-danger">
-            {{l.Delete}}
+                class="btn btn-default">
+            <i class="fa fa-trash-o fa-fw text-danger"></i>
         </button>
     </div>
-
 </div>

@@ -1,10 +1,4 @@
-﻿<!--<tag-cloud (selectedTag)="onSelectedTag($event)" 
-           [text]="tagSiteView"           
-           [showSize]="showSize" 
-           [maxWords]="size"
-           ></tag-cloud>-->
-
-<div *ngIf="tagCloud">
+﻿<div style="padding-bottom: 15px; text-align:center" *ngIf="tagCloud">
     <div  id="tag-cloud1" [style.width]="'100%'">
         <tag-badge style="cursor: pointer" *ngFor="let tag of tagCloud.tags" [tag]="tag" [sizeRatio]="sizeRatio" [showSize]="showSize"  (click)="tagClick(tag.name)" ></tag-badge>
     </div>
