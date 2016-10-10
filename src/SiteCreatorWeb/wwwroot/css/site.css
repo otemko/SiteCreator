@@ -133,3 +133,8 @@ div.hover-blue:hover {
     margin-left: -150px;
     margin-right: -150px;
 }
+
+.panel {
+    background: linear-gradient(-60deg, #fcfeff, #fcfcfc
+);
+}

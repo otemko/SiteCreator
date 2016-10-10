@@ -11,12 +11,12 @@
     </select>
 
 
-    <div class="list-group">
-        <div class="list-group-item" *ngFor="let site of sites | paginate: { itemsPerPage: 4, currentPage: p }">
+    <div class="list-group" style="padding-top: 20px;">
+        <div *ngFor="let site of sites | paginate: { itemsPerPage: 10, currentPage: p }">
             <site-item [site]="site"></site-item>
         </div>
-        <div class="text-center" style="margin-top: 5px">
-            <pagination-controls style="cursor:pointer" directionLinks="false" (pageChange)="p = $event"></pagination-controls>
+        <div *ngIf="sites.length > 10" class="text-center" style="margin-top: 5px">
+            <pagination-controls style="cursor:pointer; font-size: 20px" directionLinks="false" (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>
 </div>

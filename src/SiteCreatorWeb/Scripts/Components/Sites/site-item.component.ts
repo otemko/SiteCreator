@@ -39,4 +39,12 @@ export class SiteItemComponent {
         this.route.navigate(['/site-create', id]);
         this.gs.prevUrl = this.route.url;
     }
+
+    checkPermission() {
+        if (this.account.role == 'admin')
+            return true;
+        if (this.account.id == this.site.userId)
+            return true;
+        return false;
+    }
 }

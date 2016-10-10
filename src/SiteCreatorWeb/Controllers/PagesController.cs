@@ -82,8 +82,8 @@ namespace SiteCreator.Web.Controllers
             if (!CheckTheRightsForVote(page?.Site)) return BadRequest();
             if (!await CheckLockout()) return StatusCode((int)HttpStatusCode.Forbidden);
 
-            page.Rating = (page.Rating * page.CountRated + rating) / (page.CountRated++);
-            await pageService.UpdateAsync(page);
+            pageService.Vote(page, rating);
+
             return Ok(new { page.Rating, page.CountRated });
         }
 
