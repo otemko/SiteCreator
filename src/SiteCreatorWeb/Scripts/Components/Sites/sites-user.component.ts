@@ -34,9 +34,7 @@ export class SitesUserComponent {
         this.id = "" + this.route.snapshot.params['id'];
         this.siteService.getSitesByUserId(this.id).then(sites => {
             this.setPageName();
-            console.log(sites);
             this.sites = sites;
-
         });
     }
 
@@ -48,7 +46,6 @@ export class SitesUserComponent {
 
     setPageName() {
         this.nameModel = { innerHTML: this.account.userName };
-        $('.fr-submit').click(console.log(this.nameModel));
     }
 
     invalidate(msg: string) {
@@ -57,8 +54,8 @@ export class SitesUserComponent {
     }
 
     validate() {
-        this.update();
         this.invalidMsg = "";
+        this.update();
         this.loading = false;
     }
 
@@ -71,7 +68,7 @@ export class SitesUserComponent {
                     this.invalidate("Invalid input");
                 }
                 else {
-                    this.validate;
+                    this.validate();
                 }
             })
         }).catch(res => {
