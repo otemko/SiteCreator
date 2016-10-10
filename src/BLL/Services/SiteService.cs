@@ -29,7 +29,7 @@ namespace SiteCreator.BLL.Services
 
         public async Task<Site> GetSitesById(int siteId)
         {
-            var sites = await siteRepository.GetSitesIncludeAllAndPagesBy(0, 0, p => p.Id == siteId);
+            var sites = await siteRepository.GetSitesIncludeAllBy(0, 0, p => p.Id == siteId);
             return sites.FirstOrDefault();
         }
 

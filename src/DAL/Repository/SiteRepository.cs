@@ -39,12 +39,6 @@ namespace SiteCreator.DAL.Repository
             
         }
 
-        public async Task<IEnumerable<Site>> GetSitesIncludeAllAndPagesBy
-            (int take = 0, int skip = 0, Expression<Func<Site, bool>> predicate = null)
-        {
-            return await GetAllQuery(take, skip, predicate).Include(p => p.Page).ToListAsync();
-        }
-
         public IQueryable<Site> GetAllQuery(int take = 0, int skip = 0, Expression<Func<Site, bool>> predicate = null)
         {
             var res = IncludeAll(Skipping(take, skip));
@@ -54,7 +48,7 @@ namespace SiteCreator.DAL.Repository
 
         public IQueryable<Site> IncludeAll(IQueryable<Site> sites)
         {
-            return sites.Include(p => p.User).Include(p => p.TagSite).ThenInclude(p => p.Tag);
+            return sites.Include(p => p.User).Include(p => p.Page).Include(p => p.TagSite).ThenInclude(p => p.Tag);
         }
 
         public IQueryable<Site> Skipping(int take, int skip)

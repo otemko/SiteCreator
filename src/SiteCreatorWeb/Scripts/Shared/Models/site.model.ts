@@ -8,6 +8,8 @@ export class Site{
     userName: string;
     userId: string;
     styleMenuId: number;
+    preview: string;
     tags: Tag[];
     pages: Page[];
+    pagesCount: number;
 }

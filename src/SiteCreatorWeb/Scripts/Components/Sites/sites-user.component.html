@@ -1,6 +1,7 @@
 ﻿<div *ngIf="sites">
-    <div *ngFor="let site of sites">
-        <site-user-item [site]="site"></site-user-item>
+    
+    <div class="row">
+        <site-user-item *ngFor="let site of sites" [site]="site"></site-user-item>
     </div>
 </div>
 <div>

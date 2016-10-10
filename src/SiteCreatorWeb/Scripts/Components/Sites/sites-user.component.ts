@@ -28,6 +28,7 @@ export class SitesUserComponent
     update() {
         this.id = "" + this.route.snapshot.params['id'];
         this.siteService.getSitesByUserId(this.id).then(sites => {
+            console.log(sites);
             this.sites = sites;
         });
     }

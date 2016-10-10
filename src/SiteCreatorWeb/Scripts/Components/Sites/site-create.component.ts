@@ -34,6 +34,10 @@ export class SiteCreateComponent {
     tagNames: string[] = new Array();
     filteredTags: any[];
     resultTag = "";
+    public previewEditor = {
+        imageEditButtons: ['imageReplace']
+    };
+    public previewModel: any = {};
 
     tagsView: string[] = new Array();
 
@@ -67,16 +71,29 @@ export class SiteCreateComponent {
                 res.tags.forEach(p => this.tagsView.push(p.name));
                 this.loading = false;
                 this.isReady = true;
+                this.setPreview();
             });
         }
-        else
+        else {
             this.isReady = true;
-            
+            this.setPreview();
+        }
+
         this.tagService.getTags().then(tags => {
             this.tags = tags;
             this.tagNames = [];
             tags.forEach(p => this.tagNames.push(p.name));
         });
+    }
+
+    setPreview() {
+        this.previewModel = {
+            src: this.site.preview || 'http://icons2.iconarchive.com/download/i85581/graphicloads/100-flat/home.ico'
+        };
+    }
+
+    getPreview() {
+        this.site.preview = this.previewModel.src || 'http://icons2.iconarchive.com/download/i85581/graphicloads/100-flat/home.ico';
     }
 
     newPage() {
@@ -91,13 +108,14 @@ export class SiteCreateComponent {
     }
 
     onSubmit() {
-        this.loading = true;
         this.getTags();
         if (this.tagsView.length == 0) {
             let element = document.getElementById("invalid-tags");
             element.hidden = false;
         }
         else {
+            this.loading = true;
+            this.getPreview();
             if (this.id) {
                 this.checkTheRights();
                 let i = 0; this.site.pages.forEach(p => p.order = i++);

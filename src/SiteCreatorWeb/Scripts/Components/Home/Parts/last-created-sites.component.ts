@@ -3,8 +3,9 @@ import { ActivatedRoute } from '@angular/router'
 
 import { Site } from '../../../Shared/Models/site.model';
 import { Tag } from '../../../Shared/Models/tag.model';
-import { HomeService } from '../../../Shared/Services/home.service';
+import { HomeService } from '../../../Shared/Services/home.service'
 import { Language } from '../../../Shared/Models/language.model'
+
 
 @Component({
     selector: 'last-created-sites',
