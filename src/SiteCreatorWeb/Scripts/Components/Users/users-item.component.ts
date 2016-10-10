@@ -5,6 +5,7 @@ import { User } from '../../Shared/Models/user.model'
 import { Account } from '../../Shared/Models/account.model'
 import { UserService } from '../../Shared/Services/user.service'
 import { UsersComponent } from './users.component'
+import { Language } from '../../Shared/Models/language.model'
 
 @Component({
     selector: 'users-item',
@@ -15,7 +16,8 @@ import { UsersComponent } from './users.component'
 export class UsersItemComponent {
     @Input() user: User;
 
-    constructor(private userService: UserService,
+    constructor(private l: Language,
+        private userService: UserService,
         private account: Account,
         private uc: UsersComponent) {
     }

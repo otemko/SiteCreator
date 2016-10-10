@@ -5,6 +5,7 @@ import { Site } from '../../Shared/Models/site.model';
 import { SiteUserItemComponent } from './site-user-item.component';
 import { SiteService } from '../../Shared/Services/sites.service'
 import { Account } from '../../Shared/Models/account.model'
+import { Language } from '../../Shared/Models/language.model'
 
 @Component({
     selector: 'sites-user',
@@ -17,7 +18,8 @@ export class SitesUserComponent
     sites: Site[] = new Array();
     id: string;
 
-    constructor(private siteService: SiteService,
+    constructor(private l: Language,
+        private siteService: SiteService,
         private route: ActivatedRoute,
         private account: Account) {        
         this.update();

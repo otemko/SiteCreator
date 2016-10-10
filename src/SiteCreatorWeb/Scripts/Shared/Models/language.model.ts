@@ -4,5 +4,10 @@ export class Language {
     Users;
     Sites;
     About;
+    CommentType;
+    Lockout;
+    SortByUserName;
+    SortBySiteName;
+    SortByDateCreated;
 }
 

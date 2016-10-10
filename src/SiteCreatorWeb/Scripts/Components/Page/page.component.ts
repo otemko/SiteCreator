@@ -8,6 +8,7 @@ import { SiteContent } from '../../Shared/Models/site.content.model';
 import { FroalaEditorDirective, FroalaViewDirective } from '../../Froala-editor/froala.directives';
 import { Page } from '../../Shared/Models/page.model'
 import { PageService } from '../../Shared/Services/pages.service'
+import { Language } from '../../Shared/Models/language.model'
 
 declare var $: any;
 
@@ -24,7 +25,7 @@ export class PageComponent {
     id;
     public extraModules = [FroalaModule, DndModule.forRoot()];
 
-    constructor(private pageService: PageService, private page: Page, private route: ActivatedRoute) {
+    constructor(private l: Language, private pageService: PageService, private page: Page, private route: ActivatedRoute) {
         this.id = +this.route.snapshot.params['id'];
         this.page.setNull();
         this.update(this.id);

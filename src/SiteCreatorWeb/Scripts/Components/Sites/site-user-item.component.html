@@ -12,8 +12,8 @@
             <a [routerLink]="['/sites', tag.id]" *ngFor="let tag of site.tags"><i class="fa fa-hashtag fa-fw"></i>{{ tag.name }} </a>
         </p>
         <p class="text-center">
-            <button *ngIf="checkPermission()" (click)="edit(site.id)" class="btn btn-primary">Edit</button>
-            <button *ngIf="checkPermission()" (click)="delete(site.id)"  class="btn btn-danger">Delete</button>          
+            <button *ngIf="checkPermission()" (click)="edit(site.id)" class="btn btn-primary">{{l.Edit}}</button>
+            <button *ngIf="checkPermission()" (click)="delete(site.id)"  class="btn btn-danger">{{l.Delete}}</button>          
         </p>
     </div>
 </div>

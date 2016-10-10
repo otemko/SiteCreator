@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <i class="fa fa-comments fa-fw"></i> Comments
+        <i class="fa fa-comments fa-fw"></i> {{l.Comments}}
     </div>
     <div class="panel-body">
         <comment-item *ngIf="checkPermission()" [comment]="newComment" [editing]="true" (create)="createComment($event)"></comment-item>

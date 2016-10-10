@@ -7,6 +7,7 @@ import { SiteService } from '../../Shared/Services/sites.service'
 
 import { Account } from '../../Shared/Models/account.model'
 import { GlobalService } from '../../Shared/Services/global.service'
+import { Language } from '../../Shared/Models/language.model'
 
 @Component({
     selector: 'site-item',
@@ -16,7 +17,8 @@ import { GlobalService } from '../../Shared/Services/global.service'
 export class SiteItemComponent {
     @Input() site: Site;
 
-    constructor(private account: Account,
+    constructor(private l: Language,
+        private account: Account,
         private sc: SitesComponent,
         private route: Router,
         private siteService: SiteService,

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router'
 import { Site } from '../../Shared/Models/site.model';
 import { SiteItemComponent } from './site-item.component';
 import { SiteService } from '../../Shared/Services/sites.service'
+import { Language } from '../../Shared/Models/language.model';
 
 @Component({
     selector: 'sites',
@@ -13,16 +14,12 @@ import { SiteService } from '../../Shared/Services/sites.service'
 
 export class SitesComponent{
     sites: Site[] = new Array();
-    
-    typesSort = [{ key: 0, value: "By user name"},
-                { key: 1, value: "By site name"},
-                { key: 2, value: "By date created"}];
+
     typeSort = -1;
 
-    constructor(private siteService: SiteService, private route: ActivatedRoute) {
+    constructor(private l: Language, private siteService: SiteService, private route: ActivatedRoute) {
         let id = +this.route.snapshot.params['id'];
-        this.update(id);
-        
+        this.update(id);        
     }
 
     update(id : number) {

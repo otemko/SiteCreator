@@ -13,7 +13,7 @@
                             <rating [(ngModel)]="rating" (click)="vote($event)">
                             </rating>
                         </span>
-                        <span *ngIf="voted">Rating: {{ page.rating }}. Rated {{ page.countRated }} times</span>
+                        <span *ngIf="voted">{{l.PageRating}}: {{ page.rating }}. {{l.PageRated}} {{ page.countRated }} {{l.PageTimes}}</span>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
     </div>
     <div class="col-sm-3">
         <div class="panel panel-default">
-            <div class="panel-heading">Navigation menu</div>
+            <div class="panel-heading">{{l.NavigationMenu}}</div>
             <div class="panel-body">
             </div>
         </div>

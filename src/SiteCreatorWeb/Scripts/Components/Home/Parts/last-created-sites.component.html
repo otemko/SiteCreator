@@ -1,5 +1,5 @@
 <div *ngIf="sites.length" class="home-panel" style="background: #eff2f7">
-    <span class="home-header">Last published sites</span>
+    <span class="home-header">{{l.HomePublished}}</span>
     <div class="row">
         <div *ngFor="let site of sites" class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
             <div class="thumbnail hover-blue text-center" style="height: 220px; margin: 20px">
@@ -21,7 +21,7 @@
                     </span>
                 </div>
                 <div style="padding-top: 10px">
-                    <span class="user-name truncate-1">By&nbsp;<a [routerLink]="['/sites']">{{ site.userName }}</a></span>
+                    <span class="user-name truncate-1">{{l.HomeBy}}&nbsp;<a [routerLink]="['/sites']">{{ site.userName }}</a></span>
                 </div>
             </div>
         </div>

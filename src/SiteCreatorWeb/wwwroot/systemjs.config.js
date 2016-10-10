@@ -28,7 +28,7 @@
         'core-js': { main: 'index.js', defaultExtension: 'js' },
         'primeng': { main: 'index.js', defaultExtension: 'js' },
         'ng2-pagination': { main: 'index.js', defaultExtension: 'js' },
-        "ng2-rating": { "main": "index.js", "defaultExtension": "js" }
+        "ng2-rating": { main: "index.js", "defaultExtension": "js" }
     };
     var ngPackageNames = [
       'common',

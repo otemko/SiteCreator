@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 
+import { Language } from '../../../Shared/Models/language.model'
 import { Account } from '../../../Shared/Models/account.model'
 import { AccountService } from '../../../Shared/Services/account.service'
 import { ActivatedRoute } from '@angular/router'
@@ -11,7 +12,10 @@ import { ActivatedRoute } from '@angular/router'
 
 export class AccountHeaderComponent {
 
-    constructor(private account: Account, public route: ActivatedRoute, private service: AccountService) {
+    constructor(private account: Account,
+        public route: ActivatedRoute,
+        private service: AccountService,
+        private l: Language) {
 
     }
 

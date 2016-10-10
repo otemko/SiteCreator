@@ -3,19 +3,19 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-user fa-fw"></i>
             <span *ngIf="account.userName">&nbsp;{{ account.userName }}</span>
-            <span *ngIf="!account.userName">&nbsp;Sign In</span>
+            <span *ngIf="!account.userName">&nbsp;{{l.SignIn}}</span>
             <b class="caret"></b>
         </a>
         <ul *ngIf="account.userName" class="dropdown-menu">
             <li>
-                <a [routerLink]=""><i class="fa fa-user-md fa-fw"></i>&nbsp;Accout</a>
+                <a [routerLink]=""><i class="fa fa-user-md fa-fw"></i>&nbsp;{{l.Account}}</a>
             </li>
             <li>
-                <a [routerLink]="['/sites-user', account.id]"><i class="fa fa-book"></i>&nbsp;My sites</a>
+                <a [routerLink]="['/sites-user', account.id]"><i class="fa fa-book"></i>&nbsp;{{l.MySites}}</a>
             </li>
             <li class="divider"></li>
             <li>
-                <a class="link-cursore" (click)="logoff()"><i class="fa fa-power-off fa-fw"></i>&nbsp;Logout</a>
+                <a class="link-cursore" (click)="logoff()"><i class="fa fa-power-off fa-fw"></i>&nbsp;{{l.Logout}}</a>
             </li>
         </ul>
         <ul *ngIf="!account.userName" class="dropdown-menu">
