@@ -8,6 +8,8 @@
         </div>
     </div>
     <div class="row">
-        <page-item *ngFor="let page of site.pages" [page]="page" (delete)="onDelete($event)"></page-item>
+        <div *ngFor="let page of site.pages" class="col-lg-2 col-md-2 col-sm-4 col-xs-6"  >
+            <page-item [page]="page" (delete)="onDelete($event)"></page-item>
+        </div>
     </div>
 </div>

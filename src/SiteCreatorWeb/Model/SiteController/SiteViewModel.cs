@@ -31,11 +31,11 @@ namespace SiteCreator.Web.Model.SiteController
 
             StyleMenuId = site.StyleMenuId;
 
-            var listTags = new List<Shared.TagViewModel>();
+            var listTags = new List<TagViewModel>();
 
             foreach (var tag in tags)
             {
-                listTags.Add(new Shared.TagViewModel
+                listTags.Add(new TagViewModel
                 {
                     Id = tag.Id,
                     Name = tag.Name

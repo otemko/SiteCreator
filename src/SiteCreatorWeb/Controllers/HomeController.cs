@@ -30,7 +30,7 @@ namespace SiteCreator.Web.Controllers
         [Route("api/[controller]/LastCreatedSites")]
         public async Task<IEnumerable<SiteViewModel>> GetLastCreatedSites()
         {
-            var sites = await siteService.GetLastCreatedSites(3, 0);
+            var sites = await siteService.GetLastCreatedSites(4, 0);
             return GetSiteViewModelList(sites);
         }
 

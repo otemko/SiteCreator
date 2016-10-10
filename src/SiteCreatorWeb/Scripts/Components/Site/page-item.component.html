@@ -1,24 +1,18 @@
-<div class="col-lg-3 col-md-4 col-sm-6 cols-xs-6" >
-    <div class="thumbnail hover-blue" style="height: 150px">
-        <a [routerLink]="['/page', page.id]">
-            <div class="text-center">
-                <div style="height: 80px">
-                <img [src]="page.preview"
-                            style="max-width: 100px; max-height: 70px; margin: 5px" />  
-                </div>               
-                <span class="text-muted">
-                   {{ page.name || "Unnamed" }}
-                </span>
-            </div>
-        </a>
-        <p class="text-center">
-            <button *ngIf="checkPermission()" [routerLink]="['/page-edit', page.id]" class="btn btn-default">
+<div class="thumbnail hover-blue text-center" style="height: 180px">
+    <a [routerLink]="['/page', page.id]">
+        <div style="height: 80px">
+            <img [src]="page.preview" style="max-width: 100px; max-height: 70px; margin: 10px" />
+        </div>
+        <div class="truncate-1" style="padding: 5px; padding-top: 15px">
+            <i class="fa fa-book"></i><span class="page-name">&nbsp;{{ page.name }}</span>
+        </div>
+    </a>
+    <div style="padding-top: 10px">
+        <button *ngIf="checkPermission()" [routerLink]="['/page-edit', page.id]" class="btn btn-default">
                 <i class="fa fa-pencil fa-fw"></i>
             </button>
-            <button *ngIf="checkPermission()" (click)="onDelete(page.id)"  class="btn btn-default">
+        <button *ngIf="checkPermission()" (click)="onDelete(page.id)" class="btn btn-default">
                 <i class="fa fa-trash-o fa-fw text-danger"></i>   
-            </button>          
-        </p>
+            </button>
     </div>
 </div>
-  

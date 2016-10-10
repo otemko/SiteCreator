@@ -15,8 +15,5 @@ namespace SiteCreator.DAL.IRepository
         Task<IEnumerable<Site>> GetSitesIncludeAllOrderBy<TKey>
             (bool orderByDescending, Expression<Func<Site, TKey>> predicateOrder = null,
                 int take = 0, int skip = 0, Expression<Func<Site, bool>> predicate = null);
-
-        Task<IEnumerable<Site>> GetSitesIncludeAllAndPagesBy
-            (int take = 0, int skip = 0, Expression<Func<Site, bool>> predicate = null);
     }
 }

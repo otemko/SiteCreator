@@ -146,17 +146,13 @@ namespace SiteCreator.Web.Controllers
             return tagsFromDb.ToList();
         }
 
-        IEnumerable<SiteViewModel> GetSitesViewModel(IEnumerable<Site> sites)
+        private IEnumerable<SiteViewModel> GetSitesViewModel(IEnumerable<Site> sites)
         {
-            if (sites == null) return null;
-            var listResult = new List<SiteViewModel>();
 
-            foreach (var site in sites)
-            {
-                var tags = site.TagSite.Select(t => t.Tag);
-                listResult.Add(new SiteViewModel(site, tags));
-            }
-            return listResult;
+            if (sites == null) return null;
+            var siteViewModel = new List<SiteViewModel>();
+            sites.ToList().ForEach(p => siteViewModel.Add(new SiteViewModel(p)));
+            return siteViewModel;
         }
     }
 }
