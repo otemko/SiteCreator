@@ -1,5 +1,5 @@
 <div class="col-lg-3 col-md-4 col-sm-6 cols-xs-6" >
-    <div class="thumbnail hover-blue">
+    <div class="thumbnail hover-blue" style="height: 150px">
         <a [routerLink]="['/page', page.id]">
             <div class="text-center">
                 <div style="height: 80px">
@@ -12,9 +12,9 @@
             </div>
         </a>
         <p class="text-center">
-            <button *ngIf="checkPermission()" [routerLink]="['/page-edit', page.id]" class="btn btn-default">
+            <a  *ngIf="checkPermission()" [routerLink]="['/page-edit', page.id]" class="btn btn-default">
                 <i class="fa fa-pencil fa-fw"></i>
-            </button>
+            </a>
             <button *ngIf="checkPermission()" (click)="onDelete(page.id)"  class="btn btn-default">
                 <i class="fa fa-trash-o fa-fw text-danger"></i>   
             </button>          

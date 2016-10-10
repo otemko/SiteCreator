@@ -10,6 +10,9 @@ export class Page {
     siteId: number;
     siteName: string;
     commentsEnabled: boolean;
+    commentsCount: number;
+    rating: number;
+    countRated: number;
 
     setNull() : Page {
         this.id = 0;
@@ -23,7 +26,9 @@ export class Page {
         this.preview = "";
         this.name = "";
         this.order = 0;
-
+        this.commentsCount = 0;
+        this.rating = 0;
+        this.countRated = 0;
         return this;
     }
 }

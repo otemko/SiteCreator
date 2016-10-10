@@ -39,8 +39,8 @@ namespace SiteCreator.Web.Model.PageController
             SiteName = page.Site?.Name;
             UserId = page.Site?.UserId;
             UserName = page.Site?.User?.UserName;
-            Content = page.PageContent.Content;
-            Elements = page.PageContent.Elements;
+            Content = page.PageContent?.Content;
+            Elements = page.PageContent?.Elements;
             CommentsEnabled = page.CommentsEnabled;
 
             if (CommentsEnabled)

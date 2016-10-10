@@ -21,6 +21,7 @@ namespace SiteCreator.Web.Model.Shared
         public string UserId { get; set; }
         public string UserName { get; set; }
         public bool CommentsEnabled { get; set; }
+        public int CommentsCount { get; set; }
 
 
         public PageInfoViewModel() { }
@@ -39,6 +40,7 @@ namespace SiteCreator.Web.Model.Shared
             UserId = page.Site?.UserId;
             UserName = page.Site?.User?.UserName;
             CommentsEnabled = page.CommentsEnabled;
+            CommentsCount = page.Comment?.Count() ?? 0;
         }
         
     }

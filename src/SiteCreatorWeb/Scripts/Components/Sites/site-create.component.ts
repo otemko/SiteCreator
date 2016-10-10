@@ -24,6 +24,7 @@ import { GlobalService } from '../../Shared/Services/global.service'
 })
 
 export class SiteCreateComponent {
+    isReady: boolean;
     site: Site = new Site();
     styleMenus: StyleMenu[];
     tags: Tag[];
@@ -63,8 +64,12 @@ export class SiteCreateComponent {
                 this.tagsView = [];
                 res.tags.forEach(p => this.tagsView.push(p.name));
                 this.loading = false;
+                this.isReady = true;
             });
         }
+        else
+            this.isReady = true;
+            
         this.tagService.getTags().then(tags => {
             this.tags = tags;
             this.tagNames = [];

@@ -27,7 +27,8 @@ gulp.task("scriptsNStyles", () => {
             'ng2-dnd/**',
             'angular2-dynamic-component/**',
             'ts-metadata-helper/**',
-            'ng2-pagination/**'
+            'ng2-pagination/**',
+            'ng2-rating/**'
         ], {
             cwd: "node_modules/**"
         }).pipe(gulp.dest("./wwwroot/lib"));

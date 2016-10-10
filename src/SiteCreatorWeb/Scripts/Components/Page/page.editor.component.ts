@@ -21,8 +21,10 @@ declare var $: any;
 })
 
 export class PageEditorComponent implements OnInit {
+    isReady: boolean;
     availableElements = [];
     elements = [];
+    rating = 4;
     options;
     trash = [];
     id;
@@ -75,6 +77,7 @@ export class PageEditorComponent implements OnInit {
         this.checkTheRights();
         this.setPreview();
         this.setPageName();
+        this.isReady = true;
     }
 
     getPage() {
@@ -83,6 +86,7 @@ export class PageEditorComponent implements OnInit {
             this.parseContent();
             this.setPreview();
             this.setPageName();
+            this.isReady = true;
         });
     }
 

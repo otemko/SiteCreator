@@ -1,11 +1,10 @@
-<div class="row">
+<div *ngIf="isReady" class="row">
     <div id="Site" class="col-sm-9">
         <div dnd-droppable (onDropSuccess)="addElement($event.dragData, elements)" [dropZones]="['add']" class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3 col-sm-2 text-center">
-                        <img [froalaEditor]="previewEditor" [(froalaModel)]="previewModel"
-                            style="max-width: 100px; max-height: 70px" />
+                        <img [froalaEditor]="previewEditor" [(froalaModel)]="previewModel" style="max-width: 100px; max-height: 70px" />
                     </div>
                     <div class="col-xs-9 col-sm-10">
                         <button class="btn-link h4" style="color: black" [froalaEditor] [(froalaModel)]="nameModel"></button><br>

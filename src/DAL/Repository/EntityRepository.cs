@@ -86,15 +86,33 @@ namespace SiteCreator.DAL.Repository
         {
             IQueryable<T> query = context.Set<T>();
             foreach (var includeProperty in includeProperties)
-            {
                 query = query.Include(includeProperty);
-            }
-            var rr = query.Where(predicate);
-            return await rr.ToListAsync();
+
+            query = query.Where(predicate);
+            return await query.ToListAsync();
         }
-        
-        
-        
+
+        public virtual async Task<IEnumerable<T>> GetAllOrderBySkippingAsync<T, TKey>(
+            bool orderByDeskencing, Expression<Func<T, TKey>> predicateOrder,
+            int take = 0, int skip = 0, Expression<Func<T, bool>> predicate = null,
+            params Expression<Func<T, object>>[] includeProperties) where T : class
+        {
+            IQueryable<T> query = context.Set<T>();
+            foreach (var includeProperty in includeProperties)
+                query = query.Include(includeProperty);
+            
+            if (predicate != null) query = query.Where(predicate);
+            if (orderByDeskencing) query = query.OrderByDescending(predicateOrder);
+            else query = query.OrderBy(predicateOrder);
+
+            if (take != 0) query = query.Take(take);
+            if (skip != 0) query = query.Skip(skip);
+
+            return await query.ToListAsync();
+        }
+
+
+
         #endregion
 
         #region GetSingle

@@ -8,10 +8,15 @@ import { DndModule } from "ng2-dnd";
 import { FroalaModule } from "./Froala-editor/froala.module";
 import { DynamicComponentModule } from "angular2-dynamic-component";
 import { Ng2PaginationModule } from 'ng2-pagination';
+import { RatingModule } from 'ng2-rating';
 
 import { FormsModule }   from "@angular/forms";
 
 import { HomeComponent } from "./Components/Home/home.component";
+import { LastCreatedSitesComponent } from "./Components/Home/Parts/last-created-sites.component";
+import { MostCommentedPages } from "./Components/Home/Parts/most-commented-pages.component";
+import { MostRatedPages } from "./Components/Home/Parts/most-rated-pages.component";
+
 import { AccountComponent } from "./Components/Account/account.component";
 
 import { SiteComponent } from "./Components/Site/site.component";
@@ -59,7 +64,8 @@ import { routing } from './routes';
         FroalaModule,
         DynamicComponentModule,
         AutoCompleteModule,
-        Ng2PaginationModule
+        Ng2PaginationModule,
+        RatingModule
     ],
     declarations: [
         AppComponent,
@@ -86,7 +92,10 @@ import { routing } from './routes';
         TagCloudComponent,
         SimpleTagCloudComponent,
         TagBadgeComponent,
-        MyTagCloudComponent
+        MyTagCloudComponent,
+        LastCreatedSitesComponent,
+        MostCommentedPages,
+        MostRatedPages
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy},
