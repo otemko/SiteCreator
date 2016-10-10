@@ -53,9 +53,10 @@ export class SiteCreateComponent {
         private l: Language) {
 
         this.id = +this.r.snapshot.params['id'];
-        this.updateSite();
         this.site.pages = [];
+        this.site.tags = [];
 
+        this.updateSite();
         this.styleMenuService.getStyleMenus().then(styleMenus => {
             this.styleMenus = styleMenus;
         });
@@ -66,13 +67,14 @@ export class SiteCreateComponent {
             this.loading = true;
             this.siteService.getSiteById(this.id).then(res => {
                 Object.assign(this.site, res);
+                if (this.site.id) {
                 this.getPagesOrder();
                 this.tagsView = [];
-                res.tags.forEach(p => this.tagsView.push(p.name));
+                if (res.tags && res.tags.length>0) res.tags.forEach(p => this.tagsView.push(p.name));
                 this.loading = false;
                 this.isReady = true;
                 this.setPreview();
-            });
+            }});
         }
         else {
             this.isReady = true;
@@ -80,9 +82,11 @@ export class SiteCreateComponent {
         }
 
         this.tagService.getTags().then(tags => {
-            this.tags = tags;
-            this.tagNames = [];
-            tags.forEach(p => this.tagNames.push(p.name));
+            if (tags) {
+                this.tags = tags;
+                this.tagNames = [];
+                tags.forEach(p => this.tagNames.push(p.name));
+            }
         });
     }
 
