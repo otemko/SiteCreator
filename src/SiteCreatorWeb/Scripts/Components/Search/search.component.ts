@@ -2,6 +2,7 @@
 import { ActivatedRoute } from '@angular/router'
 
 import { SearchResult } from '../../Shared/Models/search.model'
+import { Language } from '../../Shared/Models/language.model'
 
 import { AppComponent } from '../../app.component'
 
@@ -12,9 +13,11 @@ import { AppComponent } from '../../app.component'
 
 export class SearchComponent {
 
-    sr = new SearchResult();    
+    sr = new SearchResult(); 
 
-    constructor(private searchResult: SearchResult, private route: ActivatedRoute) {
+    constructor(private l: Language,
+        private searchResult: SearchResult,
+        private route: ActivatedRoute) {
         this.sr = searchResult;
     }
 
