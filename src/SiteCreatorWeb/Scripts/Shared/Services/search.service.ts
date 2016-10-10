@@ -10,10 +10,11 @@ export class SearchService {
 
     private url = 'api/Search/';
 
-    constructor(private service: Service) {
+    constructor(private searchResult: SearchResult, private service: Service) {
     }
 
-    getSearchResultByTerm(term: string): Promise<SearchResult> {
-        return this.service.post(this.url, term);
+    getSearchResultByTerm(term: string): void {
+        this.service.post(this.url, term).then(res => 
+            Object.assign(this.searchResult, res));        
     }
 }

@@ -26,9 +26,14 @@ export class CommentComponent implements OnInit {
         this.updateModel();
     }
 
+    checkPermission() {        
+        if (this.account.id)
+            return true;
+        return false;
+    }
 
     canEdit(comment: Comment) {
-        if (this.account.id == comment.userId) return true;
+        if (this.account.id == comment.userId || this.account.role == 'admin') return true;
         return false;
     }
 

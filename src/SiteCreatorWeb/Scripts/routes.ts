@@ -75,7 +75,7 @@ const appRoutes: Routes = [
         component: SiteCreateComponent
     },
     {
-        path: 'search/:id',
+        path: 'search',
         component: SearchComponent
     },
     {

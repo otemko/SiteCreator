@@ -4,6 +4,6 @@
     </div>
 </div>
 <div>
-    <a [routerLink]="['/site-create']" class="btn btn-primary">Create</a>
+    <a *ngIf="checkPermission()" [routerLink]="['/site-create']" class="btn btn-primary">Create</a>
 </div>
 

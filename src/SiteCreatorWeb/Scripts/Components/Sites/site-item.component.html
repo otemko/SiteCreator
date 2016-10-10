@@ -14,7 +14,7 @@
                 {{ tag.name }}
             </a>
         </span><br />
-        <span><a [routerLink]="['/sites']">{{ site.userName }}</a> </span>
+        <span><a [routerLink]="['/sites-user', site.userId]">{{ site.userName }}</a> </span>
         <div *ngIf="account.role == 'admin'">
             <button (click)="edit(site.id)" class="btn btn-primary">Edit</button>
             <button (click)="delete(site.id)" class="btn btn-danger">Delete</button>
