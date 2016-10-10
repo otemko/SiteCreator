@@ -13,13 +13,18 @@ export class AccountService {
     constructor(private account: Account, private service: Service) {
     }
 
-    getAccountInfo(): void {
+    getAccountInfo(): Promise<any> {
         this.account.loading = true;
-        this.service.get(this.url)
+        return this.service.get(this.url)
             .then(account => {
                 Object.assign(this.account, account);
                 this.account.loading = false;
             });
+    }   
+
+    updateName(userName: string): Promise<any> {
+        return this.service.put(this.url, userName);
+        
     }
 
     externalLogin(provider: string, returnUrl: string) {
