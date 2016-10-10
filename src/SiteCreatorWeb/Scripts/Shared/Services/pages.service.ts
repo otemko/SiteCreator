@@ -45,4 +45,8 @@ export class PageService {
     deletePage(id: number): Promise<any> {
         return this.service.delete(this.url + id);
     }
+
+    vote(id: number, rating: number): Promise<any> {
+        return this.service.put(this.url + `${id}/${rating}`, null);
+    }
 }

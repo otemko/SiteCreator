@@ -24,6 +24,7 @@ export class PageEditorComponent implements OnInit {
     isReady: boolean;
     availableElements = [];
     elements = [];
+    rating = 4;
     options;
     trash = [];
     id;

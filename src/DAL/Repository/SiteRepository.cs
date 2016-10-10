@@ -26,8 +26,8 @@ namespace SiteCreator.DAL.Repository
                 int take = 0, int skip = 0, Expression<Func<Site, bool>> predicate = null)
         {
             var res = GetAllQuery(take, skip, predicate);
-            if (orderByDescending) res.OrderByDescending(predicateOrder);
-            else res.OrderBy(predicateOrder);
+            if (orderByDescending) res = res.OrderByDescending(predicateOrder);
+            else res = res.OrderBy(predicateOrder);
 
             return await res.ToListAsync();
         }
@@ -60,9 +60,10 @@ namespace SiteCreator.DAL.Repository
         public IQueryable<Site> Skipping(int take, int skip)
         {
             var sites = context.Site;
-            if (take != 0) sites.Take(take);
-            if (skip != 0) sites.Skip(skip);
-            return sites;
+            IQueryable<Site> query = sites;
+            if (take != 0) query = sites.Take(take);
+            if (skip != 0) query = sites.Skip(skip);
+            return query;
         }
     }
 }

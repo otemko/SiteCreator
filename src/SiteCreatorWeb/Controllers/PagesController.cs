@@ -73,6 +73,20 @@ namespace SiteCreator.Web.Controllers
             return Ok();
         }
 
+        [HttpPut("{id}/{rating}")]
+        public async Task<IActionResult> Vote(int id, int rating)
+        {
+            var page = await pageService.GetPageWithSite(id);
+            if (page == null) return BadRequest();
+            if (rating > 5 || rating < 0) return BadRequest();
+            if (!CheckTheRightsForVote(page?.Site)) return BadRequest();
+            if (!await CheckLockout()) return StatusCode((int)HttpStatusCode.Forbidden);
+
+            page.Rating = (page.Rating * page.CountRated + rating) / (page.CountRated++);
+            await pageService.UpdateAsync(page);
+            return Ok(new { page.Rating, page.CountRated });
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -103,6 +117,15 @@ namespace SiteCreator.Web.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await userService.GetSingleAsync(userId);
             if (user.LockoutEnabled)
+                return true;
+
+            return false;
+        }
+
+        private bool CheckTheRightsForVote(Site site)
+        {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (site != null && site.UserId != userId)
                 return true;
 
             return false;

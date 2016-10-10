@@ -88,8 +88,8 @@ namespace SiteCreator.DAL.Repository
             foreach (var includeProperty in includeProperties)
                 query = query.Include(includeProperty);
 
-            var rr = query.Where(predicate);
-            return await rr.ToListAsync();
+            query = query.Where(predicate);
+            return await query.ToListAsync();
         }
 
         public virtual async Task<IEnumerable<T>> GetAllOrderBySkippingAsync<T, TKey>(
@@ -101,15 +101,14 @@ namespace SiteCreator.DAL.Repository
             foreach (var includeProperty in includeProperties)
                 query = query.Include(includeProperty);
             
-            var rr = query;
-            if (predicate != null) query.Where(predicate);
-            if (orderByDeskencing) rr.OrderByDescending(predicateOrder);
-            else rr.OrderBy(predicateOrder);
+            if (predicate != null) query = query.Where(predicate);
+            if (orderByDeskencing) query = query.OrderByDescending(predicateOrder);
+            else query = query.OrderBy(predicateOrder);
 
-            if (take != 0) rr.Take(take);
-            if (skip != 0) rr.Skip(skip);
+            if (take != 0) query = query.Take(take);
+            if (skip != 0) query = query.Skip(skip);
 
-            return await rr.ToListAsync();
+            return await query.ToListAsync();
         }
 
 

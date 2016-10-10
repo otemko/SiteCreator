@@ -26,7 +26,7 @@ namespace SiteCreator.DAL
         Task UpdateRangeAsync<T>(T[] entities) where T : class;
 
         Task<IEnumerable<T>> GetAllOrderBySkippingAsync<T, TKey>(
-            bool orderByDeskencing, Expression<Func<T, TKey>> predicateOrder,
+            bool orderByDescencing, Expression<Func<T, TKey>> predicateOrder,
             int take = 0, int skip = 0, Expression<Func<T, bool>> predicate = null,
             params Expression<Func<T, object>>[] includeProperties) where T : class;
 

@@ -30,7 +30,7 @@ namespace SiteCreator.Web.Controllers
         [Route("api/[controller]/LastCreatedSites")]
         public async Task<IEnumerable<SiteViewModel>> GetLastCreatedSites()
         {
-            var sites = await siteService.GetLastCreatedSites(10, 0);
+            var sites = await siteService.GetLastCreatedSites(3, 0);
             return GetSiteViewModelList(sites);
         }
 
@@ -38,7 +38,7 @@ namespace SiteCreator.Web.Controllers
         [Route("api/[controller]/MostCommentedPages")]
         public async Task<IEnumerable<PageInfoViewModel>> GetMostCommentedPage()
         {
-            var pages = await pageService.GetMostCommentedPages(10, 0);
+            var pages = await pageService.GetMostCommentedPages(4, 0);
             return GetPageViewModelList(pages);
         }
 
@@ -46,7 +46,7 @@ namespace SiteCreator.Web.Controllers
         [Route("api/[controller]/MostRatedPages")]
         public async Task<IEnumerable<PageInfoViewModel>> GetMostRatedPage()
         {
-            var pages = await pageService.GetMostRatedPages(10, 0);
+            var pages = await pageService.GetMostRatedPages(4, 0);
             return GetPageViewModelList(pages);
         }
 

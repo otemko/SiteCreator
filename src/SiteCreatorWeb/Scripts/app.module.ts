@@ -8,6 +8,7 @@ import { DndModule } from "ng2-dnd";
 import { FroalaModule } from "./Froala-editor/froala.module";
 import { DynamicComponentModule } from "angular2-dynamic-component";
 import { Ng2PaginationModule } from 'ng2-pagination';
+import { RatingModule } from 'ng2-rating';
 
 import { FormsModule }   from "@angular/forms";
 
@@ -63,7 +64,8 @@ import { routing } from './routes';
         FroalaModule,
         DynamicComponentModule,
         AutoCompleteModule,
-        Ng2PaginationModule
+        Ng2PaginationModule,
+        RatingModule
     ],
     declarations: [
         AppComponent,
