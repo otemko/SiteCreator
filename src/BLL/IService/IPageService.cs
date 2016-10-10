@@ -12,5 +12,6 @@ namespace SiteCreator.BLL.IService
 
         Task<IEnumerable<Page>> GetMostCommentedPages(int take = 0, int skip = 0);
         Task<IEnumerable<Page>> GetMostRatedPages(int take = 0, int skip = 0);
+        Task Vote(Page page, int rating);
     }
 }

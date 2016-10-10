@@ -13,7 +13,7 @@ namespace SiteCreator.BLL.Services
     {
         IEntityRepository repository;
 
-        public PageService(IEntityRepository repository): base(repository)
+        public PageService(IEntityRepository repository) : base(repository)
         {
             this.repository = repository;
         }
@@ -51,6 +51,12 @@ namespace SiteCreator.BLL.Services
         {
             return await repository.GetAllOrderBySkippingAsync<Page, decimal>(true, p => p.Rating, take, skip,
                 null, p => p.Site, p => p.Site.User);
+        }
+
+        public async Task Vote(Page page, int rating)
+        {
+            page.Rating = (page.Rating * page.CountRated + rating) / (++page.CountRated);
+            await UpdateAsync(page);
         }
     }
 }

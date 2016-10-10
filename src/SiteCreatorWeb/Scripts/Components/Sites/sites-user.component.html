@@ -1,5 +1,9 @@
 ﻿<div *ngIf="sites">
-    
+    <div>
+        <i class="fa fa-user"></i>
+        <button class="btn-link h4" style="color: black" [froalaEditor] [(froalaModel)]="nameModel"></button><br>
+        <button class="btn btn-default" (click)="updateName()"><i class="fa fa-save"></i></button>
+    </div>
     <div class="row">
         <site-user-item *ngFor="let site of sites" [site]="site"></site-user-item>
     </div>
