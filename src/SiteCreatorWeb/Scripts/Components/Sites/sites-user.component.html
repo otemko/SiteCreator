@@ -1,17 +1,24 @@
 ﻿<div *ngIf="sites">
-    <div style="padding-left: 20px">
+    <div *ngIf="account.id && account.id == sites.userId" style="padding-left: 20px">
         <span class="site-name">
         <i class="fa fa-user fa-lg"></i>
         <button class="btn-link h4" style="color: black" [froalaEditor] [(froalaModel)]="nameModel"></button>
+         <button class="btn btn-link" style="margin-left: 5px; color: gray" (click)="updateName()"><i class="fa fa-save fa-lg"></i></button> &nbsp;
+         </span>
+        <span class="text-danger">{{ invalidMsg }}</span>
+    </div>
+    <div *ngIf="account.id != sites.userId" style="padding-left: 20px">
+        <span class="site-name">
+        <i class="fa fa-user fa-lg"></i>
+        {{ nameModel.innerHTML }}
         </span>
-        <button class="btn btn-link" style="margin-left: 5px; color: gray" (click)="updateName()"><i class="fa fa-save fa-lg"></i></button>
-        &nbsp;<span class="text-danger">{{ invalidMsg }}</span>
     </div>
     <div class="row">
         <site-user-item *ngFor="let site of sites" [site]="site"></site-user-item>
+        <div *ngIf="checkPermission()" class="col-lg-3 col-md-3 col-sm-4 col-xs-6" style="padding: 20px; padding-left: 35px; padding-right: 35px">
+            <div class="thumbnail hover-blue text-center link-cursore" [routerLink]="['/site-create']" style="height: 280px">
+                <i class="fa fa-plus fa-3x text-info" style="padding-top: 65px;"></i>
+            </div>
+        </div>
     </div>
 </div>
-<div>
-    <a *ngIf="checkPermission()" [routerLink]="['/site-create']" class="btn btn-primary">{{l.Create}}</a>
-</div>
-

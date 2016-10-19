@@ -35,8 +35,8 @@ export class SitesUserComponent {
     update() {
         this.id = "" + this.route.snapshot.params['id'];
         this.siteService.getSitesByUserId(this.id).then(sites => {
-            this.setPageName();
             this.sites = sites;
+            this.setPageName();
         });
     }
 
@@ -45,9 +45,12 @@ export class SitesUserComponent {
             return true;
         return false;
     }
-
+    
     setPageName() {
-        this.nameModel = { innerHTML: this.account.userName };
+        if (this.sites.length) {
+            console.log(this.sites);
+            this.nameModel = { innerHTML: this.sites[0].userName };
+        }
     }
 
     invalidate(msg: string) {

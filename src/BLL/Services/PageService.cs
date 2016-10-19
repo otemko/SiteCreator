@@ -34,6 +34,8 @@ namespace SiteCreator.BLL.Services
         {
             var page = await repository.GetSingleAsync<Page>(p => p.Id == id, p => p.PageContent,
                 p => p.Comment, p => p.Site, p => p.Site.User);
+            var pages = await repository.GetAllAsync<Page>(p => p.SiteId == page.SiteId);
+            page.Site.Page = pages.ToList();
             if (page == null) return null;
 
             var comments = await repository.GetAllAsync<Comment>(p => p.PageId == id, p => p.User);
