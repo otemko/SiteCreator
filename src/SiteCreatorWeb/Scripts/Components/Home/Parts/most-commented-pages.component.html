@@ -20,7 +20,7 @@
                     <i class="fa fa-comments"></i>&nbsp;<span class="badge">{{ page.commentsCount }}</span>
                 </div>
                 <div style="padding-top: 10px">
-                    <span class="user-name truncate-1">{{l.HomeBy}}&nbsp;<a [routerLink]="['/pages']">{{ page.userName }}</a></span>
+                    <span class="user-name truncate-1">{{l.HomeBy}}&nbsp;<a [routerLink]="['/sites-user', page.userId]">{{ page.userName }}</a></span>
                 </div>
             </div>
         </div>

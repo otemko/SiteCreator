@@ -10,9 +10,6 @@
         </a>
         <ul *ngIf="account.userName" class="dropdown-menu">
             <li>
-                <a [routerLink]=""><i class="fa fa-user-md fa-fw"></i>&nbsp;{{l.Account}}</a>
-            </li>
-            <li>
                 <a [routerLink]="['/sites-user', account.id]"><i class="fa fa-book"></i>&nbsp;{{l.MySites}}</a>
             </li>
             <li class="divider"></li>

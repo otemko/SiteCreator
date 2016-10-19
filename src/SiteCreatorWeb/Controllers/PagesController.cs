@@ -56,7 +56,7 @@ namespace SiteCreator.Web.Controllers
 
             var page = pageViewModel.CreateBllPage();
             await pageService.CreateAsync(page);
-            return Ok(page);
+            return Ok(page.Id);
         }
 
         [HttpPut("{id}")]

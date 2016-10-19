@@ -1,5 +1,5 @@
 ﻿<div *ngIf="sites">
-    <div *ngIf="account.id && account.id == sites.userId" style="padding-left: 20px">
+    <div *ngIf="account.userName == name" style="padding-left: 20px">
         <span class="site-name">
         <i class="fa fa-user fa-lg"></i>
         <button class="btn-link h4" style="color: black" [froalaEditor] [(froalaModel)]="nameModel"></button>
@@ -7,7 +7,7 @@
          </span>
         <span class="text-danger">{{ invalidMsg }}</span>
     </div>
-    <div *ngIf="account.id != sites.userId" style="padding-left: 20px">
+    <div *ngIf="account.userName != name" style="padding-left: 20px">
         <span class="site-name">
         <i class="fa fa-user fa-lg"></i>
         {{ nameModel.innerHTML }}

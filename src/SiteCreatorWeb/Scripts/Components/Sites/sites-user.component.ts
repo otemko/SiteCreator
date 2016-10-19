@@ -21,6 +21,7 @@ export class SitesUserComponent {
     id: string;
     loading: boolean;
     invalidMsg: string;
+    name: string;
     nameModel: any = {};
 
     constructor(private l: Language,
@@ -50,6 +51,7 @@ export class SitesUserComponent {
         if (this.sites.length) {
             console.log(this.sites);
             this.nameModel = { innerHTML: this.sites[0].userName };
+            this.name = this.sites[0].userName;
         }
     }
 

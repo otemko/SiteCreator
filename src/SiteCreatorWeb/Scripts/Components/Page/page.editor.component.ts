@@ -124,6 +124,8 @@ export class PageEditorComponent implements OnInit {
     createPage() {
         this.pageService.createPage(this.page).then(res => {
             this.page.id = res;
+            this.id = res;
+            console.log(res);
             this.loaded();
         }).catch(res => this.failloaded());
     }
